@@ -58,7 +58,7 @@ class Request
 
         if (empty($ArregloUrl)) {
             // Si Arreglo Url esta vacio, cargo el controller por defecto y  cargo el index por defecto.
-            $this->controller = 'view';
+            $this->controller = ucwords('view');
             $this->method = 'index';
         } else {
             // Quito el primer elemento del array y lo uso como controller y el segundo lo uso como method
