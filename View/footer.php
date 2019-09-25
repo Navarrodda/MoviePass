@@ -6,7 +6,7 @@
                 <div class="row">
                     <?php if ($view == 'FEATURE') {?>
                         <div class="col-md-4">
-                            <h2>NAME</h2>
+                            <h2>NAMES</h2>
                             <a><p><i class="fa fa-circle" aria-hidden="true"></i>Agustin Vagent</p></a>
                             <a><p><i class="fa fa-circle" aria-hidden="true"></i>David Navarro</p></a>
                             <a><p><i class="fa fa-circle" aria-hidden="true"></i>Mauro Castillo Rondinara</p></a>

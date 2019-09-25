@@ -10,33 +10,29 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="text">
-                    <h2>Who are we?</h2>
-                    <p>is simply dummy text of the printing and typesetting industry. Lorem Ipsum 
-been the industry's standard dummy text ever since the 1500s, when an 
-printer took a galley of type</p>
-               <p>and scrambled it to make a type specimen book. It has survived not only five 
-but also the leap into electronic typesetting, remaining essentially unchanged
-larised in the 1960s with the release of</p>
+                    <h2>Enjoy Watching Movies?</h2>
+                    <p>Our goal is that you have the best experience and the comfort to satisfy the needs you are looking for.</p>
+               <p>we want to transmit an unforgettable experience and astonished in your memory to feel comfortable with being able to provide the need to understand what you are looking for when choosing a movie.</p>
                 </div>
             </div>
             <div class="col-md-6">
                  <div class="progress_bar">
-                  <h2>Our skills</h2>
-                  <p>Photoshop</p>
+                  <h2>Statistics</h2>
+                  <p>Comfort</p>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:20%"></div>
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:80%"></div>
                   </div>
-                  <p>Wordpress</p>
+                  <p>Experience</p>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:60%"></div>
                   </div>
-                  <p>Html/Css</p>
+                  <p>Variety</p>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:40%"></div>
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:50%"></div>
                   </div>
-                  <p>Php</p>
+                  <p>Entertainment</p>
                   <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:30%"></div>
                   </div>
                   </div>
             </div>

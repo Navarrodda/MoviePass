@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-md-12">
                    <div class="header-part">
-                    <p>HOME &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
+                    <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
                     </div>
                 </div>
             </div>
