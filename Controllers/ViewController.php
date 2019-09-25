@@ -14,7 +14,7 @@ class ViewController
 
 	public function index()
 	{
-		$vista = 'MOVIES';
+		$view = 'MOVIES';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "home.php");
 		include URL_VISTA . 'footer.php';
@@ -23,9 +23,28 @@ class ViewController
 	public function register()
 	{
 
-		$vista = 'REGISTER';
+		$view = 'REGISTER';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrer.php");
 		include URL_VISTA . 'footer.php';
-	}     
+	} 
+
+	public function login()
+	{
+
+		$view = 'LOGIN';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "login.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
+	public function feature()
+	{
+
+		$view = 'FEATURE';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "feature.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
 }

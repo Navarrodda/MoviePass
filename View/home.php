@@ -3,7 +3,7 @@
 <?php  include(URL_VISTA . 'navbar.php') ?>
 
  <section class="slider">
-    <img src="./img/slider-about.jpg">
+    <img src="<?php echo URL ?>/img/slider-about.jpg">
 </section>
 <section class="our_skill">
     <div class="container">
@@ -53,21 +53,21 @@ larised in the 1960s with the release of</p>
         <div class="row">
             <div class="col-md-4">
                <div class="text-img left">
-                   <img src="/img/logo-one.jpg">
+                   <img src="<?php echo URL ?>/img/logo-one.jpg">
                 <h3>Tust Adrenalin</h3>
                 <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
                </div>
             </div>
             <div class="col-md-4">
                <div class="text-img center">
-                   <img src="/img/logo-one.jpg">
+                   <img src="<?php echo URL ?>/img/logo-one.jpg">
                 <h3>Our Mission</h3>
                 <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
                </div>
             </div>
             <div class="col-md-4">
                <div class="text-img right">
-                   <img src="/img/logo-two.jpg">
+                   <img src="<?php echo URL ?>/img/logo-two.jpg">
                 <h3>Fashion Style</h3>
                 <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
                </div>
@@ -86,7 +86,7 @@ larised in the 1960s with the release of</p>
         <div class="row">
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema1.jpg">
+                    <img src="<?php echo URL ?>/img/tema1.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -99,7 +99,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema2.jpg">
+                    <img src="<?php echo URL ?>/img/tema2.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -112,7 +112,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema3.jpg">
+                    <img src="<?php echo URL ?>/img/tema3.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -125,7 +125,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema4.jpg">
+                    <img src="<?php echo URL ?>/img/tema4.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -138,7 +138,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema5.jpg">
+                    <img src="<?php echo URL ?>/img/tema5.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -151,7 +151,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema6.jpg">
+                    <img src="<?php echo URL ?>/img/tema6.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -164,7 +164,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema1.jpg">
+                    <img src="<?php echo URL ?>/img/tema1.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -177,7 +177,7 @@ larised in the 1960s with the release of</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="/img/tema2.jpg">
+                    <img src="<?php echo URL ?>/img/tema2.jpg">
                 <div class="icon">
                     <a href="#"><i class="fa fa-facebook"></i></a>
                     <a href="#"><i class="fa fa-twitter"></i></a>
