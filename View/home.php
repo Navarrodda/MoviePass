@@ -76,113 +76,41 @@
     <div class="container">
        <div class="row">
            <div class="col-md-12">
-               <h2>MOVIES</h2>
+               <h2>Movies and Cinema</h2>
            </div>
        </div>
         <div class="row">
             <div class="col-md-3">
                <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema1.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
+                    <img src="<?php echo URL ?>/img/porcorn.png">
                 <div class="overlay"></div>
             </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
+                <h3>Popcorn</h3>
+                <p>ENJOY THE BEST POPCORN</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema2.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
+                    <img src="<?php echo URL ?>/img/glas.png">
                 <div class="overlay"></div>
             </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
+                <h3>Glasses</h3>
+                <p>3D GLASSES</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema3.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
+                    <img src="<?php echo URL ?>/img/proyector.png">
                 <div class="overlay"></div>
             </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
+                <h3>Projector</h3>
+                <p>ENJOY THE BEST VIDEO QUALITY</p>
             </div>
             <div class="col-md-3">
                <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema4.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
+                    <img src="<?php echo URL ?>/img/headband.png">
                 <div class="overlay"></div>
             </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
-            </div>
-            <div class="col-md-3">
-               <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema5.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
-                <div class="overlay"></div>
-            </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
-            </div>
-            <div class="col-md-3">
-               <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema6.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
-                <div class="overlay"></div>
-            </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
-            </div>
-            <div class="col-md-3">
-               <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema1.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
-                <div class="overlay"></div>
-            </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
-            </div>
-            <div class="col-md-3">
-               <div class="teams">
-                    <img src="<?php echo URL ?>/img/tema2.jpg">
-                <div class="icon">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                </div>
-                <div class="overlay"></div>
-            </div>
-                <h3>Michael Williams</h3>
-                <p>CREATIVE LEAD</p>
+                <h3>HEADBAND</h3>
+                <p>THE BEST PROGRAMMING</p>
             </div>
         </div>
     </div>
