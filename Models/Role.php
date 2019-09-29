@@ -1,6 +1,6 @@
 <?php
 
-namespace Modelo;
+namespace Model;
 
 class Role
 {
