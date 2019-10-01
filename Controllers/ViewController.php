@@ -1,6 +1,6 @@
 <?php
 
-namespace controllers;
+namespace Controllers;
 
 //Modelo
 //Dao
@@ -46,5 +46,14 @@ class ViewController
 		require(URL_VISTA . "feature.php");
 		include URL_VISTA . 'footer.php';
 	} 
+
+	public function message()
+	{
+
+		$view = 'MESSAGE';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "message.php");
+		include URL_VISTA . 'footer.php';
+	}
 
 }

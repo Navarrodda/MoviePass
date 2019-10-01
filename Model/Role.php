@@ -12,10 +12,9 @@ class Role
        public function __construct($preority)
     {
         $this->setPreority($preority);
+    }
     
-    /**
-     * @return mixed
-     */
+
     public function getId()
     {
         return $this->id;

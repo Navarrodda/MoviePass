@@ -3,10 +3,10 @@
 namespace Config;
 
 
-define("DB_NAME", "");
-define("DB_USER", "");
+define("DB_NAME", "moviepass");
+define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_HOST", "");
+define("DB_HOST", "localhost");
 
 // Constantes front
 define('ROOT',  dirname(__DIR__) . "/");
