@@ -8,15 +8,22 @@ class User
     private $role;
     private $nikname;
     private $email;
+    private $name;
+    private $lastname;
+    private $dni;
     private $password;
 
-    public function __construct($nikname, $email, $password, Role $role)
+    public function __construct($nikname, $email, $name, $lastname, $dni, $password, Role $role)
     {
         $this->setNikname($nikname);
         $this->setEmail($email);
+        $this->setName($name);
+        $this->setLastname($lastname);
+        $this->setDni($dni);
         $this->setPassword($password);
         $this->setRole($role);
     }
+
 
 
     /**
@@ -35,6 +42,26 @@ class User
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -82,6 +109,66 @@ class User
     /**
      * @return mixed
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $lastname
+     *
+     * @return self
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDni()
+    {
+        return $this->dni;
+    }
+
+    /**
+     * @param mixed $dni
+     *
+     * @return self
+     */
+    public function setDni($dni)
+    {
+        $this->dni = $dni;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getPassword()
     {
         return $this->password;
@@ -95,26 +182,6 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-        /**
-     * @return mixed
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param mixed $password
-     *
-     * @return self
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
 
         return $this;
     }

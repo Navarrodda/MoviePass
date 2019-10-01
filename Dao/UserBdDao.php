@@ -42,7 +42,7 @@ class UserBdDao{
       try{
 
         /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (rol, nikname ,email, password) VALUES (:rol, :nikname, :email, :password)");
+        $sql = ("INSERT INTO $this->table (rol, name, lastname, dni, nikname ,email, password) VALUES (:rol, :name, :lastname, :dni, :nikname, :email, :password)");
 
         $conec = Conection::conection();
 
@@ -51,12 +51,18 @@ class UserBdDao{
         $r = $user->getRole();
         $rol = $r->getId();
 
+        $name = $user->getName();
+        $lastname = $user->getLastname();
+        $dni = $user->getDni();
         $nikname = $user->getNikname();
         $email = $user->getEmail();
         $password = $user->getPassword();
 
 
         $judgment->bindParam(":rol",$rol);
+        $judgment->bindParam(":name",$name);
+        $judgment->bindParam(":lastname",$lastname);
+        $judgment->bindParam(":dni",$dni);
         $judgment->bindParam(":nikname",$nikname);
         $judgment->bindParam(":email", $email);
         $judgment->bindParam(":password", $password);
@@ -103,7 +109,7 @@ public function remove_by_mail($email){
 public function to_update(User $user, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET rol=:rol, nombre=:nombre,  nikname=:nikname, email=:email,pass=:pass WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET rol=:rol, name=:name, lastname=:lastname, dni=:dni, nikname=:nikname, email=:email,pass=:pass WHERE id=\"$id\"");
 
         $conec = Conection::conection();
 
@@ -112,12 +118,17 @@ public function to_update(User $user, $id){
         $r = $user->getRole();
         $rol = $r->getId();
 
+        $name = $user->getName();
+        $lastname = $user->getLastname();
+        $dni = $user->getDni();
         $nikname = $user->getNikname();
         $email = $user->getEmail();
         $password = $user->getPassword();
 
-
         $judgment->bindParam(":rol",$rol);
+        $judgment->bindParam(":name",$name);
+        $judgment->bindParam(":lastname",$lastname);
+        $judgment->bindParam(":dni",$dni);
         $judgment->bindParam(":nikname",$nikname);
         $judgment->bindParam(":email", $email);
         $judgment->bindParam(":password", $password);
@@ -251,10 +262,13 @@ public function bring_by_nikname($nikname){
 public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-       $this->list = array_map(function ($p) {
+     $this->list = array_map(function ($p) {
         $daoRol = RolBdDao::getInstance();
         $usuario = new User
         (
+            $p['name'],
+            $p['lastname'],
+            $p['dni'],
             $p['nikname'],
             $p['email'],
             $p['password'],
@@ -263,6 +277,6 @@ public function mapear($dataSet){
         $usuario->setId($p['id']);
         return $usuario;
     }, $dataSet);
-   }
+ }
 }
 }

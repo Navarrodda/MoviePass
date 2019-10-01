@@ -4,17 +4,20 @@ USE moviepass;
 
 CREATE TABLE roles(
 id TINYINT AUTO_INCREMENT NOT NULL,
-preority VARCHAR(15),
+preority VARCHAR(255),
 CONSTRAINT pk_id_rol PRIMARY KEY (id)
 );
 
 
 CREATE TABLE users(
 id BIGINT AUTO_INCREMENT NOT NULL,
-rol TINYINT,     
-nikname VARCHAR(20) NOT NULL,
-email VARCHAR(50) NOT NULL,
-password VARCHAR(17) NOT NULL,
+rol TINYINT, 
+name VARCHAR(255) NOT NULL,
+lastname VARCHAR(255) NOT NULL,  
+dni VARCHAR(255) NOT NULL,   
+nikname VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
 CONSTRAINT pk_id_user PRIMARY KEY (id),
 CONSTRAINT fk_id_user_rol FOREIGN KEY (rol) REFERENCES roles (id)    
 );

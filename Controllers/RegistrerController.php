@@ -24,17 +24,17 @@ class RegistrerController
 		$this->daoUser = UserBD::getInstance();
 	}
 
-	public function check_in($nikname, $email, $password, $pass2){
+	public function check_in($name, $lastname, $dni, $nikname, $email, $password, $pass2){
 		try{
 			$regCompleted = FALSE;
 
-			$nombre = ucwords($nikname); 
+			$name = ucwords($name);
+			$lastname = ucwords($lastname);
+			$nikname = ucwords($nikname);
 
 			if(!$this->daoUser->verify_email($email)){
 				$id = 3;
-				print_r("llego");
-				$userInstance = new user($nikname, $email, $password, $this->daoRole->bring_by_id($id));
-				print_r("r");
+				$userInstance = new user($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
 				$idUser = $this->daoUser->add($userInstance);
 				$userInstance->setId($idUser);
 				$regCompleted = TRUE;
