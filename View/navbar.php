@@ -6,18 +6,16 @@
             <div class="row">
                 <div class="col-md-4">
                     <ul>
+                      <?php if(!empty($_SESSION["data"])){ ?>
                         <li><a href="#">Account</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">dashbord</a></li>
+                        <<?php } ?>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <div class="icon">
-                       <a href="#"><i class="fa fa-facebook"></i></a>
-                       <a href="#"><i class="fa fa-twitter"></i></a>
-                       <a href="#"><i class="fa fa-google-plus"></i></a>
-                       <a href="#"><i class="fa fa-linkedin"></i></a>
-                       <a href="#"><i class="fa fa-wifi"></i></a>
+                       <a><img src="<?php echo URL ?>/img/Icon/cine.png"/></a>
                     </div>
                 </div>
                 <div class="col-md-4">
