@@ -39,8 +39,8 @@
         <input required name="nikname" type="Text" value="" placeholder="Nikname"/>
         <input required name="email" type="Email" value="" placeholder="Email"/>     
         <input required name="pass" id="pass"  value="" type="password" placeholder="Password"/>
-        <input name="pass2" id="pass2"  value="" type="password" placeholder="Confirm password"/>
-        <button class="subbt" type="submit" name="button" style="border:none;">Sign In</button>           
+        <input required name="pass2" id="pass2"  value="" type="password" placeholder="Confirm password"/>
+        <input class="subbt" type="submit" value="Sign In" style="border:none;"/>            
       </form>        
     </div>
   </div>       

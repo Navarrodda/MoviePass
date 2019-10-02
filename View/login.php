@@ -1,6 +1,12 @@
 <?php  include(URL_VISTA . "navbar.php"); ?>
 
 
+ <?php if(isset($this->message)) {?>
+    <div class="container">
+      <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
+    </div>
+  <?php } ?>
+
   <section class="register-account"> 
       
           <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
@@ -15,9 +21,10 @@
                 <h4>Login To Your Account</h4>
               </div>
               <div class="form">
-                <form class="login-form">
-                    <input type="email" placeholder="Email or Nikname"/>     
-                    <input type="password" placeholder="Password"/>        
+                <form class="login-form" class="login-form" method="post" action="<?php echo URL ?>/session/login/">
+                    <input name="dato" type="Text" placeholder="Email or Nikname"/>     
+                    <input name="password" type="password" placeholder="Password"/>
+
                     <input class="subbt" type="submit" value="Sign In" style="border:none;"/>   
                 </form>
                 <input type="checkbox" id="remember" name="remember"><span style="color:#b6b6b6;font-size: 0.9em;"> Remember Me</span><a href="#">Forgot your password?</a>        

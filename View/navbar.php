@@ -22,8 +22,12 @@
                 </div>
                 <div class="col-md-4">
                    <div class="a-right">
+                    <?php if(empty($_SESSION["data"])){ ?>
                         <a href="<?php echo URL ?>/view/login/"><p><span><i class="fa fa-user"></i></span>Login</p></a>
                         <a href="<?php echo URL ?>/view/register/"><p><span><i class="fa fa-pencil"></i></span>Register</p></a>
+                        <?php } else { ?>
+                            <a href="<?php echo URL ?>/session/logout/"><p><span><i  class="fa fa-sign-out"></i></span>Sign Out</p></a>
+                          <?php }?>
                    </div>
                 </div>
             </div>

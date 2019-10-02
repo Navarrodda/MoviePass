@@ -3,7 +3,7 @@
 namespace Controllers;
 
 //Modelo
-use \Model\User as user;
+use \Model\User as User;
 use \Model\Role as role;
 use \Model\Message as Message;;
 
@@ -34,7 +34,7 @@ class RegistrerController
 
 			if(!$this->daoUser->verify_email($email)){
 				$id = 3;
-				$userInstance = new user($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
+				$userInstance = new User($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
 				$idUser = $this->daoUser->add($userInstance);
 				$userInstance->setId($idUser);
 				$regCompleted = TRUE;
@@ -42,7 +42,7 @@ class RegistrerController
 			if($regCompleted == TRUE)
 			{
 				$view = "MESSAGE";
-				$this->message = new Message( "success", "The user was registered successfully!" );
+				$this->message = new Message( "success", "The User was registered successfully!" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';

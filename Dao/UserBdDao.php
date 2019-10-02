@@ -215,7 +215,7 @@ public function bring_by_id($id)
 public function bring_by_mail($email){
     try{
         $sql = "SELECT * FROM $this->table WHERE email =  \"$email\" LIMIT 1";
-
+        
         $conec = Conection::conection();
 
         $judgment = $conec->prepare($sql);
@@ -266,13 +266,13 @@ public function mapear($dataSet){
         $daoRol = RolBdDao::getInstance();
         $usuario = new User
         (
+            $p['nikname'],
+            $p['email'],
             $p['name'],
             $p['lastname'],
             $p['dni'],
-            $p['nikname'],
-            $p['email'],
             $p['password'],
-            $daoRol->traerPorId($p['rol'])
+            $daoRol->bring_by_id($p['rol'])
         );
         $usuario->setId($p['id']);
         return $usuario;
