@@ -79,6 +79,7 @@ class SessionController
                         //Seteo las variables de sesión.
 							$_SESSION["id"] = $user->getId();
 							$_SESSION["data"] = $data;
+							$_SESSION["email"] = $user->getEmail();
 							$_SESSION["nombre"] = $user->getName();
 							$_SESSION["lastname"] = $user->getLastname();
 							$_SESSION["dni"] = $user->getDni();

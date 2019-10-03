@@ -3,13 +3,16 @@
 namespace Controllers;
 
 //Modelo
+use \Model\User as User;
 //Dao
+use \Dao\UserBdDao as UserBD;
 
 class ViewController
 {
 
 	public function __construct()
 	{
+		$this->daoUser = UserBD::getInstance();
 	}
 
 	public function index()
@@ -53,6 +56,23 @@ class ViewController
 		$view = 'MESSAGE';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "message.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function account()
+	{
+		$view = 'ACCOUNT';
+		$user = $this->daoUser->bring_by_id($_SESSION["id"]);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "account.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function modifyaccount()
+	{
+		$view = 'MODIFY ACCOUNT';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modifyaccount.php");
 		include URL_VISTA . 'footer.php';
 	}
 

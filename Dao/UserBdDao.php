@@ -109,7 +109,7 @@ public function remove_by_mail($email){
 public function to_update(User $user, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET rol=:rol, name=:name, lastname=:lastname, dni=:dni, nikname=:nikname, email=:email,pass=:pass WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET rol=:rol, name=:name, lastname=:lastname, dni=:dni, nikname=:nikname, email=:email, password=:password WHERE id=\"$id\"");
 
         $conec = Conection::conection();
 
@@ -185,7 +185,7 @@ public function verify_email($email){
 public function bring_by_id($id)
 {   
     try{
-        if ($id_usuario != null) {
+        if ($id != null) {
             $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
 
             $conec = Conection::conection();

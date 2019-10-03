@@ -7,10 +7,10 @@
                 <div class="col-md-4">
                     <ul>
                       <?php if(!empty($_SESSION["data"])){ ?>
-                        <li><a href="#">Account</a></li>
+                        <li><a href="<?php echo URL ?>/view/account/">Account</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">dashbord</a></li>
-                        <<?php } ?>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -50,11 +50,14 @@
                       <li><a href="#">PAGES</a></li>
                     </ul>
                 </div>
+                <?php if(!empty($_SESSION["rol"])){ ?>
+                  <?php if($_SESSION["rol"] == 3){ ?>
                 <div class="col-md-2">
                     <div class="cart">
                         <p><i class="fa fa-cart-arrow-down"></i><sup>0</sup> &#36;&nbsp;&nbsp;0.00</p>
                     </div>
                 </div>
+              <?php } } ?>
             </div>
             <div class="row">
                 <div class="col-md-12">

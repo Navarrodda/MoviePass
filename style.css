@@ -2057,3 +2057,12 @@ form#login-form::before {
     font-size: 20px;
     margin-left: 20px;
 }
+
+.centerin {
+
+   padding:2px;
+   cursor:pointer;
+   width:390px;
+   margin:auto;
+
+}
