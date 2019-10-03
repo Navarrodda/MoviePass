@@ -45,7 +45,7 @@
                       <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
                       <li><a href="#">LOKER</a></li>
                       <li><a href="#">BLOG</a></li>
-                      <li><a href="#">SHORTCODE</a></li>
+                      <li><a href="<?php echo URL?>/Movie/getList">SHORTCODE</a></li>
                       <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
                       <li><a href="#">PAGES</a></li>
                     </ul>
