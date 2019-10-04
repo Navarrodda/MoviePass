@@ -1,15 +1,23 @@
 <?php
 	namespace Controllers; 
 
-	use Dao\GenreDao as GenreDao;
+	use Dao\GenreFileDao as GenreFileDao;
 
 	class GenreController
 	{
-		private GenreFileDao;
+		private $GenreFileDao;
 
 		public function __construct()
 		{
-			GenreFileDao = new GenreFileDao();
+			$this->GenreFileDao = new GenreFileDao();
+		}
+
+		// Devuelve un Array de Generos desde la api.
+		public function getList()
+		{
+			$api = $this->GenreFileDao->getNowApi();
+			//var_dump($api);
+			return $api;
 		}
 
 	}
