@@ -37,7 +37,7 @@ class RegistrerController
 				$userInstance = new User($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
 				$idUser = $this->daoUser->add($userInstance);
 				$userInstance->setId($idUser);
-				<?php
+				/*
 				ini_set( 'display_errors', 1 );
 				error_reporting( E_ALL );
 				$from = "test@hostinger-tutorials.com";
@@ -47,7 +47,7 @@ class RegistrerController
 				$headers = "From:" . $from;
 				mail($to,$subject,$message, $headers);
 				echo "The email message was sent.";
-			);
+			);*/
 $regCompleted = TRUE;
 }
 if($regCompleted == TRUE)
