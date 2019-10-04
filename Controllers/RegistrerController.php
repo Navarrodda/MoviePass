@@ -48,31 +48,31 @@ class RegistrerController
 				mail($to,$subject,$message, $headers);
 				echo "The email message was sent.";
 			);*/
-$regCompleted = TRUE;
-}
-if($regCompleted == TRUE)
-{
-	$view = "MESSAGE";
-	$this->message = new Message( "success", "The User was registered successfully!" );
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . 'message.php');
-	include URL_VISTA . 'footer.php';
-}
-else
-{
-	$view = "MESSAGE";
-	$this->message = new Message( "warning", "Email entered existing!" );
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . 'message.php');
-	include URL_VISTA . 'footer.php';
-}
-}catch(\PDOException $pdo_error){
-	include URL_VISTA . 'header.php';
-	require(URL_VISTA . 'error.php');
-	include URL_VISTA . 'footer.php';
-}catch(\Exception $error){
-	echo $error->getMessage();
-}
+			$regCompleted = TRUE;
+		}
+		if($regCompleted == TRUE)
+		{
+			$view = "MESSAGE";
+			$this->message = new Message( "success", "The User was registered successfully!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "Email entered existing!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+	}catch(\PDOException $pdo_error){
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . 'error.php');
+		include URL_VISTA . 'footer.php';
+	}catch(\Exception $error){
+		echo $error->getMessage();
+	}
 }
 
 public function change_priority($code){
@@ -88,7 +88,6 @@ public function change_priority($code){
 			}
 			$id = $code;
 			$_SESSION["rol"] = $id;
-			die(var_dump($id));
 			if ($id == 1  && $id = 2) {
 
 				if(substr_count($_SESSION["data"], "@") == 1)
