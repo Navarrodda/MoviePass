@@ -6,6 +6,7 @@ namespace Controllers;
 use \Model\User as User;
 //Controler
 use \Controllers\MovieController as MoviesC;
+use \Controllers\GenreController as GenreC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -16,6 +17,7 @@ class ViewController
 	{
 		$this->daoUser = UserBD::getInstance();
 		$this->ControlMovies = new MoviesC;
+		$this->ControlGenre = new GenreC;
 	}
 
 	public function index()
@@ -83,6 +85,7 @@ class ViewController
 	{
 		$view = 'MOVIES';
 		$values = $this->ControlMovies->getList();
+		$genere = $this->ControlGenre->getList();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';

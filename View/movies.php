@@ -10,18 +10,18 @@
         </div>
       </div>
       <div class="blog-sidebar">
+        <?php if(!empty($genere)){ ?>
        <h2>Categories</h2>
        <div class="categorie">
         <div class="row">
           <div class="col-md-12">
-            <p>Advice (8)</p>
-            <p>Articles (20)</p>
-            <p>Comments (10)</p>
-            <p>Design (5)</p>
-            <p>Other (3)</p>
+         <?php foreach ($genere as $gen) { ?>
+            <p><?php echo $gen->getName()?></p>
+          <?php  }?>
           </div>
         </div>
       </div> 
+    <?php }  ?>
       <h2>Search Categories or Movies</h2>
        <div class="tags">
       <?php if(!isset($_SESSION['rol']) != 3) {?>

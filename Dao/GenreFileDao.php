@@ -45,10 +45,11 @@
 
 			foreach ($arrayTodecode as $indice) 
 				{
-					$genre = new Genre();
+					
 					//indice tiene un  array de arrays de generos.
 					foreach ($indice as $value) 
 					{	
+						$genre = new Genre();
 						//value contiene un solo array con genero.
 						$genre->setId($value["id"]);
 						$genre->setName($value["name"]);
@@ -69,7 +70,7 @@
 
 				$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 
-				foreach ($arrayTodecode as $values) 
+				foreach ($arrayTodecode as $indice) 
 				{
 					
 					$genre = new Genre();
