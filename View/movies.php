@@ -21,9 +21,47 @@
             <p>Other (3)</p>
           </div>
         </div>
-      </div>
-    </div>
-    <?php if(!empty($values)){
+      </div> 
+      <h2>Search Categories or Movies</h2>
+       <div class="tags">
+      <?php if(!isset($_SESSION['rol']) != 3) {?>
+        <?php if($view == 'MOVIES') {?>
+
+          <script type="text/javascript">
+            function valida(search) {
+              var ok = true;
+              var msg = "!Empty search data:\n";
+              if(search.elements["search"].value == "")
+              {
+                msg += "Complete the field\n";
+                ok = false;
+              }
+
+              if(ok == false)
+                alert(msg);
+              return ok;
+            }
+          </script>
+          <div class="flexsearch">
+            <div class="flexsearch--wrapper">
+              <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="#">
+                <div class="flexsearch--input-wrapper">
+                  <div class="center">
+                    <select name="select" class="btnselect">
+                     <option value="0">Choose an option</option> 
+                     <option value="1">Movie</option> 
+                     <option value="2">Categories</option>
+                   </select>
+                 </div>
+               </div>
+               <input method="post" class="flexsearch--input btn3" value=""  name="search" type="search" placeholder="Search">          
+             </form>
+           </div>
+         </div>
+       <?php } } ?>
+     </div>
+   </div>
+     <?php if(!empty($values)){
       foreach ($values as $data) { ?>
        <div class="col-md-9">
          <div class="b-slide-text">

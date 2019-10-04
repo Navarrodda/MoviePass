@@ -20,7 +20,7 @@ class ViewController
 
 	public function index()
 	{
-		$view = 'MOVIES';
+		$view = 'HOME';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "home.php");
 		include URL_VISTA . 'footer.php';

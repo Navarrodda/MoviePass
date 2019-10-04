@@ -29,10 +29,10 @@
  </table>
  <?php if ($_SESSION["rol"] == 3) { ?>
   <script type="text/javascript">
-    function valida(password) {
+    function valida(dato) {
       var ok = true;
       var msg = "I don't enter any key:\n";
-      if(password.elements["dato"].value != " ")
+      if(dato.elements["dato"].value != " ")
       {
         msg += "Put a key\n";
         ok = false;

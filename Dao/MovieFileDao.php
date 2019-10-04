@@ -12,12 +12,12 @@
 
 			foreach ($list as $movie) {
 
-				$valueArray["id"] = $movie->setId($values["id"]);
+				//$valueArray["id"] = $movie->setId($values["id"]);
 				$valueArray["title"] =	$movie->setTitle($values["title"]);
 				$valueArray["idApi"] =	$movie->setIdapi($values["idApi"]);
 				$valueArray["imagenruta"] =	$movie->setImagenruta($values["imagenruta"]);
 				$valueArray["overview"] =	$movie->setOverview($values["overview"]);
-				$valueArray["duration"] =	$movie->setDuration($values["duration"]);
+				//$valueArray["duration"] =	$movie->setDuration($values["duration"]);
 				$valueArray["genre"] =	$movie->setGenre($value["genre"]);
 
 				array_push($arrayToencode, $valueArray);
@@ -101,8 +101,8 @@
 					$movie->setVoteAverage($value["vote_average"]);
 					$movie->setOriginalLanguage($value["original_language"]);
 					/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
-						$values["price"]);
-					array_push($cellList, $cell);*/
+						$values["price"]);*/
+					array_push($movieList, $movie);
 				}
 				return $movielList;
 			}
