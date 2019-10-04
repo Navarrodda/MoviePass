@@ -14,7 +14,8 @@
 
 		public function getList()
 		{
-			$this->MovieFileDao->getNowApi();
+			$api = $this->MovieFileDao->getNowApi();
+			return $api;
 		}
 
 	}

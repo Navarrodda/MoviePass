@@ -4,6 +4,8 @@ namespace Controllers;
 
 //Modelo
 use \Model\User as User;
+//Controler
+use \Controllers\MovieController as MoviesC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -13,6 +15,7 @@ class ViewController
 	public function __construct()
 	{
 		$this->daoUser = UserBD::getInstance();
+		$this->ControlMovies = new MoviesC;
 	}
 
 	public function index()
@@ -73,6 +76,15 @@ class ViewController
 		$view = 'MODIFY ACCOUNT';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modifyaccount.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+		public function movies()
+	{
+		$view = 'MOVIES';
+		$values = $this->ControlMovies->getList();
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
 	}
 

@@ -13,6 +13,10 @@ class Movie
     private $overview; 
     private $duration;
     private $genre;
+    private $release_date;
+    private $vote_count;
+    private $vote_average;
+    private $original_language;
     
     public function __construct()
     {
@@ -62,25 +66,6 @@ class Movie
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getVoteAverage()
-    {
-        return $this->vote_average;
-    }
-
-    /**
-     * @param mixed $vote_average
-     *
-     * @return self
-     */
-    public function setVoteAverage($vote_average)
-    {
-        $this->vote_average = $vote_average;
-
-        return $this;
-    }
 
     /**
      * @return mixed
@@ -198,6 +183,88 @@ class Movie
     public function setIdApi($idApi)
     {
         $this->idApi = $idApi;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReleaseDate()
+    {
+        return $this->release_date;
+    }
+
+    /**
+     * @param mixed $release_date
+     *
+     * @return self
+     */
+    public function setReleaseDate($release_date)
+    {
+        $this->release_date = $release_date;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoteCount()
+    {
+        return $this->vote_count;
+    }
+
+    /**
+     * @param mixed $vote_count
+     *
+     * @return self
+     */
+    public function setVoteCount($vote_count)
+    {
+        $this->vote_count = $vote_count;
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getVoteAverage()
+    {
+        return $this->vote_average;
+    }
+
+    /**
+     * @param mixed $vote_average
+     *
+     * @return self
+     */
+    public function setVoteAverage($vote_average)
+    {
+        $this->vote_average = $vote_average;
+
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getOriginalLanguage()
+    {
+        return $this->original_language;
+    }
+
+    /**
+     * @param mixed $original_language
+     *
+     * @return self
+     */
+    public function setOriginalLanguage($original_language)
+    {
+        $this->original_language = $original_language;
 
         return $this;
     }

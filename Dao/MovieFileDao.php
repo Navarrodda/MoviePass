@@ -55,10 +55,16 @@
 								$movie->setIdApi($indice["id"]);
 								$movie->setTitle($indice["original_title"]);
 								//$movie->setIdapi($arreglo["idApi"]);
-								$movie->setImagenruta($indice["poster_path"]);
+								$movie->setImagenruta($indice["backdrop_path"]);
 								$movie->setOverview($indice["overview"]);
 								//$movie->setDuration($arreglo["duration"]);
 								$movie->setGenre($indice["genre_ids"]);
+								$movie->setReleaseDate($indice["release_date"]);
+								$movie->setVoteCount($indice["vote_count"]);
+								$movie->setVoteAverage($indice["vote_average"]);
+								$movie->setOriginalLanguage($indice["original_language"]);
+
+
 								/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 									$values["price"]);*/
 								array_push($movieList, $movie);
@@ -89,7 +95,11 @@
 					$movie->setImagenruta($values["imagenruta"]);
 					$movie->setOverview($values["overview"]);
 					$movie->setDuration($values["duration"]);
-					$movie->setGenre($value["genre"]);
+					$movie->setGenre($value["genre_ids"]);
+					$movie->setReleaseDate($value["release_date"]);
+					$movie->setVoteCount($value["vote_count"]);
+					$movie->setVoteAverage($value["vote_average"]);
+					$movie->setOriginalLanguage($value["original_language"]);
 					/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 						$values["price"]);
 					array_push($cellList, $cell);*/
