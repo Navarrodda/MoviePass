@@ -43,11 +43,7 @@
       <div class="col-md-7">
         <ul class="nav navbar-nav">
           <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
-<<<<<<< HEAD
            <li><a href="<?php echo URL?>/Genre/getList/">LOKER</a></li>
-=======
-          <li><a href="<?php echo URL?>/Genre/getList/">LOKER</a></li>
->>>>>>> 1840216df20e0243afff661583c1a41fa9de20dd
           <li><a href="#">BLOG</a></li>
           <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
