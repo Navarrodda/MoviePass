@@ -1,15 +1,12 @@
 <?php  include(URL_VISTA . 'navbar.php') ?>
 
+
 <section class="blog-slide-text">
   <div class="container">
     <div class="row">
       <div class="centerin">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="headit">
-              <h1>New Movies</h1>
-            </div>
-          </div>
+        <div class="col-md-12">
+          <h1>New Movies</h1>
         </div>
       </div>
       <div class="blog-sidebar">
@@ -55,8 +52,6 @@
     <?php } } ?>
   </div>
 </div>
-</div>
-</section>
 <div class="container">
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
@@ -71,3 +66,4 @@
     </div>
   </div>
 </div>
+</section>
