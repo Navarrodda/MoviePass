@@ -10,7 +10,8 @@
 		{
 			$arrayToencode = array();
 
-			foreach ($list as $movie) {
+			foreach ($list as $movie) 
+			{
 
 				//$valueArray["id"] = $movie->setId($values["id"]);
 				$valueArray["title"] =	$movie->setTitle($values["title"]);
@@ -29,6 +30,24 @@
 			file_put_contents("Data/movie.json", $jsonContent);
 
 
+		}
+
+		public function getMovieByGenre($id)
+		{
+			$array = $this->getNowApi();
+			$movieList = array();
+
+			foreach ($array as $movie) 
+			{
+				foreach ($movie->getGenre() as $genero) {
+					if($id == $genero)
+					{
+						array_push($movieList, $movie);
+					}
+				}
+			}
+			
+			return $movieList;
 		}
 
 		public function getNowApi()
@@ -52,23 +71,23 @@
 				foreach ($array as $indice) 
 				{
 						$movie = new Movie();
-								$movie->setIdApi($indice["id"]);
-								$movie->setTitle($indice["original_title"]);
-								//$movie->setIdapi($arreglo["idApi"]);
-								$movie->setImagenruta($indice["backdrop_path"]);
-								$movie->setOverview($indice["overview"]);
-								//$movie->setDuration($arreglo["duration"]);
-								$movie->setGenre($indice["genre_ids"]);
-								$movie->setReleaseDate($indice["release_date"]);
-								$movie->setVoteCount($indice["vote_count"]);
-								$movie->setVoteAverage($indice["vote_average"]);
-								$movie->setOriginalLanguage($indice["original_language"]);
+						$movie->setIdApi($indice["id"]);
+						$movie->setTitle($indice["original_title"]);
+						//$movie->setIdapi($arreglo["idApi"]);
+						$movie->setImagenruta($indice["backdrop_path"]);
+						$movie->setOverview($indice["overview"]);
+						//$movie->setDuration($arreglo["duration"]);
+						$movie->setGenre($indice["genre_ids"]);
+						$movie->setReleaseDate($indice["release_date"]);
+						$movie->setVoteCount($indice["vote_count"]);
+						$movie->setVoteAverage($indice["vote_average"]);
+						$movie->setOriginalLanguage($indice["original_language"]);
 
 
-								/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
-									$values["price"]);*/
-								array_push($movieList, $movie);
-							
+						/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
+							$values["price"]);*/
+						array_push($movieList, $movie);
+					
 					
 				}
 				return $movieList;

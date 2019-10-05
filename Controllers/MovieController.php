@@ -1,7 +1,7 @@
 <?php
 	namespace Controllers;
 
-	use Dao\MovieFileDao as MovieFileDao;
+	use \Dao\MovieFileDao as MovieFileDao;
 
 	class MovieController
 	{
@@ -16,6 +16,12 @@
 		{
 			$api = $this->MovieFileDao->getNowApi();
 			return $api;
+		}
+
+		public function getMovieByGenre($id)
+		{
+
+			return $this->MovieFileDao->getMovieByGenre($id);
 		}
 
 	}
