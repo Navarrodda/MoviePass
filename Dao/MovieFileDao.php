@@ -6,32 +6,6 @@
 	class MovieFileDao
 	{
 
-		private function saveData($list)
-		{
-			$arrayToencode = array();
-
-			foreach ($list as $movie) 
-			{
-
-				//$valueArray["id"] = $movie->setId($values["id"]);
-				$valueArray["title"] =	$movie->setTitle($values["title"]);
-				$valueArray["idApi"] =	$movie->setIdapi($values["idApi"]);
-				$valueArray["imagenruta"] =	$movie->setImagenruta($values["imagenruta"]);
-				$valueArray["overview"] =	$movie->setOverview($values["overview"]);
-				//$valueArray["duration"] =	$movie->setDuration($values["duration"]);
-				$valueArray["genre"] =	$movie->setGenre($value["genre"]);
-
-				array_push($arrayToencode, $valueArray);
-
-			}
-
-			$jsonContent = json_encode($arrayToencode,JSON_PRETTY_PRINT);
-
-			file_put_contents("Data/movie.json", $jsonContent);
-
-
-		}
-
 		public function getMovieByGenre($id)
 		{
 			$array = $this->getNowApi();
@@ -53,6 +27,32 @@
 		public function getNowApi()
 		{
 			return $this->retrieveApi();
+		}
+
+		private function saveData($list)
+		{
+			$arrayToencode = array();
+
+			foreach ($list as $movie) 
+			{
+
+				//$valueArray["id"] = $movie->setId($values["id"]);
+				$valueArray["title"] =	$movie->getTitle();
+				$valueArray["idApi"] =	$movie->getIdapi();
+				$valueArray["imagenruta"] =	$movie->getImagenruta();
+				$valueArray["overview"] =	$movie->getOverview();
+				//$valueArray["duration"] =	$movie->setDuration($values["duration"]);
+				$valueArray["genre"] =	$movie->getGenre();
+
+				array_push($arrayToencode, $valueArray);
+
+			}
+
+			$jsonContent = json_encode($arrayToencode,JSON_PRETTY_PRINT);
+
+			file_put_contents("Data/movie.json", $jsonContent);
+
+
 		}
 
 		private function retrieveApi()
