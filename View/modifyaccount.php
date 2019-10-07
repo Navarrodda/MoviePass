@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-12">
         <div class="headit">
-          <h3>Modify your account</h3>
+          <h3 style="color:white">Modify your account</h3>
           <h4>No need to fill in all fields</h4>
         </div>
         <div class="form">

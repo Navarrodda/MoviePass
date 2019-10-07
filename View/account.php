@@ -3,23 +3,23 @@
 <section class="mb-4">
   <div class="container">
     <div class="row">
-     <h2 class="col-md-12">Your Account</h2>
+     <h2 class="col-md-12" style="color:white">Your Account</h2>
      <table class="table bg-light-alpha">
       <thead>
-       <th>Name</th>
-       <th>Lastname</th>
-       <th>DNI</th>
-       <th>Nikname</th>
-       <th>Email</th>
+       <th style="color:white">Name</th>
+       <th style="color:white">Lastname</th>
+       <th style="color:white">DNI</th>
+       <th style="color:white">Nikname</th>
+       <th style="color:white">Email</th>
      </thead>
      <tbody>
        <form>
          <tr>
-          <td><?php echo $user->getName();?></td>
-          <td><?php echo $user->getLastname(); ?></td>
-          <td><?php echo $user->getDni();?></td>
-          <td><?php echo $user->getNikname(); ?></td>
-          <td><?php echo $user->getEmail();?></td>
+          <td style="color:white"><?php echo $user->getName();?></td>
+          <td style="color:white"><?php echo $user->getLastname(); ?></td>
+          <td style="color:white"><?php echo $user->getDni();?></td>
+          <td style="color:white"><?php echo $user->getNikname(); ?></td>
+          <td style="color:white"><?php echo $user->getEmail();?></td>
           <td> 
            <a class="btn btn-warning" href="<?php echo URL ?>/view/modifyaccount/">Modify</a> 
          </td>

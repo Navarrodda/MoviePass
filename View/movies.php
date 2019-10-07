@@ -6,7 +6,7 @@
     <div class="row">
       <div class="centerin">
         <div class="col-md-12">
-          <h1>New Movies</h1>
+          <h1 style="color:white">New Movies</h1>
         </div>
       </div>
       <div class="blog-sidebar">
@@ -65,7 +65,7 @@
      <div class="b-slide-text">
        <div class="row">
         <div class="col-md-5">
-          <div class="b-slide">
+          <div class="b-slide marc">
             <img src="<?php echo $data->getImageruta()?>">
           </div>
         </div>

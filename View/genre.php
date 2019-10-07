@@ -6,7 +6,7 @@
     <div class="row">
       <div class="centerin">
         <div class="col-md-12">
-          <h1>Genre: <?php echo $titule; ?></h1>
+          <h1 style="color:white">Genre: <?php echo $titule; ?></h1>
         </div>
       </div>
       <div class="blog-sidebar">
