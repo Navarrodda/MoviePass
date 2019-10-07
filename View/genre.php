@@ -6,7 +6,7 @@
     <div class="row">
       <div class="centerin">
         <div class="col-md-12">
-          <h1>New Movies</h1>
+          <h1>Genre: <?php echo $titule; ?></h1>
         </div>
       </div>
       <div class="blog-sidebar">
@@ -25,6 +25,7 @@
     <?php if(!isset($_SESSION)) {?>
       <h2>Search Categories or Movies</h2>
       <div class="tags">
+
         <script type="text/javascript">
           function valida(search) {
             var ok = true;
@@ -57,7 +58,7 @@
          </div>
        </div>
      </div>
-   <?php  } ?>
+   <?php }  ?>
  </div>
  <?php if(!empty($values)){
   foreach ($values as $data) { ?>
@@ -86,21 +87,35 @@
       </div>
     </div>
   </div>
-<?php } } ?>
-</div>
-<?php if($length > 20 ) { ?>
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="centre">
-      <ul class="pagination pagination-lg">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-      </ul>
+<?php } }  
+else {
+  ?>
+  <div class="col-md-9">
+   <div class="b-slide-text">
+     <div class="row">
+      <div class="col-md-7">
+        <div class="b-text">
+          <h2>There are no films with the genre: <?php echo $titule; ?></h2>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+</div>
+<?php } ?>
+<?php if($length > 10 ) { ?>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="centre">
+        <ul class="pagination pagination-lg">
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 <?php }  ?>
 </div>
 </section>

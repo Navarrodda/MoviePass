@@ -81,13 +81,32 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function movies()
+	public function movies()
 	{
 		$view = 'MOVIES';
 		$values = $this->ControlMovies->getList();
 		$genere = $this->ControlGenre->getList();
+		$length = count($values);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function genre($genre, $id)
+	{
+		$view = 'MOVIES'.' '.' '.'->'. ' '.'GENRE';
+		$values = NULL;
+		$values = $this->ControlMovies->getMovieByGenre($id);
+		$genere = $this->ControlGenre->getList();
+		$length = count($values);
+
+		$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+			"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
+		$genre = trim(str_replace($strip, " ", strip_tags($genre)));
+		$genre = preg_replace('/\s+/', " ", $genre);
+		$titule = ucwords($genre);	
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "genre.php");
 		include URL_VISTA . 'footer.php';
 	}
 

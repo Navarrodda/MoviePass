@@ -45,16 +45,16 @@
           <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
            <li><a href="<?php echo URL ?>/cinema/remove">LOKER</a></li>
           <li><a href="#">BLOG</a></li>
-          <?php if(!empty($_SESSION["rol"])){ ?>
-            <?php if($_SESSION["rol"] != 3){ ?>
+          <?php //if(!empty($_SESSION["rol"])){ ?>
+            <?php //if($_SESSION["rol"] != 3){ ?>
               <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
-            <?php } } ?>
+            <?php// } } ?>
             <li><a href="#">SHORTCODE</a></li>
             <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
             <li><a href="#">PAGES</a></li>
           </ul>
         </div>
-        <?php if(!empty($_SESSION["rol"])){ ?>
+      <?php if(!empty($_SESSION["rol"])){ ?>
           <?php if($_SESSION["rol"] == 3){ ?>
             <div class="col-md-2">
               <div class="cart">
