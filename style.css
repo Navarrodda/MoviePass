@@ -499,6 +499,10 @@ a{
 }
 .blog-slide-text .b-slide > img {
   width: 100%;
+    background-repeat: no-repeat;
+    background-position: 15%;
+    border-radius: 15%;
+    background-size: 100% auto;
 }
 .blog-slide-text .b-text > h2 {
   color: #f39c12;
@@ -2233,9 +2237,10 @@ form#login-form:after {
   text-decoration: none;
 }
 .marc{
-  background-color:black; 
-  padding: 10px; 
+  background-image: url(img/marco.png);
+  padding: 34.5px; 
   margin: 10px; 
   border: 2px; 
-  width: 350px;
+  width: 395px;
+  height: 280px;
 }

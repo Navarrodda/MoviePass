@@ -66,7 +66,7 @@
      <div class="b-slide-text">
        <div class="row">
         <div class="col-md-5">
-          <div class="b-slide">
+          <div class="b-slide marc">
             <img src="<?php echo $data->getImageruta()?>">
           </div>
         </div>

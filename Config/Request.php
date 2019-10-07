@@ -36,7 +36,7 @@ class Request
 
         $urlToArray = explode("/", $url);
 
-  
+
         /**
          * Devuelve un array de string, siendo cada uno un substring del segundo parametro pasado formado
          * por la división realizada por los delimitadores indicados en el primer paramtro.
@@ -64,6 +64,7 @@ class Request
             // Quito el primer elemento del array y lo uso como controller y el segundo lo uso como method
             $this->controller = ucwords(array_shift($ArregloUrl));
             $this->method = array_shift($ArregloUrl);
+
         }
 
         if ($requestMethod == 'GET') {
