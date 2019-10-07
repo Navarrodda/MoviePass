@@ -7,6 +7,7 @@ use \Model\User as User;
 //Controler
 use \Controllers\MovieController as MoviesC;
 use \Controllers\GenreController as GenreC;
+use \Controllers\CinemaController as CinemaC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -18,6 +19,7 @@ class ViewController
 		$this->daoUser = UserBD::getInstance();
 		$this->ControlMovies = new MoviesC;
 		$this->ControlGenre = new GenreC;
+		$this->ControlCinema = new CinemaC;
 	}
 
 	public function index()
@@ -107,6 +109,23 @@ class ViewController
 		$titule = ucwords($genre);	
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "genre.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+		public function registrercinema()
+	{
+		$view = 'REGISTRER CINEMA';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "registrercinema.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+		public function cinema()
+	{
+		$view = 'CINEMA';
+		$values = $this->ControlCinema->list();
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "cinemas.php");
 		include URL_VISTA . 'footer.php';
 	}
 

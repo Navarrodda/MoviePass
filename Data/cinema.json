@@ -2,22 +2,22 @@
     {
         "id": 1,
         "capacidad": 5,
-        "direccion": "Diegote",
-        "nombre": "locura",
-        "valor_entrada": 150
-    },
-    {
-        "id": 2,
-        "capacidad": 5,
-        "direccion": "Diegote",
-        "nombre": "locura",
-        "valor_entrada": 450
-    },
-    {
-        "id": 3,
-        "capacidad": 5,
         "direccion": "traful 33",
         "nombre": "bebelo",
         "valor_entrada": 490
+    },
+    {
+        "id": 2,
+        "capacidad": "23",
+        "direccion": "32",
+        "nombre": "213",
+        "valor_entrada": "32"
+    },
+    {
+        "id": 3,
+        "capacidad": "200",
+        "direccion": "Paseo",
+        "nombre": "Aldrey",
+        "valor_entrada": "$200"
     }
 ]

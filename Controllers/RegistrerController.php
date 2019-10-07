@@ -5,7 +5,7 @@ namespace Controllers;
 //Modelo
 use \Model\User as User;
 use \Model\Role as role;
-use \Model\Message as Message;;
+use \Model\Message as Message;
 
 //Dao
 

@@ -1,25 +1,67 @@
 <?php
-	namespace Controllers;
+namespace Controllers;
+//Model
+use \Model\Message as Message;
+//Dao
+use Dao\CinemaFileDao as CinemaFileDao;
 
-	use Dao\CinemaFileDao as CinemaFileDao;
+class CinemaController
+{
+	private $cinemaFileDao;
 
-	class CinemaController
+	public function __construct()
 	{
-		private $cinemaFileDao;
+		$this->cinemaFileDao = new CinemaFileDao();
+	}
 
-		public function __construct()
+	public function add($name,$capacity,$address,$input_value)
+	{
+		$name = ucwords($name);
+		$address = ucwords($address);
+		$question = $this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
+		if($question == true)
 		{
-			$this->cinemaFileDao = new CinemaFileDao();
+			$view = "MESSAGE";
+			$this->message = new Message( "success", "Has successfully registered the Cinema!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
 		}
-
-		public function add()
+		else
 		{
-			return $this->cinemaFileDao->addCinema($capacidad,$direccion,$nombre,$valor_entrada);
-		}
-
-		public function remove($id)
-		{
-			return $this->cinemaFileDao->removeCinema($id);
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "An error has occurred!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
 		}
 	}
+
+	public function remove($id)
+	{
+		$question = $this->cinemaFileDao->removeCinema($id);
+		if($question == true)
+		{
+			$view = "MESSAGE";
+			$this->message = new Message('success', ' The cinema with the id' . ' ' . '<i><strong>' .  $id 
+				. '</strong>. has been deleted successfully!');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "An error has occurred!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+	}
+
+	public function list()
+	{
+		return $this->cinemaFileDao->retrieveData();
+	}
+}
 ?>

@@ -5,8 +5,7 @@
 
 	class CinemaFileDao
 	{
-
-		public function addCinema($capacidad,$direccion,$nombre,$valor_entrada)
+		public function addCinema($nombre,$capacidad,$direccion,$valor_entrada)
 		{
 			$flag = false;
 			$cinemaList = $this->retrieveData();
@@ -32,6 +31,7 @@
 				$flag = true;
 
 			}
+			
 			array_push($cinemaList, $cinema);
 			$this->saveData($cinemaList);
 			return $flag;
@@ -83,7 +83,7 @@
 
 		}
 
-		private function retrieveData()
+		public function retrieveData()
 		{
 			$cinemaList = array();
 
@@ -96,7 +96,7 @@
 				foreach ($arrayTodecode as $values) 
 				{
 					
-					$cinema = new cinema();
+					$cinema = new Cinema();
 
 					$cinema->setId($values["id"]);
 					$cinema->setCapacidad($values["capacidad"]);

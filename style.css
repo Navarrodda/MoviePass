@@ -355,7 +355,7 @@ a{
   margin-bottom: 30px;
 }
 .slider .text p {
-  color: #959595;
+  color: #ffff;
   font-family: "Roboto",sans-serif;
   font-size: 19px;
   font-weight: 400;
@@ -2244,3 +2244,61 @@ form#login-form:after {
   width: 395px;
   height: 280px;
 }
+.marcform{
+  background-color: rgba(0,0,0,0.50);
+  width:840px;
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+}
+.form1{
+  width:740px;
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+  background-color: rgba(111,111,110,0.50);
+  border-radius:8px;
+  box-shadow:0 0 20px -10px #eee;
+  margin:calc(40vh - 120px) auto;
+  padding:20px 30px;max-width:calc(100vw - 40px);box-sizing:border-box;
+  font-family:'Montserrat',sans-serif;
+  position:relative
+}
+.int
+{
+  width:100%;
+  padding:10px;
+  box-sizing:border-box;
+  background:none;outline:none;resize:none;
+  border:0;font-family:'Montserrat',sans-serif;
+  transition:all .3s;
+  border-bottom:2px solid #ffff
+}
+.int:focus{
+  border-bottom:2px solid #ffff
+}
+
+.p2:before
+{
+  content:attr(type)
+  ;display:block;
+  margin:28px 0 0;
+  font-size:14px;
+  color:#ffff
+}
+.but{
+  padding:8px 12px;
+  margin:8px 0 0;
+  font-family:'Montserrat',
+  sans-serif;
+  border:2px solid #ffff;
+  background:0
+  ;color:#ffff;cursor:pointer;
+  transition:all .3s}
+.but:hover
+{
+  background:#ffff;
+  color:#fff
+}
+
+

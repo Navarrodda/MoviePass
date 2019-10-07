@@ -43,33 +43,34 @@
       <div class="col-md-7">
         <ul class="nav navbar-nav">
           <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
-           <li><a href="<?php echo URL ?>/cinema/remove">LOKER</a></li>
-          <li><a href="#">BLOG</a></li>
           <?php //if(!empty($_SESSION["rol"])){ ?>
             <?php //if($_SESSION["rol"] != 3){ ?>
               <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
-            <?php// } } ?>
-            <li><a href="#">SHORTCODE</a></li>
-            <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
-            <li><a href="#">PAGES</a></li>
-          </ul>
-        </div>
-      <?php if(!empty($_SESSION["rol"])){ ?>
-          <?php if($_SESSION["rol"] == 3){ ?>
-            <div class="col-md-2">
-              <div class="cart">
-                <p><i class="fa fa-cart-arrow-down"></i><sup>0</sup> &#36;&nbsp;&nbsp;0.00</p>
+              <?php// } } ?>
+              <?php if(!empty($_SESSION["rol"])){ ?>
+                <?php if($_SESSION["rol"] != 3){ ?>
+                  <li><a href="<?php echo URL?>/view/registrercinema/">REGISTER CINEMA</a></li>
+                  <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
+                <?php } } ?>
+                <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
+              </ul>
+            </div>
+            <?php if(!empty($_SESSION["rol"])){ ?>
+              <?php if($_SESSION["rol"] == 3){ ?>
+                <div class="col-md-2">
+                  <div class="cart">
+                    <p><i class="fa fa-cart-arrow-down"></i><sup>0</sup> &#36;&nbsp;&nbsp;0.00</p>
+                  </div>
+                </div>
+              <?php } } ?>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+               <div class="header-part">
+                <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
               </div>
             </div>
-          <?php } } ?>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-           <div class="header-part">
-            <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
- </header>
+      </section>
+    </header>
