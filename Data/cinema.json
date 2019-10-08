@@ -19,5 +19,12 @@
         "direccion": "Paseo",
         "nombre": "Aldrey",
         "valor_entrada": "$200"
+    },
+    {
+        "id": 4,
+        "capacidad": "q",
+        "direccion": "Las Heras 88244",
+        "nombre": "TEST NombRE               A",
+        "valor_entrada": "asg"
     }
 ]

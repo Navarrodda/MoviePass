@@ -53,7 +53,7 @@
     <form method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/registrer/change_priority/">
      <tr>
       <td>
-        <input name="dato" type="Text"/>     
+        <input style="color:black" name="dato" type="Text"/>     
         <input class="btn btn-success" type="submit" value="Send" style="border:none;"/>   
       </form> 
     </td>
