@@ -29,6 +29,11 @@
 			return $this->retrieveApi();
 		}
 
+		public function getPages()
+		{
+			return $this->retrievePages();
+		}
+
 		private function saveData($list)
 		{
 			$arrayToencode = array();
@@ -54,20 +59,30 @@
 
 
 		}
+// Devuelve cantidad total de paginas Api
+		private function retrievePages()
+		{
+			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE."1");
+			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+			$pages = $arrayTodecode["total_pages"]; // La api entregar 2 arreglos 1 de results y otro de date.
+				
+			return $pages;
+		}
 
-		private function retrieveApi()
+		private function retrieveApi($page)
 		{
 			
 			$movieList = array();
 
 			//$jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/now_playing?api_key=1b6861e202a1e52c6537b73132864511&language=en-US&page=1");
 			
-			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY);
+			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
 
 				$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 
 				$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
 
+				
 				foreach ($array as $indice) 
 				{
 						$movie = new Movie();

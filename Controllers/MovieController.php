@@ -12,9 +12,9 @@
 			$this->MovieFileDao = new MovieFileDao();
 		}
 
-		public function getList()
+		public function getList($page)
 		{
-			$api = $this->MovieFileDao->getNowApi();
+			$api = $this->MovieFileDao->getNowApi($page);
 			return $api;
 		}
 
@@ -24,5 +24,9 @@
 			return $this->MovieFileDao->getMovieByGenre($id);
 		}
 
+		public function getAllPages()
+		{
+			die(var_dump($this->MovieFileDao->getPages()));
+		}
 	}
 ?>

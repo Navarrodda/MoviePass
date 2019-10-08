@@ -15,4 +15,5 @@ define('URL', 'http://localhost/MoviePass');
 
 //Api 
 define('API','https://api.themoviedb.org/3/');
-define('KEY','?api_key=1b6861e202a1e52c6537b73132864511&language=en-US&page=1');
+define('KEY','?api_key=1b6861e202a1e52c6537b73132864511');
+define('PAGE','&language=en-US&page=');
