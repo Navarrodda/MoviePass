@@ -39,7 +39,7 @@
 
 			//$jsonContent = file_get_contents("https://api.themoviedb.org/3/genre/movie/list?api_key=1b6861e202a1e52c6537b73132864511&language=en-US&page=1");
 			
-			$jsonContent = file_get_contents(API. "genre/movie/list" .KEY);
+			$jsonContent = file_get_contents(API. "genre/movie/list" .KEY.PAGE."1");
 
 			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 

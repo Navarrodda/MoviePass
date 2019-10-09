@@ -86,6 +86,7 @@ class ViewController
 	public function movies()
 	{
 		$view = 'MOVIES';
+		$page = 1;
 		$values = $this->ControlMovies->getList(1);
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();

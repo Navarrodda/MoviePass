@@ -8,7 +8,7 @@
 
 		public function getMovieByGenre($id)
 		{
-			$array = $this->getNowApi();
+			$array = $this->getNowApi(1);
 			$movieList = array();
 
 			foreach ($array as $movie) 
