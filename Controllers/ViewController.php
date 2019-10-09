@@ -86,7 +86,9 @@ class ViewController
 	public function movies()
 	{
 		$view = 'MOVIES';
+		$count = 3;
 		$page = 1;
+		$emty = $page;
 		$values = $this->ControlMovies->getList(1);
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
@@ -113,7 +115,7 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function registrercinema()
+	public function registrercinema()
 	{
 		$view = 'REGISTRER CINEMA';
 		include URL_VISTA . 'header.php';
@@ -121,7 +123,7 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function cinema()
+	public function cinema()
 	{
 		$view = 'CINEMA';
 		$values = $this->ControlCinema->list();
@@ -130,12 +132,32 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function moviespages()
+	public function moviespages($emty,$pages,$count,$buton)
 	{
 		$view = 'MOVIES';
-		$values = $this->ControlMovies->getList();
-		$genere = $this->ControlGenre->getList();
-		$length = count($values);
+		$length = $this->ControlMovies->getAllPages();
+		if($buton == 1){ 
+			$page = $pages;
+			$count = $count + 3;
+			$emty = $count - 2;
+			$values = $this->ControlMovies->getList($page);
+			$genere = $this->ControlGenre->getList();
+		}
+		if ($buton == 2) 
+		{
+			$emty = $count -2;
+			$page = $pages;
+			$count = $count;
+			$values = $this->ControlMovies->getList($page);
+			$genere = $this->ControlGenre->getList();
+		}		
+		if($buton == -1){ 
+			$emty = $emty - 3;
+			$page = $pages -3;
+			$count = $count - 3;
+			$values = $this->ControlMovies->getList($page);
+			$genere = $this->ControlGenre->getList();
+		}
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';

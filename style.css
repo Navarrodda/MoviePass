@@ -615,7 +615,7 @@ a{
 }
 .pagination li a{
   background: #c8c8c8;
-  color: #ffff;
+  color: black;
   font-size: 25px;
   font-family: "Roboto",sans-serif;
   margin: 0px 6px

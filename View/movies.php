@@ -88,20 +88,27 @@
   </div>
 <?php } } ?>
 </div>
-<?php if(!empty($length) ) { ?>
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-    <div class="centre">
-      <ul class="pagination pagination-lg">
-      <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-      <?php for ($i=1; $i <= 3 ; $i++) {?>
-        <li><a href="#"><?php echo $i?></a></li>
-      <?php } ?>
-      <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-      </ul>
+<?php if(!empty($length)){ ?>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="centre">
+        <ul class="pagination pagination-lg">   
+          <?php if($page > 3) { ?>
+            <li><a href="<?php echo URL ?>/view/moviespages/<?php echo $emty ?>/<?php echo $page ?>/<?php echo $count ?>/<?php echo -1 ?>"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+          <?php } ?>
+          <?php for ($i=$emty; $i <= $count; $i++) {
+            if($i == $page) { ?>
+              <li><a style="color:#a11d26"><?php echo $i;?></a></li>
+            <?php } else { ?>
+              <li><a href="<?php echo URL ?>/view/moviespages/<?php echo $emty ?>/<?php echo $i ?>/<?php echo $count ?>/<?php echo 2?>"><?php echo $i?></a></li>
+            <?php } } 
+            if ($page < 66) { ?>
+              <li><a href="<?php echo URL ?>/view/moviespages/<?php echo $emty ?>/<?php echo $i ?>/<?php echo $count ?>/<?php echo 1?>"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+            <?php } ?>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<?php }  ?>
+  <?php } ?>
 </div>
 </section>
