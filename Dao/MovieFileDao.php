@@ -24,9 +24,9 @@
 			return $movieList;
 		}
 
-		public function getNowApi()
+		public function getNowApi($page)
 		{
-			return $this->retrieveApi();
+			return $this->retrieveApi($page);
 		}
 
 		public function getPages()

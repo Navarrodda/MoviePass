@@ -23,10 +23,10 @@
 
 			return $this->MovieFileDao->getMovieByGenre($id);
 		}
-
+		//devuelve cant paginas;
 		public function getAllPages()
 		{
-			die(var_dump($this->MovieFileDao->getPages()));
+			return $this->MovieFileDao->getPages();
 		}
 	}
 ?>

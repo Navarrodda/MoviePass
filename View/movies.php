@@ -88,15 +88,16 @@
   </div>
 <?php } } ?>
 </div>
-<?php if($length > 20 ) { ?>
+<?php if(!empty($length) ) { ?>
 <div class="row">
   <div class="col-md-4 col-md-offset-4">
     <div class="centre">
       <ul class="pagination pagination-lg">
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
+      <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
+      <?php for ($i=1; $i <= 3 ; $i++) {?>
+        <li><a href="#"><?php echo $i?></a></li>
+      <?php } ?>
+      <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
       </ul>
     </div>
   </div>

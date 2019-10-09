@@ -86,9 +86,9 @@ class ViewController
 	public function movies()
 	{
 		$view = 'MOVIES';
-		$values = $this->ControlMovies->getList();
+		$values = $this->ControlMovies->getList(1);
 		$genere = $this->ControlGenre->getList();
-		$length = count($values);
+		$length = $this->ControlMovies->getAllPages();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
@@ -126,6 +126,17 @@ class ViewController
 		$values = $this->ControlCinema->list();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cinemas.php");
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function moviespages()
+	{
+		$view = 'MOVIES';
+		$values = $this->ControlMovies->getList();
+		$genere = $this->ControlGenre->getList();
+		$length = count($values);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
 	}
 
