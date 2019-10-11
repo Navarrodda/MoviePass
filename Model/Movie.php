@@ -102,8 +102,12 @@ class Movie
      */
     public function setImagenruta($imagenruta)
     {
-        $this->imageruta = "http://image.tmdb.org/t/p/w500/".$imagenruta;
-
+        $this->imageruta = "http://image.tmdb.org/t/p/w500".$imagenruta;
+        $heders = get_headers($this->imageruta,1); 
+        if ($heders[0] == "HTTP/1.1 404 Not Found") {
+            $this->imageruta = "/MoviePass/img/imgrot.jpg";
+        }
+                
         return $this;
     }
 

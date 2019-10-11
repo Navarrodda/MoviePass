@@ -140,24 +140,20 @@ class ViewController
 			$page = $pages;
 			$count = $count + 3;
 			$emty = $count - 2;
-			$values = $this->ControlMovies->getList($page);
-			$genere = $this->ControlGenre->getList();
 		}
 		if ($buton == 2) 
 		{
 			$emty = $count -2;
 			$page = $pages;
 			$count = $count;
-			$values = $this->ControlMovies->getList($page);
-			$genere = $this->ControlGenre->getList();
 		}		
 		if($buton == -1){ 
 			$emty = $emty - 3;
 			$page = $pages -3;
 			$count = $count - 3;
-			$values = $this->ControlMovies->getList($page);
-			$genere = $this->ControlGenre->getList();
 		}
+		$values = $this->ControlMovies->getList($page);
+		$genere = $this->ControlGenre->getList();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
