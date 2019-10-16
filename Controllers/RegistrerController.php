@@ -79,6 +79,7 @@ public function change_priority($code){
 	try{
 		if(!empty($_SESSION))
 		{
+			$regCompleted = FALSE;
 			if (!empty($code)) {
 
 				$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
@@ -87,12 +88,11 @@ public function change_priority($code){
 				$code = preg_replace('/\s+/', " ", $code);
 			}
 			$id = $code;
-			$_SESSION["rol"] = $id;
-			if ($id == 1  && $id = 2) {
+			if ($id == 1  || $id = 2) {
 
 				if(substr_count($_SESSION["data"], "@") == 1)
 				{
-
+					$_SESSION["rol"] = $id;
 					$user = $this->daoUser->bring_by_mail($_SESSION["data"]);
 					$userInstance = new User($_SESSION["nikname"],  $_SESSION["data"], $_SESSION["nombre"], $_SESSION["lastname"],  $_SESSION["dni"], $_SESSION["password"], $this->daoRole->bring_by_id($code));
 					$idUser = $this->daoUser->to_update($userInstance,$_SESSION["id"]);
@@ -101,6 +101,7 @@ public function change_priority($code){
 				}
 				else
 				{
+					$_SESSION["rol"] = $id;
 					$user = $this->daoUser->bring_by_nikname($_SESSION["data"]);
 					$nikname = $_SESSION["data"];
 					$userInstance = new User($_SESSION["data"], $_SESSION["email"], $_SESSION["nombre"], $_SESSION["lastname"],  $_SESSION["dni"], $_SESSION["password"], $this->daoRole->bring_by_id($code));
