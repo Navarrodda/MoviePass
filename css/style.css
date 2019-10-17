@@ -2237,7 +2237,8 @@ form#login-form:after {
   text-decoration: none;
 }
 .marc{
-  background-image: url(img/marco.png);
+
+  background-image: url(../img/marco.png);
   padding: 34.5px; 
   margin: 10px; 
   border: 2px; 
@@ -2301,4 +2302,16 @@ form#login-form:after {
   color:#fff
 }
 
+.fond
+{
+  background:rgba(111, 111, 115,0.6);
+  -webkit-border-radius: 40; 
+  -moz-border-radius: 40;
+  border-radius: 18%;
+  font-family: Arial;
+  color: #727272;
+  font-size: 17px;
+  padding: 0px 8px 0px 8px;
+  text-decoration: none;
+}
 

@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-md-4">
             <ul>
-              <?php if(!empty($_SESSION["data"])){ ?>
+              <?php if(!empty($_SESSION["email"])){ ?>
                 <li><a href="<?php echo URL ?>/view/account/">Account</a></li>
                 <li><a href="#">Checkout</a></li>
                 <li><a href="#">dashbord</a></li>
@@ -20,7 +20,7 @@
          </div>
          <div class="col-md-4">
            <div class="a-right">
-            <?php if(empty($_SESSION["data"])){ ?>
+            <?php if(empty($_SESSION["email"])){ ?>
               <a href="<?php echo URL ?>/view/login/"><p><span><i class="fa fa-user"></i></span>Login</p></a>
               <a href="<?php echo URL ?>/view/register/"><p><span><i class="fa fa-pencil"></i></span>Register</p></a>
             <?php } else { ?>

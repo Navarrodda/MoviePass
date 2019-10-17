@@ -27,58 +27,21 @@ class SessionController
 		try {
 			$ir_a_inicio = FALSE;
 
-			if(substr_count($data, "@") == 1)
-			{
-				if (isset($data) && isset($password))  {
-					if ($data === "" || $password === "") {
-						$this->message = new Message('warning', 'You must fill in all fields!');
-					} else {
-						/** @var Cuenta $usuario */
-						$user = $this->daoUser->bring_by_mail($data);
+			if (isset($data) && isset($password))  {
+				if ($data === "" || $password === "") {
+					$this->message = new Message('warning', 'You must fill in all fields!');
+				} else {
+					/** @var Cuenta $usuario */
+					if($this->daoUser->bring_by_nikname($data));
+					{
 
-						if ($data === $user->getEmail() && $password === $user->getPassword()) {
-							$rol = $user->getRole();
-                        //Seteo las variables de sesión.
-							$_SESSION["id"] = $user->getId();
-							$_SESSION["nikname"] = $user->getNikname();
-							$_SESSION["data"] = $data;
-							$_SESSION["nombre"] = $user->getName();
-							$_SESSION["lastname"] = $user->getLastname();
-							$_SESSION["dni"] = $user->getDni();
-							$_SESSION["password"] = $password;
-							$_SESSION["rol"] = $rol->getId();
-							$result = $user->getName() . ' ' . $user->getLastname();
-                        //Message de success
-							$this->message = new Message('success', ' Welcome' . ' ' . '<i><strong>' .  $result 
-								. '</strong>. You have successfully logged in 
-								! Logged in as' . ' ' . '<i><strong>' .  $data 
-								. '</strong></i>');
-							$ir_a_inicio = TRUE;
-						} else {
-							$this->message = new Message('warning', 'The data entered is incorrect!');
-						}
-					}
-				}
-
-				else {
-					throw new \Exception('Login failed, try again later!');
-				}
-			}
-			else
-			{
-				if (isset($data) && isset($password))  {
-					if ($data === "" || $password === "") {
-						$this->message = new Message('warning', 'You must fill in all fields!');
-					} else {
-						$data = ucwords($data);
-						/** @var Cuenta $usuario */
 						$user = $this->daoUser->bring_by_nikname($data);
 
 						if ($data === $user->getNikname() && $password === $user->getPassword()) {
 							$rol = $user->getRole();
                         //Seteo las variables de sesión.
 							$_SESSION["id"] = $user->getId();
-							$_SESSION["data"] = $data;
+							$_SESSION["nikname"] = $data;
 							$_SESSION["email"] = $user->getEmail();
 							$_SESSION["nombre"] = $user->getName();
 							$_SESSION["lastname"] = $user->getLastname();
@@ -86,25 +49,53 @@ class SessionController
 							$_SESSION["password"] = $password;
 							$_SESSION["rol"] = $rol->getId();
 							$result = $user->getName() . ' ' . $user->getLastname();
-                        //Message de success
-							$this->message = new Message('success', ' Welcome' . ' ' . '<i><strong>' .  $result 
-								. '</strong>. You have successfully logged in 
-								! Logged in as' . ' ' . '<i><strong>' .  $data 
-								. '</strong></i>');
+							$ir_a_inicio = TRUE;				
+						}
+
+					}
+					if($this->daoUser->bring_by_mail($data))
+					{
+						$user = $this->daoUser->bring_by_mail($data);
+						if ($data === $user->getEmail() && $password === $user->getPassword()) {
+							$rol = $user->getRole();
+                        //Seteo las variables de sesión.
+							$_SESSION["id"] = $user->getId();
+							$_SESSION["nikname"] = $user->getNikname();
+							$_SESSION["email"] = $data;
+							$_SESSION["nombre"] = $user->getName();
+							$_SESSION["lastname"] = $user->getLastname();
+							$_SESSION["dni"] = $user->getDni();
+							$_SESSION["password"] = $password;
+							$_SESSION["rol"] = $rol->getId();
+							$result = $user->getName() . ' ' . $user->getLastname();
 							$ir_a_inicio = TRUE;
-						} else {
-							$this->message = new Message('warning', 'The data entered is incorrect!');
+							$_SESSION["email"] = $data;
 						}
 					}
-				}
 
-				else {
-					throw new \Exception('Login failed, try again later!');
+
+					if ($ir_a_inicio) {
+                        //Message de success
+						$this->message = new Message('success', ' Welcome' . ' ' . '<i><strong>' .  $result 
+							. '</strong>. You have successfully logged in 
+							! Logged in as' . ' ' . '<i><strong>' .  $data 
+							. '</strong></i>');
+
+					} else {
+						$this->message = new Message('warning', 'The data entered is incorrect!');
+					}
 				}
 			}
 
 
-		} catch (\PDOException $e) {
+			else {
+				throw new \Exception('Login failed, try again later!');
+			}
+
+
+		}
+
+		catch (\PDOException $e) {
 			$this->message = new Message('danger', 'There was an error connecting to the database! ' . $e);
 		} catch (\Exception $exception) {
 			$this->message = new Message('danger', $exception->getMessage());

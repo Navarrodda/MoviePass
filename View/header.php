@@ -7,6 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo URL ?>/css/bootstrap.css">
     <link rel="stylesheet" href="<?php echo URL ?>/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo URL ?>/style.css">
+    <link rel="stylesheet" href="<?php echo URL ?>/css/style.css">
 </head>
 <body>

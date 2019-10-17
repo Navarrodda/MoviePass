@@ -22,7 +22,7 @@
         </div>
       </div> 
     <?php }  ?>
-    <?php if(!isset($_SESSION)) {?>
+    <?php if($_SESSION["rol"] != 3) { ?>
       <h2>Search Categories or Movies</h2>
       <div class="tags">
         <script type="text/javascript">
@@ -63,26 +63,26 @@
   foreach ($values as $data) { ?>
    <div class="col-md-9">
      <div class="b-slide-text">
-       <div class="row">
-        <div class="col-md-5">
-          <div class="b-slide marc">
-            <img src="<?php echo $data->getImageruta()?>">
+       <div class="row fond">
+          <div class="col-md-5">
+            <div class="b-slide marc">
+              <img src="<?php echo $data->getImageruta()?>">
+            </div>
           </div>
-        </div>
-        <div class="col-md-7">
-          <div class="b-text">
-            <h2><?php echo $data->getTitle()?></h2>
-            <?php if($data->getVoteCount() < 100) {?>
-              <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
-              </p>
-            <?php } else { ?>          
-              <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-up" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-remove" aria-hidden="true"></i></span>
-              </p>
-            <?php } ?>
-            <h4><?php echo $data->getOverview(); ?></h4>
-            <a href="#" class="fa fa-archive"> CHOOSE MOVIE</a>
+          <div class="col-md-7">
+            <div class="b-text">
+              <h2><?php echo $data->getTitle()?></h2>
+              <?php if($data->getVoteCount() < 100) {?>
+                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
+                </p>
+              <?php } else { ?>          
+                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-up" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-remove" aria-hidden="true"></i></span>
+                </p>
+              <?php } ?>
+              <h4><?php echo $data->getOverview(); ?></h4>
+              <a href="#" class="fa fa-archive"> CHOOSE MOVIE</a>
+            </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
