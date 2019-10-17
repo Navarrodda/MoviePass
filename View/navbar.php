@@ -40,7 +40,8 @@
           <a></a>
         </div>
       </div>
-      <div class="col-md-7">
+        <div class="navaling">
+          <div class="col-md-12">
         <ul class="nav navbar-nav">
           <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
           <?php //if(!empty($_SESSION["rol"])){ ?>
@@ -55,6 +56,7 @@
                 <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
               </ul>
             </div>
+          </div>
             <?php if(!empty($_SESSION["rol"])){ ?>
               <?php if($_SESSION["rol"] == 3){ ?>
                 <div class="col-md-2">

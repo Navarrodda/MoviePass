@@ -1,5 +1,6 @@
 <!-- Section Footer.
 	================================================== -->
+
     <footer>
         <div class="footer_top">
             <div class="container">
@@ -59,8 +60,8 @@
             </div>
         </div>
         <div class="footer_bottom">
-           <div class="footer_overlay"></div>
-           <div class="container">
+         <div class="footer_overlay"></div>
+         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="copy_txt">

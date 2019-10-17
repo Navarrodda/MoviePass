@@ -2315,3 +2315,8 @@ form#login-form:after {
   text-decoration: none;
 }
 
+.navaling
+{
+  margin-left: 60%;
+  transform: translateX(-60%);
+}
