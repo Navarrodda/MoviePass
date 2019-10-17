@@ -26,6 +26,8 @@ class SessionController
 	{
 		try {
 			$ir_a_inicio = FALSE;
+			
+			$data = ucwords($data);
 
 			if (isset($data) && isset($password))  {
 				if ($data === "" || $password === "") {
@@ -69,7 +71,6 @@ class SessionController
 							$_SESSION["rol"] = $rol->getId();
 							$result = $user->getName() . ' ' . $user->getLastname();
 							$ir_a_inicio = TRUE;
-							$_SESSION["email"] = $data;
 						}
 					}
 
