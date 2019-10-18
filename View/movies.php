@@ -22,7 +22,8 @@
         </div>
       </div> 
     <?php }  ?>
-    <?php if($_SESSION["rol"] != 3) { ?>
+    <?php if(!empty($_SESSION)){
+    if($_SESSION["rol"] != 3) { ?>
       <h2>Search Categories or Movies</h2>
       <div class="tags">
         <script type="text/javascript">
@@ -57,7 +58,7 @@
          </div>
        </div>
      </div>
-   <?php  } ?>
+   <?php  } } ?>
  </div>
  <?php if(!empty($values)){
   foreach ($values as $data) { ?>
