@@ -2,12 +2,14 @@
   ================================================== -->
   <?php  include(URL_VISTA . 'navbar.php') ?>
 
-  <section class="slider">
-    <img src="<?php echo URL ?>/img/slider-about.jpg">
-  </section>
   <section class="our_skill">
     <div class="container">
       <div class="row">
+        <div class="col-md-12">
+          <div class="slider">
+            <img src="<?php echo URL ?>/img/slider-about.jpg">
+          </div>
+        </div>
         <div class="col-md-6">
           <div class="text">
             <h2>Enjoy Watching Movies?</h2>
