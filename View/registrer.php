@@ -32,7 +32,7 @@
         }
 
       </script>
-      <form class="login-form" method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/registrer/check_in/">
+      <form class="login-form" method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/user/check_in/">
         <input required name="name" type="Text" value="" placeholder="Name"/>
         <input required name="lastname" type="Text" value="" placeholder="Last Name"/>
         <input required name="dni" type="number" value="" placeholder="DNI"/>

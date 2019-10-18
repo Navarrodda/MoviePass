@@ -8,6 +8,7 @@ use \Model\User as User;
 use \Controllers\MovieController as MoviesC;
 use \Controllers\GenreController as GenreC;
 use \Controllers\CinemaController as CinemaC;
+use \Controllers\UserController as UserC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -20,6 +21,7 @@ class ViewController
 		$this->ControlMovies = new MoviesC;
 		$this->ControlGenre = new GenreC;
 		$this->ControlCinema = new CinemaC;
+		$this->ControlUser = new UserC;
 	}
 
 	public function index()
@@ -69,7 +71,7 @@ class ViewController
 	public function account()
 	{
 		$view = 'ACCOUNT';
-		$user = $this->daoUser->bring_by_id($_SESSION["id"]);
+		$user = $this->ControlUser->bring_by_id();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "account.php");
 		include URL_VISTA . 'footer.php';

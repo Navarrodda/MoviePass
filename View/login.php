@@ -21,7 +21,7 @@
                 <h4>Login To Your Account</h4>
               </div>
               <div class="form">
-                <form class="login-form" class="login-form" method="post" action="<?php echo URL ?>/session/login/">
+                <form class="login-form" class="login-form" method="post" action="<?php echo URL ?>/user/login/">
                     <input name="dato" type="Text" placeholder="Email or Nikname"/>     
                     <input name="password" type="password" placeholder="Password"/>
 

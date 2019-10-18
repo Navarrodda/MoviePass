@@ -24,7 +24,7 @@
               <a href="<?php echo URL ?>/view/login/"><p><span><i class="fa fa-user"></i></span>Login</p></a>
               <a href="<?php echo URL ?>/view/register/"><p><span><i class="fa fa-pencil"></i></span>Register</p></a>
             <?php } else { ?>
-              <a href="<?php echo URL ?>/session/logout/"><p><span><i  class="fa fa-sign-out"></i></span>Sign Out</p></a>
+              <a href="<?php echo URL ?>/user/logout/"><p><span><i  class="fa fa-sign-out"></i></span>Sign Out</p></a>
             <?php }?>
           </div>
         </div>
