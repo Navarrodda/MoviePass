@@ -85,19 +85,20 @@
 				
 				foreach ($array as $indice) 
 				{
+
+
 						$movie = new Movie();
 						$movie->setIdApi($indice["id"]);
 						$movie->setTitle($indice["original_title"]);
-						//$movie->setIdapi($arreglo["idApi"]);
-						$movie->setImagenruta($indice["backdrop_path"]);
+						$movie->setPoster($indice["poster_path"]);
+						$movie->setBackdrop($indice["backdrop_path"]);
 						$movie->setOverview($indice["overview"]);
-						//$movie->setDuration($arreglo["duration"]);
+						$movie->setAverage($indice["vote_average"]);
 						$movie->setGenre($indice["genre_ids"]);
-						$movie->setReleaseDate($indice["release_date"]);
-						$movie->setVoteCount($indice["vote_count"]);
-						$movie->setVoteAverage($indice["vote_average"]);
-						$movie->setOriginalLanguage($indice["original_language"]);
-
+						$movie->setDate($indice["release_date"]);
+						$movie->setVote($indice["vote_count"]);
+						$movie->setLanguage($indice["original_language"]);
+						$movie->setPopularity($indice["popularity"]);
 
 						/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 							$values["price"]);*/

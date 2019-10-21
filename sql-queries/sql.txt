@@ -3,15 +3,18 @@ CREATE DATABASE moviepass;
 USE moviepass;
 
 CREATE TABLE roles(
-id TINYINT AUTO_INCREMENT NOT NULL,
+id TINYINT UNSIGNED AUTO_INCREMENT NOT NULL,
 preority VARCHAR(255),
 CONSTRAINT pk_id_rol PRIMARY KEY (id)
 );
 
+INSERT INTO roles (preority) VALUES ('Developer');
+INSERT INTO roles (preority) VALUES ('Administrador');
+INSERT INTO roles (preority) VALUES ('Customer');
 
 CREATE TABLE users(
-id BIGINT AUTO_INCREMENT NOT NULL,
-rol TINYINT, 
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+rol TINYINT UNSIGNED, 
 name VARCHAR(255) NOT NULL,
 lastname VARCHAR(255) NOT NULL,  
 dni VARCHAR(255) NOT NULL,   
@@ -19,5 +22,114 @@ nikname VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
 CONSTRAINT pk_id_user PRIMARY KEY (id),
-CONSTRAINT fk_id_user_rol FOREIGN KEY (rol) REFERENCES roles (id)    
+CONSTRAINT fk_id_user_rol FOREIGN KEY (rol) REFERENCES roles (id),
+CONSTRAINT unq_dni_user UNIQUE (dni)    
 );
+
+CREATE TABLE cinemas(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+name VARCHAR(255) NOT NULL,
+address VARCHAR(255) NOT NULL,
+total_capacity SMALLINT UNSIGNED NOT NULL,
+estimated_price FLOAT UNSIGNED NOT NULL,
+CONSTRAINT pk_id_cinema PRIMARY KEY (id)    
+);
+
+
+
+CREATE TABLE seats(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, 
+number_seat SMALLINT UNSIGNED,
+row_des VARCHAR(255),
+CONSTRAINT pk_id_seats PRIMARY KEY (id),
+CONSTRAINT unq_number_row UNIQUE (number_seat,row_des)    
+);
+
+CREATE TABLE rooms(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+cinema BIGINT UNSIGNED,
+seat BIGINT UNSIGNED,     
+capacity SMALLINT UNSIGNED,
+CONSTRAINT pk_id_room PRIMARY KEY (id),
+CONSTRAINT fk_id_cinema FOREIGN KEY (cinema) REFERENCES cinemas (id),
+CONSTRAINT fk_id_seat FOREIGN KEY (seat) REFERENCES seats (id)
+);
+
+CREATE TABLE genres(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+name VARCHAR(255),
+CONSTRAINT pk_id_genres PRIMARY KEY (id)
+);
+
+CREATE TABLE movies(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,  
+idApi BIGINT,
+vote SMALLINT,
+poster VARCHAR(255),
+backdrop VARCHAR(255),
+lan TINYTEXT,
+title VARCHAR(255),
+popularity FLOAT,
+overview VARCHAR(255),
+datemdy DATE,
+CONSTRAINT pk_id_movies PRIMARY KEY (id)
+); 
+
+CREATE TABLE movie_for_genres(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+genre BIGINT UNSIGNED,  
+movie BIGINT UNSIGNED,
+CONSTRAINT pk_id_movie_for_genre PRIMARY KEY (id),
+CONSTRAINT fk_id_genre_movie_for_genre FOREIGN KEY (genre) REFERENCES genres (id),
+CONSTRAINT fk_id_movie_movie_for_genre FOREIGN KEY (movie) REFERENCES movies (id)   
+);
+
+CREATE TABLE functions(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+cinema BIGINT UNSIGNED,    
+movie BIGINT UNSIGNED,
+room BIGINT UNSIGNED, 
+day DATE NOT NULL,
+hours TIME NOT NULL,    
+CONSTRAINT pk_id_functio PRIMARY KEY (id),
+CONSTRAINT fk_id_cinema_functions FOREIGN KEY (cinema) REFERENCES cinemas (id),    
+CONSTRAINT fk_id_movie FOREIGN KEY (movie) REFERENCES movies (id),
+CONSTRAINT fk_id_rooms_functions FOREIGN KEY (room) REFERENCES rooms (id)    
+);
+
+CREATE TABLE type_of_tickets(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,    
+description VARCHAR(255) NOT NULL,
+price FLOAT NOT NULL,
+CONSTRAINT pk_id_type_of_ticket PRIMARY KEY (id)    
+);
+
+CREATE TABLE tikets(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,    
+functionc BIGINT UNSIGNED,
+seat BIGINT UNSIGNED,    
+type_of_ticket BIGINT UNSIGNED,    
+qr VARCHAR(255) NOT NULL ,
+numbre BIGINT UNSIGNED NOT NULL,
+CONSTRAINT pk_id_tiket PRIMARY KEY (id),
+CONSTRAINT fk_type_of_ticket_id FOREIGN KEY (type_of_ticket) REFERENCES type_of_tickets (id),
+CONSTRAINT fk_seat_id_tikets FOREIGN KEY (seat) REFERENCES seats (id),    
+CONSTRAINT unq_numbertikets UNIQUE(numbre)     
+);
+
+
+CREATE TABLE shoppings(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+tiket BIGINT UNSIGNED,
+client BIGINT UNSIGNED,
+day DATE NOT NULL,
+countrtiket SMALLINT UNSIGNED NOT NULL,   
+cost FLOAT UNSIGNED NOT NULL,    
+discount FLOAT UNSIGNED NOT NULL,
+total FLOAT UNSIGNED NOT NULL,
+CONSTRAINT pk_id_shoppings PRIMARY KEY (id),
+CONSTRAINT fk_tiket_id FOREIGN KEY (tiket) REFERENCES tikets (id),
+CONSTRAINT fk_user_id FOREIGN KEY (client) REFERENCES  users (id) 
+);
+
+

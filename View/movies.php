@@ -67,17 +67,17 @@
        <div class="row fond">
           <div class="col-md-5">
             <div class="b-slide marc">
-              <img src="<?php echo $data->getImageruta()?>">
+              <img src="<?php echo $data->getBackdrop()?>">
             </div>
           </div>
           <div class="col-md-7">
             <div class="b-text">
               <h2><?php echo $data->getTitle()?></h2>
-              <?php if($data->getVoteCount() < 100) {?>
-                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
+              <?php if($data->getVote() < 100) {?>
+                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVote()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
                 </p>
               <?php } else { ?>          
-                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getReleaseDate()?></i></span><span><i class="fa fa-long-arrow-up" aria-hidden="true"></i><?php echo $data->getVoteCount()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getVoteAverage()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getOriginalLanguage()?>"</span><span><i class="fa fa-remove" aria-hidden="true"></i></span>
+                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span><i class="fa fa-long-arrow-up" aria-hidden="true"></i><?php echo $data->getVote()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span><span><i class="fa fa-remove" aria-hidden="true"></i></span>
                 </p>
               <?php } ?>
               <h4><?php echo $data->getOverview(); ?></h4>
