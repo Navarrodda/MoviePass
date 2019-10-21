@@ -1,3 +1,0 @@
-INSERT INTO roles (preority) VALUES ('Developer');
-INSERT INTO roles (preority) VALUES ('Administrador');
-INSERT INTO roles (preority) VALUES ('Customer');
