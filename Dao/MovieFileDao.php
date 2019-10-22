@@ -24,6 +24,34 @@
 			return $movieList;
 		}
 
+		public function getMovieById($id,$page)
+		{
+			$array = $this->getNowApi($page);
+			$flag = false;
+
+			foreach ($array as $movie) 
+			{
+				if($id == $movie->getId())
+				{
+					$flag = new Movie();
+					$flag->setId($movie->getId());
+					$flag->setIdapi($movie->getIdapi());
+					$flag->setVote($movie->getVote());
+					$flag->setPoster($movie->getPoster());
+					$flag->setBackdrop($movie->getBackdrop());
+					$flag->setLanguage($movie->getLanguage());
+					$flag->setTitle($movie->getTitle());
+					$flag->setGenre($movie->getGenre());
+					$flag->setPopularity($movie->getPopularity());
+					$flag->setOverview($movie->getOverview());
+					$flag->setDate($movie->getDate());
+					$flag->setAverage($movie->getAverage());
+				}
+			}
+			
+			return $flag;
+		}
+
 		public function getNowApi($page)
 		{
 			return $this->retrieveApi($page);
