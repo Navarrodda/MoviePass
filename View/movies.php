@@ -1,10 +1,13 @@
+<section>
 <?php  include(URL_VISTA . 'navbar.php') ?>
+  <div class="clear"></div>
+</section>
 
-<div id="contenedor_carga">
-  <div id="carga"></div>
-</div>
-
-
+<section>
+  <div id="contenedor_carga">
+    <div id="carga"></div>
+  </div>
+</section>
 <section id="principal" class="blog-slide-text">
   <div class="container">
     <div class="row">

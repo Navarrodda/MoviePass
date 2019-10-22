@@ -264,7 +264,7 @@ public function mapear($dataSet){
     if($dataSet){
      $this->list = array_map(function ($p) {
         $daoRol = RolBdDao::getInstance();
-        $usuario = new User
+        $user = new User
         (
             $p['nikname'],
             $p['email'],
@@ -274,8 +274,8 @@ public function mapear($dataSet){
             $p['password'],
             $daoRol->bring_by_id($p['rol'])
         );
-        $usuario->setId($p['id']);
-        return $usuario;
+        $user->setId($p['id']);
+        return $user;
     }, $dataSet);
  }
 }

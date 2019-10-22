@@ -99,15 +99,15 @@ a{
   text-align: right;
 }
 .cart > p {
-  font-size: 23px;
-  margin-top: 58px;
+  color: #eee;
+  font-size: 139%;
 }
 .cart i {
-  color: #f39c12;
+  color: #ffcc00;
   font-size: 30px;
 }
 .cart sup {
-  background: #c3bdbd;
+  background: #241717;
   margin-left: -4px;
   padding: 0 5px;
   border-radius: 20px;
@@ -2317,7 +2317,11 @@ form#login-form:after {
 
 .navaling
 {
-  margin-left: 60%;
-  transform: translateX(-60%);
+  margin-left: 39%;
+}
+
+.navacari
+{
+  margin-left: 70%;
 }
 

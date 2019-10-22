@@ -50,7 +50,7 @@
      <th>Enter key to be a member</th>
    </thead>
    <tbody>
-    <form method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/registrer/change_priority/">
+    <form method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/user/change_priority/">
      <tr>
       <td>
         <input style="color:black" name="dato" type="Text"/>     

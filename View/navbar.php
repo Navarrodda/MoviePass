@@ -31,7 +31,9 @@
       </div>
     </div>
   </section>
-  <div class="clear"></div>
+  <section>
+    <div class="clear"></div>
+  </section>
   <section class="header">
     <div class="container">
       <div class="row">
@@ -40,26 +42,22 @@
           <a></a>
         </div>
       </div>
-        <div class="navaling">
-          <div class="col-md-12">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
-          <?php //if(!empty($_SESSION["rol"])){ ?>
-            <?php //if($_SESSION["rol"] != 3){ ?>
-              <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
-              <?php// } } ?>
-              <?php if(!empty($_SESSION["rol"])){ ?>
-                <?php if($_SESSION["rol"] != 3){ ?>
-                  <li><a href="<?php echo URL?>/view/registrercinema/">REGISTER CINEMA</a></li>
-                  <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
-                <?php } } ?>
-                <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
-              </ul>
-            </div>
-          </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
+        <?php //if(!empty($_SESSION["rol"])){ ?>
+          <?php //if($_SESSION["rol"] != 3){ ?>
+            <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
+            <?php// } } ?>
+            <?php if(!empty($_SESSION["rol"])){ ?>
+              <?php if($_SESSION["rol"] != 3){ ?>
+                <li><a href="<?php echo URL?>/view/registrercinema/">REGISTER CINEMA</a></li>
+                <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
+              <?php } } ?>
+              <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
+            </ul>
             <?php if(!empty($_SESSION["rol"])){ ?>
               <?php if($_SESSION["rol"] == 3){ ?>
-                <div class="col-md-2">
+                <div class="col-md-12">
                   <div class="cart">
                     <p><i class="fa fa-cart-arrow-down"></i><sup>0</sup> &#36;&nbsp;&nbsp;0.00</p>
                   </div>
