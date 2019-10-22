@@ -1,7 +1,11 @@
 <?php  include(URL_VISTA . 'navbar.php') ?>
 
+<div id="contenedor_carga">
+  <div id="carga"></div>
+</div>
 
-<section class="blog-slide-text">
+
+<section id="principal" class="blog-slide-text">
   <div class="container">
     <div class="row">
       <div class="centerin">
@@ -23,48 +27,48 @@
       </div> 
     <?php }  ?>
     <?php if(!empty($_SESSION)){
-    if($_SESSION["rol"] != 3) { ?>
-      <h2>Search Categories or Movies</h2>
-      <div class="tags">
-        <script type="text/javascript">
-          function valida(search) {
-            var ok = true;
-            var msg = "!Empty search data:\n";
-            if(search.elements["search"].value == "")
-            {
-              msg += "Complete the field\n";
-              ok = false;
-            }
+      if($_SESSION["rol"] != 3) { ?>
+        <h2>Search Categories or Movies</h2>
+        <div class="tags">
+          <script type="text/javascript">
+            function valida(search) {
+              var ok = true;
+              var msg = "!Empty search data:\n";
+              if(search.elements["search"].value == "")
+              {
+                msg += "Complete the field\n";
+                ok = false;
+              }
 
-            if(ok == false)
-              alert(msg);
-            return ok;
-          }
-        </script>
-        <div class="flexsearch">
-          <div class="flexsearch--wrapper">
-            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="#">
-              <div class="flexsearch--input-wrapper">
-                <div class="center">
-                  <select name="select" class="btnselect">
-                   <option value="0">Choose an option</option> 
-                   <option value="1">Movie</option> 
-                   <option value="2">Categories</option>
-                 </select>
+              if(ok == false)
+                alert(msg);
+              return ok;
+            }
+          </script>
+          <div class="flexsearch">
+            <div class="flexsearch--wrapper">
+              <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="#">
+                <div class="flexsearch--input-wrapper">
+                  <div class="center">
+                    <select name="select" class="btnselect">
+                     <option value="0">Choose an option</option> 
+                     <option value="1">Movie</option> 
+                     <option value="2">Categories</option>
+                   </select>
+                 </div>
                </div>
-             </div>
-             <input method="post" class="flexsearch--input btn3" value=""  name="search" type="search" placeholder="Search">          
-           </form>
+               <input method="post" class="flexsearch--input btn3" value=""  name="search" type="search" placeholder="Search">          
+             </form>
+           </div>
          </div>
        </div>
-     </div>
-   <?php  } } ?>
- </div>
- <?php if(!empty($values)){
-  foreach ($values as $data) { ?>
-   <div class="col-md-9">
-     <div class="b-slide-text">
-       <div class="row fond">
+     <?php  } } ?>
+   </div>
+   <?php if(!empty($values)){
+    foreach ($values as $data) { ?>
+     <div class="col-md-9">
+       <div class="b-slide-text">
+         <div class="row fond">
           <div class="col-md-5">
             <div class="b-slide marc">
               <img src="<?php echo $data->getBackdrop()?>">
@@ -84,10 +88,10 @@
               <a href="#" class="fa fa-archive"> CHOOSE MOVIE</a>
             </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
-<?php } } ?>
+  <?php } } ?>
 </div>
 <?php if(!empty($length)){ ?>
   <div class="row">
@@ -113,3 +117,12 @@
   <?php } ?>
 </div>
 </section>
+
+<script>
+  window.onload = function(){
+    var contenedor = document.getElementById('contenedor_carga');
+
+    contenedor.style.visibility = 'hidden';
+    contenedor.style.opacity = '0';
+  }
+</script>

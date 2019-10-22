@@ -5,7 +5,7 @@ namespace Model;
 class Movie
 {
     private $id;
-    private $idApi;
+    private $idapi;
     private $vote;
     private $poster;
     private $backdrop;
@@ -22,6 +22,9 @@ class Movie
     {
     	
     }
+
+
+
 
 
     /**
@@ -47,19 +50,19 @@ class Movie
     /**
      * @return mixed
      */
-    public function getIdApi()
+    public function getIdapi()
     {
-        return $this->idApi;
+        return $this->idapi;
     }
 
     /**
-     * @param mixed $idApi
+     * @param mixed $idapi
      *
      * @return self
      */
-    public function setIdApi($idApi)
+    public function setIdapi($idapi)
     {
-        $this->idApi = $idApi;
+        $this->idapi = $idapi;
 
         return $this;
     }
@@ -119,14 +122,14 @@ class Movie
      */
     public function setBackdrop($backdrop)
     {
-       $this->backdrop = "http://image.tmdb.org/t/p/w500".$backdrop;
-       $heders = get_headers($this->backdrop,1); 
-       if ($heders[0] == "HTTP/1.1 404 Not Found") 
-       {
+     $this->backdrop = "http://image.tmdb.org/t/p/w500".$backdrop;
+     $heders = get_headers($this->backdrop,1); 
+     if ($heders[0] == "HTTP/1.1 404 Not Found") 
+     {
         $this->backdrop = "/MoviePass/img/imgrot.jpg";
     }
     return $this;
-    }
+}
 
     /**
      * @return mixed
