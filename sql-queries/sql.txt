@@ -35,26 +35,7 @@ estimated_price FLOAT UNSIGNED NOT NULL,
 CONSTRAINT pk_id_cinema PRIMARY KEY (id)    
 );
 
-
-
-CREATE TABLE seats(
-id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL, 
-number_seat SMALLINT UNSIGNED,
-row_des VARCHAR(255),
-CONSTRAINT pk_id_seats PRIMARY KEY (id),
-CONSTRAINT unq_number_row UNIQUE (number_seat,row_des)    
-);
-
-CREATE TABLE rooms(
-id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-cinema BIGINT UNSIGNED,
-seat BIGINT UNSIGNED,     
-capacity SMALLINT UNSIGNED,
-CONSTRAINT pk_id_room PRIMARY KEY (id),
-CONSTRAINT fk_id_cinema FOREIGN KEY (cinema) REFERENCES cinemas (id),
-CONSTRAINT fk_id_seat FOREIGN KEY (seat) REFERENCES seats (id)
-);
-
+    
 CREATE TABLE genres(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 name VARCHAR(255),
@@ -89,48 +70,47 @@ CREATE TABLE functions(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 cinema BIGINT UNSIGNED,    
 movie BIGINT UNSIGNED,
-room BIGINT UNSIGNED, 
 day DATE NOT NULL,
-hours TIME NOT NULL,    
+hours TIME NOT NULL,   
 CONSTRAINT pk_id_functio PRIMARY KEY (id),
 CONSTRAINT fk_id_cinema_functions FOREIGN KEY (cinema) REFERENCES cinemas (id),    
-CONSTRAINT fk_id_movie FOREIGN KEY (movie) REFERENCES movies (id),
-CONSTRAINT fk_id_rooms_functions FOREIGN KEY (room) REFERENCES rooms (id)    
+CONSTRAINT fk_id_movie FOREIGN KEY (movie) REFERENCES movies (id)
 );
 
-CREATE TABLE type_of_tickets(
-id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,    
-description VARCHAR(255) NOT NULL,
-price FLOAT NOT NULL,
-CONSTRAINT pk_id_type_of_ticket PRIMARY KEY (id)    
-);
 
-CREATE TABLE tikets(
-id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,    
-functionc BIGINT UNSIGNED,
-seat BIGINT UNSIGNED,    
-type_of_ticket BIGINT UNSIGNED,    
-qr VARCHAR(255) NOT NULL ,
-numbre BIGINT UNSIGNED NOT NULL,
-CONSTRAINT pk_id_tiket PRIMARY KEY (id),
-CONSTRAINT fk_type_of_ticket_id FOREIGN KEY (type_of_ticket) REFERENCES type_of_tickets (id),
-CONSTRAINT fk_seat_id_tikets FOREIGN KEY (seat) REFERENCES seats (id),    
-CONSTRAINT unq_numbertikets UNIQUE(numbre)     
+CREATE TABLE discounts(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+discount FLOAT UNSIGNED NOT NULL,
+description VARCHAR(255),
+day DATE NOT NULL,
+hours TIME,
+CONSTRAINT pk_id_discount PRIMARY KEY (id)
 );
-
 
 CREATE TABLE shoppings(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-tiket BIGINT UNSIGNED,
 client BIGINT UNSIGNED,
+discount BIGINT UNSIGNED,
 day DATE NOT NULL,
 countrtiket SMALLINT UNSIGNED NOT NULL,   
 cost FLOAT UNSIGNED NOT NULL,    
-discount FLOAT UNSIGNED NOT NULL,
 total FLOAT UNSIGNED NOT NULL,
 CONSTRAINT pk_id_shoppings PRIMARY KEY (id),
-CONSTRAINT fk_tiket_id FOREIGN KEY (tiket) REFERENCES tikets (id),
-CONSTRAINT fk_user_id FOREIGN KEY (client) REFERENCES  users (id) 
+CONSTRAINT fk_user_id FOREIGN KEY (client) REFERENCES  users (id),
+CONSTRAINT fk_discounts_id FOREIGN KEY (client) REFERENCES  discounts (id)  
+);
+
+CREATE TABLE tikets(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+shopping BIGINT UNSIGNED,
+movie BIGINT UNSIGNED,    
+seat BIGINT UNSIGNED,       
+qr VARCHAR(255) NOT NULL ,
+numbre BIGINT UNSIGNED NOT NULL,
+CONSTRAINT pk_id_tiket PRIMARY KEY (id),
+CONSTRAINT fk_id_shopping_tikets FOREIGN KEY (shopping) REFERENCES shoppings (id),
+CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES shoppings (id),
+CONSTRAINT unq_numbertikets UNIQUE(numbre)     
 );
 
 
