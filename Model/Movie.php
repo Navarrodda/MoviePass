@@ -124,10 +124,10 @@ class Movie
      */
     public function setBackdrop($backdrop)
     {
-       $this->backdrop = "http://image.tmdb.org/t/p/w500".$backdrop;
-       $heders = get_headers($this->backdrop,1); 
-       if ($heders[0] == "HTTP/1.1 404 Not Found") 
-       {
+     $this->backdrop = "http://image.tmdb.org/t/p/w500".$backdrop;
+     $heders = get_headers($this->backdrop,1); 
+     if ($heders[0] == "HTTP/1.1 404 Not Found") 
+     {
         $this->backdrop = "/MoviePass/img/imgrot.jpg";
     }
     return $this;
@@ -288,8 +288,8 @@ class Movie
      */
     public function setDuration($duration)
     {
-        $this->duration = $duration;
-
+        $horas = floor($duration/60);
+       $this->duration = '0'.$horas.'-'.'00'.'-'.'00';
         return $this;
     }
 }

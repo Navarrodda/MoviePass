@@ -57,7 +57,7 @@
 		if($regCompleted)
 		{
 			$view = "MESSAGE";
-			$this->message = new Message( "success", "piola!" );
+			$this->message = new Message( "success", "Movie loaded successfully!" );
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'message.php');
 			include URL_VISTA . 'footer.php';
@@ -65,7 +65,7 @@
 		else
 		{
 			$view = "MESSAGE";
-			$this->message = new Message( "warning", "no!" );
+			$this->message = new Message( "warning", "A problem has occurred!" );
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'message.php');
 			include URL_VISTA . 'footer.php';
