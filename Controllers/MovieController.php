@@ -23,7 +23,7 @@
 			$api = $this->MovieFileDao->getNowApi($page);
 			return $api;
 		}
-
+		//Devuelve peliculas por genero
 		public function getMovieByGenre($id)
 		{
 
@@ -33,6 +33,16 @@
 		public function getAllPages()
 		{
 			return $this->MovieFileDao->getPages();
+		}
+		//devuelve pelicula por id
+		public function getMovieId($id,$page)
+		{
+			return $this->MovieFileDao->getMovieById($id,$page);
+		}
+		//devuelve las specs de la pelicula con la duracion
+		public function movieSpecsId($id)
+		{
+			return $this->MovieFileDao->getMovieSpecs($id);
 		}
 
 		public function choose_movie($idmovie,$page){

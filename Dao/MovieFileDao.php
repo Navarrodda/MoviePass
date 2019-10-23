@@ -5,7 +5,7 @@
 
 	class MovieFileDao
 	{
-
+		// Devuelve pelicula por genero
 		public function getMovieByGenre($id)
 		{
 			$array = $this->getNowApi(1);
@@ -23,7 +23,7 @@
 			
 			return $movieList;
 		}
-
+		//devuelve pelicula a partir del ID
 		public function getMovieById($id,$page)
 		{
 			$array = $this->getNowApi($page);
@@ -44,22 +44,29 @@
 					$flag->setOverview($movie->getOverview());
 					$flag->setDate($movie->getDate());
 					$flag->setAverage($movie->getAverage());
-					$flag->setDuration();
+					$mov = $this->retrieveMovie($id);
+					$flag->setDuration($mov->getDuration());
 				}
 			}
 			return $flag;
 		}
-
+		//devuelve una pagina de la api de peliculas ahora.
 		public function getNowApi($page)
 		{
 			return $this->retrieveApi($page);
 		}
-
+		//devuelve el total de paginas de la api
 		public function getPages()
 		{
 			return $this->retrievePages();
 		}
 
+		public function getMovieSpecs($id)
+		{
+			return $this->retrieveMovie($id);
+		}
+
+		//graba en json
 		private function saveData($list)
 		{
 			$arrayToencode = array();
@@ -104,9 +111,9 @@
 			
 			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
 
-				$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 
-				$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
+			$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
 
 				
 				foreach ($array as $indice) 
@@ -134,14 +141,31 @@
 				}
 				return $movieList;
 		}
-
+		//devuelve el detalle de una pelicula
 		private function retrieveMovie($id)
 		{
 			$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
 
-			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true);
-
-			$
+			$data = ($jsonContent) ? json_decode($jsonContent,true):array();
+			$movie = new Movie();
+			if(!empty($data))
+			{
+				$movie->setIdApi($indice["id"]);
+				$movie->setTitle($indice["original_title"]);
+				$movie->setPoster($indice["poster_path"]);
+				$movie->setBackdrop($indice["backdrop_path"]);
+				$movie->setOverview($indice["overview"]);
+				$movie->setAverage($indice["vote_average"]);
+				$movie->setGenre($indice["genre_ids"]);
+				$movie->setDate($indice["release_date"]);
+				$movie->setVote($indice["vote_count"]);
+				$movie->setLanguage($indice["original_language"]);
+				$movie->setPopularity($indice["popularity"]);
+				$movie->setDuration($indice["runtime"]);
+			}else{
+				$movie = false;
+			}
+			return $movie;
 		}
 
 		private function retrieveData()
