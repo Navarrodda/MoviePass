@@ -211,7 +211,7 @@ class MovieBdDao{
 					$p['overview'],
 					$p['datemdy'],
 					$p['average'],
-					$p['duration'],
+					$p['duration']
 
 				);
 				$movie->setId($p['id']);

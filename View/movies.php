@@ -88,7 +88,7 @@
                 </p>
               <?php } ?>
               <h4><?php echo $data->getOverview(); ?></h4>
-              <a href="#" class="fa fa-archive"> CHOOSE MOVIE</a>
+              <a href="<?php echo URL ?>/movie/choose_movie/<?php echo $data->getIdapi()  ?>/<?php echo $page ?>/" class="fa fa-archive"> CHOOSE MOVIE</a>
             </div>
           </div>
         </div>
