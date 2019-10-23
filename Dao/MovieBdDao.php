@@ -42,7 +42,7 @@ class MovieBdDao{
 		try{
 
 			/** @noinspection SqlResolve */
-			$sql = ("INSERT INTO $this->table (idApi, vote, poster, backdrop, lan ,title, popularity, overview, datemdy, average) VALUES (:idApi, :vote, :poster, :backdrop, :lan, :title, :popularity, :overview, :datemdy, :average)");
+			$sql = ("INSERT INTO $this->table (idApi, vote, poster, backdrop, lan ,title, popularity, overview, datemdy, average, duration) VALUES (:idApi, :vote, :poster, :backdrop, :lan, :title, :popularity, :overview, :datemdy, :average, :duration)");
 
 			$conec = Conection::conection();
 
@@ -59,6 +59,7 @@ class MovieBdDao{
 			$overview = $movie->getOverview();
 			$datemdy = $movie->getDate();
 			$average = $movie->getAverage();
+			$duration = $movie->getDuration();
 
 			$judgment->bindParam(":idApi",$idApi);
 			$judgment->bindParam(":vote",$vote);
@@ -70,6 +71,7 @@ class MovieBdDao{
 			$judgment->bindParam(":overview", $overview);
 			$judgment->bindParam(":datemdy", $datemdy);
 			$judgment->bindParam(":average", $average);
+			$judgment->bindParam(":duration", $duration);
 
 			$judgment->execute();
 
@@ -103,7 +105,7 @@ class MovieBdDao{
 	public function to_update(Movie $movie, $id){
 
 		try{
-			$sql = ("UPDATE $this->table SET idApi=:idApi, vote=:vote, poster=:poster, backdrop=:backdrop, lan=:lan, title=:title, popularity=:popularity, overview=:overview, datemdy=:datemdy, average=:average WHERE id=\"$id\"");
+			$sql = ("UPDATE $this->table SET idApi=:idApi, vote=:vote, poster=:poster, backdrop=:backdrop, lan=:lan, title=:title, popularity=:popularity, overview=:overview, datemdy=:datemdy, average=:average duration=:duration WHERE id=\"$id\"");
 
 			$conec = Conection::conection();
 
@@ -119,6 +121,7 @@ class MovieBdDao{
 			$overview = $movie->getOverview();
 			$datemdy = $movie->getDate();
 			$average = $movie->getAverage();
+			$duration = $movie->getDuration();
 
 			$judgment->bindParam(":idApi",$idApi);
 			$judgment->bindParam(":vote",$vote);
@@ -130,6 +133,7 @@ class MovieBdDao{
 			$judgment->bindParam(":overview", $overview);
 			$judgment->bindParam(":datemdy", $datemdy);
 			$judgment->bindParam(":average", $average);
+			$judgment->bindParam(":duration", $duration);
 
 
 			$judgment->execute();
@@ -206,7 +210,9 @@ class MovieBdDao{
 					$p['popularity'],
 					$p['overview'],
 					$p['datemdy'],
-					$p['average']
+					$p['average'],
+					$p['duration'],
+
 				);
 				$movie->setId($p['id']);
 				return $movie;

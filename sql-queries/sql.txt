@@ -54,6 +54,7 @@ popularity FLOAT,
 overview VARCHAR(255),
 datemdy DATE,
 average VARCHAR(255),
+duration TIME,
 CONSTRAINT pk_id_movies PRIMARY KEY (id)
 ); 
 

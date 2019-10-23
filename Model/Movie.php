@@ -16,6 +16,7 @@ class Movie
     private $overview; 
     private $date;
     private $average;
+    private $duration;
 
 
     public function __construct()
@@ -272,6 +273,26 @@ class Movie
     public function setAverage($average)
     {
         $this->average = $average;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDuration()
+    {
+        return $this->duration;
+    }
+
+    /**
+     * @param mixed $duration
+     *
+     * @return self
+     */
+    public function setDuration($duration)
+    {
+        $this->duration = $duration;
 
         return $this;
     }
