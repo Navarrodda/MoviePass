@@ -46,6 +46,7 @@
 					$flag->setOverview($movie->getOverview());
 					$flag->setDate($movie->getDate());
 					$flag->setAverage($movie->getAverage());
+					$flag->setDuration();
 				}
 			}
 			
@@ -135,6 +136,15 @@
 					
 				}
 				return $movieList;
+		}
+
+		private function retrieveMovie($id)
+		{
+			$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
+
+			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true);
+
+			$
 		}
 
 		private function retrieveData()
