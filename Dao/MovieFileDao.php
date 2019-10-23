@@ -28,13 +28,11 @@
 		{
 			$array = $this->getNowApi($page);
 			$flag = false;
-
 			foreach ($array as $movie) 
 			{
-				if($id == $movie->getId())
+				if($id == $movie->getIdapi())
 				{
 					$flag = new Movie();
-					$flag->setId($movie->getId());
 					$flag->setIdapi($movie->getIdapi());
 					$flag->setVote($movie->getVote());
 					$flag->setPoster($movie->getPoster());
@@ -48,7 +46,6 @@
 					$flag->setAverage($movie->getAverage());
 				}
 			}
-			
 			return $flag;
 		}
 
