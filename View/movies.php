@@ -67,7 +67,9 @@
        </div>
      <?php  } } ?>
    </div>
-   <?php if(!empty($values)){
+   <?php if(!empty($value)){
+    foreach ($value as $val)
+      if(!empty($values)){
     foreach ($values as $data) { ?>
      <div class="col-md-9">
        <div class="b-slide-text">
@@ -80,13 +82,14 @@
           <div class="col-md-7">
             <div class="b-text">
               <h2><?php echo $data->getTitle()?></h2>
+              <p>
               <?php if($data->getVote() < 100) {?>
-                <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVote()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
+                <span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span><i class="fa fa-long-arrow-down" aria-hidden="true"></i><?php echo $data->getVote()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span><span><i class="fa fa-check" aria-hidden="true"></i></span>
                 </p>
               <?php } else { ?>          
                 <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span><i class="fa fa-long-arrow-up" aria-hidden="true"></i><?php echo $data->getVote()?></span><span><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span><span><i class="fa fa-remove" aria-hidden="true"></i></span>
-                </p>
               <?php } ?>
+              </p>
               <h4><?php echo $data->getOverview(); ?></h4>
               <a href="<?php echo URL ?>/movie/choose_movie/<?php echo $data->getIdapi()  ?>/<?php echo $page ?>/" class="fa fa-archive"> CHOOSE MOVIE</a>
             </div>
@@ -117,7 +120,7 @@
         </div>
       </div>
     </div>
-  <?php } ?>
+  <?php } } ?>
 </div>
 </section>
 

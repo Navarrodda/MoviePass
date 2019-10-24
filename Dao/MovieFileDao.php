@@ -98,8 +98,24 @@ class MovieFileDao
 						$jsonContenten = file_get_contents(API. "movie/".$indice["id"].KEY.PAGE.$page);
 						$data = ($jsonContenten) ? json_decode($jsonContenten,true):array();
 						$movie->setTitle($indice["original_title"]);
-						$movie->setPoster($indice["poster_path"]);
-						$movie->setBackdrop($indice["backdrop_path"]);
+						
+						$poster = "http://image.tmdb.org/t/p/w500". $indice["poster_path"];
+						$heders = get_headers($poster,1); 
+						if ($heders[0] == "HTTP/1.1 404 Not Found") 
+						{
+							$poster = "/MoviePass/img/imgrot.jpg";
+						}
+						$movie->setPoster($poster);
+
+						$backdrop = "http://image.tmdb.org/t/p/w500". $indice["backdrop_path"];
+						$heders = get_headers($backdrop,1); 
+						if ($heders[0] == "HTTP/1.1 404 Not Found") 
+						{
+							$backdrop = "/MoviePass/img/imgrot.jpg";
+						}
+
+						$movie->setBackdrop($backdrop);
+						
 						$movie->setOverview($indice["overview"]);
 						$movie->setAverage($indice["vote_average"]);
 						$movie->setGenre($indice["genre_ids"]);
@@ -137,8 +153,23 @@ class MovieFileDao
 				$jsonContenten = file_get_contents(API. "movie/".$indice["id"].KEY.PAGE.$page);
 				$data = ($jsonContenten) ? json_decode($jsonContenten,true):array();
 				$movie->setTitle($indice["original_title"]);
-				$movie->setPoster($indice["poster_path"]);
-				$movie->setBackdrop($indice["backdrop_path"]);
+
+				$poster = "http://image.tmdb.org/t/p/w500". $indice["poster_path"];
+				$heders = get_headers($poster,1); 
+				if ($heders[0] == "HTTP/1.1 404 Not Found") 
+				{
+					$poster = "/MoviePass/img/imgrot.jpg";
+				}
+				$movie->setPoster($poster);
+
+				$backdrop = "http://image.tmdb.org/t/p/w500". $indice["backdrop_path"];
+				$heders = get_headers($backdrop,1); 
+				if ($heders[0] == "HTTP/1.1 404 Not Found") 
+				{
+					$backdrop = "/MoviePass/img/imgrot.jpg";
+				}
+
+				$movie->setBackdrop($backdrop);
 				$movie->setOverview($indice["overview"]);
 				$movie->setAverage($indice["vote_average"]);
 				$movie->setGenre($indice["genre_ids"]);

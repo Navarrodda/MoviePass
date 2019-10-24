@@ -47,6 +47,7 @@
         <?php //if(!empty($_SESSION["rol"])){ ?>
           <?php //if($_SESSION["rol"] != 3){ ?>
             <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
+            <li><a href="<?php echo URL?>/view/mymovies/">MYMOVIES</a></li>
             <?php// } } ?>
             <?php if(!empty($_SESSION["rol"])){ ?>
               <?php if($_SESSION["rol"] != 3){ ?>

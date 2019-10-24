@@ -99,15 +99,9 @@ class Movie
      */
     public function setPoster($poster)
     {
-        $this->poster = "http://image.tmdb.org/t/p/w500".$poster;
-        $heders = get_headers($this->poster,1); 
-        if ($heders[0] == "HTTP/1.1 404 Not Found") 
-        {
-            $this->poster = "/MoviePass/img/imgrot.jpg";
-        }
-
-        return $this;
-    }
+     $this->poster = $poster;
+     return $this;
+ }
 
     /**
      * @return mixed
@@ -124,14 +118,9 @@ class Movie
      */
     public function setBackdrop($backdrop)
     {
-     $this->backdrop = "http://image.tmdb.org/t/p/w500".$backdrop;
-     $heders = get_headers($this->backdrop,1); 
-     if ($heders[0] == "HTTP/1.1 404 Not Found") 
-     {
-        $this->backdrop = "/MoviePass/img/imgrot.jpg";
-    }
-    return $this;
-}
+     $this->backdrop = $backdrop;
+     return $this;
+ }
 
     /**
      * @return mixed
@@ -288,8 +277,14 @@ class Movie
      */
     public function setDuration($duration)
     {
-        $horas = floor($duration/60);
-       $this->duration = '0'.$horas.'-'.'00'.'-'.'00';
-        return $this;
-    }
+
+
+           // $horas = floor($duration/60);
+            //$this->duration = '0'.$horas.'-'.'00'.'-'.'00';
+
+
+       $this->duration = $duration;
+
+       return $this;
+   }
 }

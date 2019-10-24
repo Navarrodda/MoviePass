@@ -91,6 +91,7 @@ class ViewController
 		$count = 3;
 		$page = 1;
 		$emty = $page;
+		$value = $this->ControlMovies->bringmovies();
 		$values = $this->ControlMovies->getList(1);
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
@@ -154,11 +155,22 @@ class ViewController
 			$page = $pages -3;
 			$count = $count - 3;
 		}
+		$value = $this->ControlMovies->bringmovies();
 		$values = $this->ControlMovies->getList($page);
 		$genere = $this->ControlGenre->getList();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
 	}
+
+		public function mymovies()
+	{
+
+		$view = 'My Movies';
+		$value = $this->ControlMovies->bringmovies();
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "mymovies.php");
+		include URL_VISTA . 'footer.php';
+	} 
 
 }

@@ -146,6 +146,7 @@ class MovieBdDao{
 
 	public function bring_everything(){
 		try{
+
 			$sql = "SELECT * FROM $this->table";
 
 			$conec = Conection::conection();
@@ -205,21 +206,19 @@ class MovieBdDao{
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){
 			$this->list = array_map(function ($p) {
-				$movie = new Movie
-				(
-					$p['idapi'],
-					$p['vote'],
-					$p['poster'],
-					$p['backdrop'],
-					$p['lan'],
-					$p['title'],
-					$p['popularity'],
-					$p['overview'],
-					$p['datemdy'],
-					$p['average'],
-					$p['duration']
-
-				);
+				$movie = new Movie();
+				$movie->setIdapi($p['idapi']);
+				$movie->setVote($p['vote']);
+				$movie->setPoster($p['poster']);
+				$movie->setBackdrop($p['backdrop']);
+				$movie->setLanguage($p['lan']);
+				$movie->setTitle($p['title']);
+				$movie->setPopularity($p['popularity']);
+				$movie->setOverview($p['overview']);
+				$newDate = date("d/m/Y", strtotime($p['datemdy']));
+				$movie->setDate($newDate);
+				$movie->setAverage($p['average']);
+				$movie->setDuration($p['duration']);
 				$movie->setId($p['id']);
 				return $movie;
 			}, $dataSet);
