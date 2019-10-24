@@ -145,22 +145,28 @@ class MovieBdDao{
 	}
 
 	public function bring_everything(){
-		$sql = "SELECT * FROM $this->table";
+		try{
+			$sql = "SELECT * FROM $this->table";
 
-		$conec = Conection::conection();
+			$conec = Conection::conection();
 
-		$judgment = $conec->prepare($sql);
+			$judgment = $conec->prepare($sql);
 
-		$judgment->execute();
+			$judgment->execute();
 
-		$dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+			$dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-		$this->mapear($dataSet);
+			$this->mapear($dataSet);
 
-		if (!empty($this->list)) {
-			return $this->list;
+			if (!empty($this->list)) {
+				return $this->list;
+			}
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
 		}
-		return null;
 	}
 
 
