@@ -84,8 +84,11 @@
                      <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span>
                      </p>
                      <h4><?= $data->getOverview(); ?></h4>
-                     <h5></h5>
-                     <p class="cart">REMOVE TO-></p>
+                     <h5></h5><p>
+                     <form action="<?php echo URL?>/movie/remove/" method="POST">
+                       <button type="submit" name="btnRemove" class="btn btn-danger" value="<?php echo $data->getId(); ?>">REMOVE TO</button>
+                     </form>  
+                     </p> 
                    </div>
                  </div>
                </div>

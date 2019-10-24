@@ -94,5 +94,20 @@ class MovieController
 		return $movie;
 	}
 
+	public function remove($id)
+	{
+		$movie = $this->MovieBddao->bring_by_id($id);
+		if(!empty($movie))
+		{
+			$movie = $this->MovieBddao->remove_by_id($id);
+		}
+		$view = "MESSAGE";
+		$this->message = new Message( "success", "Movie loaded successfully!" );
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . 'message.php');
+		include URL_VISTA . 'footer.php';
+		
+	}
+
 
 }
