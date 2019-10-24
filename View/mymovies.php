@@ -60,27 +60,25 @@
                   <div class="best-sell-part">
                    <img src="<?= $data->getBackdrop();?>">
                    <p><i class="fa fa-heart" aria-hidden="true"></i></p>
-                   <h4>QUICK VIEW</h4>
+                   <h4>Select For Billboard</h4>
                  </div>
                  <div class="row">
                   <div class="col-md-12">
                     <div class="prodact-s-text">
                       <h3><?= $data->getTitle(); ?></h3>
-                      <?php  if($data->getVote() < 500) { ?>
+                      <?php  if(floor($data->getVote()*5/100) == 1) { ?>
                        <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                      <?php }?>
-
-                     <?php  if($data->getVote() < 1000) { ?>
+                     <?php  if(floor($data->getVote()*5/100) == 2) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                      <?php }?>
-                     <?php  if($data->getVote() < 1500) { ?>
+                     <?php  if(floor($data->getVote()*5/100) == 3) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-
                      <?php }?>
-                     <?php  if($data->getVote() < 2000) { ?>
+                     <?php  if(floor($data->getVote()*5/100) == 4) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p> 
                      <?php }?>
-                     <?php  if($data->getVote() > 2500) { ?>
+                     <?php  if(floor($data->getVote()*5/100) > 5) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p> 
                      <?php }?>
                      <p><span><i class="fa fa-calendar" aria-hidden="true"> <?php echo $data->getDate()?></i></span><span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?php echo $data->getPopularity()?></span><span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?php echo $data->getLanguage()?>"</span>
