@@ -38,6 +38,27 @@ class MovieBdDao{
 		return null;
 	}
 
+	public function bring_id_by_idapi($idapi){
+
+		$sql = "SELECT id FROM $this->table WHERE idapi = \"$idapi\" LIMIT 1";
+
+		$conec = Conection::conection();
+
+		$judgment = $conec->prepare($sql);
+
+		$judgment->execute();
+
+
+		$id = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+		if(!empty($id))
+		{
+			return $id['id'];
+		}
+
+		return null;
+	}
+
 	public function add(Movie $movie){
 		try{
 

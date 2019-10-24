@@ -91,8 +91,23 @@ class ViewController
 		$count = 3;
 		$page = 1;
 		$emty = $page;
-		$value = $this->ControlMovies->bringmovies();
+		$count = count($this->ControlMovies->bringmovies());
 		$values = $this->ControlMovies->getList(1);
+		$value = $this->ControlMovies->bringmovies();
+		$i = 0;
+			foreach ($values as $data) {
+				
+				if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
+				{
+					$values[$i]->codigo = TRUE;
+	
+				}
+				else
+				{
+					$values[$i]->codigo = FALSE;
+				}
+				$i++;
+			}
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
 		include URL_VISTA . 'header.php';
@@ -163,7 +178,7 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
-		public function mymovies()
+	public function mymovies()
 	{
 
 		$view = 'My Movies';

@@ -79,6 +79,12 @@ class MovieController
 		}
 	}
 
+	public function bring_id_by_idapi($id)
+	{
+		$movie = $this->MovieBddao->bring_id_by_idapi($id);
+		return $movie;
+	}
+
 	public function bringmovies()
 	{
 		$movie = $this->MovieBddao->bring_everything();
