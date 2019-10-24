@@ -51,8 +51,11 @@ class MovieController
 
 			if($this->MovieFileDao->getMovieById($idmovie,$page)){
 				$movie = $this->MovieFileDao->getMovieById($idmovie,$page);
-				$this->MovieBddao->add($movie,$page);
-				$regCompleted = TRUE;
+				if($this->MovieBddao->bring_id_by_idapi($movie->getIdapi())== NULL)
+				{
+					$this->MovieBddao->add($movie,$page);
+					$regCompleted = TRUE;
+				}
 			}
 			if($regCompleted)
 			{

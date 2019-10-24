@@ -9,7 +9,7 @@
    <div class="row">
     <div class="col-md-12">
       <div class="bar">
-        <h2>My Movies</h2>
+        <h2>Genres</h2>
         <img alt="" src="<?php echo URL ?>/img/bar.png">
       </div>
     </div>
@@ -52,11 +52,11 @@
     </div>
     <div class="best-seller-part">
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-12">
           <div class="row">
             <?php if(!empty($value)){ 
-              foreach ($value as $data)  { ?>
-                <div class="col-md-4">
+              foreach ($value as $data)  { ?> 
+                <div class="col-md-6 fond1">
                   <div class="best-sell-part">
                    <img src="<?= $data->getBackdrop();?>">
                    <p><i class="fa fa-heart" aria-hidden="true"></i></p>
@@ -66,7 +66,7 @@
                   <div class="col-md-12">
                     <div class="prodact-s-text">
                       <h3><?= $data->getTitle(); ?></h3>
-                      <?php  if(floor($data->getVote()*5/100) == 1) { ?>
+                      <?php  if(floor($data->getVote()*5/100) < 1) { ?>
                        <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                      <?php }?>
                      <?php  if(floor($data->getVote()*5/100) == 2) { ?>
