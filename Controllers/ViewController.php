@@ -91,7 +91,6 @@ class ViewController
 		$count = 3;
 		$page = 1;
 		$emty = $page;
-		$count = count($this->ControlMovies->bringmovies());
 		$values = $this->ControlMovies->getList(1);
 		$value = $this->ControlMovies->bringmovies();
 		$i = 0;
