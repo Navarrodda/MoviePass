@@ -160,6 +160,7 @@ class MovieFileDao
 				$movie->setAverage($indice["vote_average"]);
 				$movie->setOverview($indice["overview"]);
 				$movie->setDate($indice["release_date"]);
+				$movie->setLanguage($indice["original_language"]);
 				array_push($movieList, $movie);
 			}
 			return $movieList;
