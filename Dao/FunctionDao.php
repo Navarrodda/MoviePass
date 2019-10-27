@@ -1,11 +1,9 @@
-<?php
+<?php 
     namespace Dao;
-
-    use Model\Movie_X_Genre as Movie_X_Genre;
-
-    class MovieGenreBdDao
+    use Model\Function as Function;
+    class FunctionDao
     {
-        protected $table = "movie_for_genre";
+        protected $table = "functions";
         protected $list;
         private static $instance;
 
@@ -16,30 +14,9 @@
             }
             return self::$instance;
         }
-
-        public function bring_id_by_Movie($idMovie)
-        {
-             $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
-
-            $conec = Conection::conection();
-
-            $judgment = $conec->prepare($sql);
-
-            $judgment->execute();
-
-            $id = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-            if(!empty($id))
-            {
-                return $id['id'];
-            }
-
-            return null;
-        }
-
-        public function bring_id_by_Genero($idGenre)
-        {
-             $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
+        //Devuelve todas las funciones del cine
+        public function bring_Function_by_idCinema($idCinema){
+            $sql = "SELECT id FROM $this->table WHERE cinema = \"$idCinema\" LIMIT 1";
 
             $conec = Conection::conection();
 
@@ -47,25 +24,6 @@
 
             $judgment->execute();
 
-            $id = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-            if(!empty($id))
-            {
-                return $id['id'];
-            }
-
-            return null;
-        }
-
-        public function bring_id_by_MovieAll($idMovie)
-        {
-             $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
-
-            $conec = Conection::conection();
-
-            $judgment = $conec->prepare($sql);
-
-            $judgment->execute();
 
             $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
 
@@ -79,15 +37,16 @@
             return null;
         }
 
-        public function bring_id_by_GeneroAll($idGenre)
+        public function bring_Function_by_idMovies($idMovie)
         {
-             $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" ";
+            $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
 
             $judgment->execute();
+
 
             $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
 
@@ -101,25 +60,32 @@
             return null;
         }
 
-        public function add(Movie_X_Genre $movieGenre){
+        public function add(Function $function){
             try{
 
                 /** @noinspection SqlResolve */
-                $sql = ("INSERT INTO $this->table (id, genre, movie) VALUES (:id, :genre, :movie)");
+                $sql = ("INSERT INTO $this->table (id, cinema, movie, day, hours) VALUES (:id, :cinema, :movie, :day, :hours)");
 
                 $conec = Conection::conection();
 
                 $judgment = $conec->prepare($sql);
-                $gen = $movieGenre->getGenre();
-                $mov = $movieGenre->getMovie();
 
-                $id = $movieGenre->getId();
-                $genre = $gen->getId();
-                $movie = $mov->getId();
+                $cine = $function->getCinema();
+                $movi = $function->getMovie();
+
+                $id = $function->getId();
+                $cinema = $cine->getId();
+                $movie = $movi->getId();
+                $day = $function->getDia();
+                $hour = $function->getHora();
+
+                //:id, :cinema, :movie, :day, :hours
 
                 $judgment->bindParam(":id",$id);
-                $judgment->bindParam(":genre",$genre);
+                $judgment->bindParam(":cinema",$cinema);
                 $judgment->bindParam(":movie",$movie);
+                $judgment->bindParam(":day",$day);
+                $judgment->bindParam(":hours",$hour);
                 
                 $judgment->execute();
 
@@ -149,27 +115,40 @@
             }
         }
 
+        // hasta aca llegue
 
-        public function to_update(Movie_X_Genre $movieGenre, $id){
+        public function to_update(Movie $movie, $id){
 
             try{
-                $sql = ("UPDATE $this->table SET id=:ide genre=:genre movie=:movie WHERE id=\"$id\"");
-                // id, genre, movie
+                $sql = ("UPDATE $this->table SET idApi=:idApi, vote=:vote, poster=:poster, backdrop=:backdrop, lan=:lan, title=:title, popularity=:popularity, overview=:overview, datemdy=:datemdy, average=:average duration=:duration WHERE id=\"$id\"");
+
                 $conec = Conection::conection();
 
                 $judgment = $conec->prepare($sql);
-            
-                $gen = $movieGenre->getGenre();
-                $mov = $movieGenre->getMovie();
 
-                $ide = $id;
-                $genre = $gen->getId();
-                $movie = $mov->getId();
+                $idApi = $movie->getIdapi();
+                $vote = $movie->getVote();
+                $poster = $movie->getPoster();
+                $backdrop = $movie->getBackdrop();
+                $lan = $movie->getLanguage();
+                $title = $movie->getTitle();
+                $popularity = $movie->getPopularity();
+                $overview = $movie->getOverview();
+                $datemdy = $movie->getDate();
+                $average = $movie->getAverage();
+                $duration = $movie->getDuration();
 
-                $judgment->bindParam(":ide",$ide);
-                $judgment->bindParam(":genre",$genre);
-                $judgment->bindParam(":movie",$movie);
-                
+                $judgment->bindParam(":idApi",$idApi);
+                $judgment->bindParam(":vote",$vote);
+                $judgment->bindParam(":poster",$poster);
+                $judgment->bindParam(":backdrop",$backdrop);
+                $judgment->bindParam(":lan",$lan);
+                $judgment->bindParam(":title",$title);
+                $judgment->bindParam(":popularity", $popularity);
+                $judgment->bindParam(":overview", $overview);
+                $judgment->bindParam(":datemdy", $datemdy);
+                $judgment->bindParam(":average", $average);
+                $judgment->bindParam(":duration", $duration);
 
 
                 $judgment->execute();
@@ -242,12 +221,21 @@
             $dataSet = is_array($dataSet) ? $dataSet : false;
             if($dataSet){
                 $this->list = array_map(function ($p) {
-                    $movieGenre = new Movie_X_Genre();
-                    $movieGenre->setId($p['id']);
-                    $movieGenre->setMovie($p['movie']);
-                    $movieGenre->setGenre($p['genre']);
-
-                    return $movieGenre;
+                    $movie = new Movie();
+                    $movie->setIdapi($p['idapi']);
+                    $movie->setVote($p['vote']);
+                    $movie->setPoster($p['poster']);
+                    $movie->setBackdrop($p['backdrop']);
+                    $movie->setLanguage($p['lan']);
+                    $movie->setTitle($p['title']);
+                    $movie->setPopularity($p['popularity']);
+                    $movie->setOverview($p['overview']);
+                    $newDate = date("d/m/Y", strtotime($p['datemdy']));
+                    $movie->setDate($newDate);
+                    $movie->setAverage($p['average']);
+                    $movie->setDuration($p['duration']);
+                    $movie->setId($p['id']);
+                    return $movie;
                 }, $dataSet);
             }
         }

@@ -2,15 +2,21 @@
 
 namespace Model;
 
+use Model\Movie as Movie;
+use Model\Cinema as Cinema;
+
 class Function
 {
     private $id;
+    private $cinema;
+    private $movie;
     private $dia;
     private $hora;
 
     public function __construct()
     {
-
+        $movie = new Movie();
+        $cinema = new Cinema();
     }
     
 
