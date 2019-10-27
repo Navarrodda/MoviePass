@@ -41,18 +41,20 @@
 		try{
 
 			/** @noinspection SqlResolve */
-			$sql = ("INSERT INTO $this->table (id_genre, genre_name) VALUES (:id_genre ,:genre_name)");
+			$sql = ("INSERT INTO $this->table (id_genre, genre_name, image) VALUES (:id_genre ,:genre_name, :image)");
 
 			$conec = Conection::conection();
 
 			$judgment = $conec->prepare($sql);
 
 
-            $id_genre = $this->genre->getId();
-            $genre_name = $this->genre->getName();
+            $id_genre = $this->genre->getId_api();
+			$genre_name = $this->genre->getName();
+			$image = $this->genre->getImage();
 
             $judgment->bindParam(":id_genre", $id_genre);
-            $judgment->bindParam(":genre_name",$genre_name);
+			$judgment->bindParam(":genre_name",$genre_name);
+			$judgment->bindParam(":image",$image);
 
 			$judgment->execute();
 
@@ -86,17 +88,19 @@
 	public function to_update(Genre $genre, $id){
 
 		try{
-			$sql = ("UPDATE $this->table SET id_genre=:id_genre genre_name=:genre_name WHERE id=\"$id\"");
+			$sql = ("UPDATE $this->table SET id_genre=:id_genre genre_name=:genre_name image=:image WHERE id=\"$id\"");
 
 			$conec = Conection::conection();
 
 			$judgment = $conec->prepare($sql);
 
-			$id_genre = $genre->getId();
+			$id_genre = $genre->getId_api();
 			$genre_name = $genre->getName();
+			$image = $this->genre->getImage();
 
 			$judgment->bindParam(":id_genre",$id_genre);
-            $judgment->bindParam(":genre_name",$vote);
+			$judgment->bindParam(":genre_name",$vote);
+			$judgment->bindParam(":image",$image);
             
 			$judgment->execute();
 		}catch(\PDOException $e){
@@ -163,8 +167,9 @@
 			$this->list = array_map(function ($p) {
 				$genre = new Genre();
 				(
-					$p['id_genre'],
-					$p['genre_name']
+					$genre->getId_api($p['id_genre']),
+					$genre->setName($p['genre_name']),
+					$genre->setImage($p['image'])
 				);
 				$genre->setId($p['id']);
 				return $genre;

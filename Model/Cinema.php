@@ -8,9 +8,12 @@ class Cinema
 	private $capacidad;
 	private $direccion;
 	private $nombre;
+	private $valor_entrada;
 	//private $valor_entrada;
 	
-	  public function __construct(){
+	public function __construct()
+	{
+
 	}
 	
 	
