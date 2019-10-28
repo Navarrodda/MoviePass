@@ -8,54 +8,62 @@
   <div class="container">
    <div class="row">
     <div class="col-md-12">
-      <div class="bar">
-        <h2>Genres</h2>
-        <img alt="" src="<?php echo URL ?>/img/bar.png">
-      </div>
+      <?php if (!empty($genre)) {?>
+        <div class="bar">
+          <h2>Genres</h2>
+          <img alt="" src="<?php echo URL ?>/img/bar.png">
+        </div>
+      <?php } else { ?>
+        <div class="bar">
+          <h2>No Loaded Genres</h2>
+          <img alt="" src="<?php echo URL ?>/img/bar.png">
+        </div>
+      <?php } ?>
     </div>
   </div>
 </div>
 <div class="clear"></div>
 </section>
 <section class="t-shart-brand">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="t_shart">
-         <div class="row">
-           <div class="col-md-5">
-             <div class="t_shart_img">
-              <img src="img/t-shart-brand1.jpg" alt="">
-            </div>
-          </div>
-          <div class="col-md-7">
-           <div class="t_shart_text">
-            <h2>All Brand T-sharts</h2>
-            <a href="#"><p>See More</p></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <?php if (!empty($genre)) {
+    foreach ($genre as $gen) { ?>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="t_shart">
+             <div class="row">
+              <div class="col-md-5">
+               <h2 style="color:white"><?= $gen->getName();?></h2>
+               <div class="imgri">
+                <a href="#">
+                 <img class="imgri" src="<?= $gen->getImage();?>">
+               </a>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   <?php } }?>
+ </div>
 </div>
 </section>
+<div class="clear"></div>
 <section class="best-seller">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="bar">
-          <h2>Movies</h2>
-          <img alt="" src="<?php echo URL ?>/img/bar.png">
+        <?php if(!empty($value)){ ?>
+          <div class="bar">
+            <h2>Movies</h2>
+            <img alt="" src="<?php echo URL ?>/img/bar.png">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="best-seller-part">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <?php if(!empty($value)){ 
-              foreach ($value as $data)  { ?> 
+      <div class="best-seller-part">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <?php foreach ($value as $data)  { ?> 
                 <div class="col-md-6 fond1">
                   <div class="best-sell-part">
                    <img src="<?= $data->getBackdrop();?>">
@@ -85,19 +93,25 @@
                      </p>
                      <h4><?= $data->getOverview(); ?></h4>
                      <h5></h5><p>
-                     <form action="<?php echo URL?>/movie/remove/" method="POST">
-                       <button type="submit" name="btnRemove" class="btn btn-danger" value="<?php echo $data->getId(); ?>">REMOVE TO</button>
-                     </form>  
+                       <form action="<?php echo URL?>/movie/remove/" method="POST">
+                         <button type="submit" name="btnRemove" class="btn btn-danger" value="<?php echo $data->getId(); ?>">REMOVE TO</button>
+                       </form>  
                      </p> 
                    </div>
                  </div>
                </div>
              </div>
-           <?php  } } ?>
+           <?php } ?>
          </div>
        </div>
      </div>
    </div>
- </div>
+ <?php }else { ?>
+  <div class="bar">
+    <h2>No Loaded Movies</h2>
+    <img alt="" src="<?php echo URL ?>/img/bar.png">
+  </div>
+<?php }  ?>
+</div>
 </section>
 

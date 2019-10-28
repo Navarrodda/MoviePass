@@ -157,7 +157,7 @@ class ViewController
 	public function cinema()
 	{
 		$view = 'CINEMA';
-		$values = $this->ControlCinema->list();
+		$values = $this->ControlCinema->bringeverything();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cinemas.php");
 		include URL_VISTA . 'footer.php';
@@ -210,6 +210,7 @@ class ViewController
 	{
 
 		$view = 'My Movies';
+		$genre = $this->ControlGenre->bring_everything();
 		$value = $this->ControlMovies->bringmovies();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "mymovies.php");

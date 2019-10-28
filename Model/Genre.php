@@ -1,17 +1,17 @@
 <?php
-	namespace Model;
+namespace Model;
 
-	class Genre
-	{
-        private $id;
-        private $id_api;
-		private $name;
-        private $image;
+class Genre
+{
+    private $id;
+    private $idapi;
+    private $name;
+    private $image;
     
-        public function __construct()
-		{
+    public function __construct()
+    {
 
-		}
+    }
 
         /**
          * @return mixed
@@ -58,7 +58,7 @@
          */ 
         public function getImage()
         {
-                return $this->image;
+            return $this->image;
         }
 
         /**
@@ -68,29 +68,28 @@
          */ 
         public function setImage($image)
         {
-                $this->image = $image;
-
-                return $this;
+            $this->image = $image;
+            return $this;
         }
 
-        /**
-         * Get the value of id_api
-         */ 
-        public function getId_api()
-        {
-                return $this->id_api;
-        }
+    
+    /**
+     * @return mixed
+     */
+    public function getIdapi()
+    {
+        return $this->idapi;
+    }
 
-        /**
-         * Set the value of id_api
-         *
-         * @return  self
-         */ 
-        public function setId_api($id_api)
-        {
-                $this->id_api = $id_api;
+    /**
+     * @param mixed $idapi
+     *
+     * @return self
+     */
+    public function setIdapi($idapi)
+    {
+        $this->idapi = $idapi;
 
-                return $this;
-        }
+        return $this;
+    }
 }
-?>

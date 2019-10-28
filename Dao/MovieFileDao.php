@@ -115,7 +115,6 @@ class MovieFileDao
 						}
 
 						$movie->setBackdrop($backdrop);
-						
 						$movie->setOverview($indice["overview"]);
 						$movie->setAverage($indice["vote_average"]);
 						$movie->setGenre($indice["genre_ids"]);
