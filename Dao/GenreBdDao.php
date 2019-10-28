@@ -37,6 +37,26 @@ class GenreBdDao{
 		return null;
 	}
 
+		public function bring_id_by_idapi($idapi){
+		$sql = "SELECT idapi FROM $this->table WHERE idapi = \"$idapi\" LIMIT 1";
+
+		$conec = Conection::conection();
+
+		$judgment = $conec->prepare($sql);
+
+		$judgment->execute();
+
+
+		$idapi = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+		if(!empty($idapi))
+		{
+			return $idapi['idapi'];
+		}
+
+		return null;
+	}
+
 	public function add(Genre $genre){
 		try{
 

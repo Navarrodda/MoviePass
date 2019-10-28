@@ -30,7 +30,10 @@ class GenreController
 		foreach ($genre as $id) 
 		{
 			$genre = $this->GenreFileDao->bring_by_id($id);
-			$this->GenreBdDao->add($genre);
+			if($this->GenreBdDao->bring_id_by_idapi($id) == null)
+			{
+				$this->GenreBdDao->add($genre);
+			}
 		}
 	}
 
