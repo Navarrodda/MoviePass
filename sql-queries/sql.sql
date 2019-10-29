@@ -62,9 +62,6 @@ CONSTRAINT pk_id_movies PRIMARY KEY (id)
 
 CREATE TABLE movie_for_genres(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-<<<<<<< HEAD
-idapi BIGINT NOT NULL,
-=======
 genre BIGINT UNSIGNED,  
 movie BIGINT UNSIGNED,
 CONSTRAINT pk_id_movie_for_genre PRIMARY KEY (id),

@@ -1,14 +1,13 @@
 <?php
     namespace Dao;
 
-    use Model\Movie_X_Genre as Movie_X_Genre;
-    use Dao\MovieBdDao as MovieBdDao;
-    
-    use Model\Movie as Movie;
-    use Model\Genre as Genre;
-    class MovieGenreBdDao
+    use Model\Buy as Buy;
+    use Model\User as User;
+    use Model\Function as Function;
+    use Model\Discount as Discount;
+    class BuyBdDao
     {
-        protected $table = "movie_for_genre";
+        protected $table = "buy";
         protected $list;
         private static $instance;
         
@@ -20,9 +19,9 @@
             return self::$instance;
         }
 
-        public function bring_id_by_Movie($idMovie)
+        public function bring_buy_by_User($idUser)
         {
-             $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
+            $sql = "SELECT * FROM $this->table WHERE id_user = \"$idUser\" ";
 
             $conec = Conection::conection();
 
@@ -30,39 +29,21 @@
 
             $judgment->execute();
 
-            $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+            $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-            if(!empty($id))
+            $this->mapear($arrayMg);
+
+            if(!empty($this->list))
             {
-                return $id['id'];
+                return $this->list;
             }
 
             return null;
         }
-
-        public function bring_id_by_Genero($idGenre)
+        
+        public function bring_buy_by_Function($idUfunction)
         {
-             $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
-
-            $conec = Conection::conection();
-
-            $judgment = $conec->prepare($sql);
-
-            $judgment->execute();
-
-            $id = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-            if(!empty($id))
-            {
-                return $id['id'];
-            }
-
-            return null;
-        }
-
-        public function bring_id_by_MovieAll($idMovie)
-        {
-             $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
+            $sql = "SELECT * FROM $this->table WHERE id_function = \"$idFunction\" ";
 
             $conec = Conection::conection();
 
@@ -82,48 +63,37 @@
             return null;
         }
 
-        public function bring_id_by_GeneroAll($idGenre)
-        {
-             $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" ";
-
-            $conec = Conection::conection();
-
-            $judgment = $conec->prepare($sql);
-
-            $judgment->execute();
-
-            $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-            $this->mapear($arrayMg);
-
-            if(!empty($this->list))
-            {
-                return $this->list;
-            }
-
-            return null;
-        }
-
-        public function add(Movie_X_Genre $movieGenre){
+        public function add(Buy $buy){
             try{
 
                 /** @noinspection SqlResolve */
-                $sql = ("INSERT INTO $this->table (id, genre, movie) VALUES (:id, :genre, :movie)");
+                $sql = ("INSERT INTO $this->table (id_user, id_function, id_descuento, date, price, total) VALUES (:id_user, :id_function, :id_descuento, :date, :price, :total)");
 
                 $conec = Conection::conection();
 
                 $judgment = $conec->prepare($sql);
-                $gen = $movieGenre->getGenre();
-                $mov = $movieGenre->getMovie();
+                $user = new User();
+                $function = new Function();
+                $discount = new Discount();
 
-                $id = $movieGenre->getId();
-                $genre = $gen->getId();
-                $movie = $mov->getId();
+                $user = $buy->getUser();
+                $function = $buy->getFunction();
+                $discount = $buy->getDiscount();
 
-                $judgment->bindParam(":id",$id);
-                $judgment->bindParam(":genre",$genre);
-                $judgment->bindParam(":movie",$movie);
-                
+                $id_user = $user->getId();
+                $id_function = $function->getId();
+                $id_descuento = $discount ->getId();
+                $fecha = $buy->getFecha();
+                $price = $buy->getPrecio();
+                $total = $buy->getTotal();
+
+                $judgment->bindParam(":id_user",$id_user);
+                $judgment->bindParam(":id_function",$id_function);
+                $judgment->bindParam(":id_descuento", $id_descuento);
+                $judgment->bindParam(":date",$fecha);
+                $judgment->bindParam(":price",$price);
+                $judgment->bindParam(":total",$total);
+
                 $judgment->execute();
 
                 return $conec->lastInsertId();
@@ -153,25 +123,37 @@
         }
 
 
-        public function to_update(Movie_X_Genre $movieGenre, $id){
+        public function to_update(Buy $buy, $id){
 
             try{
-                $sql = ("UPDATE $this->table SET id=:ide genre=:genre movie=:movie WHERE id=\"$id\"");
+                $sql = ("UPDATE $this->table SET id_user=:id_user id_function=:id_function id_descuento=:id_descuento date=:date price=:price total=:total WHERE id=\"$id\"");
                 // id, genre, movie
                 $conec = Conection::conection();
 
                 $judgment = $conec->prepare($sql);
             
-                $gen = $movieGenre->getGenre();
-                $mov = $movieGenre->getMovie();
+                $judgment = $conec->prepare($sql);
+                $user = new User();
+                $function = new Function();
+                $discount = new Discount();
 
-                $ide = $id;
-                $genre = $gen->getId();
-                $movie = $mov->getId();
+                $user = $buy->getUser();
+                $function = $buy->getFunction();
+                $discount = $buy->getDiscount();
 
-                $judgment->bindParam(":ide",$ide);
-                $judgment->bindParam(":genre",$genre);
-                $judgment->bindParam(":movie",$movie);
+                $id_user = $user->getId();
+                $id_function = $function->getId();
+                $id_descuento = $discount ->getId();
+                $fecha = $buy->getFecha();
+                $price = $buy->getPrecio();
+                $total = $buy->getTotal();
+
+                $judgment->bindParam(":id_user",$id_user);
+                $judgment->bindParam(":id_function",$id_function);
+                $judgment->bindParam(":id_descuento", $id_descuento);
+                $judgment->bindParam(":date",$fecha);
+                $judgment->bindParam(":price",$price);
+                $judgment->bindParam(":total",$total);
                 
 
 
@@ -245,15 +227,29 @@
             $dataSet = is_array($dataSet) ? $dataSet : false;
             if($dataSet){
                 $this->list = array_map(function ($p) {
-                    $movieGenre = new Movie_X_Genre();
-                    $movieGenre->setId($p['id']);
-                    $movie = new Movie();
-                    $genre = new Genre();
-                    $movie->setId($p['movie']);
-                    $genre->setId($p['genre']);
-                    // Esta mal mapea movie y genero con numero  id y no con objetos 
-                    $movieGenre->setMovie($movie);
-                    $movieGenre->setGenre($genre);
+                
+                $buy = new Buy();
+                $user = new User();
+                $function = new Function();
+                $discount = new Discount();
+
+                $user = $buy->getUser();
+                $function = $buy->getFunction();
+                $discount = $buy->getDiscount();
+
+                $id_user = $user->getId();
+                $id_function = $function->getId();
+                $id_descuento = $discount ->getId();
+                $fecha = $buy->getFecha();
+                $price = $buy->getPrecio();
+                $total = $buy->getTotal();
+
+                $movie->setId($p['movie']);
+                $genre->setId($p['genre']);
+                // Esta mal mapea movie y genero con numero  id y no con objetos 
+                $movieGenre->setMovie($movie));
+                $movieGenre->setGenre($genre);
+
                     return $movieGenre;
                 }, $dataSet);
             }

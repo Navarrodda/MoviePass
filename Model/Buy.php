@@ -1,17 +1,24 @@
 <?php
 namespace Model;
 
+use Model\User as User;
+use Model\Function as Function;
+use Model\Discount as Discount;
 class Buy
 {
     private $id;
-    private $cant_entradas;
+    private $user;
+    private $function;
     private $descuento;
     private $fecha;
+    private $precio;
     private $total;
 
     public function __construct()
     {
-        
+        $user = new User();
+        $function = new Function();
+        $descuento = new Discount();
     }
 
     /**
@@ -30,26 +37,6 @@ class Buy
     public function setId($id)
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of cant_entradas
-     */ 
-    public function getCant_entradas()
-    {
-        return $this->cant_entradas;
-    }
-
-    /**
-     * Set the value of cant_entradas
-     *
-     * @return  self
-     */ 
-    public function setCant_entradas($cant_entradas)
-    {
-        $this->cant_entradas = $cant_entradas;
 
         return $this;
     }
@@ -95,6 +82,26 @@ class Buy
     }
 
     /**
+         * Get the value of precio
+         */ 
+        public function getPrecio()
+        {
+            return $this->precio;
+        }
+
+        /**
+         * Set the value of precio
+         *
+         * @return  self
+         */ 
+        public function setPrecio($precio)
+        {
+            $this->precio = $precio;
+
+            return $this;
+        }
+
+    /**
      * Get the value of total
      */ 
     public function getTotal()
@@ -110,6 +117,48 @@ class Buy
     public function setTotal($total)
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+  
+
+    /**
+     * Get the value of user
+     */ 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @return  self
+     */ 
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of function
+     */ 
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
+    /**
+     * Set the value of function
+     *
+     * @return  self
+     */ 
+    public function setFunction($function)
+    {
+        $this->function = $function;
 
         return $this;
     }
