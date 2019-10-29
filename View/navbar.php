@@ -68,11 +68,14 @@
             <div class="row">
               <div class="col-md-12">
                <div class="header-part">
-                <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
+                <?php if(!empty($espace)) { ?>
+                  <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view;?><span> <i class="fa fa-angle-right" aria-hidden="true"></i></span> <?= $espace; ?></span></p>
+                  <?php } else {  ?>
+                    <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
+                  <?php }  ?>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </header>
-    
+        </section>
+      </header>

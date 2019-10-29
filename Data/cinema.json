@@ -1,23 +1,2 @@
 [
-    {
-        "id": 1,
-        "capacidad": "200",
-        "direccion": "Paseo",
-        "nombre": "Aldrey",
-        "valor_entrada": "$200"
-    },
-    {
-        "id": 2,
-        "capacidad": "200",
-        "direccion": "25 DE MAYO Y LA RIOJA",
-        "nombre": "Cinemasenter",
-        "valor_entrada": "300"
-    },
-    {
-        "id": 3,
-        "capacidad": "200",
-        "direccion": "Paseo Ladrey",
-        "nombre": "Navarrp",
-        "valor_entrada": "111"
-    }
 ]

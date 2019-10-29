@@ -217,7 +217,7 @@ class ViewController
 	public function mymovies()
 	{
 
-		$view = 'My Movies';
+		$view = 'MY MOVIES';
 		$genre = $this->ControlGenre->bring_everything();
 		$value = $this->ControlMovies->bringmovies();
 		include URL_VISTA . 'header.php';
@@ -227,7 +227,8 @@ class ViewController
 
 	public function mymoviegenres($idgenre)
 	{
-		$view = 'My Movies -> Genre';
+		$view = 'My Movies';
+		$espace = 'Genre';
 		$genresel = array();
 		$value = array();
 		$genre = $this->ControlGenre->bring_everything();
