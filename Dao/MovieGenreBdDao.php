@@ -4,6 +4,8 @@
     use Model\Movie_X_Genre as Movie_X_Genre;
     use Dao\MovieBdDao as MovieBdDao;
     
+    use Model\Movie as Movie;
+    use Model\Genre as Genre;
     class MovieGenreBdDao
     {
         protected $table = "movie_for_genre";
@@ -245,10 +247,20 @@
                 $this->list = array_map(function ($p) {
                     $movieGenre = new Movie_X_Genre();
                     $movieGenre->setId($p['id']);
+                    $movie = new Movie();
+                    $genre = new Genre();
+                    $movie->setId($p['movie']);
+                    $genre->setId($p['genre']);
                     // Esta mal mapea movie y genero con numero  id y no con objetos 
+<<<<<<< HEAD
                     $movieGenre->setMovie($p['movie']);
                     $movieGenre->setGenre($p['genre']);
                     
+=======
+                    $movieGenre->setMovie($movie));
+                    $movieGenre->setGenre($genre);
+
+>>>>>>> bc176429c18df3be73aca88f9eb4e2b8be2733d4
                     return $movieGenre;
                 }, $dataSet);
             }
