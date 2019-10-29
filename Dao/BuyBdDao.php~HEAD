@@ -1,389 +1,372 @@
 <?php
-<<<<<<< HEAD:Dao/BuyBdDao.php
-    namespace Dao;
 
-    use Model\Buy as Buy;
-    use Model\User as User;
-    use Model\Function as Function;
-    use Model\Discount as Discount;
-    class BuyBdDao
-    {
-        protected $table = "buy";
-        protected $list;
-        private static $instance;
-        
-        public static function getInstance()
-        {
-            if (!self::$instance instanceof self) {
-                self::$instance = new self();
-            }
-            return self::$instance;
-=======
 namespace Dao;
 
-use Model\Movie_X_Genre as Movie_X_Genre;
-use Dao\MovieBdDao as MovieBdDao;
-
-use Model\Movie as Movie;
-use Model\Genre as Genre;
-class MovieGenreBdDao
+use Model\Buy as Buy;
+use Model\User as User;
+use Model\Function as Function;
+use Model\Discount as Discount;
+class BuyBdDao
 {
-    protected $table = "movie_for_genres";
+    protected $table = "buy";
     protected $list;
     private static $instance;
-
+    
     public static function getInstance()
     {
         if (!self::$instance instanceof self) {
             self::$instance = new self();
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
         }
         return self::$instance;
-    }
 
-<<<<<<< HEAD:Dao/BuyBdDao.php
-        public function bring_buy_by_User($idUser)
+        namespace Dao;
+
+        use Model\Movie_X_Genre as Movie_X_Genre;
+        use Dao\MovieBdDao as MovieBdDao;
+
+        use Model\Movie as Movie;
+        use Model\Genre as Genre;
+        class MovieGenreBdDao
         {
-            $sql = "SELECT * FROM $this->table WHERE id_user = \"$idUser\" ";
-=======
-    public function bring_id_by_Movie($idMovie)
-    {
-     $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
+            protected $table = "movie_for_genres";
+            protected $list;
+            private static $instance;
 
-     $conec = Conection::conection();
+            public static function getInstance()
+            {
+                if (!self::$instance instanceof self) {
+                    self::$instance = new self();
+                }
+                return self::$instance;
+            }
 
-     $judgment = $conec->prepare($sql);
+            public function bring_buy_by_User($idUser)
+            {
+                $sql = "SELECT * FROM $this->table WHERE id_user = \"$idUser\" ";
+                public function bring_id_by_Movie($idMovie)
+                {
+                   $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
 
-     $judgment->execute();
+                   $conec = Conection::conection();
 
-     $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+                   $judgment = $conec->prepare($sql);
 
-     if(!empty($id))
-     {
-        return $id['id'];
-    }
+                   $judgment->execute();
 
-    return null;
-}
+                   $id = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-public function bring_id_by_Genero($idGenre)
-{
- $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
+                   if(!empty($id))
+                   {
+                    return $id['id'];
+                }
 
- $conec = Conection::conection();
+                return null;
+            }
 
- $judgment = $conec->prepare($sql);
+            public function bring_id_by_Genero($idGenre)
+            {
+               $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
 
- $judgment->execute();
+               $conec = Conection::conection();
 
- $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+               $judgment = $conec->prepare($sql);
 
- if(!empty($id))
- {
-    return $id['id'];
-}
+               $judgment->execute();
 
-return null;
-}
+               $id = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-public function bring_id_by_MovieAll($idMovie)
-{
- $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
+               if(!empty($id))
+               {
+                return $id['id'];
+            }
 
- $conec = Conection::conection();
-
- $judgment = $conec->prepare($sql);
-
- $judgment->execute();
-
- $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
-
- $this->mapear($arrayMg);
-
- if(!empty($this->list))
- {
-    return $this->list;
-}
-
-<<<<<<< HEAD:Dao/BuyBdDao.php
             return null;
         }
-        
-        public function bring_buy_by_Function($idUfunction)
+
+        public function bring_id_by_MovieAll($idMovie)
         {
-            $sql = "SELECT * FROM $this->table WHERE id_function = \"$idFunction\" ";
-=======
-return null;
-}
+           $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
 
-public function bring_id_by_generoAll($idGenre)
-{   
-    try{
-        if ($idGenre != null) {
-            $sql = ("SELECT * FROM $this->table WHERE genre = \"$idGenre\"" );
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
+           $conec = Conection::conection();
 
-            $conec = Conection::conection();
+           $judgment = $conec->prepare($sql);
 
-            $judgment = $conec->prepare($sql);
+           $judgment->execute();
 
-            $judgment->execute();
+           $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-            $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+           $this->mapear($arrayMg);
 
-            $this->mapear($dataSet);
-
-            if(!empty($this->list[0])){
-
-                return $this->list[0];
-            }
-        }
-
-<<<<<<< HEAD:Dao/BuyBdDao.php
-        public function add(Buy $buy){
-            try{
-
-                /** @noinspection SqlResolve */
-                $sql = ("INSERT INTO $this->table (id_user, id_function, id_descuento, date, price, total) VALUES (:id_user, :id_function, :id_descuento, :date, :price, :total)");
-=======
-        return null;
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
-}
-
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
-
-public function add(Movie_X_Genre $movieGenre){
-    try{
-
-<<<<<<< HEAD:Dao/BuyBdDao.php
-                $judgment = $conec->prepare($sql);
-                $user = new User();
-                $function = new Function();
-                $discount = new Discount();
-
-                $user = $buy->getUser();
-                $function = $buy->getFunction();
-                $discount = $buy->getDiscount();
-
-                $id_user = $user->getId();
-                $id_function = $function->getId();
-                $id_descuento = $discount ->getId();
-                $fecha = $buy->getFecha();
-                $price = $buy->getPrecio();
-                $total = $buy->getTotal();
-
-                $judgment->bindParam(":id_user",$id_user);
-                $judgment->bindParam(":id_function",$id_function);
-                $judgment->bindParam(":id_descuento", $id_descuento);
-                $judgment->bindParam(":date",$fecha);
-                $judgment->bindParam(":price",$price);
-                $judgment->bindParam(":total",$total);
-
-                $judgment->execute();
-=======
-        /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (genre, movie) VALUES (:genre, :movie)");
-
-        $conec = Conection::conection();
-
-        $judgment = $conec->prepare($sql);
-
-        $gen = $movieGenre->getGenre();
-        $mov = $movieGenre->getMovie();
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
-
-        $genre = $gen->getId();
-        $movie = $mov->getId();
-
-        $judgment->bindParam(":genre",$genre);
-        $judgment->bindParam(":movie",$movie);
-
-        $judgment->execute();
-
-        return $conec->lastInsertId();
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
-}
-
-public function remove_by_id($id){
-    try{
-
-        $sql = "DELETE FROM $this->table WHERE id = \"$id \"";
-
-        $conec = Conection::conection();
-
-        $judgment = $conec->prepare($sql);
-
-<<<<<<< HEAD:Dao/BuyBdDao.php
-        public function to_update(Buy $buy, $id){
-
-            try{
-                $sql = ("UPDATE $this->table SET id_user=:id_user id_function=:id_function id_descuento=:id_descuento date=:date price=:price total=:total WHERE id=\"$id\"");
-=======
-        $judgment->execute();
-
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
-}
-
-
-public function to_update(Movie_X_Genre $movieGenre, $id){
-
-    try{
-        $sql = ("UPDATE $this->table SET genre=:genre movie=:movie WHERE id=\"$id\"");
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
-                // id, genre, movie
-        $conec = Conection::conection();
-
-<<<<<<< HEAD:Dao/BuyBdDao.php
-                $judgment = $conec->prepare($sql);
-            
-                $judgment = $conec->prepare($sql);
-                $user = new User();
-                $function = new Function();
-                $discount = new Discount();
-
-                $user = $buy->getUser();
-                $function = $buy->getFunction();
-                $discount = $buy->getDiscount();
-
-                $id_user = $user->getId();
-                $id_function = $function->getId();
-                $id_descuento = $discount ->getId();
-                $fecha = $buy->getFecha();
-                $price = $buy->getPrecio();
-                $total = $buy->getTotal();
-
-                $judgment->bindParam(":id_user",$id_user);
-                $judgment->bindParam(":id_function",$id_function);
-                $judgment->bindParam(":id_descuento", $id_descuento);
-                $judgment->bindParam(":date",$fecha);
-                $judgment->bindParam(":price",$price);
-                $judgment->bindParam(":total",$total);
-                
-=======
-        $judgment = $conec->prepare($sql);
-
-        $gen = $movieGenre->getGenre();
-        $mov = $movieGenre->getMovie();
-
-        $genre = $gen->getId();
-        $movie = $mov->getId();
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
-
-        $judgment->bindParam(":genre",$genre);
-        $judgment->bindParam(":movie",$movie);
-
-
-
-        $judgment->execute();
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
-}
-
-public function bring_everything(){
-    try{
-
-        $sql = "SELECT * FROM $this->table";
-
-        $conec = Conection::conection();
-
-        $judgment = $conec->prepare($sql);
-
-        $judgment->execute();
-
-        $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
-
-        $this->mapear($dataSet);
-
-        if (!empty($this->list)) {
+           if(!empty($this->list))
+           {
             return $this->list;
         }
+
         return null;
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
     }
-}
+    
+    public function bring_buy_by_Function($idUfunction)
+    {
+        $sql = "SELECT * FROM $this->table WHERE id_function = \"$idFunction\" ";
+        return null;
+    }
 
+    public function bring_id_by_generoAll($idGenre)
+    {   
+        try{
+            if ($idGenre != null) {
+                $sql = ("SELECT * FROM $this->table WHERE genre = \"$idGenre\"" );
 
+                $conec = Conection::conection();
 
-public function bring_by_id($id)
-{   
-    try{
-        if ($id != null) {
-            $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
+                $judgment = $conec->prepare($sql);
 
-            $conec = Conection::conection();
+                $judgment->execute();
 
-            $judgment = $conec->prepare($sql);
+                $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-            $judgment->execute();
+                $this->mapear($dataSet);
 
-            $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+                if(!empty($this->list[0])){
 
-            $this->mapear($dataSet);
-
-            if(!empty($this->list[0])){
-
-                return $this->list[0];
+                    return $this->list[0];
+                }
             }
-        }
 
-<<<<<<< HEAD:Dao/BuyBdDao.php
-        public function mapear($dataSet){
-            $dataSet = is_array($dataSet) ? $dataSet : false;
-            if($dataSet){
-                $this->list = array_map(function ($p) {
-                
-                $buy = new Buy();
-                $user = new User();
-                $function = new Function();
-                $discount = new Discount();
+            public function add(Buy $buy){
+                try{
 
-                $user = $buy->getUser();
-                $function = $buy->getFunction();
-                $discount = $buy->getDiscount();
+                    /** @noinspection SqlResolve */
+                    $sql = ("INSERT INTO $this->table (id_user, id_function, id_descuento, date, price, total) VALUES (:id_user, :id_function, :id_descuento, :date, :price, :total)");
+                    return null;
+                }catch(\PDOException $e){
+                    echo $e->getMessage();die();
+                }catch(\Exception $e){
+                    echo $e->getMessage();die();
+                }
+            }
 
-                $id_user = $user->getId();
-                $id_function = $function->getId();
-                $id_descuento = $discount ->getId();
-                $fecha = $buy->getFecha();
-                $price = $buy->getPrecio();
-                $total = $buy->getTotal();
 
-                $movie->setId($p['movie']);
-                $genre->setId($p['genre']);
+            public function add(Movie_X_Genre $movieGenre){
+                try{
+
+                    $judgment = $conec->prepare($sql);
+                    $user = new User();
+                    $function = new Function();
+                    $discount = new Discount();
+
+                    $user = $buy->getUser();
+                    $function = $buy->getFunction();
+                    $discount = $buy->getDiscount();
+
+                    $id_user = $user->getId();
+                    $id_function = $function->getId();
+                    $id_descuento = $discount ->getId();
+                    $fecha = $buy->getFecha();
+                    $price = $buy->getPrecio();
+                    $total = $buy->getTotal();
+
+                    $judgment->bindParam(":id_user",$id_user);
+                    $judgment->bindParam(":id_function",$id_function);
+                    $judgment->bindParam(":id_descuento", $id_descuento);
+                    $judgment->bindParam(":date",$fecha);
+                    $judgment->bindParam(":price",$price);
+                    $judgment->bindParam(":total",$total);
+
+                    $judgment->execute();
+
+                    /** @noinspection SqlResolve */
+                    $sql = ("INSERT INTO $this->table (genre, movie) VALUES (:genre, :movie)");
+
+                    $conec = Conection::conection();
+
+                    $judgment = $conec->prepare($sql);
+
+                    $gen = $movieGenre->getGenre();
+                    $mov = $movieGenre->getMovie();
+
+                    $genre = $gen->getId();
+                    $movie = $mov->getId();
+
+                    $judgment->bindParam(":genre",$genre);
+                    $judgment->bindParam(":movie",$movie);
+
+                    $judgment->execute();
+
+                    return $conec->lastInsertId();
+                }catch(\PDOException $e){
+                    echo $e->getMessage();die();
+                }catch(\Exception $e){
+                    echo $e->getMessage();die();
+                }
+            }
+
+            public function remove_by_id($id){
+                try{
+
+                    $sql = "DELETE FROM $this->table WHERE id = \"$id \"";
+
+                    $conec = Conection::conection();
+
+                    $judgment = $conec->prepare($sql);
+
+                    public function to_update(Buy $buy, $id){
+
+                        try{
+                            $sql = ("UPDATE $this->table SET id_user=:id_user id_function=:id_function id_descuento=:id_descuento date=:date price=:price total=:total WHERE id=\"$id\"");
+
+                            $judgment->execute();
+
+                        }catch(\PDOException $e){
+                            echo $e->getMessage();die();
+                        }catch(\Exception $e){
+                            echo $e->getMessage();die();
+                        }
+                    }
+
+
+                    public function to_update(Movie_X_Genre $movieGenre, $id){
+
+                        try{
+                            $sql = ("UPDATE $this->table SET genre=:genre movie=:movie WHERE id=\"$id\"");
+
+                // id, genre, movie
+                            $conec = Conection::conection();
+
+                            $judgment = $conec->prepare($sql);
+                            
+                            $judgment = $conec->prepare($sql);
+                            $user = new User();
+                            $function = new Function();
+                            $discount = new Discount();
+
+                            $user = $buy->getUser();
+                            $function = $buy->getFunction();
+                            $discount = $buy->getDiscount();
+
+                            $id_user = $user->getId();
+                            $id_function = $function->getId();
+                            $id_descuento = $discount ->getId();
+                            $fecha = $buy->getFecha();
+                            $price = $buy->getPrecio();
+                            $total = $buy->getTotal();
+
+                            $judgment->bindParam(":id_user",$id_user);
+                            $judgment->bindParam(":id_function",$id_function);
+                            $judgment->bindParam(":id_descuento", $id_descuento);
+                            $judgment->bindParam(":date",$fecha);
+                            $judgment->bindParam(":price",$price);
+                            $judgment->bindParam(":total",$total);
+                            
+
+                            $judgment = $conec->prepare($sql);
+
+                            $gen = $movieGenre->getGenre();
+                            $mov = $movieGenre->getMovie();
+
+                            $genre = $gen->getId();
+                            $movie = $mov->getId();
+
+                            $judgment->bindParam(":genre",$genre);
+                            $judgment->bindParam(":movie",$movie);
+
+
+
+                            $judgment->execute();
+                        }catch(\PDOException $e){
+                            echo $e->getMessage();die();
+                        }catch(\Exception $e){
+                            echo $e->getMessage();die();
+                        }
+                    }
+
+                    public function bring_everything(){
+                        try{
+
+                            $sql = "SELECT * FROM $this->table";
+
+                            $conec = Conection::conection();
+
+                            $judgment = $conec->prepare($sql);
+
+                            $judgment->execute();
+
+                            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+
+                            $this->mapear($dataSet);
+
+                            if (!empty($this->list)) {
+                                return $this->list;
+                            }
+                            return null;
+                        }catch(\PDOException $e){
+                            echo $e->getMessage();die();
+                        }catch(\Exception $e){
+                            echo $e->getMessage();die();
+                        }
+                    }
+
+
+
+                    public function bring_by_id($id)
+                    {   
+                        try{
+                            if ($id != null) {
+                                $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
+
+                                $conec = Conection::conection();
+
+                                $judgment = $conec->prepare($sql);
+
+                                $judgment->execute();
+
+                                $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+                                $this->mapear($dataSet);
+
+                                if(!empty($this->list[0])){
+
+                                    return $this->list[0];
+                                }
+                            }
+
+                            public function mapear($dataSet){
+                                $dataSet = is_array($dataSet) ? $dataSet : false;
+                                if($dataSet){
+                                    $this->list = array_map(function ($p) {
+                                        
+                                        $buy = new Buy();
+                                        $user = new User();
+                                        $function = new Function();
+                                        $discount = new Discount();
+
+                                        $user = $buy->getUser();
+                                        $function = $buy->getFunction();
+                                        $discount = $buy->getDiscount();
+
+                                        $id_user = $user->getId();
+                                        $id_function = $function->getId();
+                                        $id_descuento = $discount ->getId();
+                                        $fecha = $buy->getFecha();
+                                        $price = $buy->getPrecio();
+                                        $total = $buy->getTotal();
+
+                                        $movie->setId($p['movie']);
+                                        $genre->setId($p['genre']);
                 // Esta mal mapea movie y genero con numero  id y no con objetos 
-                $movieGenre->setMovie($movie));
-                $movieGenre->setGenre($genre);
+                                        $movieGenre->setMovie($movie));
+                                    $movieGenre->setGenre($genre);
 
-                    return $movieGenre;
-                }, $dataSet);
-            }
-        }
-=======
-        return null;
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
+                                    return $movieGenre;
+                                }, $dataSet);
+}
+}
+return null;
+}catch(\PDOException $e){
+    echo $e->getMessage();die();
+}catch(\Exception $e){
+    echo $e->getMessage();die();
+}
 }
 
 public function mapear($dataSet){
@@ -399,7 +382,6 @@ public function mapear($dataSet){
                     // Esta mal mapea movie y genero con numero  id y no con objetos       
             return $movieGenre;
         }, $dataSet);
->>>>>>> f05bc291e3d9fdfe2797637d6fce9662a76cc298:Dao/MovieGenreBdDao.php
     }
 }
 }

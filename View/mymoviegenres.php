@@ -6,21 +6,45 @@
 </section>
 <section class="best-seller">
   <div class="container">
-   <div class="row">
-    <div class="col-md-12">
-      <?php if (!empty($genre)) {?>
-        <div class="bar">
-          <h2>Genres</h2>
-          <img alt="" src="<?php echo URL ?>/img/bar.png">
+    <div class="row">
+      <div class="col-md-12">
+        <?php if (!empty($genresel)) {?>
+          <div class="bar">
+            <h2>Selected Genre: <?=$genresel[0]->getName();?></h2>
+            <img alt="" src="<?php echo URL ?>/img/bar.png">
+          </div>
         </div>
-      <?php } else { ?>
-        <div class="bar">
-          <h2>No Loaded Genres</h2>
-          <img alt="" src="<?php echo URL ?>/img/bar.png">
-        </div>
-      <?php } ?>
-    </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="center">
+           <div class="row">
+            <div class="col-md-12 center">
+             <h2 class="cent" style="color:white"><?= $genresel[0]->getName();?></h2>
+             <div class="imgri2">
+               <img class="imgri2 center" src="<?= $genresel[0]->getImage();?>">
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   <?php } ?>
+ </div>
+ <div class="row">
+  <div class="col-md-12">
+    <?php if (!empty($genre)) {?>
+      <div class="bar">
+        <h2>Genres</h2>
+        <img alt="" src="<?php echo URL ?>/img/bar.png">
+      </div>
+    <?php } else { ?>
+      <div class="bar">
+        <h2>No Loaded Genres</h2>
+        <img alt="" src="<?php echo URL ?>/img/bar.png">
+      </div>
+    <?php } ?>
   </div>
+</div>
 </div>
 <div class="clear"></div>
 </section>
@@ -32,14 +56,16 @@
           <div class="col-md-4">
             <div class="t_shart">
              <div class="row">
-              <div class="col-md-5">
-               <h2 style="color:white"><?= $gen->getName();?></h2>
-               <div class="imgri">
-                <a href="<?php echo URL ?>/view/mymoviegenres/<?= $gen->getId(); ?>">
-                 <img class="imgri" src="<?= $gen->getImage();?>">
-               </a>
+              <?php if($gen->getName() != $genresel[0]->getName()) { ?>
+                <div class="col-md-5">
+                 <h2 style="color:white"><?= $gen->getName();?></h2>
+                 <div class="imgri">
+                  <a href="<?php echo URL ?>/view/mymoviegenres/<?= $gen->getId(); ?>">
+                   <img class="imgri" src="<?= $gen->getImage();?>">
+                 </a>
+               </div>
              </div>
-           </div>
+           <?php }  ?>
          </div>
        </div>
      </div>
@@ -54,7 +80,7 @@
       <div class="col-md-12">
         <?php if(!empty($value)){ ?>
           <div class="bar">
-            <h2>Movies</h2>
+            <h2>The movies that correspond to the selected genre are:</h2>
             <img alt="" src="<?php echo URL ?>/img/bar.png">
           </div>
         </div>

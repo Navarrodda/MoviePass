@@ -78,6 +78,7 @@ public function bring_id_by_generoAll($idGenre)
         }
 
 }
+
 public function add(Movie_X_Genre $movieGenre){
     try{
         /** @noinspection SqlResolve */

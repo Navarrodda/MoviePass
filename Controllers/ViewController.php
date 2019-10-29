@@ -9,6 +9,7 @@ use \Controllers\MovieController as MoviesC;
 use \Controllers\GenreController as GenreC;
 use \Controllers\CinemaController as CinemaC;
 use \Controllers\UserController as UserC;
+use \Controllers\MoviegenreController as MoviegenreC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -22,6 +23,7 @@ class ViewController
 		$this->ControlGenre = new GenreC;
 		$this->ControlCinema = new CinemaC;
 		$this->ControlUser = new UserC;
+		$this->ControlMuvGen = new MoviegenreC;
 	}
 
 	public function index()
@@ -215,6 +217,33 @@ class ViewController
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "mymovies.php");
 		include URL_VISTA . 'footer.php';
+	} 
+
+	public function mymoviegenres($idgenre)
+	{
+		$view = 'My Movies -> Genre';
+		$genresel = array();
+		$value = array();
+		$genre = $this->ControlGenre->bring_everything();
+		$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
+		if ($moviesgenre != null) {
+			foreach ($moviesgenre as $movgenre) {
+				array_push($genresel, $movgenre->getGenre());
+				array_push($value, $movgenre->getMovie());
+			}
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "mymoviegenres.php");
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$genre = $this->ControlGenre->bring_everything();
+			$value = $this->ControlMovies->bringmovies();
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "mymovies.php");
+			include URL_VISTA . 'footer.php';
+		}
+
 	} 
 
 }
