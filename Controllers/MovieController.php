@@ -22,7 +22,7 @@ class MovieController
 		$this->MovieFileDao = new MovieFileDao();
 		$this->MovieBddao = Moviebd::getInstance(); 
 		$this->ControlGenre = new GenreC;
-		$tis ->MoviegenreGenre = new Moviegenre;
+		$this ->MoviegenreGenre = new Moviegenre;
 	}
 
 	public function getList($page)
@@ -58,11 +58,13 @@ class MovieController
 
 			if($this->MovieFileDao->getMovieById($idmovie,$page)){
 				$movie = $this->MovieFileDao->getMovieById($idmovie,$page);
-				if($this->MovieBddao->bring_id_by_idapi($movie->getIdapi())== NULL)
+				if($this->MovieBddao->bring_id_by_idapi($movie->getIdapi()) == NULL)
 				{
 					$this->ControlGenre->add($movie->getGenre());
 					$this->MovieBddao->add($movie);
-					$this->MoviegenreGenre->add($idmovie,$movie->getGenre());
+					foreach ($movie->getGenre() as $idgenre) {
+						$this->MoviegenreGenre->add($movie,$idgenre);
+					}
 					$regCompleted = TRUE;
 				}
 			}

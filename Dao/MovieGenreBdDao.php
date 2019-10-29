@@ -8,7 +8,7 @@
     use Model\Genre as Genre;
     class MovieGenreBdDao
     {
-        protected $table = "movie_for_genre";
+        protected $table = "movie_for_genres";
         protected $list;
         private static $instance;
         
@@ -108,19 +108,18 @@
             try{
 
                 /** @noinspection SqlResolve */
-                $sql = ("INSERT INTO $this->table (id, genre, movie) VALUES (:id, :genre, :movie)");
+                $sql = ("INSERT INTO $this->table (genre, movie) VALUES (:genre, :movie)");
 
                 $conec = Conection::conection();
 
                 $judgment = $conec->prepare($sql);
+
                 $gen = $movieGenre->getGenre();
                 $mov = $movieGenre->getMovie();
 
-                $id = $movieGenre->getId();
                 $genre = $gen->getId();
                 $movie = $mov->getId();
 
-                $judgment->bindParam(":id",$id);
                 $judgment->bindParam(":genre",$genre);
                 $judgment->bindParam(":movie",$movie);
                 
@@ -156,7 +155,7 @@
         public function to_update(Movie_X_Genre $movieGenre, $id){
 
             try{
-                $sql = ("UPDATE $this->table SET id=:ide genre=:genre movie=:movie WHERE id=\"$id\"");
+                $sql = ("UPDATE $this->table SET genre=:genre movie=:movie WHERE id=\"$id\"");
                 // id, genre, movie
                 $conec = Conection::conection();
 
@@ -165,11 +164,9 @@
                 $gen = $movieGenre->getGenre();
                 $mov = $movieGenre->getMovie();
 
-                $ide = $id;
                 $genre = $gen->getId();
                 $movie = $mov->getId();
 
-                $judgment->bindParam(":ide",$ide);
                 $judgment->bindParam(":genre",$genre);
                 $judgment->bindParam(":movie",$movie);
                 
@@ -254,7 +251,7 @@
                     // Esta mal mapea movie y genero con numero  id y no con objetos 
                     $movieGenre->setMovie($p['movie']);
                     $movieGenre->setGenre($p['genre']);         
-                    $movieGenre->setMovie($movie));
+                    $movieGenre->setMovie($movie);
                     $movieGenre->setGenre($genre);
                     return $movieGenre;
                 }, $dataSet);

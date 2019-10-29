@@ -151,11 +151,11 @@ class GenreBdDao{
 
 
 
-	public function bring_by_id($id)
+	public function bring_by_id($idapi)
 	{   
 		try{
-			if ($id != null) {
-				$sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
+			if ($idapi != null) {
+				$sql = ("SELECT * FROM $this->table WHERE idapi = \"$idapi\"" );
 
 				$conec = Conection::conection();
 
