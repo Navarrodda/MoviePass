@@ -17,7 +17,7 @@ class MoviegenreController
 
 	public function add($idmovie,$idgenre)
 	{
-		
+			///
 	}
 
 }
