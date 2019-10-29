@@ -18,10 +18,15 @@
       <th>Address</th>
       <th>Capacity</th>
       <th>Estimated Price</th>
+      <?php if(!empty($_SESSION["rol"])){ ?>
+       <?php if($_SESSION["rol"] != 3){ ?>
+         <th>Modification</th>
+         <th>Delete</th>
+       <?php } }  ?>
 
-    </thead>
-    <tbody>
-     <form action="<?php echo URL?>/cinema/remove/" method="POST">
+
+     </thead>
+     <tbody>
       <?php
 
       foreach($values as $data){
@@ -38,16 +43,26 @@
            <td>$<?php echo $data->getValor_entrada(); ?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
-             <td> 
-              <button type="submit" name="btnRemove" class="btn btn-danger" value="<?php echo $data->getId(); ?>"> Eliminar </button>
+             <td>
+              <a href="#" class="disabled">         
+                <span class="fa fa-pencil-square-o" title=""
+                data-toggle="tooltip" data-placement="right">
+              </span>
             </td>
-          <?php } } ?>
-        </tr>
-        <?php
-      }
+            <td>
+              <a type="submit" method="post"  name=""  href="#" class="disabled">
+                <span class="fa fa-trash-o" title=""
+                data-toggle="tooltip" data-placement="right">
+              </span>
+            </a>
+          </td>
 
-      ?>
-    </form>
+        <?php } } ?>
+      </tr>
+      <?php
+    }
+
+    ?>
   </tbody>
 </table>
 <?php } 
