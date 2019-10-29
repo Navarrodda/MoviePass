@@ -32,6 +32,12 @@ class ViewController
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "home.php");
 		include URL_VISTA . 'footer.php';
+		/*
+		$view = 'Billboard';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "homebillboard.php");
+		include URL_VISTA . 'footer.php';
+		*/
 	} 
 
 	public function register()
