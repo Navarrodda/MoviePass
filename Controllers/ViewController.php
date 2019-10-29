@@ -28,6 +28,7 @@ class ViewController
 
 	public function index()
 	{
+		
 		$view = 'HOME';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "home.php");
@@ -38,6 +39,7 @@ class ViewController
 		require(URL_VISTA . "homebillboard.php");
 		include URL_VISTA . 'footer.php';
 		*/
+		
 	} 
 
 	public function register()

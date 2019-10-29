@@ -1,7 +1,6 @@
 <?php
 namespace Dao;
 use Model\Movie_X_Genre as Movie_X_Genre;
-use Dao\MovieBdDao as MovieBdDao;
 use Model\Movie as Movie;
 use Model\Genre as Genre;
 class MovieGenreBdDao

@@ -1,2 +1,23 @@
 [
+    {
+        "id": 1,
+        "capacidad": "200",
+        "direccion": "Aldrey",
+        "nombre": "Ambazador",
+        "valor_entrada": "200"
+    },
+    {
+        "id": 2,
+        "capacidad": "200",
+        "direccion": "Fortunato De La Plaza 199",
+        "nombre": "Roquefeler",
+        "valor_entrada": "300"
+    },
+    {
+        "id": 3,
+        "capacidad": "200",
+        "direccion": "Lujan 123123",
+        "nombre": "David",
+        "valor_entrada": "300"
+    }
 ]

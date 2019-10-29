@@ -61,7 +61,7 @@ class CinemaBdDao
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (id,name,address,total_capacity,estimated_price) VALUES (:id,:nombre,:capacidad,:direccion,:valor_entrada)");
+            $sql = ("INSERT INTO $this->table (id,name,address,total_capacity,estimated_price) VALUES (:id,:nombre,:direccion,:capacidad,:valor_entrada)");
 
             $conec = Conection::conection();
 
