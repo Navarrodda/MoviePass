@@ -35,7 +35,7 @@
               <div class="col-md-5">
                <h2 style="color:white"><?= $gen->getName();?></h2>
                <div class="imgri">
-                <a href="#">
+                <a href="<?php echo URL ?>/Moviegenre/bringbygender/<?= $gen->getId(); ?>">
                  <img class="imgri" src="<?= $gen->getImage();?>">
                </a>
              </div>

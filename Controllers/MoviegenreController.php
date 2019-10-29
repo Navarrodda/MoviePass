@@ -32,4 +32,10 @@ class MoviegenreController
 		$this->MovieGenreDao->add($moviegenre);
 	}
 
+	public function bringbygender($idgenero)
+	{
+		die(var_dump($this->MovieGenreDao->bring_id_by_generoAll($idgenero)));
+
+	}
+
 }
