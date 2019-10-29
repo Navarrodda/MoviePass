@@ -50,7 +50,7 @@
               </span>
             </td>
             <td>
-              <a type="submit" method="post"  name=""  href="#" class="disabled">
+              <a type="submit" method="post"  name="id"  href="<?php echo URL ?>/cinema/remove/<?=$data->getId() ?>" class="disabled">
                 <span class="fa fa-trash-o" title=""
                 data-toggle="tooltip" data-placement="right">
               </span>

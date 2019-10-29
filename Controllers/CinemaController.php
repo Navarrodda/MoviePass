@@ -59,7 +59,7 @@ class CinemaController
 
 	public function remove($id)
 	{
-		$cinema = $this->cinemaBdDao->bring_id_by_id($id);
+		$cinema = $this->cinemaBdDao->bring_by_id($id);
 		if($cinema != null )
 		{
 			$name = $cinema->getNombre();
