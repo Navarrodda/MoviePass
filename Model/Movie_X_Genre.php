@@ -3,6 +3,7 @@
 
     use Model\Movie as Movie;
     use Model\Genre as Genre;
+    
     class Movie_X_Genre
     {
         private $id;
@@ -11,8 +12,7 @@
 
         public function __construct()
         {
-            $movie = new Movie();
-            $genre = new Genre();
+
         }
         
          /**
@@ -48,7 +48,7 @@
          *
          * @return  self
          */ 
-        public function setMovie($movie)
+        public function setMovie(Movie $movie)
         {
                 $this->movie = $movie;
 
@@ -68,7 +68,7 @@
          *
          * @return  self
          */ 
-        public function setGenre($genre)
+        public function setGenre(Genre $genre)
         {
                 $this->genre = $genre;
 
