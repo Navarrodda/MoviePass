@@ -64,18 +64,19 @@ public function bring_id_by_generoAll($idGenre)
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
             $judgment->execute();
-            $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
             $this->mapear($dataSet);
-            if(!empty($this->list[0])){
-                return $this->list[0];
+            if (!empty($this->list)) {
+                return $this->list;
             }
+            return null;
         }
-        return null;
-    }catch(\PDOException $e){
-        echo $e->getMessage();die();
-    }catch(\Exception $e){
-        echo $e->getMessage();die();
-    }
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
 }
 public function add(Movie_X_Genre $movieGenre){
     try{
