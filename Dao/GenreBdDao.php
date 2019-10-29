@@ -1,11 +1,11 @@
 <?php 
-    namespace Dao;
+namespace Dao;
 
-    use Models\Genre;
+use Model\Genre;
 
-    class GenreBdDao{
+class GenreBdDao{
 
-    protected $table = "genres";
+	protected $table = "genres";
 	protected $list;
 	private static $instance;
 
@@ -37,22 +37,44 @@
 		return null;
 	}
 
+		public function bring_id_by_idapi($idapi){
+		$sql = "SELECT idapi FROM $this->table WHERE idapi = \"$idapi\" LIMIT 1";
+
+		$conec = Conection::conection();
+
+		$judgment = $conec->prepare($sql);
+
+		$judgment->execute();
+
+
+		$idapi = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+		if(!empty($idapi))
+		{
+			return $idapi['idapi'];
+		}
+
+		return null;
+	}
+
 	public function add(Genre $genre){
 		try{
 
 			/** @noinspection SqlResolve */
-			$sql = ("INSERT INTO $this->table (id_genre, genre_name) VALUES (:id_genre ,:genre_name)");
+			$sql = ("INSERT INTO $this->table (idapi, name, image) VALUES (:idapi ,:name, :image)");
 
 			$conec = Conection::conection();
 
 			$judgment = $conec->prepare($sql);
 
 
-            $id_genre = $this->genre->getId();
-            $genre_name = $this->genre->getName();
+			$idapi = $genre->getIdapi();
+			$name = $genre->getName();
+			$image = $genre->getImage();
 
-            $judgment->bindParam(":id_genre", $id_genre);
-            $judgment->bindParam(":genre_name",$genre_name);
+			$judgment->bindParam(":idapi", $idapi);
+			$judgment->bindParam(":name",$name);
+			$judgment->bindParam(":image",$image);
 
 			$judgment->execute();
 
@@ -86,18 +108,20 @@
 	public function to_update(Genre $genre, $id){
 
 		try{
-			$sql = ("UPDATE $this->table SET id_genre=:id_genre genre_name=:genre_name WHERE id=\"$id\"");
+			$sql = ("UPDATE $this->table SET idapi=:idapi name=:name image=:image WHERE id=\"$id\"");
 
 			$conec = Conection::conection();
 
 			$judgment = $conec->prepare($sql);
 
-			$id_genre = $genre->getId();
-			$genre_name = $genre->getName();
+			$idapi = $genre->getIdapi();
+			$name = $genre->getName();
+			$image = $genre->getImage();
 
-			$judgment->bindParam(":id_genre",$id_genre);
-            $judgment->bindParam(":genre_name",$vote);
-            
+			$judgment->bindParam(":idapi", $idapi);
+			$judgment->bindParam(":name",$name);
+			$judgment->bindParam(":image",$image);
+
 			$judgment->execute();
 		}catch(\PDOException $e){
 			echo $e->getMessage();die();
@@ -162,15 +186,15 @@
 		if($dataSet){
 			$this->list = array_map(function ($p) {
 				$genre = new Genre();
-				(
-					$p['id_genre'],
-					$p['genre_name']
-				);
+
+				$genre->setIdapi($p['idapi']);
+				$genre->setName($p['name']);
+				$genre->setImage($p['image']);
 				$genre->setId($p['id']);
+				
 				return $genre;
 			}, $dataSet);
 		}
 	}
 
-    }
-?>
+}

@@ -2,23 +2,38 @@
 namespace Controllers;
 //Model
 use \Model\Message as Message;
+use \Model\Cinema as Cinema;
 //Dao
 use Dao\CinemaFileDao as CinemaFileDao;
+use Dao\CinemaBdDao as CinemaBd;
 
 class CinemaController
 {
 	private $cinemaFileDao;
+	private $cinemaBdDao;
 
 	public function __construct()
 	{
 		$this->cinemaFileDao = new CinemaFileDao();
+		$this->cinemaBdDao = CinemaBd::getInstance();
 	}
 
 	public function add($name,$capacity,$address,$input_value)
 	{
 		$name = ucwords($name);
 		$address = ucwords($address);
-		$question = $this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
+		if(!empty($_SESSION))
+		{
+			$this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
+			$cinema = new Cinema();
+			$cinema->setNombre($name);
+			$cinema->setCapacidad($capacity);
+			$cinema->setDireccion($address);
+			$cinema->setValor_entrada($input_value);
+			$this->cinemaBdDao->add($cinema);
+			$question = true; 
+
+		}
 		if($question == true)
 		{
 			$view = "MESSAGE";
@@ -37,14 +52,23 @@ class CinemaController
 		}
 	}
 
+	public function  bringeverything()
+	{
+		return $this->cinemaBdDao->bring_everything();
+	}
+
 	public function remove($id)
 	{
-		$question = $this->cinemaFileDao->removeCinema($id);
-		if($question == true)
+		$cinema = $this->cinemaBdDao->bring_id_by_id($id);
+		if($cinema != null )
 		{
+			$name = $cinema->getNombre();
+			$this->cinemaFileDao->removeCinema($id);
+			$this->cinemaBdDao->remove_by_id($id);
 			$view = "MESSAGE";
-			$this->message = new Message('success', ' The cinema with the id' . ' ' . '<i><strong>' .  $id 
-				. '</strong>. has been deleted successfully!');
+			$this->message = new Message('success', 'The cinema with the id for:'  . '<i><strong>' .  $id 
+				. '</strong>. and Name' . ' ' . '<i><strong>' .  $name 
+				. '</strong> has been deleted successfully </i>');
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'message.php');
 			include URL_VISTA . 'footer.php';
@@ -52,7 +76,8 @@ class CinemaController
 		else
 		{
 			$view = "MESSAGE";
-			$this->message = new Message( "warning", "An error has occurred!" );
+						$this->message = new Message('warning', ' The id was already deleted or no data is found that the id:' . ' ' . '<i><strong>' .  $id 
+				. '</strong>!');
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'message.php');
 			include URL_VISTA . 'footer.php';

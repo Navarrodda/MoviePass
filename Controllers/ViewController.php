@@ -94,19 +94,19 @@ class ViewController
 		$values = $this->ControlMovies->getList(1);
 		$value = $this->ControlMovies->bringmovies();
 		$i = 0;
-			foreach ($values as $data) {
-				
-				if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
-				{
-					$values[$i]->codigo = TRUE;
-	
-				}
-				else
-				{
-					$values[$i]->codigo = FALSE;
-				}
-				$i++;
+		foreach ($values as $data) {
+
+			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
+			{
+				$values[$i]->codigo = TRUE;
+
 			}
+			else
+			{
+				$values[$i]->codigo = FALSE;
+			}
+			$i++;
+		}
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
 		include URL_VISTA . 'header.php';
@@ -118,15 +118,29 @@ class ViewController
 	{
 		$view = 'MOVIES'.' '.' '.'->'. ' '.'GENRE';
 		$values = NULL;
+		$page = 1;
 		$values = $this->ControlMovies->getMovieByGenre($id);
 		$genere = $this->ControlGenre->getList();
-		$length = count($values);
 
+		$i = 0;
+		foreach ($values as $data) 
+		{
+			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
+			{
+				$values[$i]->codigo = TRUE;
+			}
+			else
+			{
+				$values[$i]->codigo = FALSE;
+			}
+			$i++;
+		}
 		$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
 			"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
 		$genre = trim(str_replace($strip, " ", strip_tags($genre)));
 		$genre = preg_replace('/\s+/', " ", $genre);
 		$titule = ucwords($genre);	
+
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "genre.php");
 		include URL_VISTA . 'footer.php';
@@ -143,7 +157,7 @@ class ViewController
 	public function cinema()
 	{
 		$view = 'CINEMA';
-		$values = $this->ControlCinema->list();
+		$values = $this->ControlCinema->bringeverything();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "cinemas.php");
 		include URL_VISTA . 'footer.php';
@@ -172,6 +186,21 @@ class ViewController
 		$value = $this->ControlMovies->bringmovies();
 		$values = $this->ControlMovies->getList($page);
 		$genere = $this->ControlGenre->getList();
+		$i = 0;
+		foreach ($values as $data) {
+
+			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
+			{
+				$values[$i]->codigo = TRUE;
+
+			}
+			else
+			{
+				$values[$i]->codigo = FALSE;
+			}
+			$i++;
+		}
+
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
@@ -181,6 +210,7 @@ class ViewController
 	{
 
 		$view = 'My Movies';
+		$genre = $this->ControlGenre->bring_everything();
 		$value = $this->ControlMovies->bringmovies();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "mymovies.php");

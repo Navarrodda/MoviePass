@@ -5,7 +5,8 @@ namespace Model;
 class Ticket
 {
     private $id;
-    private $nro_entrada;
+    private $nro_entrada;    //nro_entrada = id_compra
+    private $nro_funcion;   //nro_funcion = id_funcion 
     private $qr;
 
 	 public function __construct()
@@ -13,6 +14,26 @@ class Ticket
 
     }
     
+    /**
+     * Get the value of nro_funcion
+     */ 
+    public function getNro_funcion()
+    {
+        return $this->nro_funcion;
+    }
+
+    /**
+     * Set the value of nro_funcion
+     *
+     * @return  self
+     */ 
+    public function setNro_funcion($nro_funcion)
+    {
+        $this->nro_funcion = $nro_funcion;
+
+        return $this;
+    }
+
 
     /**
      * Get the value of nro_entrada

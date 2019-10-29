@@ -7,15 +7,19 @@ use \Model\Message as Message;
 use \Dao\MovieFileDao as MovieFileDao;
 use \Dao\MovieBdDao as Moviebd;
 
+use \Controllers\GenreController as GenreC;
+
 class MovieController
 {
 	private $MovieFileDao;
 	private $MovieBddao;
+	private $ControlGenre;
 
 	public function __construct()
 	{
 		$this->MovieFileDao = new MovieFileDao();
-		$this->MovieBddao = Moviebd::getInstance();
+		$this->MovieBddao = Moviebd::getInstance(); 
+		$this->ControlGenre = new GenreC;
 	}
 
 	public function getList($page)
@@ -53,7 +57,8 @@ class MovieController
 				$movie = $this->MovieFileDao->getMovieById($idmovie,$page);
 				if($this->MovieBddao->bring_id_by_idapi($movie->getIdapi())== NULL)
 				{
-					$this->MovieBddao->add($movie,$page);
+					$this->ControlGenre->add($movie->getGenre());
+					$this->MovieBddao->add($movie);
 					$regCompleted = TRUE;
 				}
 			}
@@ -68,7 +73,7 @@ class MovieController
 			else
 			{
 				$view = "MESSAGE";
-				$this->message = new Message( "warning", "A problem has occurred!" );
+				$this->message = new Message( "warning", "Movie already loaded!" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';

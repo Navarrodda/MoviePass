@@ -115,7 +115,6 @@ class MovieFileDao
 						}
 
 						$movie->setBackdrop($backdrop);
-						
 						$movie->setOverview($indice["overview"]);
 						$movie->setAverage($indice["vote_average"]);
 						$movie->setGenre($indice["genre_ids"]);
@@ -132,116 +131,95 @@ class MovieFileDao
 
 			private function retrieveApi($page)
 			{
-
 				$movieList = array();
-
-			//$jsonContent = file_get_contents("https://api.themoviedb.org/3/movie/now_playing?api_key=1b6861e202a1e52c6537b73132864511&language=en-US&page=1");
 				try{
 					$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
-
 					$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
-
 			$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
-
-
 			foreach ($array as $indice) 
 			{
-				
-
 				$movie = new Movie();
-				$movie->setIdApi($indice["id"]);
-				$jsonContenten = file_get_contents(API. "movie/".$indice["id"].KEY.PAGE.$page);
-				$data = ($jsonContenten) ? json_decode($jsonContenten,true):array();
-				$movie->setTitle($indice["original_title"]);
-
+				$movie->setPopularity($indice["popularity"]);
+				$movie->setVote($indice["vote_count"]);
 				$poster = "http://image.tmdb.org/t/p/w500". $indice["poster_path"];
 				if ($indice["poster_path"] == NULL) 
 				{
 					$poster = "/MoviePass/img/imgrot.jpg";
 				}
 				$movie->setPoster($poster);
-
+				$movie->setIdApi($indice["id"]);
 				$backdrop = "http://image.tmdb.org/t/p/w500". $indice["backdrop_path"];
 				if ($indice["backdrop_path"] == NULL) 
 				{
 					$backdrop = "/MoviePass/img/imgrot.jpg";
 				}
-
 				$movie->setBackdrop($backdrop);
-				$movie->setOverview($indice["overview"]);
-				$movie->setAverage($indice["vote_average"]);
+				$movie->setTitle($indice["original_title"]);
 				$movie->setGenre($indice["genre_ids"]);
+				$movie->setAverage($indice["vote_average"]);
+				$movie->setOverview($indice["overview"]);
 				$movie->setDate($indice["release_date"]);
-				$movie->setVote($indice["vote_count"]);
 				$movie->setLanguage($indice["original_language"]);
-				$movie->setPopularity($indice["popularity"]);
-				$movie->setDuration($data["runtime"]);
-
-						/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
-						$values["price"]);*/
-						array_push($movieList, $movie);
-
-
-					}
-					return $movieList;
-				
-				}catch(\Error $e){
-					die("Error");
-				}
+				array_push($movieList, $movie);
 			}
+			return $movieList;
+		}catch(\Error $e){
+			die("Error");
+		}
+	}
 		//devuelve el detalle de una pelicula
-			private function retrieveMovie($id,$page)
-			{
-				$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
+	private function retrieveMovie($id,$page)
+	{
+		$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
 
-				$data = ($jsonContent) ? json_decode($jsonContent,true):array();
+		$data = ($jsonContent) ? json_decode($jsonContent,true):array();
+		$movie = new Movie();
+		if(!empty($data))
+		{
+			$movie->setIdApi($indice["id"]);
+			$movie->setTitle($indice["original_title"]);
+			$movie->setPoster($indice["poster_path"]);
+			$movie->setBackdrop($indice["backdrop_path"]);
+			$movie->setOverview($indice["overview"]);
+			$movie->setAverage($indice["vote_average"]);
+			$movie->setGenre($indice["genre_ids"]);
+			$movie->setDate($indice["release_date"]);
+			$movie->setVote($indice["vote_count"]);
+			$movie->setLanguage($indice["original_language"]);
+			$movie->setPopularity($indice["popularity"]);
+			$movie->setDuration($indice["runtime"]);
+		}else{
+			$movie = false;
+		}
+		return $movie;
+	}
+
+	private function retrieveData()
+	{
+		$movieList = array();
+
+		if(file_exists("Data/movie.json"))
+		{
+			$jsonContent = file_get_contents("Data/movie.json");
+
+			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+
+			foreach ($arrayTodecode as $values) 
+			{
+
 				$movie = new Movie();
-				if(!empty($data))
-				{
-					$movie->setIdApi($indice["id"]);
-					$movie->setTitle($indice["original_title"]);
-					$movie->setPoster($indice["poster_path"]);
-					$movie->setBackdrop($indice["backdrop_path"]);
-					$movie->setOverview($indice["overview"]);
-					$movie->setAverage($indice["vote_average"]);
-					$movie->setGenre($indice["genre_ids"]);
-					$movie->setDate($indice["release_date"]);
-					$movie->setVote($indice["vote_count"]);
-					$movie->setLanguage($indice["original_language"]);
-					$movie->setPopularity($indice["popularity"]);
-					$movie->setDuration($indice["runtime"]);
-				}else{
-					$movie = false;
-				}
-				return $movie;
-			}
 
-			private function retrieveData()
-			{
-				$movieList = array();
-
-				if(file_exists("Data/movie.json"))
-				{
-					$jsonContent = file_get_contents("Data/movie.json");
-
-					$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
-
-					foreach ($arrayTodecode as $values) 
-					{
-
-						$movie = new Movie();
-
-						$movie->setId($values["id"]);
-						$movie->setTitle($values["title"]);
-						$movie->setIdapi($values["idApi"]);
-						$movie->setImagenruta($values["imagenruta"]);
-						$movie->setOverview($values["overview"]);
-						$movie->setDuration($values["duration"]);
-						$movie->setGenre($value["genre_ids"]);
-						$movie->setReleaseDate($value["release_date"]);
-						$movie->setVoteCount($value["vote_count"]);
-						$movie->setVoteAverage($value["vote_average"]);
-						$movie->setOriginalLanguage($value["original_language"]);
+				$movie->setId($values["id"]);
+				$movie->setTitle($values["title"]);
+				$movie->setIdapi($values["idApi"]);
+				$movie->setImagenruta($values["imagenruta"]);
+				$movie->setOverview($values["overview"]);
+				$movie->setDuration($values["duration"]);
+				$movie->setGenre($value["genre_ids"]);
+				$movie->setReleaseDate($value["release_date"]);
+				$movie->setVoteCount($value["vote_count"]);
+				$movie->setVoteAverage($value["vote_average"]);
+				$movie->setOriginalLanguage($value["original_language"]);
 					/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 					$values["price"]);*/
 					array_push($movieList, $movie);
