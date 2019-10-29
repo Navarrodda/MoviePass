@@ -8,18 +8,21 @@ use \Dao\MovieFileDao as MovieFileDao;
 use \Dao\MovieBdDao as Moviebd;
 
 use \Controllers\GenreController as GenreC;
+use \Controllers\MoviegenreController as Moviegenre;
 
 class MovieController
 {
 	private $MovieFileDao;
 	private $MovieBddao;
 	private $ControlGenre;
+	private $MoviegenreGenre;
 
 	public function __construct()
 	{
 		$this->MovieFileDao = new MovieFileDao();
 		$this->MovieBddao = Moviebd::getInstance(); 
 		$this->ControlGenre = new GenreC;
+		$tis ->MoviegenreGenre = new Moviegenre;
 	}
 
 	public function getList($page)
@@ -59,6 +62,7 @@ class MovieController
 				{
 					$this->ControlGenre->add($movie->getGenre());
 					$this->MovieBddao->add($movie);
+					$this->MoviegenreGenre->add($idmovie,$movie->getGenre());
 					$regCompleted = TRUE;
 				}
 			}

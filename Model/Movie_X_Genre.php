@@ -3,6 +3,7 @@
 
     use Model\Movie as Movie;
     use Model\Genre as Genre;
+    
     class Movie_X_Genre
     {
         private $id;

@@ -248,7 +248,7 @@
                     // Esta mal mapea movie y genero con numero  id y no con objetos 
                     $movieGenre->setMovie($p['movie']);
                     $movieGenre->setGenre($p['genre']);
-
+                    
                     return $movieGenre;
                 }, $dataSet);
             }
