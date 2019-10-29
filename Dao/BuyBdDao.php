@@ -229,16 +229,13 @@
                 $this->list = array_map(function ($p) {
                 
                 $buy = new Buy();
-                $user = new User();
-                $function = new Function();
-                $discount = new Discount();
-                $user->setId($p['id_user']);
-                $function->setId($p['id_function']);
-                $discount->setId($p['id_discount']);
+                $DaoUser = UserBdDao::getInstance();
+                $DaoFunction = FunctionBdDao::getInstance();
+                $DaoDiscount = DiscountBdDao::getInstance();
                 //id_user, id_function, id_descuento, date, price, total
-                $buy->setUser($user);
-                $buy->setFunction($function);
-                $buy->setDiscount($discount);
+                $buy->setUser(UserBdDao->bring_by_id($p['id_user']);
+                $buy->setFunction(FunctionBdDao->bring_by_id($p['id_function']));
+                $buy->setDiscount(DiscountBdDao->bring_by_id($p['id_discount']));
                 $buy->setFecha($p['date']);
                 $buy->getPrecio($p['price']);
                 $buy->getTotal($p['total']);

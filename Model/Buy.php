@@ -16,9 +16,7 @@ class Buy
 
     public function __construct()
     {
-        $user = new User();
-        $function = new Function();
-        $descuento = new Discount();
+
     }
 
     /**
@@ -54,7 +52,7 @@ class Buy
      *
      * @return  self
      */ 
-    public function setDescuento($descuento)
+    public function setDescuento(Discount $descuento)
     {
         $this->descuento = $descuento;
 
@@ -136,7 +134,7 @@ class Buy
      *
      * @return  self
      */ 
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -156,7 +154,7 @@ class Buy
      *
      * @return  self
      */ 
-    public function setFunction($function)
+    public function setFunction(Function $function)
     {
         $this->function = $function;
 
