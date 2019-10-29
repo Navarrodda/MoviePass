@@ -181,6 +181,36 @@ class GenreBdDao{
 		}
 	}
 
+		public function bring_by_id_id($id)
+	{   
+		try{
+			if ($id != null) {
+				$sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
+
+				$conec = Conection::conection();
+
+				$judgment = $conec->prepare($sql);
+
+				$judgment->execute();
+
+				$dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+				$this->mapear($dataSet);
+
+				if(!empty($this->list[0])){
+
+					return $this->list[0];
+				}
+			}
+
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
+	}
+
 	public function mapear($dataSet){
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){
