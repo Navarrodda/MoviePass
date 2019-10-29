@@ -145,21 +145,14 @@
         $this->list = array_map(function ($p) {
             $daoRol = RolBdDao::getInstance();
             $discount = new Discount();
-            
-            $user = new User
-            (
-                $p['nikname'],
-                $p['email'],
-                $p['name'],
-                $p['lastname'],
-                $p['dni'],
-                $p['password'],
-                $daoRol->bring_by_id($p['rol'])
-            );
-            $user->setId($p['id']);
-            return $user;
-        }, $dataSet);
+            //disc=:disc description=:description fecha=:fecha
+            $discount->setId($p['id']);
+            $discount->setDisc($p['disc']);
+            $discount->setDescription($p['description']);
+            $discount->setFecha($p['fecha']);
+            return $discount;
+            }, $dataSet);
+        }
     }
-    }
-    }
+}
 ?>
