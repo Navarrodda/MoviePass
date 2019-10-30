@@ -1,27 +1,28 @@
 <?php
-    namespace Model;
+namespace Model;
 
-    class Discount
+class Discount
+{
+    private $id;
+    private $disc; // float
+    private $description;
+    private $fecha;
+    private $hora;
+
+    public function __construction()
     {
-        private $id;
-        private $disc; // float
-        private $description;
-        private $fecha;
 
-        public function __construction()
-        {
-                
-        }
+    }
 
-        
 
-        /**
-         * Get the value of id
-         */ 
-        public function getId()
-        {
-                return $this->id;
-        }
+
+    /**
+    * Get the value of id
+     */ 
+    public function getId()
+    {         
+       return $this->id;
+    }
 
         /**
          * Set the value of id
@@ -30,9 +31,9 @@
          */ 
         public function setId($id)
         {
-                $this->id = $id;
+            $this->id = $id;
 
-                return $this;
+            return $this;
         }
 
         /**
@@ -40,7 +41,7 @@
          */ 
         public function getDisc()
         {
-                return $this->disc;
+            return $this->disc;
         }
 
         /**
@@ -50,9 +51,9 @@
          */ 
         public function setDisc($disc)
         {
-                $this->disc = $disc;
+            $this->disc = $disc;
 
-                return $this;
+            return $this;
         }
 
         /**
@@ -60,7 +61,7 @@
          */ 
         public function getDescription()
         {
-                return $this->description;
+            return $this->description;
         }
 
         /**
@@ -70,9 +71,9 @@
          */ 
         public function setDescription($description)
         {
-                $this->description = $description;
+            $this->description = $description;
 
-                return $this;
+            return $this;
         }
 
         /**
@@ -80,7 +81,7 @@
          */ 
         public function getFecha()
         {
-                return $this->fecha;
+            return $this->fecha;
         }
 
         /**
@@ -90,9 +91,29 @@
          */ 
         public function setFecha($fecha)
         {
-                $this->fecha = $fecha;
+            $this->fecha = $fecha;
 
-                return $this;
+            return $this;
         }
+
+    /**
+     * @return mixed
+     */
+    public function getHora()
+    {
+        return $this->hora;
     }
+
+    /**
+     * @param mixed $hora
+     *
+     * @return self
+     */
+    public function setHora($hora)
+    {
+        $this->hora = $hora;
+
+        return $this;
+    }
+}
 ?>

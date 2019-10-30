@@ -9,7 +9,7 @@
               <?php if(!empty($_SESSION["email"])){ ?>
                 <li><a href="<?php echo URL ?>/view/account/">Account</a></li>
                 <li><a href="#">Checkout</a></li>
-                <li><a href="#">dashbord</a></li>
+                <li><a href="<?php echo URL ?>/view/discounts/">Discounts</a></li>
               <?php } ?>
             </ul>
           </div>

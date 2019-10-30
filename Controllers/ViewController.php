@@ -10,6 +10,7 @@ use \Controllers\GenreController as GenreC;
 use \Controllers\CinemaController as CinemaC;
 use \Controllers\UserController as UserC;
 use \Controllers\MoviegenreController as MoviegenreC;
+use \Controllers\DiscountController as DiscountC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -24,6 +25,7 @@ class ViewController
 		$this->ControlCinema = new CinemaC;
 		$this->ControlUser = new UserC;
 		$this->ControlMuvGen = new MoviegenreC;
+		$this->ControlDiscount = new DiscountC;
 	}
 
 	public function index()
@@ -254,6 +256,26 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 
+	} 
+
+	public function discounts()
+	{
+
+		$view = 'DISCOUNTS';
+		$discount = $this->ControlDiscount->bring_everything();
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "discounts.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
+	public function registrerdiscounts()
+	{
+
+		$view = 'DISCOUNTS';
+		$espace = 'REGISTRED';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "registrerdiscounts.php");
+		include URL_VISTA . 'footer.php';
 	} 
 
 }

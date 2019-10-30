@@ -1,41 +1,46 @@
 <?php
-    namespace Dao;
+namespace Dao;
 
-    use Model\Discount as Discount;
+use Model\Discount as Discount;
 
-    class DiscountBdDao
+class DiscountBdDao
+{
+    protected $table = "discounts";
+    protected $list;
+    private static $instance;
+
+    public static function getInstance()
     {
-        protected $table = "discount";
-        protected $list;
-        private static $instance;
-
-        public static function getInstance()
-        {
-            if (!self::$instance instanceof self) {
-                self::$instance = new self();
-            }
-            return self::$instance;
+        if (!self::$instance instanceof self) {
+            self::$instance = new self();
         }
+        return self::$instance;
+    }
 
-        public function add(Discount $discount)
-        {
+    public function add(Discount $disc)
+    {
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (disc, description, fecha) VALUES (:disc, :description, :fecha)");
+            $sql = ("INSERT INTO $this->table (discount, description, day, hours) VALUES (:discount, :description, :day, :hours)");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
 
-            $disc = $discount->getDisc();
-            $description = $description->getDescription();
-            $fecha = $fecha->getFecha();
+            $discount = $disc->getDisc();
+            $description = $disc->getDescription();
+            $day = $disc->getFecha();
+            $hours = $disc->getHora();
 
-            $judgment->bindParam(":disc",$disc);
+            $judgment->bindParam(":discount",$discount);
+
             $judgment->bindParam(":description",$description);
-            $judgment->bindParam(":fecha",$fecha);
 
+            $judgment->bindParam(":day",$day);
+
+            $judgment->bindParam(":hours",$hours);
+ 
             $judgment->execute();
 
             return $conec->lastInsertId();
@@ -90,6 +95,7 @@
         }
     }
 
+
     public function bring_everything(){
         $sql = "SELECT * FROM $this->table";
 
@@ -142,15 +148,14 @@
     public function mapear($dataSet){
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
-        $this->list = array_map(function ($p) {
-            $daoRol = RolBdDao::getInstance();
-            $discount = new Discount();
-            //disc=:disc description=:description fecha=:fecha
-            $discount->setId($p['id']);
-            $discount->setDisc($p['disc']);
-            $discount->setDescription($p['description']);
-            $discount->setFecha($p['fecha']);
-            return $discount;
+            $this->list = array_map(function ($p) {
+                $discount = new Discount();
+                $discount->setId($p['id']);
+                $discount->setDisc($p['discount']);
+                $discount->setDescription($p['description']);
+                $discount->setFecha($p['day']);
+                $discount->setHora($p['hours']);
+                return $discount;
             }, $dataSet);
         }
     }

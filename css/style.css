@@ -2252,6 +2252,13 @@ form#login-form:after {
   -moz-border-radius: 60;
   border-radius: 60px;
 }
+.marcform1{
+    background-color: rgba(111,10,0,0.50);
+  width:840px;
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+}
 .form1{
   width:740px;
   -webkit-border-radius: 60;
@@ -2361,3 +2368,8 @@ form#login-form:after {
     margin-left: auto;
     margin-right: auto;
   }
+
+  .rightt{
+    float: right;
+    text-align: right;
+}
