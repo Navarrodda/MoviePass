@@ -90,6 +90,7 @@ class ViewController
 	public function modifyaccount()
 	{
 		$view = 'MODIFY ACCOUNT';
+		$user = $this->ControlUser->bring_by_id();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "modifyaccount.php");
 		include URL_VISTA . 'footer.php';

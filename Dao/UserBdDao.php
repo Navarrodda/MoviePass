@@ -38,6 +38,46 @@ class UserBdDao{
         return null;
     }
 
+    public function bring_id_by_nikname($nikname){
+        $sql = "SELECT id FROM $this->table WHERE nikname = \"$nikname\" LIMIT 1";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($id))
+        {
+            return $id['id'];
+        }
+
+        return null;
+    }
+
+    public function bring_id_by_dni($dni){
+        $sql = "SELECT id FROM $this->table WHERE dni = \"$dni\" LIMIT 1";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($id))
+        {
+            return $id['id'];
+        }
+
+        return null;
+    }
+
     public function add(User $user){
       try{
 
@@ -262,7 +302,7 @@ public function bring_by_nikname($nikname){
 public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-     $this->list = array_map(function ($p) {
+       $this->list = array_map(function ($p) {
         $daoRol = RolBdDao::getInstance();
         $user = new User
         (
@@ -277,6 +317,6 @@ public function mapear($dataSet){
         $user->setId($p['id']);
         return $user;
     }, $dataSet);
- }
+   }
 }
 }
