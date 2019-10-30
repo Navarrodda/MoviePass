@@ -24,32 +24,32 @@ class CinemaController
 		$address = ucwords($address);
 		if(!empty($_SESSION))
 		{
-			$this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
-			$cinema = new Cinema();
-			$cinema->setNombre($name);
-			$cinema->setCapacidad($capacity);
-			$cinema->setDireccion($address);
-			$cinema->setValor_entrada($input_value);
-			$this->cinemaBdDao->add($cinema);
-			$question = true; 
+			if($this->cinemaBdDao->bring_id_by_title($name) == NULL)
+			{
+				$this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
+				$cinema = new Cinema();
+				$cinema->setNombre($name);
+				$cinema->setCapacidad($capacity);
+				$cinema->setDireccion($address);
+				$cinema->setValor_entrada($input_value);
+				$this->cinemaBdDao->add($cinema);
 
+				$view = "MESSAGE";
+				$this->message = new Message( "success", "Has successfully registered the Cinema!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$view = "MESSAGE";
+				$this->message = new Message( "warning", "The cinema with that name is already registered!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			}
 		}
-		if($question == true)
-		{
-			$view = "MESSAGE";
-			$this->message = new Message( "success", "Has successfully registered the Cinema!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'message.php');
-			include URL_VISTA . 'footer.php';
-		}
-		else
-		{
-			$view = "MESSAGE";
-			$this->message = new Message( "warning", "An error has occurred!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'message.php');
-			include URL_VISTA . 'footer.php';
-		}
+
 	}
 
 	public function  bringeverything()
@@ -76,7 +76,7 @@ class CinemaController
 		else
 		{
 			$view = "MESSAGE";
-						$this->message = new Message('warning', ' The id was already deleted or no data is found that the id:' . ' ' . '<i><strong>' .  $id 
+			$this->message = new Message('warning', ' The id was already deleted or no data is found that the id:' . ' ' . '<i><strong>' .  $id 
 				. '</strong>!');
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'message.php');

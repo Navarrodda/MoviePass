@@ -5,5 +5,12 @@
         "direccion": "Fortunato De La Plaza 199",
         "nombre": "Roquefeler",
         "valor_entrada": "300"
+    },
+    {
+        "id": 2,
+        "capacidad": "200",
+        "direccion": "Padre Duto 12",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "300"
     }
 ]
