@@ -30,9 +30,9 @@ class UserController
 	public function login($data, $password)
 	{
 		try {
+
 			$ir_a_inicio = FALSE;
 			
-
 			if (isset($data) && isset($password))  {
 				if ($data === "" || $password === "") {
 					$this->message = new Message('warning', 'You must fill in all fields!');
