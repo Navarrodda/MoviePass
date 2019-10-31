@@ -41,6 +41,7 @@
     </div>
   </div>
 </section>
+<!--
 <section class="features">
   <div class="container">
     <div class="row">
@@ -51,21 +52,21 @@
     <div class="row">
       <div class="col-md-4">
        <div class="text-img left">
-         <img src="<?php echo URL ?>/img/logo-one.png">
+         <img src="<?php//echo URL ?>/img/logo-one.png">
          <h3>Tust Adrenalin</h3>
          <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
        </div>
      </div>
      <div class="col-md-4">
        <div class="text-img center">
-         <img src="<?php echo URL ?>/img/logo-one.png">
+         <img src="<?php //echo URL ?>/img/logo-one.png">
          <h3>Our Mission</h3>
          <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
        </div>
      </div>
      <div class="col-md-4">
        <div class="text-img right">
-         <img src="<?php echo URL ?>/img/logo-two.png">
+         <img src="<?php //echo URL ?>/img/logo-two.png">
          <h3>Fashion Style</h3>
          <p>Lorem ipsum dolor sit amet, has et probatus tem, ad sea alii cetero scripserit. Ius accusa legendos omittantur cu,</p>
        </div>
@@ -73,6 +74,7 @@
    </div>
  </div>
 </section>
+-->
 <section class="team">
  <div class="clear"></div>
  <div class="container">
