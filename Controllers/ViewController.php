@@ -4,6 +4,7 @@ namespace Controllers;
 
 //Modelo
 use \Model\User as User;
+use \Model\Message as Message;
 //Controler
 use \Controllers\MovieController as MoviesC;
 use \Controllers\GenreController as GenreC;
@@ -234,12 +235,11 @@ class ViewController
 	{
 		$view = 'My Movies';
 		$espace = 'Genre';
-		$genresel = NULL; 
+		$genresel = array();
 		$value = array();
 		$genre = $this->ControlGenre->bring_everything();
 		$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
 		if ($moviesgenre != null) {
-			$genresel = array();
 			foreach ($moviesgenre as $movgenre) {
 				array_push($genresel, $movgenre->getGenre());
 				array_push($value, $movgenre->getMovie());
@@ -249,7 +249,8 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 		else
-		{
+		{	$genresel = NULL;
+			$this->message = new Message( "warning", "That genre does not contain movies!" );
 			$genre = $this->ControlGenre->bring_everything();
 			$value = $this->ControlMovies->bringmovies();
 			include URL_VISTA . 'header.php';

@@ -1,7 +1,14 @@
 <section>
   <?php  include(URL_VISTA . 'navbar.php') ?>
   <div class="clear"></div>
-
+<section>
+    <?php if(isset($this->message)) {?>
+      <div class="container">
+        <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
+      </div>
+    <?php } ?>
+    <div class="clear"></div>
+</section>
 
 </section>
 <section class="best-seller">
