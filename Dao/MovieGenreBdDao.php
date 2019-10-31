@@ -17,40 +17,40 @@ class MovieGenreBdDao
     }
     public function bring_id_by_Movie($idMovie)
     {
-     $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
-     $conec = Conection::conection();
-     $judgment = $conec->prepare($sql);
-     $judgment->execute();
-     $id = $judgment->fetch(\PDO::FETCH_ASSOC);
-     if(!empty($id))
-     {
+       $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" LIMIT 1";
+       $conec = Conection::conection();
+       $judgment = $conec->prepare($sql);
+       $judgment->execute();
+       $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+       if(!empty($id))
+       {
         return $id['id'];
     }
     return null;
 }
 public function bring_id_by_Genero($idGenre)
 {
- $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
- $conec = Conection::conection();
- $judgment = $conec->prepare($sql);
- $judgment->execute();
- $id = $judgment->fetch(\PDO::FETCH_ASSOC);
- if(!empty($id))
- {
+   $sql = "SELECT id FROM $this->table WHERE genre = \"$idGenre\" LIMIT 1";
+   $conec = Conection::conection();
+   $judgment = $conec->prepare($sql);
+   $judgment->execute();
+   $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+   if(!empty($id))
+   {
     return $id['id'];
 }
 return null;
 }
 public function bring_id_by_MovieAll($idMovie)
 {
- $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
- $conec = Conection::conection();
- $judgment = $conec->prepare($sql);
- $judgment->execute();
- $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
- $this->mapear($arrayMg);
- if(!empty($this->list))
- {
+   $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
+   $conec = Conection::conection();
+   $judgment = $conec->prepare($sql);
+   $judgment->execute();
+   $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
+   $this->mapear($arrayMg);
+   if(!empty($this->list))
+   {
     return $this->list;
 }
 return null;
@@ -70,11 +70,11 @@ public function bring_id_by_generoAll($idGenre)
             }
             return null;
         }
-        }catch(\PDOException $e){
-            echo $e->getMessage();die();
-        }catch(\Exception $e){
-            echo $e->getMessage();die();
-        }
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
 
 }
 
@@ -110,6 +110,21 @@ public function remove_by_id($id){
         echo $e->getMessage();die();
     }
 }
+
+public function remove_by_id_movie($id){
+    try{
+        $sql = "DELETE FROM $this->table WHERE movie = \"$id \"";
+        $conec = Conection::conection();
+        $judgment = $conec->prepare($sql);
+        $judgment->execute();
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
+}
+
+
 public function to_update(Movie_X_Genre $movieGenre, $id){
     try{
         $sql = ("UPDATE $this->table SET genre=:genre movie=:movie WHERE id=\"$id\"");

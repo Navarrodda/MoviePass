@@ -110,6 +110,7 @@ class MovieController
 		$movie = $this->MovieBddao->bring_by_id($id);
 		if(!empty($movie))
 		{
+			$this->MoviegenreGenre->remove_by_id_movie($id);
 			$movie = $this->MovieBddao->remove_by_id($id);
 		}
 		$view = "MESSAGE";

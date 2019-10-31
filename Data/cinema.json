@@ -12,5 +12,12 @@
         "direccion": "Padre Duto 12",
         "nombre": "Cinemasenter",
         "valor_entrada": "300"
+    },
+    {
+        "id": 3,
+        "capacidad": "222",
+        "direccion": "Asdsad",
+        "nombre": "Dasdas",
+        "valor_entrada": "112"
     }
 ]

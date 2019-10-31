@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <?php if (!empty($genresel)) {?>
+        <?php if (!empty($genresel)) { ?>
           <div class="bar">
             <h2>Selected Genre: <?=$genresel[0]->getName();?></h2>
             <img alt="" src="<?php echo URL ?>/img/bar.png">
@@ -28,9 +28,17 @@
          </div>
        </div>
      </div>
-   <?php } ?>
- </div>
- <div class="row">
+   <?php } else {  ?>
+     <div class="col-md-12">
+      <div class="bar">
+        <h2>Genre not Found</h2>
+        <img alt="" src="<?php echo URL ?>/img/bar.png">
+      </div>
+    </div>
+  </div>
+<?php } ?>
+</div>
+<div class="row">
   <div class="col-md-12">
     <?php if (!empty($genre)) {?>
       <div class="bar">

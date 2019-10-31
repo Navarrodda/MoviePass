@@ -234,11 +234,12 @@ class ViewController
 	{
 		$view = 'My Movies';
 		$espace = 'Genre';
-		$genresel = array();
+		$genresel = NULL; 
 		$value = array();
 		$genre = $this->ControlGenre->bring_everything();
 		$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
 		if ($moviesgenre != null) {
+			$genresel = array();
 			foreach ($moviesgenre as $movgenre) {
 				array_push($genresel, $movgenre->getGenre());
 				array_push($value, $movgenre->getMovie());
