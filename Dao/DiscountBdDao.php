@@ -17,6 +17,26 @@ class DiscountBdDao
         return self::$instance;
     }
 
+        public function bring_by_for_id($id){
+        $sql = "SELECT id FROM $this->table WHERE id = \"$id\" LIMIT 1";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($id))
+        {
+            return $id['id'];
+        }
+
+        return null;
+    }
+
     public function add(Discount $disc)
     {
         try{

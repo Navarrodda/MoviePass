@@ -54,4 +54,31 @@ class DiscountController
 
 		}
 	}
+
+	public function remove_by_id($id)
+	{
+		if(!empty($_SESSION))
+		{
+			$id = $this->DiscountBd->bring_by_for_id($id);
+			$this->DiscountBd->remove_by_id($id);
+			if(!empty($id))
+			{
+
+				$view = "MESSAGE";
+				$this->message = new Message( "success", "The discount was deleted successfully!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$view = "MESSAGE";
+				$this->message = new Message( "warning", "There is no such discount!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+
+			}
+		}
+	}
 }

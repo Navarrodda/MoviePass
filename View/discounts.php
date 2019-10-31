@@ -47,7 +47,7 @@
         </span>
       </td>
       <td>
-        <a type="submit" method="post"  name="id"  href="#" class="disabled">
+        <a type="submit" method="post"  name="id"  href="<?php echo URL ?>/discount/remove_by_id/<?= $data->getId(); ?>" class="disabled">
           <span class="fa fa-trash-o" title=""
           data-toggle="tooltip" data-placement="right">
         </span>
