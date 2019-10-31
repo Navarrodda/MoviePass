@@ -32,13 +32,13 @@ class UserController
 		try {
 			$ir_a_inicio = FALSE;
 			
-			$data = ucwords($data);
 
 			if (isset($data) && isset($password))  {
 				if ($data === "" || $password === "") {
 					$this->message = new Message('warning', 'You must fill in all fields!');
 				} else {
 					/** @var Cuenta $usuario */
+					$data = ucwords($data);
 					if($this->daoUser->bring_by_nikname($data));
 					{
 
@@ -60,6 +60,7 @@ class UserController
 						}
 
 					}
+					$data = lcfirst($data);
 					if($this->daoUser->bring_by_mail($data))
 					{
 						$user = $this->daoUser->bring_by_mail($data);

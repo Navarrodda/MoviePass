@@ -9,7 +9,9 @@
               <?php if(!empty($_SESSION["email"])){ ?>
                 <li><a href="<?php echo URL ?>/view/account/">Account</a></li>
                 <li><a href="#">Checkout</a></li>
+                <?php if($_SESSION["rol"] != 3){ ?>
                 <li><a href="<?php echo URL ?>/view/discounts/">Discounts</a></li>
+              <?php }  ?>
               <?php } ?>
             </ul>
           </div>
