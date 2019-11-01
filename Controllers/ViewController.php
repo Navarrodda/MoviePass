@@ -281,4 +281,15 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	} 
 
+		public function modifydiscounts($id)
+	{
+
+		$view = 'DISCOUNTS';
+		$espace = 'MODIFY';
+		$discount = $this->ControlDiscount->bring_data_id($id);
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modificationdiscounts.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
 }

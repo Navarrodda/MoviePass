@@ -23,6 +23,11 @@ class DiscountController
 		return $this->DiscountBd->bring_everything();
 	}
 
+		public function bring_data_id($id)
+	{
+		return $this->DiscountBd->bring_by_id($id);
+	}
+
 	public function add($dis,$description,$day,$hours)
 	{
 		if(!empty($_SESSION))

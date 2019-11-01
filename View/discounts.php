@@ -41,7 +41,7 @@
       <td><?= $newDate ?></td>
       <td><?= $data->getHora() ?></td>
       <td>
-        <a href="#" class="disabled">         
+        <a href="<?php echo URL ?>/view/modifydiscounts/<?= $data->getId(); ?>" class="disabled">         
           <span class="fa fa-pencil-square-o" title=""
           data-toggle="tooltip" data-placement="right">
         </span>
