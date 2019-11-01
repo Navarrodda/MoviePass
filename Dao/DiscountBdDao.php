@@ -89,22 +89,27 @@ class DiscountBdDao
         }
     }
 
-    public function to_update(Discount $discount, $id){
+    public function to_update(Discount $disc, $id){
 
         try{
-            $sql = ("UPDATE $this->table SET disc=:disc description=:description fecha=:fecha WHERE id=\"$id\"");
+            $sql = ("UPDATE $this->table SET discount=:discount, description=:description, day=:day,  hours=:hours WHERE id=\"$id\"");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
 
-            $disc = $discount->getDisc();
-            $description = $description->getDescription();
-            $fecha = $fecha->getFecha();
+            $discount = $disc->getDisc();
+            $description = $disc->getDescription();
+            $day = $disc->getFecha();
+            $hours = $disc->getHora();
 
-            $judgment->bindParam(":disc",$disc);
+            $judgment->bindParam(":discount",$discount);
+
             $judgment->bindParam(":description",$description);
-            $judgment->bindParam(":fecha",$fecha);
+
+            $judgment->bindParam(":day",$day);
+
+            $judgment->bindParam(":hours",$hours);
 
 
             $judgment->execute();

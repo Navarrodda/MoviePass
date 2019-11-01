@@ -23,7 +23,7 @@ class DiscountController
 		return $this->DiscountBd->bring_everything();
 	}
 
-		public function bring_data_id($id)
+	public function bring_data_id($id)
 	{
 		return $this->DiscountBd->bring_by_id($id);
 	}
@@ -84,6 +84,26 @@ class DiscountController
 				include URL_VISTA . 'footer.php';
 
 			}
+		}
+	}
+
+	public function to_update($id,$dis,$description,$day,$hours)
+	{
+		if(!empty($_SESSION))
+		{
+			$disc = $this->DiscountBd->bring_by_id($id);
+			$discount = new Discount;
+			$discount->setDisc($dis);
+			$discount->setDescription($description);
+			$discount->setFecha($day);
+			$discount->setHora($hours);
+			
+			$id = $this->DiscountBd->to_update($discount,$id);
+			$view = "MESSAGE";
+			$this->message = new Message( "success", "The discount is modify valid!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
 		}
 	}
 }
