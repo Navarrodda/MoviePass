@@ -22,6 +22,7 @@
        <?php if($_SESSION["rol"] != 3){ ?>
          <th>Modification</th>
          <th>Delete</th>
+         <th><a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></th>
        <?php } }  ?>
 
 
@@ -56,6 +57,7 @@
               </span>
             </a>
           </td>
+          <th>-</th>
 
         <?php } } ?>
       </tr>
@@ -69,7 +71,7 @@
 else {?>
  <div class="centerin">
    <div class="col-md-12">
-     <h2 class="mb-4">There are no registered cinemas</h2>
+     <h2 class="mb-4">There are no registered cinemas ADD: <a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></h2>
    </div>
  </div>
 <?php } ?>

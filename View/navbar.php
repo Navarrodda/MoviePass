@@ -53,7 +53,6 @@
             <?php// } } ?>
             <?php if(!empty($_SESSION["rol"])){ ?>
               <?php if($_SESSION["rol"] != 3){ ?>
-                <li><a href="<?php echo URL?>/view/registrercinema/">REGISTER CINEMA</a></li>
                 <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
               <?php } } ?>
               <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
