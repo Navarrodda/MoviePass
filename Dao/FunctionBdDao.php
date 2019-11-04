@@ -55,7 +55,8 @@ class FunctionBdDao
         return null;
     }
         //Devuelve todas las funciones del cine
-    public function bring_Function_by_idCinema($idCinema){
+    public function bring_Function_by_idCinema($idCinema)
+    {
         $sql = "SELECT id FROM $this->table WHERE cinema = \"$idCinema\" LIMIT 1";
 
         $conec = Conection::conection();
@@ -182,6 +183,35 @@ class FunctionBdDao
         }catch(\Exception $e){
             echo $e->getMessage();die();
         }
+    }
+
+    public function bring_by_date_dmovie_cinema($idcinema,$day,$idmovie)
+    {
+        return $this->bring_by_date_idmovie_idcinema($idcinema,$day,$idmovie);
+    } 
+
+
+    private function bring_by_date_idmovie_idcinema($idcinema,$day,$idmovie)
+    {
+        $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idCinema\" AND movie = \"$idmovie\" ";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        $this->mapear($arrayMg);
+
+        if(!empty($this->list))
+        {
+            return $this->list;
+        }
+
+        return null;
     }
 
     public function bring_everything(){
