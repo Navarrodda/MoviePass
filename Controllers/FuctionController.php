@@ -45,7 +45,7 @@ class FuctionController
 					$movie = $this->movieBdDao->bring_by_id($idmovie);
 					$verifiqueday = $this->fuctionBdDao->bring_id_by_day($day);
 					$verifiquehour = $this->fuctionBdDao->bring_id_by_hour($hour);
-					if($verifiqueday == NULL && $verifiquehour == NULL && )
+					if($verifiqueday == NULL && $verifiquehour == NULL  )
 					{
 						$function = new Fuction;
 						$function->setCinema($cinema);
@@ -94,5 +94,9 @@ class FuctionController
 		return $this->fuctionBdDao->bring_everything();
 	}
 
+		public function  bring_Function_by_idCinema($id)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
+	}
 
 }

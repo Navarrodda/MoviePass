@@ -42,13 +42,28 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 		else{
-			$view = 'Billboard';
+			$i = 0 ;
+			$cinema = $this->ControlCinema->bringeverything();
+			$movies = array();
+			$cinemas = array();
+			if(!empty($cinema))
+			{
+				foreach ($cinema as $cin) {
+					$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
+					array_push($cinemas, $cin);
+					foreach ($tocinema as $to) {
+						array_push($movies, $to);
+						
+					}
+				}
+			}
+			$view = 'BILLBOARD';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "homebillboard.php");
 			include URL_VISTA . 'footer.php';
 		}
-		
-	} 
+
+	}
 
 	public function register()
 	{
@@ -114,6 +129,8 @@ class ViewController
 		$values = $this->ControlMovies->getList(1);
 		$value = $this->ControlMovies->bringmovies();
 		$i = 0;
+		$genresel = array();
+		$value = array();
 		foreach ($values as $data) {
 
 			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))

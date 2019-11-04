@@ -919,7 +919,8 @@ a{
 }
 .s_product .s_overlay{
   position: absolute;
-  background: rgba(200,200,200,.4);
+
+  background: rgba(222,222,222,.4);
   width: 100%;
   height: 100%;
   top: 0;
@@ -2093,6 +2094,13 @@ form#login-form:after {
  width:399px;
  margin:auto;
 
+}
+
+.centerin2 {
+
+ padding:1px;
+ width:199px;
+ margin:auto;
 }
 
 .flexsearch--wrapper {

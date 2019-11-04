@@ -15,6 +15,26 @@ class FunctionBdDao
         return self::$instance;
     }
 
+    public function bring_id_by_cunema($idcinema){
+        $sql = "SELECT id FROM $this->table WHERE cinema = \"$idcinema\" LIMIT 1";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $id = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($id))
+        {
+            return $id['id'];
+        }
+
+        return null;
+    }
+
     public function bring_id_by_day($day){
         $sql = "SELECT id FROM $this->table WHERE day = \"$day\" LIMIT 1";
 
@@ -55,27 +75,29 @@ class FunctionBdDao
         return null;
     }
         //Devuelve todas las funciones del cine
+
+
     public function bring_Function_by_idCinema($idCinema)
-    {
-        $sql = "SELECT id FROM $this->table WHERE cinema = \"$idCinema\" LIMIT 1";
-
-        $conec = Conection::conection();
-
-        $judgment = $conec->prepare($sql);
-
-        $judgment->execute();
-
-
-        $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-        $this->mapear($arrayMg);
-
-        if(!empty($this->list))
-        {
-            return $this->list;
+    {   
+        try{
+            if ($idCinema != null) {
+                $sql = ("SELECT * FROM $this->table WHERE cinema = \"$idCinema\"" );
+                $conec = Conection::conection();
+                $judgment = $conec->prepare($sql);
+                $judgment->execute();
+                $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+                $this->mapear($dataSet);
+                if (!empty($this->list)) {
+                    return $this->list;
+                }
+                return null;
+            }
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
         }
 
-        return null;
     }
 
     public function bring_Function_by_idMovies($idMovie)
@@ -279,13 +301,13 @@ class FunctionBdDao
                 $function = new Fuction();
                 $daoMovie = MovieBdDao::getInstance();
                 $daoCinema = CinemaBdDao::getInstance();
-                    //Carga cine con solo el id;
+                $function->setId($p['id']);
+                //Carga cine con solo el id;
                 $function->setCinema($daoCinema->bring_by_id($p['cinema']));
-                    //Carga pelicula con solo el id;
+                //Carga pelicula con solo el id;
                 $function->setMovie($daoMovie->bring_by_id($p['movie']));
                 $function->setDia($p['day']);
                 $function->setHora($p['hours']);
-                $function->setId($p['id']);
                 return $function;
             }, $dataSet);
         }
