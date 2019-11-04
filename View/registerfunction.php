@@ -25,11 +25,11 @@
                </p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/function/add/">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/fuction/add/">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
-                     <p class="p2" type="Cinema:">
-                       <select class="btnselect" type="Select Cinema:" placeholder = "Select a Cinema" required>
+                     <p class="p2"  type="Cinema:">
+                       <select class="btnselect" name="idcinema" type="Select Cinema:" placeholder = "Select a Cinema" required>
                         <?php foreach($cineList as $cine) { ?>
                           <option value ="<?php echo $cine->getId()?>"><?php echo $cine->getNombre()?></option>
                         <?php } ?>
@@ -42,7 +42,7 @@
               
                <p class="p2" type="Hour:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
               <button class="but">Save Data</button>
-              <p><input  name="id" type=hidden value="<?= $movie->getId()?>"></p>
+              <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
               <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
               <script> var array = <?php echo json_encode($fecha);?>;
                 $('#dat').datepicker({
