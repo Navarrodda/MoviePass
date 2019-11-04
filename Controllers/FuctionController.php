@@ -43,13 +43,12 @@ class FuctionController
 				{
 					$movie = $this->movieBdDao->bring_by_id($idmovie);
 					$verifiqueday = $this->fuctionBdDao->bring_id_by_day($day);
-					$verifiquehour = $this->fuctionBdDao->bring_id_by_hour($hour);
-<<<<<<< HEAD
+
 					if($verifiqueday == NULL && $verifiquehour == NULL  )
-=======
+
 					$funtion = $this->fuctionBdDao->bring_by_date_dmovie_cinema($idcinema,$day,$idmovie);
 					if( empty($funtion))
->>>>>>> d48d4038395b16df478f17cbb01757e6e6738a97
+
 					{
 						$function = new Fuction;
 						$function->setCinema($cinema);
@@ -122,12 +121,11 @@ class FuctionController
 		return $this->fuctionBdDao->bring_everything();
 	}
 
-<<<<<<< HEAD
 		public function  bring_Function_by_idCinema($id)
 	{
 		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
 	}
-=======
+
 	public function masCercano($list,$numer)
 	{
 		$menor = 0;
@@ -153,7 +151,5 @@ class FuctionController
 	
 		return $cercano;
 	}
-
->>>>>>> d48d4038395b16df478f17cbb01757e6e6738a97
 
 }
