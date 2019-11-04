@@ -71,7 +71,12 @@
 else {?>
  <div class="centerin">
    <div class="col-md-12">
+    <?php if(!empty($_SESSION["rol"])){ ?>
+    <?php if($_SESSION["rol"] != 3){ ?>
      <h2 class="mb-4">There are no registered cinemas ADD: <a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></h2>
+   <?php }} else { ?>
+     <h2 class="mb-4">There are no registered cinemas</h2>
+   <?php }?>
    </div>
  </div>
 <?php } ?>

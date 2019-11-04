@@ -227,6 +227,7 @@ class ViewController
 		$view = 'MY MOVIES';
 		$genre = $this->ControlGenre->bring_everything();
 		$value = $this->ControlMovies->bringmovies();
+		$cinemas = $this->ControlCinema->bringeverything();
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "mymovies.php");
 		include URL_VISTA . 'footer.php';
@@ -238,6 +239,7 @@ class ViewController
 		$espace = 'Genre';
 		$genresel = array();
 		$value = array();
+		$cinemas = $this->ControlCinema->bringeverything();
 		$genre = $this->ControlGenre->bring_everything();
 		$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
 		if ($moviesgenre != null) {
@@ -276,6 +278,16 @@ class ViewController
 
 		$view = 'DISCOUNTS';
 		$espace = 'REGISTRED';
+		$discount = $this->ControlDiscount->bring_everything();
+		$i = 0;
+		$current_date = date ("Y-m-d");
+		if(!empty($discount))
+		{
+			foreach ($discount as $dis) {
+				$fecha[$i] = date("Y-m-d", strtotime($dis->getFecha()));
+				$i++;
+			}
+		}
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrerdiscounts.php");
 		include URL_VISTA . 'footer.php';

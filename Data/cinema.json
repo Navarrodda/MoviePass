@@ -8,9 +8,16 @@
     },
     {
         "id": 2,
+<<<<<<< HEAD
         "capacidad": "3000",
         "direccion": "3 De Febrero 4320",
         "nombre": "Ambassador",
         "valor_entrada": "150"
+=======
+        "capacidad": "200",
+        "direccion": "Asdsd",
+        "nombre": "Sadsd",
+        "valor_entrada": "200"
+>>>>>>> 593d8a1b34095886f8319fc2162ea3bd26a49447
     }
 ]
