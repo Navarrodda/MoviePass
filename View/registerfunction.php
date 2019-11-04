@@ -29,7 +29,7 @@
                   </div>
                 </div>
             
-              <p class="p2" type="Capacity:"><input required type="date" class="int" name="day" style="color:white" placeholder="Select Day of Function"></input></p>
+              <p class="p2" type="Date:"><input required type="date" class="int" name="day" style="color:white" placeholder="Select Day of Function"></input></p>
                <p class="p2" type="Hour:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
               <button class="but">Save Data</button>
               <p><input  name="id" type=hidden value="<?= $movie->getId()?>"></p>
