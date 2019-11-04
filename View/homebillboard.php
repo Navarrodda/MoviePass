@@ -59,17 +59,16 @@
                             <h3><?=$muv->getMovie()->getTitle() ?></h3>
                             <?php if(!empty($_SESSION)){
                               if($_SESSION["rol"] == 3) { ?>
-                                <h4><i aria-hidden="true" class="fa fa-cart-arrow-down" ></i>ADD TO CART</h4>
+                                <h4><a href="#"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
                             <?php } else { ?>
-                                <h4><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>Options</h4>
+                                <h4><a href="#"><i aria-hidden="true" class="fa fa-angle-double-right"></i>Options</a></h4>
                             <?php } } else { ?>
-                                <h4><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</h4>
+                                <h4><a href="<?php echo URL ?>/view/login/"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
                             <?php  } ?>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="rate">
-
                                     <h3><?=$muv->getMovie()->getOverview()?></h3>
                                     <p>   <?php  if(floor($muv->getMovie()->getVote()*5/100) <= 1) { ?>
                                        <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
