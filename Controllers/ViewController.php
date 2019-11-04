@@ -292,4 +292,14 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	} 
 
+	public function registerFunction($id)
+	{	
+		$view = 'REGISTRER FUNCTION';
+		$movie = $this->ControlMovies->movieBdId($id);
+		$cineList = array();
+		$cineList = $this->ControlCinema->bringeverything();
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "registerfunction.php");
+		include URL_VISTA . 'footer.php';
+	}
 }

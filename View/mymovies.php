@@ -72,7 +72,7 @@
             <div class="row">
               <?php foreach ($value as $data)  { ?> 
                 <div class="col-md-6 fond1">
-                <a  id="myMovieForm" href ="">
+                <a  id="myMovieForm" href ="<?php echo URL ?>/View/registerFunction/<?php echo $data->getId()?>">
                   <div class="best-sell-part">
                    <img src="<?= $data->getBackdrop();?>">
                    <p><i class="fa fa-heart" aria-hidden="true"></i></p>

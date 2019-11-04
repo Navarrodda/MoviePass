@@ -5,5 +5,12 @@
         "direccion": "Padre Duto 12",
         "nombre": "Cinemasenter",
         "valor_entrada": "300"
+    },
+    {
+        "id": 2,
+        "capacidad": "3000",
+        "direccion": "3 De Febrero 4320",
+        "nombre": "Ambassador",
+        "valor_entrada": "150"
     }
 ]

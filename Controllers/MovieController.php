@@ -46,12 +46,16 @@ class MovieController
 	{
 		return $this->MovieFileDao->getMovieById($id,$page);
 	}
-		//devuelve las specs de la pelicula con la duracion
+		//devuelve las specs de la pelicula con la duracion en la api
 	public function movieSpecsId($id)
 	{
 		return $this->MovieFileDao->getMovieSpecs($id);
 	}
 
+	public function movieBdId($id)
+	{
+		return $this->MovieBddao->bring_by_id($id);
+	}
 	public function choose_movie($idmovie,$page){
 		try{
 			$regCompleted = FALSE;
