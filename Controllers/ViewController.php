@@ -310,6 +310,7 @@ class ViewController
 		$movie = $this->ControlMovies->movieBdId($id);
 		$cineList = array();
 		$cineList = $this->ControlCinema->bringeverything();
+		$current_date = date ("Y-m-d");
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registerfunction.php");
 		include URL_VISTA . 'footer.php';
