@@ -7,9 +7,10 @@
 
 <section class="product-s-display">
     <?php if(!empty($genresel)){ ?>
-        <h1>Genres</h1>
+       
     <div class="container">
         <div class="row">
+             <h1>Genres</h1>
             <?php foreach ($genresel as $genre) { ?>
                 <div class="col-md-4">
                     <div class="s_display">
