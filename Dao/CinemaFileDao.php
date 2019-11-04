@@ -97,8 +97,6 @@
 				{
 					
 					$cinema = new Cinema();
-
-					$cinema->setId($values["id"]);
 					$cinema->setCapacidad($values["capacidad"]);
 					$cinema->setDireccion($values["direccion"]);
 					$cinema->setNombre($values["nombre"]);
