@@ -12,6 +12,7 @@ use \Controllers\CinemaController as CinemaC;
 use \Controllers\UserController as UserC;
 use \Controllers\MoviegenreController as MoviegenreC;
 use \Controllers\DiscountController as DiscountC;
+use \Controllers\FuctionController as Fuctionc;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -27,21 +28,25 @@ class ViewController
 		$this->ControlUser = new UserC;
 		$this->ControlMuvGen = new MoviegenreC;
 		$this->ControlDiscount = new DiscountC;
+		$this->ControlFuctionc = new Fuctionc;
 	}
 
 	public function index()
 	{
-		
-		$view = 'HOME';
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "home.php");
-		include URL_VISTA . 'footer.php';
-		/*
-		$view = 'Billboard';
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "homebillboard.php");
-		include URL_VISTA . 'footer.php';
-		*/
+		$funcion = $this->ControlFuctionc->bringeverything();
+		if(empty($funcion))
+		{
+			$view = 'HOME';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "home.php");
+			include URL_VISTA . 'footer.php';
+		}
+		else{
+			$view = 'Billboard';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "homebillboard.php");
+			include URL_VISTA . 'footer.php';
+		}
 		
 	} 
 
@@ -252,67 +257,67 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 		else
-		{	$genresel = NULL;
-			$this->message = new Message( "warning", "That genre does not contain movies!" );
-			$genre = $this->ControlGenre->bring_everything();
-			$value = $this->ControlMovies->bringmovies();
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "mymovies.php");
-			include URL_VISTA . 'footer.php';
-		}
-
-	} 
-
-	public function discounts()
-	{
-
-		$view = 'DISCOUNTS';
-		$discount = $this->ControlDiscount->bring_everything();
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "discounts.php");
-		include URL_VISTA . 'footer.php';
-	} 
-
-	public function registrerdiscounts()
-	{
-
-		$view = 'DISCOUNTS';
-		$espace = 'REGISTRED';
-		$discount = $this->ControlDiscount->bring_everything();
-		$i = 0;
-		$current_date = date ("Y-m-d");
-		if(!empty($discount))
-		{
-			foreach ($discount as $dis) {
-				$fecha[$i] = date("Y-m-d", strtotime($dis->getFecha()));
-				$i++;
+			{	$genresel = NULL;
+				$this->message = new Message( "warning", "That genre does not contain movies!" );
+				$genre = $this->ControlGenre->bring_everything();
+				$value = $this->ControlMovies->bringmovies();
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "mymovies.php");
+				include URL_VISTA . 'footer.php';
 			}
-		}
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registrerdiscounts.php");
-		include URL_VISTA . 'footer.php';
-	} 
+
+		} 
+
+		public function discounts()
+		{
+
+			$view = 'DISCOUNTS';
+			$discount = $this->ControlDiscount->bring_everything();
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "discounts.php");
+			include URL_VISTA . 'footer.php';
+		} 
+
+		public function registrerdiscounts()
+		{
+
+			$view = 'DISCOUNTS';
+			$espace = 'REGISTRED';
+			$discount = $this->ControlDiscount->bring_everything();
+			$i = 0;
+			$current_date = date ("Y-m-d");
+			if(!empty($discount))
+			{
+				foreach ($discount as $dis) {
+					$fecha[$i] = date("Y-m-d", strtotime($dis->getFecha()));
+					$i++;
+				}
+			}
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "registrerdiscounts.php");
+			include URL_VISTA . 'footer.php';
+		} 
 
 		public function modifydiscounts($id)
-	{
+		{
 
-		$view = 'DISCOUNTS';
-		$espace = 'MODIFY';
-		$discount = $this->ControlDiscount->bring_data_id($id);
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "modificationdiscounts.php");
-		include URL_VISTA . 'footer.php';
-	} 
+			$view = 'DISCOUNTS';
+			$espace = 'MODIFY';
+			$discount = $this->ControlDiscount->bring_data_id($id);
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "modificationdiscounts.php");
+			include URL_VISTA . 'footer.php';
+		} 
 
-	public function registerFunction($id)
-	{	
-		$view = 'REGISTRER FUNCTION';
-		$movie = $this->ControlMovies->movieBdId($id);
-		$cineList = array();
-		$cineList = $this->ControlCinema->bringeverything();
-		$current_date = date ("Y-m-d");
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "registerfunction.php");
-		include URL_VISTA . 'footer.php';
+		public function registerFunction($id)
+		{	
+			$view = 'REGISTRER FUNCTION';
+			$movie = $this->ControlMovies->movieBdId($id);
+			$cineList = array();
+			$cineList = $this->ControlCinema->bringeverything();
+			$current_date = date ("Y-m-d");
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "registerfunction.php");
+			include URL_VISTA . 'footer.php';
+		}
 	}
-}

@@ -247,19 +247,15 @@ class FunctionBdDao
         if($dataSet){
             $this->list = array_map(function ($p) {
                 $function = new Fuction();
-
-                $cine = new Cine();
-                $movie = new Movie();
-                $cine->setId($p['cine']);
-                $movie->setId($p['movie']);
-                $function->setId($p['id']);
+                $daoMovie = MovieBdDao::getInstance();
+                $daoCinema = CinemaBdDao::getInstance();
                     //Carga cine con solo el id;
-                $function->setCine($cine);
+                $function->setCinema($daoCinema->bring_by_id($p['cinema']));
                     //Carga pelicula con solo el id;
-                $function->setMovie($movi);
+                $function->setMovie($daoMovie->bring_by_id($p['movie']));
                 $function->setDia($p['day']);
                 $function->setHora($p['hours']);
-
+                $function->setId($p['id']);
                 return $function;
             }, $dataSet);
         }
