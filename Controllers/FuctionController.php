@@ -32,10 +32,9 @@ class FuctionController
 	{
 
 
-		
+
 		if(!empty($_SESSION))
 		{
-			
 			if($this->cinemaBdDao->bring_id_by_id($idcinema) != NULL)
 			{
 				$cinema = $this->cinemaBdDao->bring_by_id($idcinema);
@@ -45,7 +44,12 @@ class FuctionController
 					$movie = $this->movieBdDao->bring_by_id($idmovie);
 					$verifiqueday = $this->fuctionBdDao->bring_id_by_day($day);
 					$verifiquehour = $this->fuctionBdDao->bring_id_by_hour($hour);
+<<<<<<< HEAD
 					if($verifiqueday == NULL && $verifiquehour == NULL  )
+=======
+					$funtion = $this->fuctionBdDao->bring_by_date_dmovie_cinema($idcinema,$day,$idmovie);
+					if( empty($funtion))
+>>>>>>> d48d4038395b16df478f17cbb01757e6e6738a97
 					{
 						$function = new Fuction;
 						$function->setCinema($cinema);
@@ -59,7 +63,31 @@ class FuctionController
 						require(URL_VISTA . 'message.php');
 						include URL_VISTA . 'footer.php';
 					}
-					else
+					else if($this->masCercano($funtion,$hour) != $hour)
+					{
+						$cercano = strtotime($this->masCercano($funtion,$hour));
+						if($cercano <strtotime("$hour" +"00:15" + "($movie->getDuration/60)" || $cercano > strtotime("$hour" +"00:15" + "($movie->getDuration/60)")
+						{
+							$function = new Fuction;
+							$function->setCinema($cinema);
+							$function->setMovie($movie);
+							$function->setDia($day);
+							$function->setHora($hour);
+							$this->fuctionBdDao->add($function);
+							$view = "MESSAGE";
+							$this->message = new Message( "success", "exito!" );
+							include URL_VISTA . 'header.php';
+							require(URL_VISTA . 'message.php');
+							include URL_VISTA . 'footer.php';
+						}else{
+							$view = "MESSAGE";
+						$this->message = new Message( "success", "Changos!" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . 'message.php');
+						include URL_VISTA . 'footer.php';
+						}
+
+					}else
 					{
 						$view = "MESSAGE";
 						$this->message = new Message( "success", "Changos!" );
@@ -94,9 +122,38 @@ class FuctionController
 		return $this->fuctionBdDao->bring_everything();
 	}
 
+<<<<<<< HEAD
 		public function  bring_Function_by_idCinema($id)
 	{
 		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
 	}
+=======
+	public function masCercano($list,$numer)
+	{
+		$menor = 0;
+		$mayor = 0;
+		$cercano = 0;
+	
+		foreach($list as $n) 
+		{
+			if ($n->getHora() == $number) {
+				return $number;
+			} else if ($n->getHora() < $number && $n->getHora() < $menor) {
+				$menor = $n->getHora();
+			} else if ($n->getHora() > $number && $n->getHora() > $mayor) {
+				$mayor = $n->getHora();
+			}
+		}
+	
+		if (($mayor - $numer) < ($numer - $menor)) {
+			$cercano = $mayor;
+		} else {
+			$cercano = $menor;
+		}
+	
+		return $cercano;
+	}
+
+>>>>>>> d48d4038395b16df478f17cbb01757e6e6738a97
 
 }
