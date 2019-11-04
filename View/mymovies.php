@@ -72,12 +72,14 @@
             <div class="row">
               <?php foreach ($value as $data)  { ?> 
                 <div class="col-md-6 fond1">
+                <a  id="myMovieForm" href ="">
                   <div class="best-sell-part">
                    <img src="<?= $data->getBackdrop();?>">
                    <p><i class="fa fa-heart" aria-hidden="true"></i></p>
                    <h4>Select For Billboard</h4>
                  </div>
-                 <div class="row">
+                 </a>
+                <div class="row">
                   <div class="col-md-12">
                     <div class="prodact-s-text">
                       <h3><?= $data->getTitle(); ?></h3>
