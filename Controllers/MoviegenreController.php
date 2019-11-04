@@ -43,4 +43,9 @@ class MoviegenreController
 		$this->MovieGenreDao->remove_by_id_movie($id);
 	}
 
+	public function bring_id_by_MovieAll($idmovie)
+	{
+		return $this->MovieGenreDao->bring_id_by_MovieAll($idmovie);
+	}
+
 }

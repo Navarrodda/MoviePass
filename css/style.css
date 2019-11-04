@@ -1276,7 +1276,7 @@ ul.commentlist li .author-name a {
   height: 565px;
 }
 .s_display {
-  width: 395px;
+  width: 418px;
 }
 .product-s-display .s_display > img {
   width: 100%;
@@ -1288,13 +1288,13 @@ ul.commentlist li .author-name a {
 .product-s-display .s_display h2 {
   bottom: 0;
   color: #fff;
-  font-size: 19px;
+  font-size: 10px;
   font-weight: bold;
   position: absolute;
   text-align: center;
   width: 100%;
   background: rgba(200,200,200,.5);
-  padding: 15px;
+  padding: 10px;
   margin: 0;
   opacity: 0
 }

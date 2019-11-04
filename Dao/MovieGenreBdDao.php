@@ -42,18 +42,26 @@ public function bring_id_by_Genero($idGenre)
 return null;
 }
 public function bring_id_by_MovieAll($idMovie)
-{
-   $sql = "SELECT id FROM $this->table WHERE movie = \"$idMovie\" ";
-   $conec = Conection::conection();
-   $judgment = $conec->prepare($sql);
-   $judgment->execute();
-   $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
-   $this->mapear($arrayMg);
-   if(!empty($this->list))
-   {
-    return $this->list;
-}
-return null;
+{   
+    try{
+        if ($idMovie != null) {
+            $sql = ("SELECT * FROM $this->table WHERE movie = \"$idMovie\"" );
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+        }
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
+
 }
 public function bring_id_by_generoAll($idGenre)
 {   

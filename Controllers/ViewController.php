@@ -42,10 +42,11 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 		else{
-			$i = 0 ;
+			$valid = FALSE;
 			$cinema = $this->ControlCinema->bringeverything();
 			$movies = array();
 			$cinemas = array();
+			$genresel = array();
 			if(!empty($cinema))
 			{
 				foreach ($cinema as $cin) {
@@ -53,17 +54,20 @@ class ViewController
 					array_push($cinemas, $cin);
 					foreach ($tocinema as $to) {
 						array_push($movies, $to);
-						
+						$moviesgenre = $this->ControlMuvGen->bring_id_by_MovieAll($to->getMovie()->getId());
+						$genresel = $this->ControlGenre->bring_everything();
 					}
 				}
 			}
-			$view = 'BILLBOARD';
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "homebillboard.php");
-			include URL_VISTA . 'footer.php';
 		}
+		
+		$view = 'BILLBOARD';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "homebillboard.php");
+		include URL_VISTA . 'footer.php';
 
 	}
+	
 
 	public function register()
 	{
