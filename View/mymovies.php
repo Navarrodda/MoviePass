@@ -86,7 +86,7 @@
                      <?php }?>
                      <?php  if(floor($data->getVote()*5/100) == 2) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                     <?php }?>
+                     <?php } ?>
                      <?php  if(floor($data->getVote()*5/100) == 3) { ?>
                        <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                      <?php }?>

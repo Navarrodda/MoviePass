@@ -60,8 +60,8 @@
             </div>
         </div>
         <div class="footer_bottom">
-         <div class="footer_overlay"></div>
-         <div class="container">
+           <div class="footer_overlay"></div>
+           <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="copy_txt">
@@ -81,5 +81,7 @@
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>  
 <script src="<?php echo URL ?>/js/bootstrap.min.js"></script>  
 <script src="<?php echo URL ?>/js/active.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </body>
 </html>
