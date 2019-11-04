@@ -14,7 +14,9 @@
                 <div class="col-md-4">
                     <div class="s_display">
                         <div class="imgri">
+                            <a href="#">
                         <img class="imgri" src="<?= $genre->getImage();?>" alt="">
+                        </a>
                         </div>
                         <h1 style="color:white"><?= $genre->getName();?></h1>
                     </div>
@@ -48,10 +50,11 @@
                 if($muv->getCinema()->getId() == $cin->getId()) { ?>
                     <div class="row">      
                         <div class="col-md-3">
+                            <h1><?=$muv->getDia()?></h1>
                             <div class="s_product">
                                 <img alt="" src="<?= $muv->getMovie()->getPoster();?>">
                                 <div class="s_overlay"></div>
-                                <h2 style="background:black; color:white"><?=$muv->getDia()?></h2>
+                                <h2 style="background:black; color:white"><?=$muv->getHora()?></h2>
                                 <h3><?=$muv->getMovie()->getTitle() ?></h3>
                                 <?php if(!empty($_SESSION)){
                                   if($_SESSION["rol"] == 3) { ?>
