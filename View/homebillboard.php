@@ -71,7 +71,7 @@
                                 <div class="rate">
 
                                     <h3><?=$muv->getMovie()->getOverview()?></h3>
-                                    <p>   <?php  if(floor($muv->getMovie()->getVote()*5/100) < 1) { ?>
+                                    <p>   <?php  if(floor($muv->getMovie()->getVote()*5/100) <= 1) { ?>
                                        <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                                    <?php }?>
                                    <?php  if(floor($muv->getMovie()->getVote()*5/100) == 2) { ?>

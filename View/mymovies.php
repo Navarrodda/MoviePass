@@ -83,7 +83,7 @@
                   <div class="col-md-12">
                     <div class="prodact-s-text">
                       <h3><?= $data->getTitle(); ?></h3>
-                      <?php  if(floor($data->getVote()*5/100) < 1) { ?>
+                      <?php  if(floor($data->getVote()*5/100) <= 1) { ?>
                        <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                      <?php }?>
                      <?php  if(floor($data->getVote()*5/100) == 2) { ?>
