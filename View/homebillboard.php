@@ -50,7 +50,7 @@
                 if($muv->getCinema()->getId() == $cin->getId()) { ?>
                     <div class="row">      
                         <div class="col-md-3">
-                            <h1><?=$muv->getDia()?></h1>
+                            <h1><?php $fecha = date("d-m-Y", strtotime($muv->getDia())); echo $fecha?></h1>
                             <div class="s_product">
                                 <img alt="" src="<?= $muv->getMovie()->getPoster();?>">
                                 <div class="s_overlay"></div>
