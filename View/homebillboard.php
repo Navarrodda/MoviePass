@@ -91,7 +91,7 @@
                              <?php  if(floor($muv->getMovie()->getVote()*5/100) > 5) { ?>
                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p> 
                                <?php }?></i></span>
-                             </p>
+                               <p>
                                <span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?=$muv->getMovie()->getPopularity()?></span> <span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?= $muv->getMovie()->getLanguage()?>"</span> <span style="color:white"><i class="fa fa-play-circle-o" aria-hidden="true"> <?= $muv->getMovie()->getDuration()?></i></span></p>
                                <h5>Estimated Price: $<?= $cin->getValor_entrada(); ?></h5>
                              </div>
