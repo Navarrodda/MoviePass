@@ -46,11 +46,11 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
-        <?php //if(!empty($_SESSION["rol"])){ ?>
-          <?php //if($_SESSION["rol"] != 3){ ?>
+        <?php if(!empty($_SESSION["rol"])){ ?>
+          <?php if($_SESSION["rol"] != 3){ ?>
             <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
             <li><a href="<?php echo URL?>/view/mymovies/">MYMOVIES</a></li>
-            <?php// } } ?>
+            <?php } } ?>
             <?php if(!empty($_SESSION["rol"])){ ?>
               <?php if($_SESSION["rol"] != 3){ ?>
                 <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
