@@ -52,6 +52,8 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
         <div class="product">
             <?php if(!empty($movies)) {
               foreach ($movies as $muv) { 
@@ -100,6 +102,8 @@
                            </div>
                        <?php } } } else { ?>
                           <h3>no movies registered</h3>
+                          </div>
+                          </div>
                       <?php  }?>
                   </div>
               </div>
