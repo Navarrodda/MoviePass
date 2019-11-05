@@ -343,7 +343,9 @@ class ViewController
 		{
 			if(!empty($idgenre))
 			{
-				$fers = null;
+				$fers = NULL;
+				$last = -1;
+				$i = 0;
 				$idmovies = array();
 				$genresel = $this->ControlGenre->bring_everything();
 				$genre = $this->ControlGenre->bring_everything();
@@ -362,23 +364,38 @@ class ViewController
 				{
 					foreach ($idmovies as $idm) {
 						$tocinema = $this->ControlFuctionc->bring_Function_by_idMovies($idm);
-
-						foreach ($tocinema as $to) {
-							if(!empty($to))
-							{
-								$id = $to->getCinema()->getId();
-								if($fers != $id)
+						if (!empty($tocinema)) {
+							foreach ($tocinema as $to) {
+								if($to != NULL)
 								{
-									array_push($cinemas, $to->getCinema());
-									$fers = $id;
-								}
-								$movie = $to->getMovie()->getId();
-								if($idm == $movie)
-								{
-									
-									array_push($movies, $to);
-								}
+									$movie = $to->getMovie()->getId();
+									if($idm == $movie)
+									{
+										array_push($movies, $to);
+										$id = $to->getCinema()->getId();
+										if($fers != $id && $last != $id )
+										{
+											if(!empty($cinemas))
+											{
+												foreach ($cinemas as $cinemaa) {
+													$idcinema= $cinemaa->getId();
+													if($idcinema != $id)
+													{
+														array_push($cinemas, $to->getCinema());
+													}
+												}
+											}
+											else
+											{
+						
+												array_push($cinemas, $to->getCinema());
+											}
+											$last = $fers;
+											$fers = $id;
+										}
+									}
 
+								}
 							}
 						}
 					}
