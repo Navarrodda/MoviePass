@@ -39,12 +39,26 @@ class FuctionController
 
 				if($this->movieBdDao->bring_id_by($idmovie)!= NULL)
 				{
-					
+					$dayfuction= array();
+					$flag = false;
+					$listday = $this->fuctionBdDao->bring_by_day_list($day);
+					foreach ($listday as $funct) {
+							
+						if($idcinema == $funct->getCinema()->getId() && $idmovie == $funct->getMovie()->getId())
+						{
+							$flag = true;
+							array_push($dayfuction, $funct);
+
+						}
+
+
+					}
+
 					$movie = $this->movieBdDao->bring_by_id($idmovie);
 					
 
 					$funtion = $this->fuctionBdDao->bring_by_date_dmovie_cinema($idcinema,$day,$idmovie);
-					if( $this->bring_by_function($idcinema,$day,$idmovie,$hour) == NULL )
+					if( $this->bring_by_function($idcinema,$day,$idmovie,$hour) == NULL && $flag )
 					{
 						$function = new Fuction();
 						$function->setCinema($cinema);
@@ -53,18 +67,25 @@ class FuctionController
 						$function->setHora($hour);
 						$this->fuctionBdDao->add($function);
 						$view = "MESSAGE";
-						$this->message = new Message( "success", "exito!" );
+						$this->message = new Message( "success", "The movie was loaded successfully!" );
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . 'message.php');
 						include URL_VISTA . 'footer.php';
 					}
-					else if($this->masCercano($funtion,$hour) != $hour )
+					else 
 					{
-						$cercano = array();
-						
-						$hourSt = (float)$hour;
-						$cercano = $this->masCercano($funtion,$hourSt);
-						if(($cercano[0]+(15/60) + ($movie->getDuration/60)) < $hourSt  || $cercano[1] > ($hourSt +(15/60) + ($movie->getDuration/60)))
+						$regle = false;
+						$hour = strtotime($hour);
+						foreach ($dayfuction as $dayfun) {
+							 $hourss = strtotime($dayfun->getHora());
+							 $hourss = $hourss + strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
+							if($hourss < $hour)
+							{
+
+								$regle = true;
+							}
+						}
+						if($regle)
 						{
 							$function = new Fuction();
 							$function->setCinema($cinema);
@@ -73,25 +94,25 @@ class FuctionController
 							$function->setHora($hour);
 							$this->fuctionBdDao->add($function);
 							$view = "MESSAGE";
-							$this->message = new Message( "success", "exito!" );
+							$this->message = new Message( "success", "The movie was loaded successfully!" );
 							include URL_VISTA . 'header.php';
 							require(URL_VISTA . 'message.php');
 							include URL_VISTA . 'footer.php';
 						}
-							
-					}else
-					{
+						else
+						{
 							$view = "MESSAGE";
-						$this->message = new Message( "success", "Changos!" );
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . 'message.php');
-						include URL_VISTA . 'footer.php';
+							$this->message = new Message( "warning", "Time not accepted duration!" );
+							include URL_VISTA . 'header.php';
+							require(URL_VISTA . 'message.php');
+							include URL_VISTA . 'footer.php';
 						}
+					}
 
 					}else
 					{
 						$view = "MESSAGE";
-						$this->message = new Message( "success", "Changos!" );
+						$this->message = new Message( "warning", "Movie dont exist!" );
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . 'message.php');
 						include URL_VISTA . 'footer.php';
@@ -100,19 +121,11 @@ class FuctionController
 				}
 				else{
 					$view = "MESSAGE";
-					$this->message = new Message( "warning", "muvie no existente!" );
+					$this->message = new Message( "warning", "Cinema dont exist!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
 				}
-			}
-			else
-			{
-				$view = "MESSAGE";
-				$this->message = new Message( "warning", "Need to login!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'login.php');
-				include URL_VISTA . 'footer.php';
 			}
 	}
 
@@ -167,5 +180,6 @@ class FuctionController
 	{
 		return $this->fuctionBdDao->bring_everything();
 	}
+
 
 }

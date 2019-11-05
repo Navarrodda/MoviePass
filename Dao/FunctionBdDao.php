@@ -55,6 +55,27 @@ class FunctionBdDao
         return null;
     }
 
+    public function bring_by_day_list($day){
+        try{
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\"";
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+            
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
+    }
+
     public function bring_id_by_hour($hours){
         $sql = "SELECT id FROM $this->table WHERE hours = \"$hours\" LIMIT 1";
 
@@ -119,7 +140,7 @@ class FunctionBdDao
                 return $this->list;
             }
             return null;
-            
+
         }catch(\PDOException $e){
             echo $e->getMessage();die();
         }catch(\Exception $e){
