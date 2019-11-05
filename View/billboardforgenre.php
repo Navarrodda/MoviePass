@@ -14,7 +14,7 @@
 
 <section class="product-s-display">
   <?php if(!empty($genresel)){ ?>
-   
+
     <div class="container">
       <div class="row">
        <h1>Genres</h1>
@@ -42,18 +42,15 @@
          <h1>Cinema Functions</h1>
        </div>
      </div>
-     <div class="row">
-      <div class="col-md-12">
-        <?php if(!empty($cinemas)) { 
-         foreach ($cinemas as $cin) {?>
+     <?php if(!empty($cinemas)) { 
+       foreach ($cinemas as $cin) {?>
+         <div class="row">
+          <div class="col-md-12">
            <div class="bar">
             <h2><?= $cin->getNombre();?></h2>
             <img alt="" src="<?php echo URL ?>/img/bar.png">
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+
           <div class="product">
             <?php if(!empty($movies)) {
               foreach ($movies as $muv) { 
@@ -79,39 +76,35 @@
                           <div class="col-md-12">
                             <div class="rate">
                               <h3><?=$muv->getMovie()->getOverview()?></h3>
-                              <p>   <?php  if(floor($muv->getMovie()->getVote()*5/100) <= 1) { ?>
+                              <?php  if(floor($muv->getMovie()->getVote()*5/100) <= 1) { ?>
                                <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                             <?php }?>
+                             <?php } ?>
                              <?php  if(floor($muv->getMovie()->getVote()*5/100) == 2) { ?>
                                <p><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
                              <?php } ?>
                              <?php  if(floor($muv->getMovie()->getVote()*5/100) == 3) { ?>
                                <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                             <?php }?>
+                             <?php } ?>
                              <?php  if(floor($muv->getMovie()->getVote()*5/100) == 4) { ?>
-                               <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p> 
-                             <?php }?>
+                               <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
+                             <?php } ?>
                              <?php  if(floor($muv->getMovie()->getVote()*5/100) > 5) { ?>
-                               <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p> 
-                               <?php }?></i></span>
-                               <span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?=$muv->getMovie()->getPopularity()?></span> <span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?= $muv->getMovie()->getLanguage()?>"</span> <span style="color:white"><i class="fa fa-play-circle-o" aria-hidden="true"> <?= $muv->getMovie()->getDuration()?></i></span></p>
-                               <h5>Estimated Price: $<?= $cin->getValor_entrada(); ?></h5>
-                             </div>
+                              <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p> 
+                             <?php } ?>
+                             <p><span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?=$muv->getMovie()->getPopularity()?></span> <span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?= $muv->getMovie()->getLanguage()?>"</span> <span style="color:white"><i class="fa fa-play-circle-o" aria-hidden="true"> <?= $muv->getMovie()->getDuration()?></i></span></p>
+                             <h5>Estimated Price: $<?= $cin->getValor_entrada(); ?></h5>
                            </div>
                          </div>
                        </div>
-                     <?php } } } else { ?>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <h4>no movies registered</h4>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <?php  }?>
+                     </div>
+                   <?php } } } else { ?>
+                    <h3>no movies registered</h3>
+                  <?php  } ?>
+                </div>
               </div>
             </div>
-          <?php } } ?>
-        </div>
+          </div>
+        <?php } } ?>
       </div>
-    </section>
+    </div>
+  </section>
