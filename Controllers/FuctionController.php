@@ -156,4 +156,9 @@ class FuctionController
 		return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
 	}
 
+		public function bringidfuction($idfuction)
+	{
+		return $this->fuctionBdDao->bring_by_id($idfuction);
+	}
+
 }

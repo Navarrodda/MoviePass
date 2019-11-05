@@ -387,7 +387,7 @@ class ViewController
 											}
 											else
 											{
-						
+
 												array_push($cinemas, $to->getCinema());
 											}
 											$last = $fers;
@@ -462,6 +462,21 @@ class ViewController
 				include URL_VISTA . 'footer.php';
 			}
 		}
+
+		public function modifyfuction($idfuction)
+		{
+
+			$view = 'DISCOUNTS';
+			$espace = 'MODIFY';
+			$function = $this->ControlFuctionc->bringidfuction($idfuction);
+			$movie = $this->ControlMovies->movieBdId($function->getMovie()->getId());
+			$cineList = array();
+			$cineList = $this->ControlCinema->bringeverything();
+			$current_date = date ("Y-m-d");
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "modifyfuction.php");
+			include URL_VISTA . 'footer.php';
+		} 
 
 
 	}

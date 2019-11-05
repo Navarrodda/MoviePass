@@ -67,7 +67,7 @@
                           if($_SESSION["rol"] == 3) { ?>
                             <h4><a href="#"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
                           <?php } else { ?>
-                            <h4><a href="#"><i aria-hidden="true" class="fa fa-angle-double-right"></i>Options</a></h4>
+                            <h4><a href="<?php echo URL ?>/view/modifyfuction/<?=$muv->getId();?>"><i aria-hidden="true" class="fa fa-angle-double-right"></i>Options</a></h4>
                           <?php } } else { ?>
                             <h4><a href="<?php echo URL ?>/view/login/"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
                           <?php  } ?>
