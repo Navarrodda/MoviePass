@@ -56,13 +56,11 @@ class ViewController
 					}
 				}
 			}
+			$view = 'BILLBOARD';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "homebillboard.php");
+			include URL_VISTA . 'footer.php';
 		}
-		
-		$view = 'BILLBOARD';
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "homebillboard.php");
-		include URL_VISTA . 'footer.php';
-
 	}
 	
 
