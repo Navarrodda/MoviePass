@@ -32,7 +32,7 @@ class FuctionController
 	{
 
 
-
+/*
 		if(!empty($_SESSION))
 		{
 			if($this->cinemaBdDao->bring_id_by_id($idcinema) != NULL)
@@ -48,9 +48,8 @@ class FuctionController
 
 					$funtion = $this->fuctionBdDao->bring_by_date_dmovie_cinema($idcinema,$day,$idmovie);
 					if( empty($funtion))
-
 					{
-						$function = new Fuction;
+						$function = new Fuction();
 						$function->setCinema($cinema);
 						$function->setMovie($movie);
 						$function->setDia($day);
@@ -65,9 +64,9 @@ class FuctionController
 					else if($this->masCercano($funtion,$hour) != $hour)
 					{
 						$cercano = strtotime($this->masCercano($funtion,$hour));
-						if($cercano <strtotime("$hour" +"00:15" + "($movie->getDuration/60)" || $cercano > strtotime("$hour" +"00:15" + "($movie->getDuration/60)")
+						if($cercano < strtotime("$hour" +"00:15" + "($movie->getDuration/60)" || $cercano > strtotime("$hour" +"00:15" + "($movie->getDuration/60)")
 						{
-							$function = new Fuction;
+							$function = new Fuction();
 							$function->setCinema($cinema);
 							$function->setMovie($movie);
 							$function->setDia($day);
@@ -112,7 +111,7 @@ class FuctionController
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
-		}
+		}*/
 
 	}
 
@@ -150,6 +149,11 @@ class FuctionController
 		}
 	
 		return $cercano;
+	}
+
+	public function bring_Function_by_idMovies($idmovie)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
 	}
 
 }
