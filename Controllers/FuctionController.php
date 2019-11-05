@@ -160,5 +160,9 @@ class FuctionController
 	{
 		return $this->fuctionBdDao->bring_by_id($idfuction);
 	}
+	public function removefuctioncinema($idcinema)
+	{
+		$this->fuctionBdDao->remove_by_id_cinema($idcinema);
+	}
 
 }

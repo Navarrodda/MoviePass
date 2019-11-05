@@ -174,6 +174,24 @@ class FunctionBdDao
         }
     }
 
+        public function remove_by_id_cinema($id){
+        try{
+
+            $sql = "DELETE FROM $this->table WHERE cinema = \"$id \" Limit 1";
+
+            $conec = Conection::conection();
+
+            $judgment = $conec->prepare($sql);
+
+            $judgment->execute();
+
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
 
     public function to_update(Fuction $function, $id){
 

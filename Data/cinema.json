@@ -1,27 +1,27 @@
 [
     {
-        "id": null,
+        "id": 1,
         "capacidad": "200",
         "direccion": "Padre Duto 12",
         "nombre": "Cinemasenter",
         "valor_entrada": "300"
     },
     {
-        "id": null,
+        "id": 2,
         "capacidad": "3000",
         "direccion": "3 De Febrero 4320",
         "nombre": "Ambassador",
         "valor_entrada": "150"
     },
     {
-        "id": null,
+        "id": 3,
         "capacidad": "200",
         "direccion": "Asdsd",
         "nombre": "Sadsd",
         "valor_entrada": "200"
     },
     {
-        "id": null,
+        "id": 4,
         "capacidad": "200",
         "direccion": "Padre Dutto 1998",
         "nombre": "Cinemacenter",
