@@ -100,7 +100,35 @@ class FunctionBdDao
 
     }
 
-        public function bring_Function_by_idMovies($idMovie)
+    public function bring_by_function($idcinema,$day,$idmovie,$hour)
+    {
+        return $this->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
+    }
+
+    private function bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour)
+    {
+        try{
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\" AND movie = \"$idmovie\" AND hours =\"$hour\" ";
+
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+            
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+
+    public function bring_Function_by_idMovies($idMovie)
     {   
         try{
             if ($idMovie != null) {
@@ -174,7 +202,7 @@ class FunctionBdDao
         }
     }
 
-        public function remove_by_id_cinema($id){
+    public function remove_by_id_cinema($id){
         try{
 
             $sql = "DELETE FROM $this->table WHERE cinema = \"$id \" Limit 1";
@@ -233,25 +261,23 @@ class FunctionBdDao
 
     private function bring_by_date_idmovie_idcinema($idcinema,$day,$idmovie)
     {
-        $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idCinema\" AND movie = \"$idmovie\" ";
-
-        $conec = Conection::conection();
-
-        $judgment = $conec->prepare($sql);
-
-        $judgment->execute();
-
-
-        $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-        $this->mapear($arrayMg);
-
-        if(!empty($this->list))
-        {
-            return $this->list;
+        try{
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\" AND movie = \"$idmovie\" ";
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+            
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
         }
-
-        return null;
     }
 
     public function bring_everything(){

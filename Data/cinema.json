@@ -33,5 +33,12 @@
         "direccion": "Asdas",
         "nombre": "El Rey",
         "valor_entrada": "200"
+    },
+    {
+        "id": 6,
+        "capacidad": "200",
+        "direccion": "Padre Dutto 199",
+        "nombre": "Cinemacenter",
+        "valor_entrada": "200"
     }
 ]
