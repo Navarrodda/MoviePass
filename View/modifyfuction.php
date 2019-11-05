@@ -37,29 +37,30 @@
                     </p>
                   </div>
                 </div>
-            
-             <p class="p2" type="Day:"><input required id="dat" value="<?=$function->getDia()?>" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
-              
-               <p class="p2" type="Hour:"><input required type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
-              <button class="but">Modify</button>
-              <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <script> var array = <?php echo json_encode($fecha);?>;
+
+                <p class="p2" type="Day:"><input required id="dat" value="<?=$function->getDia()?>" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
+
+                <p class="p2" type="Hour:"><input required type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
+                <button class="but">Modify</button>
+                <a href=""><button class="but">REMOVE</button></a>
+                <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
+               <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                <script> var array = <?php //echo json_encode($fecha);?>;
                 $('#dat').datepicker({
                   beforeShowDay: function(date){
                     var string = jQuery.datepicker.formatDate('Y-m-d', date);
                     return [ array.indexOf(string) == -1 ]
                   }
                 });
-              </script>
+              </script>-->
             </form>
-                </div>
-                </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+</div>
 <?php }else {?>
   <h2 class="section-heading" style="color:white">No Cinemas Registered</h2>
 <?php }?>
