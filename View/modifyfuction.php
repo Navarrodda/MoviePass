@@ -28,7 +28,7 @@
                  <form class="flexsearch--form" method="post" action="#">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
-                     <p class="p2"  type="Cinema:">
+                     <p class="p2"  type="Cinema: <?=$function->getCinema()->getNombre() ?> :">
                        <select class="btnselect" name="idcinema" type="Select Cinema:" placeholder = "Select a Cinema" required>
                         <?php foreach($cineList as $cine) { ?>
                           <option value ="<?php echo $cine->getId()?>"><?php echo $cine->getNombre()?></option>
