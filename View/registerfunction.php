@@ -43,15 +43,15 @@
                <p class="p2" type="Hour:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
               <button class="but">Save Data</button>
               <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
-              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-              <script> var array = <?php echo json_encode($fecha);?>;
+              <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+              <script> var array = <?php// echo json_encode($fecha);?>;
                 $('#dat').datepicker({
                   beforeShowDay: function(date){
                     var string = jQuery.datepicker.formatDate('Y-m-d', date);
                     return [ array.indexOf(string) == -1 ]
                   }
                 });
-              </script>
+              </script>-->
             </form>
                 </div>
                 </div>
