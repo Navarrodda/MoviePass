@@ -42,16 +42,19 @@ class FuctionController
 					$dayfuction= array();
 					$flag = false;
 					$listday = $this->fuctionBdDao->bring_by_day_list($day);
-					foreach ($listday as $funct) {
+					if(!empty($listday )){
+						foreach ($listday as $funct) {
 							
-						if($idcinema == $funct->getCinema()->getId() && $idmovie == $funct->getMovie()->getId())
-						{
-							$flag = true;
-							array_push($dayfuction, $funct);
-
+							if($idcinema == $funct->getCinema()->getId() && $idmovie == $funct->getMovie()->getId())
+							{
+								$flag = true;
+								array_push($dayfuction, $funct);
+							}
 						}
-
-
+					}
+					else
+					{
+						$flag = true;
 					}
 
 					$movie = $this->movieBdDao->bring_by_id($idmovie);
@@ -77,8 +80,8 @@ class FuctionController
 						$regle = false;
 						$hour = strtotime($hour);
 						foreach ($dayfuction as $dayfun) {
-							 $hourss = strtotime($dayfun->getHora());
-							 $hourss = $hourss + strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
+							$hourss = strtotime($dayfun->getHora());
+							$hourss = $hourss + strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
 							if($hourss < $hour)
 							{
 
@@ -109,65 +112,65 @@ class FuctionController
 						}
 					}
 
-					}else
-					{
-						$view = "MESSAGE";
-						$this->message = new Message( "warning", "Movie dont exist!" );
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . 'message.php');
-						include URL_VISTA . 'footer.php';
-					}
-					
-				}
-				else{
+				}else
+				{
 					$view = "MESSAGE";
-					$this->message = new Message( "warning", "Cinema dont exist!" );
+					$this->message = new Message( "warning", "Movie dont exist!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
 				}
+
 			}
+			else{
+				$view = "MESSAGE";
+				$this->message = new Message( "warning", "Cinema dont exist!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			}
+		}
 	}
 
-			public function  bring_Function_by_idCinema($id)
-			{
-				return $this->fuctionBdDao->bring_Function_by_idCinema($id);
-			}
+	public function  bring_Function_by_idCinema($id)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
+	}
 
-			public function bring_by_function($idcinema,$day,$idmovie,$hour)
-			{
-				return $this->fuctionBdDao->bring_by_function($idcinema,$day,$idmovie,$hour);
+	public function bring_by_function($idcinema,$day,$idmovie,$hour)
+	{
+		return $this->fuctionBdDao->bring_by_function($idcinema,$day,$idmovie,$hour);
+	}
+	public function masCercano($list,$numer)
+	{
+		$menor = 0;
+		$mayor = 0;
+		$cercano = 0;
+
+		foreach($list as $n) 
+		{
+			if ($n->getHora() == $numer) {
+				return $numer;
+			} else if ($n->getHora() < $numer && $n->getHora() < $menor) {
+				$menor = $n->getHora();
+			} else if ($n->getHora() > $numer && $n->getHora() > $mayor) {
+				$mayor = $n->getHora();
 			}
-			public function masCercano($list,$numer)
-			{
-				$menor = 0;
-				$mayor = 0;
-				$cercano = 0;
-				
-				foreach($list as $n) 
-				{
-					if ($n->getHora() == $numer) {
-						return $numer;
-					} else if ($n->getHora() < $numer && $n->getHora() < $menor) {
-						$menor = $n->getHora();
-					} else if ($n->getHora() > $numer && $n->getHora() > $mayor) {
-						$mayor = $n->getHora();
-					}
-				}
-				
-			$array = array();
-			array_push($array,$menor);
-			array_push($array,$mayor);
-			
-				return $array;
-			}
+		}
+
+		$array = array();
+		array_push($array,$menor);
+		array_push($array,$mayor);
+
+		return $array;
+	}
 
 	public function bring_Function_by_idMovies($idmovie)
 	{
 		return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
 	}
 
-		public function bringidfuction($idfuction)
+	public function bringidfuction($idfuction)
 	{
 		return $this->fuctionBdDao->bring_by_id($idfuction);
 	}

@@ -65,9 +65,9 @@ class CinemaController
 		if($cinema != null )
 		{
 			$name = $cinema->getNombre();
+			$this->ControlFuctionc->removefuctioncinema($id);
 			$this->cinemaFileDao->removeCinema($id);
 			$this->cinemaBdDao->remove_by_id($id);
-				$this->ControlFuctionc->removefuctioncinema($id);
 			$view = "MESSAGE";
 			$this->message = new Message('success', 'The cinema with the id for:'  . '<i><strong>' .  $id 
 				. '</strong>. and Name' . ' ' . '<i><strong>' .  $name 

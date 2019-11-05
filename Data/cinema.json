@@ -40,5 +40,12 @@
         "direccion": "Padre Dutto 199",
         "nombre": "Cinemacenter",
         "valor_entrada": "200"
+    },
+    {
+        "id": 7,
+        "capacidad": "200",
+        "direccion": "Asdasd",
+        "nombre": "Luquita",
+        "valor_entrada": "200"
     }
 ]
