@@ -161,6 +161,7 @@ class UserController
 				$idnikname = $this->daoUser->bring_id_by_nikname($nikname);
 				if($idnikname == NULL)
 				{
+						
 					$iddni =  $this->daoUser->bring_id_by_dni($dni);
 					if($iddni == NULL )
 					{
@@ -227,8 +228,7 @@ class UserController
 			{
 				$regCompleted = FALSE;
 				if (!empty($code)) {
-
-					$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+					$strip = array("~","labcdefghi","`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
 						"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
 					$code = trim(str_replace($strip, " ", strip_tags($code)));
 					$code = preg_replace('/\s+/', " ", $code);

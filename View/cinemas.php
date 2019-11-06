@@ -4,9 +4,17 @@
  <div class="container">
   <?php if(!empty($values)) { ?>
    <div class="centerin">
-     <div class="col-md-12">
-       <h2 class="mb-4">Cinemas List</h2>
+    <div class="row">
+      <div class="col-md-2"> 
+      <?php if(!empty($_SESSION["rol"])){ ?>
+       <?php if($_SESSION["rol"] != 3){ ?>
+         <h1><a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></h1>
+           <?php } }  ?>
+         </div>
+     <div class="col-md-6">
+       <h2>Cinemas List</h2>
      </div>
+   </div>
    </div>
    <table class="table bg-light-alpha">
     <thead>
@@ -22,7 +30,6 @@
        <?php if($_SESSION["rol"] != 3){ ?>
          <th>Modification</th>
          <th>Delete</th>
-         <th><a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></th>
        <?php } }  ?>
 
 
@@ -57,7 +64,6 @@
               </span>
             </a>
           </td>
-          <th>-</th>
 
         <?php } } ?>
       </tr>

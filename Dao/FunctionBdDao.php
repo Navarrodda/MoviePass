@@ -121,23 +121,19 @@ class FunctionBdDao
 
     }
 
-    public function bring_by_function($idcinema,$day,$idmovie,$hour)
-    {
-        return $this->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
-    }
 
-    private function bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour)
+
+    public function bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour)
     {
         try{
-            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\" AND movie = \"$idmovie\" AND hours =\"$hour\" ";
+            $sql = ("SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\" AND movie = \"$idmovie\" AND hours =\"$hour\"");
 
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
             $judgment->execute();
             $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
-            if (!empty($this->list)) {
-                return $this->list;
+            if (!empty($dataSet)) {
+                return $dataSet;
             }
             return null;
 

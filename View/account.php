@@ -32,12 +32,16 @@
     function valida(dato) {
       var ok = true;
       var msg = "I don't enter any key:\n";
-      if(dato.elements["dato"].value == " ")
+      if(dato.elements["dato"].value == "")
       {
         msg += "Put a key\n";
         ok = false;
       }
-
+      if(dato.elements["dato"].value == "l")
+      {
+        msg += "Put a key\n";
+        ok = false;
+      }
 
       if(ok == false)
         alert(msg);
