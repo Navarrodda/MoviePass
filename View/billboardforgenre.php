@@ -59,7 +59,7 @@
           <?php if(!empty($movies)) {
             foreach ($movies as $muv) { 
               if($muv->getCinema()->getId() == $cin->getId()) { ?>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="product">
                     <h1><?php $fecha = date("d-m-Y", strtotime($muv->getDia())); echo $fecha?></h1>
                     <div class="s_product">
