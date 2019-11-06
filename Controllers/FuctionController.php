@@ -49,15 +49,30 @@ class FuctionController
 					if($regla == NULL)
 					{
 						$regle = false;
-						$hou = strtotime($hour);
-						foreach ($listday as $dayfun) {
-							$hourss = strtotime($dayfun->getHora());
-							$hourss = $hourss + strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
-							$hourmin =  $hourss - strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
-							if($hourss < $hou || $hourmin > $hou)
-							{
-								$regle = true;
+
+						$nuevaFecha = (float)$hour;
+						$durationyhismovie = (float)$movie->getDuration()/60;
+						$minutesretarde = 0.25;
+
+						if(!empty($listday))
+						{
+							foreach ($listday as $dayfun) {
+								$hourss = (float)$dayfun->getHora();
+								$resultmin = $hourss - $minutesretarde;
+								$duration = (float)$dayfun->getMovie()->getDuration()/60;
+								$resultmax = $hourss + $minutesretarde + $duration/60;
+								$resultmin = $hourss - $minutesretarde - $duration/60;
+								$resultFecmin = $nuevaFecha - $resultmin;
+								$resultFemax = $nuevaFecha - $resultmax;
+								if($resultFemax > $resultmax || $resultFecmin < $resultmin)
+								{
+									$regle = true;
+								}
 							}
+						}
+						else
+						{
+							$regle = true;
 						}
 						if($regle){
 							$function = new Fuction();

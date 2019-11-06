@@ -40,7 +40,7 @@
             
              <p class="p2" type="Day:"><input required id="dat" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
               
-               <p class="p2" type="Hour:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
+               <p class="p2" type="Hours:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
               <button class="but">Save Data</button>
               <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
               <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

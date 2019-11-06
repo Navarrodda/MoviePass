@@ -12,9 +12,9 @@
 </section>
 
 <section class="product-s-display">
-  <?php if(!empty($genre)){ ?>
-    <div class="container">
-      <div class="row">
+  <div class="container">
+    <div class="row">
+      <?php if(!empty($genre)){ ?>
        <h1>Genres</h1>
        <?php foreach ($genre as $genre) { ?>
         <div class="col-md-4">
@@ -27,15 +27,16 @@
             <h1 style="color:white"><?= $genre->getName();?></h1>
           </div>
         </div>
-        <?php } ?>
-        <?php } else { ?>
-          <div class="bar">
-            <h2>No Loaded Genres</h2>
-            <img alt="" src="<?php echo URL ?>/img/bar.png">
-          </div>
+      <?php } ?>
+    <?php } else { ?>
+      <div class="row">
+        <div class="col-md-12">
+          <h1>No Loaded Genres</h1>
+        </div>
       </div>
-    </div>
-  <?php } ?>
+    <?php } ?>
+  </div>
+</div>
 </section>
 
 

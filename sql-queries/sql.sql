@@ -1,4 +1,4 @@
-/* CREATE DATABASE moviepass; */
+CREATE DATABASE moviepass; 
 
 USE moviepass;
 

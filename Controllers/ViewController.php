@@ -60,19 +60,19 @@ class ViewController
 							}
 
 
-							}
-							
 						}
+
 					}
-					
 				}
+
+			}
 			$view = 'BILLBOARD';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "homebillboard.php");
 			include URL_VISTA . 'footer.php';
-			}
-			
 		}
+
+	}
 	
 	
 
@@ -343,10 +343,20 @@ class ViewController
 			$movie = $this->ControlMovies->movieBdId($id);
 			$cineList = array();
 			$cineList = $this->ControlCinema->bringeverything();
-			$current_date = date ("Y-m-d");
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "registerfunction.php");
-			include URL_VISTA . 'footer.php';
+			if(empty($cineList))
+			{
+				$this->message = new Message( "warning", "There are no registered cinemas!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registrercinema.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$current_date = date ("Y-m-d");
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "registerfunction.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 
 		public function billboardforgenre($idgenre)
