@@ -1,36 +1,48 @@
 <section>
   <?php  include(URL_VISTA . 'navbar.php') ?>
   <div class="clear"></div>
+</section>
 <section>
-    <?php if(isset($this->message)) {?>
-      <div class="container">
-        <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
-      </div>
-    <?php } ?>
-    <div class="clear"></div>
+  <?php if(isset($this->message)) {?>
+    <div class="container">
+      <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
+    </div>
+  <?php } ?>
+  <div class="clear"></div>
 </section>
 
-</section>
-<section class="best-seller">
-  <div class="container">
-   <div class="row">
-    <div class="col-md-12">
-      <?php if (!empty($genre)) {?>
-        <div class="bar">
-          <h2>Genres</h2>
-          <img alt="" src="<?php echo URL ?>/img/bar.png">
+<section class="product-s-display">
+  <?php if(!empty($genre)){ ?>
+    <div class="container">
+      <div class="row">
+       <h1>Genres</h1>
+       <?php foreach ($genre as $genre) { ?>
+        <div class="col-md-4">
+          <div class="s_display">
+            <div class="imgri">
+              <a href="<?php echo URL ?>/view/mymoviegenres/<?= $genre->getId(); ?>">
+                <img class="imgri" src="<?= $genre->getImage();?>" alt="">
+              </a>
+            </div>
+            <h1 style="color:white"><?= $genre->getName();?></h1>
+          </div>
         </div>
-      <?php } else { ?>
-        <div class="bar">
-          <h2>No Loaded Genres</h2>
-          <img alt="" src="<?php echo URL ?>/img/bar.png">
-        </div>
-      <?php } ?>
+        <?php } ?>
+        <?php } else { ?>
+          <div class="bar">
+            <h2>No Loaded Genres</h2>
+            <img alt="" src="<?php echo URL ?>/img/bar.png">
+          </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="clear"></div>
+  <?php } ?>
 </section>
+
+
+<section>
+  <div class="clear"></div>
+</section>
+
 <section class="t-shart-brand">
   <?php if (!empty($genre)) {
     foreach ($genre as $gen) { ?>
@@ -72,14 +84,14 @@
             <div class="row">
               <?php foreach ($value as $data)  { ?> 
                 <div class="col-md-6 fond1">
-                <a  id="myMovieForm" href ="<?php echo URL ?>/View/registerFunction/<?php echo $data->getId()?>">
-                  <div class="best-sell-part">
-                   <img src="<?= $data->getBackdrop();?>">
-                   <p><i class="fa fa-heart" aria-hidden="true"></i></p>
-                   <h4>Select For Billboard</h4>
-                 </div>
+                  <a  id="myMovieForm" href ="<?php echo URL ?>/View/registerFunction/<?php echo $data->getId()?>">
+                    <div class="best-sell-part">
+                     <img src="<?= $data->getBackdrop();?>">
+                     <p><i class="fa fa-heart" aria-hidden="true"></i></p>
+                     <h4>Select For Billboard</h4>
+                   </div>
                  </a>
-                <div class="row">
+                 <div class="row">
                   <div class="col-md-12">
                     <div class="prodact-s-text">
                       <h3><?= $data->getTitle(); ?></h3>
