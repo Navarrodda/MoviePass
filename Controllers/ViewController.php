@@ -49,19 +49,31 @@ class ViewController
 			if(!empty($cinema))
 			{
 				foreach ($cinema as $cin) {
-					$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
-					array_push($cinemas, $cin);
-					foreach ($tocinema as $to) {
-						array_push($movies, $to);
+					if($cin->getId() != null)
+					{
+						$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
+
+						if (!empty($tocinema )) {
+							array_push($cinemas, $cin);
+							foreach ($tocinema as $to) {
+								array_push($movies, $to);
+							}
+
+
+							}
+							
+						}
 					}
+					
 				}
-			}
 			$view = 'BILLBOARD';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "homebillboard.php");
 			include URL_VISTA . 'footer.php';
+			}
+			
 		}
-	}
+	
 	
 
 	public function register()

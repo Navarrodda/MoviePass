@@ -1,6 +1,8 @@
 <?php 
 namespace Dao;
-use Model\Fuction as Fuction;
+
+use \Model\Fuction as Fuction;
+
 class FunctionBdDao
 {
     protected $table = "functions";
@@ -55,9 +57,9 @@ class FunctionBdDao
         return null;
     }
 
-    public function bring_by_day_list($day){
+    public function bring_by_day_for_cinema($day,$idcinema){
         try{
-            $sql = "SELECT * FROM $this->table WHERE day = \"$day\"";
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\"";
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
             $judgment->execute();
@@ -98,27 +100,35 @@ class FunctionBdDao
         //Devuelve todas las funciones del cine
 
 
-    public function bring_Function_by_idCinema($idCinema)
+    public function bring_Function_by_idCinema($cinema)
     {   
         try{
-            if ($idCinema != null) {
-                $sql = ("SELECT * FROM $this->table WHERE cinema = \"$idCinema\"" );
+            if ($cinema != null) {
+                $sql = "SELECT * FROM $this->table WHERE cinema = \"$cinema\"";
+
                 $conec = Conection::conection();
+
                 $judgment = $conec->prepare($sql);
+
                 $judgment->execute();
+
+
                 $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+                 
                 $this->mapear($dataSet);
-                if (!empty($this->list)) {
+
+                if(!empty($this->list)){
+
                     return $this->list;
                 }
-                return null;
             }
+
+            return null;
         }catch(\PDOException $e){
             echo $e->getMessage();die();
         }catch(\Exception $e){
             echo $e->getMessage();die();
         }
-
     }
 
 
@@ -356,22 +366,23 @@ class FunctionBdDao
     }
 
     public function mapear($dataSet){
-        $dataSet = is_array($dataSet) ? $dataSet : false;
-        if($dataSet){
-            $this->list = array_map(function ($p) {
-                $function = new Fuction();
-                $daoMovie = MovieBdDao::getInstance();
-                $daoCinema = CinemaBdDao::getInstance();
-                $function->setId($p['id']);
-                //Carga cine con solo el id;
-                $function->setCinema($daoCinema->bring_by_id($p['cinema']));
-                //Carga pelicula con solo el id;
-                $function->setMovie($daoMovie->bring_by_id($p['movie']));
-                $function->setDia($p['day']);
-                $function->setHora($p['hours']);
-                return $function;
-            }, $dataSet);
-        }
+        $dataSet = is_array($dataSet) ? $dataSet : [];
+        $this->list = array_map(function ($f){
+         $daoMovie = MovieBdDao::getInstance();
+         $daoCinema = CinemaBdDao::getInstance();
+         $fuction = new Fuction();
+
+         $fuction->setId($f['id']);
+         $fuction->setCinema($daoCinema->bring_by_id($f['cinema']));
+         $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
+         $fuction->setDia($f['day']);
+         $fuction->setHora($f['hours']);
+
+         return $fuction;
+
+     }, $dataSet);
+
+        return count($dataSet) > 0 ? $dataSet : null;
+        
     }
-}
-?>
+} 

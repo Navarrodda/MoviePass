@@ -42,37 +42,15 @@ class FuctionController
 
 				if($movie != NULL)
 				{
-					$dayfuction= array();
-					$listday = $this->fuctionBdDao->bring_by_day_list($day);
-					if(!empty($listday )){
-						foreach ($listday as $funct) {
-							
-							if($idcinema == $funct->getCinema()->getId() && $idmovie == $funct->getMovie()->getId())
-							{
-								array_push($dayfuction, $funct);
-							}
-						}
-					}
+
+					$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
+
 					$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
 					if($regla == NULL)
 					{
-						$function = new Fuction();
-						$function->setCinema($cinema);
-						$function->setMovie($movie);
-						$function->setDia($day);
-						$function->setHora($hour);
-						$this->fuctionBdDao->add($function);
-						$view = "MESSAGE";
-						$this->message = new Message( "success", "The movie was loaded successfully!" );
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . 'message.php');
-						include URL_VISTA . 'footer.php';
-					}
-					else 
-					{
 						$regle = false;
 						$hou = strtotime($hour);
-						foreach ($dayfuction as $dayfun) {
+						foreach ($listday as $dayfun) {
 							$hourss = strtotime($dayfun->getHora());
 							$hourss = $hourss + strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
 							$hourmin =  $hourss - strtotime('00:15') + strtotime($dayfun->getMovie()->getDuration());
@@ -81,10 +59,7 @@ class FuctionController
 								$regle = true;
 							}
 						}
-						if($regla == NULL)
-						{
-						if($regle)
-						{
+						if($regle){
 							$function = new Fuction();
 							$function->setCinema($cinema);
 							$function->setMovie($movie);
@@ -100,41 +75,48 @@ class FuctionController
 						else
 						{
 							$view = "MESSAGE";
-							$this->message = new Message( "warning", "Time not accepted duration!" );
-							include URL_VISTA . 'header.php';
-							require(URL_VISTA . 'message.php');
-							include URL_VISTA . 'footer.php';
-						}
-						}
-						else
-						{
-							$view = "MESSAGE";
-							$this->message = new Message( "warning", "Billboard movie already exists!" );
+							$this->message = new Message( "warning", "Does not meet the duration!" );
 							include URL_VISTA . 'header.php';
 							require(URL_VISTA . 'message.php');
 							include URL_VISTA . 'footer.php';
 						}
 					}
-
-				}else
+					else
+					{
+						$view = "MESSAGE";
+						$this->message = new Message( "warning", "Billboard movie already exists. It does not matter!!" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . 'message.php');
+						include URL_VISTA . 'footer.php';
+					}
+				}
+				else
 				{
 					$view = "MESSAGE";
-					$this->message = new Message( "warning", "Movie dont exist!" );
+					$this->message = new Message( "warning", "Cinema dont exist!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
 				}
-
 			}
-			else{
+			else
+			{
 				$view = "MESSAGE";
-				$this->message = new Message( "warning", "Cinema dont exist!" );
+				$this->message = new Message( "warning", "Movie dont exist!" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
 		}
+		else{
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "Must login!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'login.php');
+			include URL_VISTA . 'footer.php';
+		}
 	}
+
 
 	public function  bring_Function_by_idCinema($id)
 	{
@@ -144,29 +126,6 @@ class FuctionController
 	public function bring_by_function($idcinema,$day,$idmovie,$hour)
 	{
 		return $this->fuctionBdDao->bring_by_function($idcinema,$day,$idmovie,$hour);
-	}
-	public function masCercano($list,$numer)
-	{
-		$menor = 0;
-		$mayor = 0;
-		$cercano = 0;
-
-		foreach($list as $n) 
-		{
-			if ($n->getHora() == $numer) {
-				return $numer;
-			} else if ($n->getHora() < $numer && $n->getHora() < $menor) {
-				$menor = $n->getHora();
-			} else if ($n->getHora() > $numer && $n->getHora() > $mayor) {
-				$mayor = $n->getHora();
-			}
-		}
-
-		$array = array();
-		array_push($array,$menor);
-		array_push($array,$mayor);
-
-		return $array;
 	}
 
 	public function bring_Function_by_idMovies($idmovie)

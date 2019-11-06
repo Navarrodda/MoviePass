@@ -13,11 +13,6 @@ class Fuction
     private $dia;
     private $hora;
 
-    public function __construct()
-    {
-
-    }
-
     /**
      * @return mixed
      */
@@ -53,8 +48,8 @@ class Fuction
      */
     public function setCinema(Cinema $cinema)
     {
-        $this->cinema = $cinema;
 
+        $this->cinema = $cinema;
         return $this;
     }
 
