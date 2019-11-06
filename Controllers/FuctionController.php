@@ -59,11 +59,12 @@ class FuctionController
 								$hourss = (float)$dayfun->getHora();
 								$resultmin = $hourss - $minutesretarde;
 								$duration = (float)$dayfun->getMovie()->getDuration()/60;
-								$resultmax = $hourss + $minutesretarde + $duration/60;
-								$resultmin = $hourss - $minutesretarde - $duration/60;
+								$resultmax = $hourss + ($minutesretarde * ($duration/60));
+								$resultmin = $hourss - ($minutesretarde * ($duration/60));
+								die(var_dump($resultmin));
 								$resultFecmin = $nuevaFecha - $resultmin;
 								$resultFemax = $nuevaFecha - $resultmax;
-								if($resultFemax >= $resultmax || $resultFecmin <= $resultmin)
+								if($resultFemax < $resultmax || $resultFecmin > $resultmin)
 								{
 									$regle = true;
 								}

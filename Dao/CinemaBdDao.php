@@ -208,8 +208,8 @@ public function mapear($dataSet){
             $cinema = new Cinema();
             $cinema->setId($p['id']);
             $cinema->setNombre($p['name']);
-            $cinema->setCapacidad($p['address']);
-            $cinema->setDireccion($p['total_capacity']);
+            $cinema->setDireccion($p['address']);
+            $cinema->setCapacidad($p['total_capacity']);
             $cinema->setValor_entrada($p['estimated_price']);
 
             return $cinema;

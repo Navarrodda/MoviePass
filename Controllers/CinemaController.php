@@ -91,5 +91,10 @@ class CinemaController
 	{
 		return $this->cinemaFileDao->retrieveData();
 	}
+
+		public function bring_for_id($idcinema)
+	{
+		return $this->cinemaBdDao->bring_by_id($idcinema);
+	}
 }
 ?>

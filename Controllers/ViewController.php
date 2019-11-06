@@ -202,6 +202,18 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	}
 
+	public function modifycinema($idcinema)
+	{
+
+		$view = 'CINEMA';
+		$espace = 'MODIFY';
+		$cinema = $this->ControlCinema->bring_for_id($idcinema);
+		$current_date = date ("Y-m-d");
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modifycinema.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
 	public function cinema()
 	{
 		$view = 'CINEMA';

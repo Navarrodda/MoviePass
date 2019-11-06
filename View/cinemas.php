@@ -46,13 +46,13 @@
              <td><?php echo $data->getId(); ?></td>
            <?php } } ?>
            <td><?php echo $data->getNombre(); ?></td>
-           <td><?php echo $data->getCapacidad(); ?></td>
            <td><?php echo $data->getDireccion(); ?></td>
+           <td><?php echo $data->getCapacidad();?></td>
            <td>$<?php echo $data->getValor_entrada(); ?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
              <td>
-              <a href="#" class="disabled">         
+              <a href="<?php echo URL ?>/view/modifycinema/<?=$data->getId() ?>" class="disabled">         
                 <span class="fa fa-pencil-square-o" title=""
                 data-toggle="tooltip" data-placement="right">
               </span>
