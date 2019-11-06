@@ -53,7 +53,7 @@
               <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="#">
                 <div class="flexsearch--input-wrapper">
                   <div class="center">
-                    <select name="select" class="btnselect">
+                    <select style="text-align:center;" name="select" class="btnselect">
                      <option value="0">Choose an option</option> 
                      <option value="1">Movie</option> 
                      <option value="2">Categories</option>
