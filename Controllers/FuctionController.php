@@ -52,8 +52,7 @@ class FuctionController
 
 						$nuevaFecha = (float)$hour;
 						$durationyhismovie = (float)$movie->getDuration()/60;
-						$minutesretarde = 0.25;
-
+						$minutesretarde = 0.15;
 						if(!empty($listday))
 						{
 							foreach ($listday as $dayfun) {
@@ -64,10 +63,11 @@ class FuctionController
 								$resultmin = $hourss - $minutesretarde - $duration/60;
 								$resultFecmin = $nuevaFecha - $resultmin;
 								$resultFemax = $nuevaFecha - $resultmax;
-								if($resultFemax > $resultmax || $resultFecmin < $resultmin)
+								if($resultFemax >= $resultmax || $resultFecmin <= $resultmin)
 								{
 									$regle = true;
 								}
+						
 							}
 						}
 						else
