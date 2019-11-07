@@ -155,11 +155,11 @@ class FunctionBdDao
     }
 
 
-    public function bring_Function_by_idMovies($idMovie)
+    public function bring_Function_by_idMovies_for_day($idMovie,$day)
     {   
         try{
             if ($idMovie != null) {
-                $sql = ("SELECT * FROM $this->table WHERE movie = \"$idMovie\"" );
+                $sql = ("SELECT * FROM $this->table WHERE movie = \"$idMovie\" AND day = \"$day\"" );
                 $conec = Conection::conection();
                 $judgment = $conec->prepare($sql);
                 $judgment->execute();

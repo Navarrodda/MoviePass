@@ -42,7 +42,7 @@ class FuctionController
 
 				if($movie != NULL)
 				{
-					$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
+					$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
 
 					if(!empty($funcionmuvie))
 					{
@@ -71,6 +71,13 @@ class FuctionController
 						if($regla == NULL)
 						{
 							$regle = false;
+							$separar[1]=explode(':',$hour);
+							//$separar[2]=explode(':',$hora2);
+							print_r('<p>hora');
+							print_r($hour);
+							print_r('<p> modificada');
+							print_r('<p>');
+							die(var_dump($separar));
 							$nuevaFecha = (float)$hour;
 							$durationyhismovie = (float)$movie->getDuration()/60;
 							$minutesretarde = 0.15;
