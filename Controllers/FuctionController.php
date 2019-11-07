@@ -54,18 +54,18 @@ class FuctionController
 								$movieforcinema = TRUE;
 								
 							}
-							
+
 						}
 					}
 					else
 					{
 						$movieforcinema = TRUE;
 					}
-
+					
 					$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
 
 					$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
-					if($regla == NULL && $movieforcinema)
+					if($regla == NULL)
 					{
 						$regle = false;
 						$nuevaFecha = (float)$hour;
