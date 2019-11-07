@@ -71,39 +71,36 @@ class FuctionController
 						if($regla == NULL)
 						{
 							$regle = false;
+							$ve = '00:15:00';
+							$veda[1]=explode(':',$ve);
 							$separar[1]=explode(':',$hour);
 							//$separar[2]=explode(':',$hora2);
-							print_r('<p>hora');
-							print_r($hour);
-							print_r('<p> modificada');
-							print_r('<p>');
-							die(var_dump($separar));
-							$nuevaFecha = (float)$hour;
-							$durationyhismovie = (float)$movie->getDuration()/60;
-							$minutesretarde = 0.15;
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
 							if(!empty($listday))
 							{
 								foreach ($listday as $dayfun) {
-									$hourss = (float)$dayfun->getHora();
-									$resultmin = $hourss - $minutesretarde;
-									$duration = (float)$dayfun->getMovie()->getDuration()/60;
-									$resultmax = $hourss + ($minutesretarde * ($duration/60));
-									$resultmin = $hourss - ($minutesretarde * ($duration/60));
-									die(var_dump($resultmin));
-									$resultFecmin = $nuevaFecha - $resultmin;
-									$resultFemax = $nuevaFecha - $resultmax;
-									if($resultFemax < $resultmax || $resultFecmin > $resultmin)
+
+									$hourss = $dayfun->getHora();
+									$separar[2]=explode(':',$hourss);
+									$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
+									$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2]; 
+									if($separar[1][0] != $separar[2][0] && $separar[1][0] != '00'){
+									}
+									if($total_minutos <= -251)
 									{
 										$regle = true;
 									}
-
+									if($total_minutos >= 123)
+									{
+										$regle = true;
+									}
 								}
 							}
 							else
 							{
 								$regle = true;
 							}
-							if($regle && $movieforcinema){
+							if($regle){
 								$function = new Fuction();
 								$function->setCinema($cinema);
 								$function->setMovie($movie);
