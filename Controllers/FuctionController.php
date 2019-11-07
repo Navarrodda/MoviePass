@@ -61,56 +61,50 @@ class FuctionController
 					{
 						$movieforcinema = TRUE;
 					}
-					
+
 					$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
 
-					$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
-					if($regla == NULL)
+					if($movieforcinema)
 					{
-						$regle = false;
-						$nuevaFecha = (float)$hour;
-						$durationyhismovie = (float)$movie->getDuration()/60;
-						$minutesretarde = 0.15;
-						if(!empty($listday))
-						{
-							foreach ($listday as $dayfun) {
-								$hourss = (float)$dayfun->getHora();
-								$resultmin = $hourss - $minutesretarde;
-								$duration = (float)$dayfun->getMovie()->getDuration()/60;
-								$resultmax = $hourss + ($minutesretarde * ($duration/60));
-								$resultmin = $hourss - ($minutesretarde * ($duration/60));
-								die(var_dump($resultmin));
-								$resultFecmin = $nuevaFecha - $resultmin;
-								$resultFemax = $nuevaFecha - $resultmax;
-								if($resultFemax < $resultmax || $resultFecmin > $resultmin)
-								{
-									$regle = true;
-								}
 
+						$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
+						if($regla == NULL)
+						{
+							$regle = false;
+							$nuevaFecha = (float)$hour;
+							$durationyhismovie = (float)$movie->getDuration()/60;
+							$minutesretarde = 0.15;
+							if(!empty($listday))
+							{
+								foreach ($listday as $dayfun) {
+									$hourss = (float)$dayfun->getHora();
+									$resultmin = $hourss - $minutesretarde;
+									$duration = (float)$dayfun->getMovie()->getDuration()/60;
+									$resultmax = $hourss + ($minutesretarde * ($duration/60));
+									$resultmin = $hourss - ($minutesretarde * ($duration/60));
+									die(var_dump($resultmin));
+									$resultFecmin = $nuevaFecha - $resultmin;
+									$resultFemax = $nuevaFecha - $resultmax;
+									if($resultFemax < $resultmax || $resultFecmin > $resultmin)
+									{
+										$regle = true;
+									}
+
+								}
 							}
-						}
-						else
-						{
-							$regle = true;
-						}
-						if($regle && $movieforcinema){
-							$function = new Fuction();
-							$function->setCinema($cinema);
-							$function->setMovie($movie);
-							$function->setDia($day);
-							$function->setHora($hour);
-							$this->fuctionBdDao->add($function);
-							$view = "MESSAGE";
-							$this->message = new Message( "success", "The movie was loaded successfully!" );
-							include URL_VISTA . 'header.php';
-							require(URL_VISTA . 'message.php');
-							include URL_VISTA . 'footer.php';
-						}
-						else
-						{
-							if($menssaj == 1){
+							else
+							{
+								$regle = true;
+							}
+							if($regle && $movieforcinema){
+								$function = new Fuction();
+								$function->setCinema($cinema);
+								$function->setMovie($movie);
+								$function->setDia($day);
+								$function->setHora($hour);
+								$this->fuctionBdDao->add($function);
 								$view = "MESSAGE";
-								$this->message = new Message( "warning", "Does not meet the duration!" );
+								$this->message = new Message( "success", "The movie was loaded successfully!" );
 								include URL_VISTA . 'header.php';
 								require(URL_VISTA . 'message.php');
 								include URL_VISTA . 'footer.php';
@@ -118,12 +112,11 @@ class FuctionController
 							else
 							{
 								$view = "MESSAGE";
-								$this->message = new Message( "warning", "The selected movie is already in another movie theater!" );
+								$this->message = new Message( "warning", "Does not meet the duration!" );
 								include URL_VISTA . 'header.php';
 								require(URL_VISTA . 'message.php');
 								include URL_VISTA . 'footer.php';
 							}
-						}
 						}
 						else
 						{
@@ -137,7 +130,7 @@ class FuctionController
 					else
 					{
 						$view = "MESSAGE";
-						$this->message = new Message( "warning", "Cinema dont exist!" );
+						$this->message = new Message( "warning", "The selected movie is already in another movie theater!" );
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . 'message.php');
 						include URL_VISTA . 'footer.php';
@@ -146,50 +139,59 @@ class FuctionController
 				else
 				{
 					$view = "MESSAGE";
-					$this->message = new Message( "warning", "Movie dont exist!" );
+					$this->message = new Message( "warning", "Cinema dont exist!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
 				}
 			}
-			else{
+			else
+			{
 				$view = "MESSAGE";
-				$this->message = new Message( "warning", "Must login!" );
+				$this->message = new Message( "warning", "Movie dont exist!" );
 				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'login.php');
+				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
 		}
-
-
-		public function  bring_Function_by_idCinema($id)
-		{
-			return $this->fuctionBdDao->bring_Function_by_idCinema($id);
+		else{
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "Must login!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'login.php');
+			include URL_VISTA . 'footer.php';
 		}
-
-		public function bring_by_function($idcinema,$day,$idmovie,$hour)
-		{
-			return $this->fuctionBdDao->bring_by_function($idcinema,$day,$idmovie,$hour);
-		}
-
-		public function bring_Function_by_idMovies($idmovie)
-		{
-			return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
-		}
-
-		public function bringidfuction($idfuction)
-		{
-			return $this->fuctionBdDao->bring_by_id($idfuction);
-		}
-		public function removefuctioncinema($idcinema)
-		{
-			$this->fuctionBdDao->remove_by_id_cinema($idcinema);
-		}
-
-		public function bringeverything()
-		{
-			return $this->fuctionBdDao->bring_everything();
-		}
-
-
 	}
+
+
+	public function  bring_Function_by_idCinema($id)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
+	}
+
+	public function bring_by_function($idcinema,$day,$idmovie,$hour)
+	{
+		return $this->fuctionBdDao->bring_by_function($idcinema,$day,$idmovie,$hour);
+	}
+
+	public function bring_Function_by_idMovies($idmovie)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
+	}
+
+	public function bringidfuction($idfuction)
+	{
+		return $this->fuctionBdDao->bring_by_id($idfuction);
+	}
+	public function removefuctioncinema($idcinema)
+	{
+		$this->fuctionBdDao->remove_by_id_cinema($idcinema);
+	}
+
+	public function bringeverything()
+	{
+		return $this->fuctionBdDao->bring_everything();
+	}
+
+
+}
