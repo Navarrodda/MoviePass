@@ -63,10 +63,31 @@
         "valor_entrada": "300"
     },
     {
-        "id": 10,
+        "id": null,
         "capacidad": "200",
         "direccion": "Asdasd",
         "nombre": "Cinemacenter",
         "valor_entrada": "300"
+    },
+    {
+        "id": null,
+        "capacidad": "200",
+        "direccion": "Asdsd",
+        "nombre": "El Rey",
+        "valor_entrada": "350"
+    },
+    {
+        "id": null,
+        "capacidad": "200",
+        "direccion": "Asdsad",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "320"
+    },
+    {
+        "id": 13,
+        "capacidad": "200",
+        "direccion": "Asdsa",
+        "nombre": "El Rey",
+        "valor_entrada": "310"
     }
 ]

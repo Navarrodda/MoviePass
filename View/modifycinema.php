@@ -25,7 +25,8 @@
           <div class="row">
             <div class="col-md-12 marcform">
               <?php  if(!empty($cinema)) { ?>
-             <form class="form1" method="post" action="<?php echo URL ?>/cinema/add/">
+             <form class="form1" method="post" action="<?php echo URL ?>/cinema/modify/">
+              <p><input  name="id" type=hidden value="<?= $cinema->getId()?>"></p>
               <p class="p2" type="Name Cinema:"><input class="int" value="<?=$cinema->getNombre()?>" name="name" style="color:white" placeholder="Enter in the name of the cinema here.."></input></p>
               <p class="p2" type="Capacity:"><input  type="number" value="<?=$cinema->getCapacidad()?>" min="100" max="395" class="int" name="capacity" style="color:white" placeholder="It introduces the totality of the cinema in total numbers.."></input></p>
               <p class="p2" type="Address:"><input  class="int" value="<?=$cinema->getDireccion()?>" name="address" style="color:white" placeholder="Enter the address of the cinema.."></input></p>

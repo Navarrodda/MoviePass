@@ -112,7 +112,7 @@ public function remove_by_id($id){
 public function to_update(Cinema $cinema, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET id=:id, name=:nombre, total_capacity=:capacidad, estimated_price=:valor_entrada WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET name=:name, address=:address, total_capacity=:total_capacity, estimated_price=:estimated_price WHERE id=\"$id\"");
 
 
 
@@ -120,17 +120,15 @@ public function to_update(Cinema $cinema, $id){
 
         $judgment = $conec->prepare($sql);
 
-        $id = $cinema->getId();
         $nombre = $cinema->getNombre();
-        $capacidad = $cinema->getCapacidad();
         $direccion = $cinema->getDireccion();
+        $capacidad = $cinema->getCapacidad();
         $valor_entrada = $cinema->getValor_entrada();
 
-        $judgment->bindParam(":id",$id);
-        $judgment->bindParam(":nombre",$nombre);
-        $judgment->bindParam(":capacidad",$capacidad);
-        $judgment->bindParam(":direccion",$direccion);
-        $judgment->bindParam(":valor_entrada",$valor_entrada);
+        $judgment->bindParam(":name",$nombre);
+        $judgment->bindParam(":address",$direccion);
+        $judgment->bindParam(":total_capacity",$capacidad);
+        $judgment->bindParam(":estimated_price",$valor_entrada);
 
 
         $judgment->execute();

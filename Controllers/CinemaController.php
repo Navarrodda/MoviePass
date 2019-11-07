@@ -92,9 +92,36 @@ class CinemaController
 		return $this->cinemaFileDao->retrieveData();
 	}
 
-		public function bring_for_id($idcinema)
+	public function bring_for_id($idcinema)
 	{
 		return $this->cinemaBdDao->bring_by_id($idcinema);
+	}
+
+	public function modify($idcinema,$name,$capacity,$address,$input_value)
+	{
+
+		$cine = $this->cinemaBdDao->bring_id_by_title($name);
+		if($cine == $idcinema){
+			$cinema = new Cinema();
+			$cinema->setNombre($name);
+			$cinema->setCapacidad($capacity);
+			$cinema->setDireccion($address);
+			$cinema->setValor_entrada($input_value);
+			$this->cinemaBdDao->to_update($cinema,$idcinema);
+			$view = "MESSAGE";
+			$this->message = new Message( "success", "The cinema has been successfully modified!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "The cinema with that name is already registered!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
 	}
 }
 ?>
