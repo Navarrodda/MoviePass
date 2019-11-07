@@ -86,11 +86,11 @@ class FuctionController
 									$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2]; 
 									if($separar[1][0] != $separar[2][0] && $separar[1][0] != '00'){
 									}
-									if($total_minutos <= -251)
+									if($total_minutos <= -132)
 									{
 										$regle = true;
 									}
-									if($total_minutos >= 123)
+									if($total_minutos >= 136)
 									{
 										$regle = true;
 									}
