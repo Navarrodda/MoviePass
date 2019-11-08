@@ -31,8 +31,14 @@ class FuctionController
 	public function add($idcinema,$day,$hour,$idmovie)
 	{	
 		$menssaj = 1;
+		$hoursnaw = date("G:i");
+		$dianaw = date ("Y-m-d");
+		$modification = $dianaw .'/'. $hoursnaw;
+		$modificationthisday = $day .'/'. $hour;
 		if(!empty($_SESSION))
 		{
+			if($modificationthisday >= $modification)
+			{
 			$cinema = $this->cinemaBdDao->bring_by_id($idcinema); 
 
 			if($cinema != NULL)
@@ -106,9 +112,9 @@ class FuctionController
 									{
 										if($hour < $hourss)
 										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
 											if($total_minutos>=0)
 											{
 												$regle = true;
@@ -116,9 +122,9 @@ class FuctionController
 										}
 										else
 										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
 											if($total_minutos>=0)
 											{
 												$regle = true;
@@ -190,7 +196,19 @@ class FuctionController
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
+
 		}
+	
+		else
+		{
+							$view = "MESSAGE";
+				$this->message = new Message( "warning", "The day or time exceeds the current!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+
+		}
+	}
 		else{
 			$view = "MESSAGE";
 			$this->message = new Message( "warning", "Must login!" );

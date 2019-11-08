@@ -91,10 +91,24 @@
         "valor_entrada": "310"
     },
     {
-        "id": 14,
+        "id": null,
         "capacidad": "200",
         "direccion": "Asdsad",
         "nombre": "Cinemacenter",
         "valor_entrada": "200"
+    },
+    {
+        "id": null,
+        "capacidad": "100",
+        "direccion": "Cine",
+        "nombre": "Cine",
+        "valor_entrada": "150"
+    },
+    {
+        "id": 16,
+        "capacidad": "100",
+        "direccion": "Cine2",
+        "nombre": "Cine2",
+        "valor_entrada": "150"
     }
 ]
