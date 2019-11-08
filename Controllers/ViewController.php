@@ -503,6 +503,7 @@ class ViewController
 
 			$view = 'DISCOUNTS';
 			$espace = 'MODIFY';
+
 			$function = $this->ControlFuctionc->bringidfuction($idfuction);
 			$movie = $this->ControlMovies->movieBdId($function->getMovie()->getId());
 			$cineList = array();

@@ -9,6 +9,7 @@ use \Dao\MovieBdDao as Moviebd;
 
 use \Controllers\GenreController as GenreC;
 use \Controllers\MoviegenreController as Moviegenre;
+use \Controllers\FuctionController as Fuctionc;
 
 class MovieController
 {
@@ -16,6 +17,7 @@ class MovieController
 	private $MovieBddao;
 	private $ControlGenre;
 	private $MoviegenreGenre;
+	private $ContolerFuction;
 
 	public function __construct()
 	{
@@ -23,6 +25,7 @@ class MovieController
 		$this->MovieBddao = Moviebd::getInstance(); 
 		$this->ControlGenre = new GenreC;
 		$this ->MoviegenreGenre = new Moviegenre;
+		$this->ContolerFuction = new Fuctionc;
 	}
 
 	public function getList($page)
@@ -111,6 +114,7 @@ class MovieController
 
 	public function remove($id)
 	{
+		$this->ContolerFuction->removefuctionmovie($id);
 		$movie = $this->MovieBddao->bring_by_id($id);
 		if(!empty($movie))
 		{

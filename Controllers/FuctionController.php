@@ -188,6 +188,11 @@ class FuctionController
 		return $this->fuctionBdDao->remove_by_id_cinema($idcinema);
 	}
 
+	public function removefuctionmovie($idmovie)
+	{
+		$this->fuctionBdDao->remove_by_id_movie($idmovie);
+	}
+
 	public function bringeverything()
 	{
 		return $this->fuctionBdDao->bring_everything();
@@ -212,5 +217,43 @@ class FuctionController
 		return $this->fuctionBdDao->bringe_for_data($data);
 	}
 
+	public function removefuctionmovieandmensaj($idfuction)
+	{
+		
+		if($idfuction)
+		{
 
+			$function = $this->fuctionBdDao->bring_by_id($idfuction);
+			if(!empty($function))
+			{
+				$movie = $function->getMovie();
+
+				if(!empty($movie))
+				{
+					$data = date("d-m-Y", strtotime($function->getDia()));
+					$this->fuctionBdDao->remove_by_id($idfuction);
+					$view = "MESSAGE";
+					$this->message = new Message('success', ' The functions with the name of the movie:' . ' ' . '<i><strong>' .  $movie->getTitle()
+						. '</strong>. Has been deleted successfully. the time:' . ' ' . '<i><strong>' .  $function->getHora()
+						. '</strong> and date are:' . ' ' . '</i><strong>' .  $function->getDia()
+						. '</strong>  ');
+				}
+
+			}
+			else
+			{
+
+				$this->message = new Message( "warning", "The function does not exist!" );
+			}
+			
+		}else
+		{
+			$this->message = new Message( "warning", "There is no function selected!" );
+		}
+		$view = "MESSAGE";		
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . 'message.php');
+		include URL_VISTA . 'footer.php';
+
+	}
 }

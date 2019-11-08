@@ -114,7 +114,7 @@ class FunctionBdDao
 
 
                 $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
-                 
+
                 $this->mapear($dataSet);
 
                 if(!empty($this->list)){
@@ -178,7 +178,7 @@ class FunctionBdDao
 
     }
 
-        public function bringe_for_data($day)
+    public function bringe_for_data($day)
     {   
         try{
             if ($day != null) {
@@ -201,7 +201,7 @@ class FunctionBdDao
 
     }
 
-     public function bring_Function_by_idMovies($idMovie)
+    public function bring_Function_by_idMovies($idMovie)
     {   
         try{
             if ($idMovie != null) {
@@ -278,7 +278,24 @@ class FunctionBdDao
     public function remove_by_id_cinema($id){
         try{
 
-            $sql = "DELETE FROM $this->table WHERE cinema = \"$id \" Limit 1";
+            $sql = "DELETE FROM $this->table WHERE cinema = \"$id \"";
+
+            $conec = Conection::conection();
+
+            $judgment = $conec->prepare($sql);
+
+            $judgment->execute();
+
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+    public function remove_by_id_movie($id){
+        try{
+
+            $sql = "DELETE FROM $this->table WHERE movie = \"$id \"";
 
             $conec = Conection::conection();
 
@@ -375,38 +392,42 @@ class FunctionBdDao
     }
 
 
-    public function bring_by_id($id)
+    public function bring_by_id($idfuncion)
     {   
         try{
-            if ($id != null) {
-                $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
+            if ($idfuncion != null) {
+               $sql = ("SELECT * FROM $this->table WHERE id = \"$idfuncion\" limit 1" );
 
-                $conec = Conection::conection();
+               $conec = Conection::conection();
 
-                $judgment = $conec->prepare($sql);
+               $judgment = $conec->prepare($sql);
 
-                $judgment->execute();
+               $judgment->execute();
 
-                $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+               $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-                $this->mapear($dataSet);
+               $this->mapear($dataSet[0]);
 
-                if(!empty($this->list[0])){
+               if(!empty($this->list[0])){
 
-                    return $this->list[0];
-                }
+                return $this->list[0];
             }
+            
 
             return null;
-        }catch(\PDOException $e){
-            echo $e->getMessage();die();
-        }catch(\Exception $e){
-            echo $e->getMessage();die();
         }
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
     }
+}
 
-    public function mapear($dataSet){
-        $dataSet = is_array($dataSet) ? $dataSet : [];
+
+public function mapear($dataSet){
+    $dataSet = is_array($dataSet) ? $dataSet : [];
+  
+    if($dataSet){
         $this->list = array_map(function ($f){
          $daoMovie = MovieBdDao::getInstance();
          $daoCinema = CinemaBdDao::getInstance();
@@ -422,7 +443,7 @@ class FunctionBdDao
 
      }, $dataSet);
 
-        return count($dataSet) > 0 ? $dataSet : null;
-        
     }
-} 
+
+}
+}

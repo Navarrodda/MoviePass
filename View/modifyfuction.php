@@ -42,8 +42,7 @@
 
                 <p class="p2" type="Hour:"><input required type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
                 <button class="but">Modify</button>
-                <a href=""><button class="but">REMOVE</button></a>
-                <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
+
                <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                 <script> var array = <?php //echo json_encode($fecha);?>;
                 $('#dat').datepicker({
@@ -54,6 +53,9 @@
                 });
               </script>-->
             </form>
+            <div>
+              <a style="background:red" href="<?php echo URL ?>/fuction/removefuctionmovieandmensaj/<?=$function->getId();?>"><button class="but" >REMOVE</button></a>
+            </div>
           </div>
         </div>
       </div>
