@@ -181,7 +181,7 @@ class FunctionBdDao
         public function bringe_for_data($day)
     {   
         try{
-            if ($idMovie != null) {
+            if ($day != null) {
                 $sql = ("SELECT * FROM $this->table WHERE day = \"$day\"" );
                 $conec = Conection::conection();
                 $judgment = $conec->prepare($sql);

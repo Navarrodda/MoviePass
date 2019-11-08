@@ -520,37 +520,73 @@ class ViewController
 
 			if($validar)
 			{
-				$this->ControlFuctionc->bringe_for_data($search);
 				$genresel = $this->ControlGenre->bring_everything();
 				$cinema = $this->ControlCinema->bringeverything();
+				$tocinema = $this->ControlFuctionc->bringe_for_data($search);
 				$movies = array();
 				$cinemas = array();
-				if(!empty($cinema))
+				if(!empty($tocinema))
 				{
-					foreach ($cinema as $cin) {
-						if($cin->getId() != null)
-						{
-							$tocinema = $this->ControlFuctionc->bringe_for_data($search);
-							if (!empty($tocinema)) {
-								array_push($cinemas, $cin);
-								foreach ($tocinema as $to) {
-									if($to->getCinema()->getId() == $cin->getId())
-									{
-										array_push($movies, $to);
+					if(!empty($cinema))
+					{
+						foreach ($cinema as $cin) {
+							if($cin->getId() != null)
+							{
+
+								if (!empty($tocinema)) {
+									array_push($cinemas, $cin);
+									foreach ($tocinema as $to) {
+										if($to->getCinema()->getId() == $cin->getId())
+										{
+											array_push($movies, $to);
+										}
+
 									}
+
 
 								}
 
+							}
+						}
+
+					}
+				}
+				else
+				{
+					if(!empty($cinema))
+					{
+						foreach ($cinema as $cin) {
+							if($cin->getId() != null)
+							{
+								$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
+								if (!empty($tocinema)) {
+									array_push($cinemas, $cin);
+									foreach ($tocinema as $to) {
+										if($to->getCinema()->getId() == $cin->getId())
+										{
+											array_push($movies, $to);
+										}
+
+									}
+
+
+								}
 
 							}
-
 						}
-					}
 
+					}
+					$view = 'BILLBOARD';
+					$this->message = new Message('warning', 'The word was not found' . ' ' . '<i><strong>' .  $search 
+						. '</strong>. what do you want to search. We are sorry!');
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "homebillboard.php");
+					include URL_VISTA . 'footer.php';		
 				}
 			}
 			else
 			{
+
 				$funcion = $this->ControlFuctionc->bringeverything();
 				$genresel = $this->ControlGenre->bring_everything();
 				$idgenre = 	$this->ControlGenre->bring_genre_id_name($search);
