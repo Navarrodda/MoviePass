@@ -193,15 +193,21 @@ class FuctionController
 		return $this->fuctionBdDao->bring_everything();
 	}
 
-	function validate_date($date){
-		$valores = explode('/', $date);
-		if(count($valores) == 3 && checkdate($valores[1], $valores[0], $valores[2])){
-			return true;
-		}
-		return false;
+	public function validate_date($date)
+	{
+
+		if(date('d-m-Y', strtotime($date))) {
+			$date = date("Y-m-d", strtotime($date));
+			return $date;
+		} 
+		if (date('d/m/Y', strtotime($date))) {
+			$date = date("Y-d-m", strtotime($date));
+			return $date;
+		} 
+		return null;
 	}
 
-		public function bringe_for_data($data)
+	public function bringe_for_data($data)
 	{
 		return $this->fuctionBdDao->bringe_for_data($data);
 	}

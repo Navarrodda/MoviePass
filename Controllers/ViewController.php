@@ -439,7 +439,7 @@ class ViewController
 
 				if($cinemas != NULL)
 				{
-					$this->message = new Message('', ' The selected genre' . ' ' . '<i><strong>' .  $namegenre 
+					$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $namegenre 
 						. '</strong>. It has movies in cinemas!');
 					$view = 'BILLBOARD';
 					$espace = 'FOR GENRE';
@@ -516,13 +516,14 @@ class ViewController
 
 		public function billboardforsearch($search)
 		{
-			$validar  = $this->ControlFuctionc->validate_date($search);
-
-			if($validar)
+			$home = false;
+			$home = 1;
+			$valid = $this->ControlFuctionc->validate_date($search);
+			if(!empty($valid) && $valid != '1969-12-31')
 			{
 				$genresel = $this->ControlGenre->bring_everything();
 				$cinema = $this->ControlCinema->bringeverything();
-				$tocinema = $this->ControlFuctionc->bringe_for_data($search);
+				$tocinema = $this->ControlFuctionc->bringe_for_data($valid);
 				$movies = array();
 				$cinemas = array();
 				if(!empty($tocinema))
@@ -550,44 +551,26 @@ class ViewController
 						}
 
 					}
+					$view = 'BILLBOARD';
+					$espace = 'FOR GENRE';
+					$home = 0;
+					$this->message = new Message('info', 'The searched Date is' . ' ' . '<i><strong>' .  $search 
+						. '</strong>. On this date there are functions:!');
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "billboardforgenre.php");
+					include URL_VISTA . 'footer.php';	
 				}
 				else
 				{
-					if(!empty($cinema))
-					{
-						foreach ($cinema as $cin) {
-							if($cin->getId() != null)
-							{
-								$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
-								if (!empty($tocinema)) {
-									array_push($cinemas, $cin);
-									foreach ($tocinema as $to) {
-										if($to->getCinema()->getId() == $cin->getId())
-										{
-											array_push($movies, $to);
-										}
-
-									}
-
-
-								}
-
-							}
-						}
-
-					}
+					$home = True;
 					$view = 'BILLBOARD';
-					$this->message = new Message('warning', 'The word was not found' . ' ' . '<i><strong>' .  $search 
+					$this->message = new Message('warning', 'The searched date' . ' ' . '<i><strong>' .  $search 
 						. '</strong>. what do you want to search. We are sorry!');
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "homebillboard.php");
-					include URL_VISTA . 'footer.php';		
-				}
+				}		
 			}
 			else
 			{
-
-				$funcion = $this->ControlFuctionc->bringeverything();
+				$search = ucwords($search);
 				$genresel = $this->ControlGenre->bring_everything();
 				$idgenre = 	$this->ControlGenre->bring_genre_id_name($search);
 				if($idgenre != null)
@@ -646,7 +629,8 @@ class ViewController
 					}
 					if($cinemas != NULL)
 					{
-						$this->message = new Message('', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+						$home = 0;
+						$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
 							. '</strong>. It has movies in cinemas!');
 						$view = 'BILLBOARD';
 						$espace = 'FOR GENRE';
@@ -656,69 +640,39 @@ class ViewController
 					}
 					else
 					{
-						$genresel = $this->ControlGenre->bring_everything();
-						$cinema = $this->ControlCinema->bringeverything();
-						$movies = array();
-						$cinemas = array();
-						if(!empty($cinema))
-						{
-							foreach ($cinema as $cin) {
-								$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
-								array_push($cinemas, $cin);
-								foreach ($tocinema as $to) {
-									array_push($movies, $to);
-									$moviesgenre = $this->ControlMuvGen->bring_id_by_MovieAll($to->getMovie()->getId());
-
-								}
-							}
-						}
+						$home = 1;
 						$this->message = new Message('warning', ' The selected genre' . ' ' . '<i><strong>' .  $search 
 							. '</strong>. does not contain any billboards. we are sorry!');
-						$view = 'BILLBOARD';
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "homebillboard.php");
-						include URL_VISTA . 'footer.php';
 					}
 				}
-				else
-				{
-					$genresel = $this->ControlGenre->bring_everything();
-					$cinema = $this->ControlCinema->bringeverything();
-					$movies = array();
-					$cinemas = array();
-					if(!empty($cinema))
-					{
-						foreach ($cinema as $cin) {
-							if($cin->getId() != null)
-							{
-								$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
-								if (!empty($tocinema)) {
-									array_push($cinemas, $cin);
-									foreach ($tocinema as $to) {
-										if($to->getCinema()->getId() == $cin->getId())
-										{
-											array_push($movies, $to);
-										}
-
-									}
-
-
-								}
-
-							}
-						}
-
-					}
-					$view = 'BILLBOARD';
-					$this->message = new Message('warning', 'The word was not found' . ' ' . '<i><strong>' .  $search 
-						. '</strong>. what do you want to search. We are sorry!');
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "homebillboard.php");
-					include URL_VISTA . 'footer.php';		
-				}
-
 
 			}
+			if($home)
+			{
+				$search = ucwords($search);
+				$genresel = $this->ControlGenre->bring_everything();
+				$cinema = $this->ControlCinema->bringeverything();
+				$movies = array();
+				$cinemas = array();
+				if(!empty($cinema))
+				{
+					foreach ($cinema as $cin) {
+						$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
+						array_push($cinemas, $cin);
+						foreach ($tocinema as $to) {
+							array_push($movies, $to);
+							$moviesgenre = $this->ControlMuvGen->bring_id_by_MovieAll($to->getMovie()->getId());
 
+						}
+					}
+				}
+
+				$this->message = new Message('warning', ' The selected Search' . ' ' . '<i><strong>' .  $search 
+					. '</strong>. does not contain any billboards. we are sorry!');
+				$view = 'BILLBOARD';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "homebillboard.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 	}
