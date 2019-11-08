@@ -161,7 +161,7 @@ class UserController
 				$idnikname = $this->daoUser->bring_id_by_nikname($nikname);
 				if($idnikname == NULL)
 				{
-						
+
 					$iddni =  $this->daoUser->bring_id_by_dni($dni);
 					if($iddni == NULL )
 					{
@@ -227,31 +227,42 @@ class UserController
 			if(!empty($_SESSION))
 			{
 				$regCompleted = FALSE;
-				if (!empty($code)) {
-					$strip = array("~","labcdefghi","`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
-						"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
-					$code = trim(str_replace($strip, " ", strip_tags($code)));
-					$code = preg_replace('/\s+/', " ", $code);
-				}
-				$id = $code;
-				if ($id == 1  || $id = 2) {
-					if(($_SESSION["email"]))
-					{
-						$_SESSION["rol"] = $id;
-						$user = $this->daoUser->bring_by_mail($_SESSION["email"]);
-						$userInstance = new User($_SESSION["nikname"],  $_SESSION["email"], $_SESSION["nombre"], $_SESSION["lastname"],  $_SESSION["dni"], $_SESSION["password"], $this->daoRole->bring_by_id($code));
-						$idUser = $this->daoUser->to_update($userInstance,$_SESSION["id"]);
-						$userInstance->setId($idUser);
-						$regCompleted = TRUE;
-					}
-				}
-				if($regCompleted == TRUE)
+				if($code === "@&#341" || $code === "@&#342" )
 				{
-					$view = "MESSAGE";
-					$this->message = new Message( "success", "Valid key!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . 'message.php');
-					include URL_VISTA . 'footer.php';
+					if (!empty($code)) {
+						$strip = array("~","labcdefghi","`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+							"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
+						$code = trim(str_replace($strip, " ", strip_tags($code)));
+						$code = preg_replace('/\s+/', " ", $code);
+					}
+					$id = $code;
+					if ($id == 1  || $id = 2) {
+						if(($_SESSION["email"]))
+						{
+							$_SESSION["rol"] = $id;
+							$user = $this->daoUser->bring_by_mail($_SESSION["email"]);
+							$userInstance = new User($_SESSION["nikname"],  $_SESSION["email"], $_SESSION["nombre"], $_SESSION["lastname"],  $_SESSION["dni"], $_SESSION["password"], $this->daoRole->bring_by_id($code));
+							$idUser = $this->daoUser->to_update($userInstance,$_SESSION["id"]);
+							$userInstance->setId($idUser);
+							$regCompleted = TRUE;
+						}
+					}
+					if($regCompleted == TRUE)
+					{
+						$view = "MESSAGE";
+						$this->message = new Message( "success", "Valid key!" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . 'message.php');
+						include URL_VISTA . 'footer.php';
+					}
+					else
+					{
+						$view = "MESSAGE";
+						$this->message = new Message( "warning", "Invalid key!" );
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . 'message.php');
+						include URL_VISTA . 'footer.php';
+					}
 				}
 				else
 				{
