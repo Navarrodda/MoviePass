@@ -31,14 +31,14 @@
         </script>
         <div class="flexsearch">
           <div class="flexsearch--wrapper">
-            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="#">
+            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
               <div class="flexsearch--input-wrapper">
                 <div class="col-md-12">
                 <div class="center">
                  </div>
                </div>
              </div>
-             <input method="post" class="flexsearch--input btn3" value=""  name="search" type="search" placeholder="Search">          
+             <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
            </form>
          </div>
        </div>

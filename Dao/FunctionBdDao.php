@@ -178,6 +178,29 @@ class FunctionBdDao
 
     }
 
+        public function bringe_for_data($day)
+    {   
+        try{
+            if ($idMovie != null) {
+                $sql = ("SELECT * FROM $this->table WHERE day = \"$day\"" );
+                $conec = Conection::conection();
+                $judgment = $conec->prepare($sql);
+                $judgment->execute();
+                $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+                $this->mapear($dataSet);
+                if (!empty($this->list)) {
+                    return $this->list;
+                }
+                return null;
+            }
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
+    }
+
      public function bring_Function_by_idMovies($idMovie)
     {   
         try{

@@ -1,6 +1,7 @@
 <section>
   <?php  include(URL_VISTA . 'navbar.php') ?>
   <div class="clear"></div>
+</section>
   <section>
     <?php if(isset($this->message)) {?>
       <div class="container">
@@ -10,6 +11,42 @@
     <div class="clear"></div>
   </section>
 
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <script type="text/javascript">
+          function valida(search) {
+            var ok = true;
+            var msg = "!Empty search data:\n";
+            if(search.elements["search"].value == "")
+            {
+              msg += "Complete the field\n";
+              ok = false;
+            }
+
+            if(ok == false)
+              alert(msg);
+            return ok;
+          }
+        </script>
+        <div class="flexsearch">
+          <div class="flexsearch--wrapper">
+            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
+              <div class="flexsearch--input-wrapper">
+                <div class="col-md-12">
+                <div class="center">
+                 </div>
+               </div>
+             </div>
+             <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
 </section>
 
 <section class="product-s-display">

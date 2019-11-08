@@ -47,6 +47,10 @@ class GenreController
 		return $this->GenreBdDao->bring_by_id_id($idgenre);
 	}
 
+		public function bring_genre_id_name($genre)
+	{
+		return $this->GenreBdDao->bring_id_by_name($genre);
+	}
 
 
 }

@@ -18,14 +18,13 @@ class GenreBdDao{
 	}
 
 	public function bring_id_by_name($name){
-		$sql = "SELECT id FROM $this->table WHERE title = \"$name\" LIMIT 1";
+		$sql = "SELECT id FROM $this->table WHERE name = \"$name\" LIMIT 1";
 
 		$conec = Conection::conection();
 
 		$judgment = $conec->prepare($sql);
 
 		$judgment->execute();
-
 
 		$id = $judgment->fetch(\PDO::FETCH_ASSOC);
 
