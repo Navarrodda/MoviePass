@@ -505,13 +505,25 @@ class ViewController
 			$espace = 'MODIFY';
 
 			$function = $this->ControlFuctionc->bringidfuction($idfuction);
-			$movie = $this->ControlMovies->movieBdId($function->getMovie()->getId());
-			$cineList = array();
-			$cineList = $this->ControlCinema->bringeverything();
-			$current_date = date ("Y-m-d");
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "modifyfuction.php");
-			include URL_VISTA . 'footer.php';
+			if(!empty($function))
+			{
+				$movie = $this->ControlMovies->movieBdId($function->getMovie()->getId());
+				$cineList = array();
+				$cineList = $this->ControlCinema->bringeverything();
+				$current_date = date ("Y-m-d");
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "modifyfuction.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$view = "MESSAGE";		
+				$this->message = new Message( "warning", "The function does not exist!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			}
+			
 		} 
 
 
