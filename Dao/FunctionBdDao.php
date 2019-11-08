@@ -178,6 +178,29 @@ class FunctionBdDao
 
     }
 
+     public function bring_Function_by_idMovies($idMovie)
+    {   
+        try{
+            if ($idMovie != null) {
+                $sql = ("SELECT * FROM $this->table WHERE movie = \"$idMovie\"" );
+                $conec = Conection::conection();
+                $judgment = $conec->prepare($sql);
+                $judgment->execute();
+                $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+                $this->mapear($dataSet);
+                if (!empty($this->list)) {
+                    return $this->list;
+                }
+                return null;
+            }
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
+    }
+
     public function add(Fuction $function){
         try{
 
@@ -280,11 +303,6 @@ class FunctionBdDao
         }
     }
 
-    public function bring_by_date_dmovie_cinema($idcinema,$day,$idmovie)
-    {
-        return $this->bring_by_date_idmovie_idcinema($idcinema,$day,$idmovie);
-    } 
-
 
     private function bring_by_date_idmovie_idcinema($idcinema,$day,$idmovie)
     {
@@ -332,7 +350,6 @@ class FunctionBdDao
             echo $e->getMessage();die();
         }
     }
-
 
 
     public function bring_by_id($id)

@@ -100,9 +100,8 @@
                  </div>
 
                </div>
-             <?php } else { ?>
-              <h3>no movies registered</h3>
-            <?php } } } ?>
+             <?php } } ?>
+            <?php }  ?>
           </div>
           </div>
         </div>

@@ -185,13 +185,12 @@ class FuctionController
 	}
 	public function removefuctioncinema($idcinema)
 	{
-		$this->fuctionBdDao->remove_by_id_cinema($idcinema);
+		return $this->fuctionBdDao->remove_by_id_cinema($idcinema);
 	}
 
 	public function bringeverything()
 	{
 		return $this->fuctionBdDao->bring_everything();
 	}
-
 
 }
