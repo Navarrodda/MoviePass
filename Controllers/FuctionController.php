@@ -63,7 +63,6 @@ class FuctionController
 					}
 
 					$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
-
 					if($movieforcinema)
 					{
 
@@ -74,21 +73,32 @@ class FuctionController
 							$ve = '00:15:00';
 							$veda[1]=explode(':',$ve);
 							$separar[1]=explode(':',$hour);
-							//$separar[2]=explode(':',$hora2);
-							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
 							if(!empty($listday))
 							{
 								foreach ($listday as $dayfun) {
-
 									$hourss = $dayfun->getHora();
 									$separar[2]=explode(':',$hourss);
-									$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
-									$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2]; 
-									if($separar[1][0] != $separar[2][0] && $separar[1][0] != '00'){
-									}
-									if($total_minutos <= -132 || $total_minutos >= 136)
+									if($hour > $hourss)
 									{
-										$regle = true;
+										$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+										$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+										$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+										if($total_minutos>=0)
+										{
+
+											$regle = true;
+										}
+
+									}
+									else
+									{
+										$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+										$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+										$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+										if($total_minutos>=0)
+										{
+											$regle = true;
+										}
 									}
 								}
 							}
