@@ -78,27 +78,54 @@ class FuctionController
 								foreach ($listday as $dayfun) {
 									$hourss = $dayfun->getHora();
 									$separar[2]=explode(':',$hourss);
-									if($hour > $hourss)
+									if($hour > '12')
 									{
-										$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-										$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-										$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-										if($total_minutos>=0)
+										if($hour > $hourss)
 										{
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+											if($total_minutos>=0)
+											{
+												$regle = true;
+											}
 
-											$regle = true;
 										}
-
-									}
+										else
+										{
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+											if($total_minutos>=0)
+											{
+												$regle = true;
+											}
+										}
+									}									
 									else
 									{
-										$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-										$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-										$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-										if($total_minutos>=0)
+										if($hour < $hourss)
 										{
-											$regle = true;
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+											if($total_minutos>=0)
+											{
+												$regle = true;
+											}
 										}
+										else
+										{
+											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+											if($total_minutos>=0)
+											{
+												$regle = true;
+											}
+
+										}
+
 									}
 								}
 							}
