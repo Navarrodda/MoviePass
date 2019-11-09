@@ -72,7 +72,7 @@ CONSTRAINT fk_id_movie_movie_for_genre FOREIGN KEY (movie) REFERENCES movies (id
 CREATE TABLE rooms(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 cinema BIGINT UNSIGNED,    
-number BIGINT UNSIGNED,
+number BIGINT UNSIGNED NOT NULL,
 capacity BIGINT UNSIGNED,
 CONSTRAINT pk_id_rooms PRIMARY KEY (id),
 CONSTRAINT fk_id_cinema_rooms FOREIGN KEY (cinema) REFERENCES cinemas (id)
