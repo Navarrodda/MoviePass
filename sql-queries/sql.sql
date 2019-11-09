@@ -69,14 +69,23 @@ CONSTRAINT fk_id_genre_movie_for_genre FOREIGN KEY (genre) REFERENCES genres (id
 CONSTRAINT fk_id_movie_movie_for_genre FOREIGN KEY (movie) REFERENCES movies (id)   
 );
 
-CREATE TABLE functions(
+CREATE TABLE rooms(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
 cinema BIGINT UNSIGNED,    
+number BIGINT UNSIGNED,
+capacity BIGINT UNSIGNED,
+CONSTRAINT pk_id_rooms PRIMARY KEY (id),
+CONSTRAINT fk_id_cinema_rooms FOREIGN KEY (cinema) REFERENCES cinemas (id)
+);
+
+CREATE TABLE functions(
+id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
+room BIGINT UNSIGNED,    
 movie BIGINT UNSIGNED,
 day DATE NOT NULL,
 hours TIME NOT NULL,   
 CONSTRAINT pk_id_functio PRIMARY KEY (id),
-CONSTRAINT fk_id_cinema_functions FOREIGN KEY (cinema) REFERENCES cinemas (id),    
+CONSTRAINT fk_id_rooms_functions FOREIGN KEY (room) REFERENCES rooms (id),    
 CONSTRAINT fk_id_movie FOREIGN KEY (movie) REFERENCES movies (id)
 );
 
@@ -115,5 +124,3 @@ CONSTRAINT fk_id_shopping_tikets FOREIGN KEY (shopping) REFERENCES shoppings (id
 CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES shoppings (id),
 CONSTRAINT unq_numbertikets UNIQUE(numbre)     
 );
-
-
