@@ -30,132 +30,139 @@ class FuctionController
 
 	public function add($idcinema,$day,$hour,$idmovie)
 	{	
-		$menssaj = 1;
-		$hoursnaw = date("G:i");
-		$dianaw = date ("Y-m-d");
-		$modification = $dianaw .'/'. $hoursnaw;
-		$modificationthisday = $day .'/'. $hour;
 		if(!empty($_SESSION))
 		{
+			$hoursnaw = date("G:i");
+			$dianaw = date ("Y-m-d");
+			$modification = $dianaw .'/'. $hoursnaw;
+			$modificationthisday = $day .'/'. $hour;
 			if($modificationthisday >= $modification)
 			{
-			$cinema = $this->cinemaBdDao->bring_by_id($idcinema); 
+				$cinema = $this->cinemaBdDao->bring_by_id($idcinema); 
 
-			if($cinema != NULL)
-			{
-				
-				$movie = $this->movieBdDao->bring_by_id($idmovie);
-
-				if($movie != NULL)
+				if($cinema != NULL)
 				{
-					$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
+					
+					$movie = $this->movieBdDao->bring_by_id($idmovie);
 
-					if(!empty($funcionmuvie))
+					if($movie != NULL)
 					{
-						$menssaj=2;
-						$movieforcinema = false;
-						foreach ($funcionmuvie as $miviefun) {
-							if($miviefun->getCinema()->getId() == $idcinema)
-							{
-								$movieforcinema = TRUE;
-								
-							}
+						$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
 
-						}
-					}
-					else
-					{
-						$movieforcinema = TRUE;
-					}
-
-					$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
-					if($movieforcinema)
-					{
-
-						$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
-						if($regla == NULL)
+						if(!empty($funcionmuvie))
 						{
-							$regle = false;
-							$ve = '00:15:00';
-							$veda[1]=explode(':',$ve);
-							$separar[1]=explode(':',$hour);
-							if(!empty($listday))
+							$movieforcinema = false;
+							foreach ($funcionmuvie as $miviefun) {
+								if($miviefun->getCinema()->getId() == $idcinema)
+								{
+									$movieforcinema = TRUE;
+									
+								}
+
+							}
+						}
+						else
+						{
+							$movieforcinema = TRUE;
+						}
+
+						$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
+						if($movieforcinema)
+						{
+
+							$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
+							if($regla == NULL)
 							{
-								foreach ($listday as $dayfun) {
-									$hourss = $dayfun->getHora();
-									$separar[2]=explode(':',$hourss);
-									if($hour > '12')
-									{
-										if($hour > $hourss)
+								$regle = false;
+								$ve = '00:15:00';
+								$veda[1]=explode(':',$ve);
+								$separar[1]=explode(':',$hour);
+								if(!empty($listday))
+								{
+									foreach ($listday as $dayfun) {
+										$hourss = $dayfun->getHora();
+										$separar[2]=explode(':',$hourss);
+										if($hour > '12')
 										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-											if($total_minutos>=0)
+											if($hour > $hourss)
 											{
-												$regle = true;
-											}
+												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+												$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+												if($total_minutos>=0)
+												{
+													$regle = true;
+												}
 
-										}
+											}
+											else
+											{
+												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+												$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+												if($total_minutos>=0)
+												{
+													$regle = true;
+												}
+											}
+										}									
 										else
 										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-											if($total_minutos>=0)
+											if($hour < $hourss)
 											{
-												$regle = true;
+												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+												$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+												if($total_minutos>=0)
+												{
+													$regle = true;
+												}
 											}
-										}
-									}									
-									else
-									{
-										if($hour < $hourss)
-										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-											if($total_minutos>=0)
+											else
 											{
-												$regle = true;
-											}
-										}
-										else
-										{
-											$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-											$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-											$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-											if($total_minutos>=0)
-											{
-												$regle = true;
+												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+												$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+												if($total_minutos>=0)
+												{
+													$regle = true;
+												}
+
 											}
 
 										}
-
 									}
+								}
+								else
+								{
+									$regle = true;
+								}
+								if($regle){
+									$function = new Fuction();
+									$function->setCinema($cinema);
+									$function->setMovie($movie);
+									$function->setDia($day);
+									$function->setHora($hour);
+									$this->fuctionBdDao->add($function);
+									$view = "MESSAGE";
+									$this->message = new Message( "success", "The movie was loaded successfully!" );
+									include URL_VISTA . 'header.php';
+									require(URL_VISTA . 'message.php');
+									include URL_VISTA . 'footer.php';
+								}
+								else
+								{
+									$view = "MESSAGE";
+									$this->message = new Message( "warning", "Does not meet the duration!" );
+									include URL_VISTA . 'header.php';
+									require(URL_VISTA . 'message.php');
+									include URL_VISTA . 'footer.php';
 								}
 							}
 							else
 							{
-								$regle = true;
-							}
-							if($regle){
-								$function = new Fuction();
-								$function->setCinema($cinema);
-								$function->setMovie($movie);
-								$function->setDia($day);
-								$function->setHora($hour);
-								$this->fuctionBdDao->add($function);
 								$view = "MESSAGE";
-								$this->message = new Message( "success", "The movie was loaded successfully!" );
-								include URL_VISTA . 'header.php';
-								require(URL_VISTA . 'message.php');
-								include URL_VISTA . 'footer.php';
-							}
-							else
-							{
-								$view = "MESSAGE";
-								$this->message = new Message( "warning", "Does not meet the duration!" );
+								$this->message = new Message( "warning", "Billboard movie already exists. It does not matter!!" );
 								include URL_VISTA . 'header.php';
 								require(URL_VISTA . 'message.php');
 								include URL_VISTA . 'footer.php';
@@ -164,7 +171,7 @@ class FuctionController
 						else
 						{
 							$view = "MESSAGE";
-							$this->message = new Message( "warning", "Billboard movie already exists. It does not matter!!" );
+							$this->message = new Message( "warning", "The selected movie is already in another movie theater!" );
 							include URL_VISTA . 'header.php';
 							require(URL_VISTA . 'message.php');
 							include URL_VISTA . 'footer.php';
@@ -173,7 +180,7 @@ class FuctionController
 					else
 					{
 						$view = "MESSAGE";
-						$this->message = new Message( "warning", "The selected movie is already in another movie theater!" );
+						$this->message = new Message( "warning", "Cinema dont exist!" );
 						include URL_VISTA . 'header.php';
 						require(URL_VISTA . 'message.php');
 						include URL_VISTA . 'footer.php';
@@ -182,33 +189,24 @@ class FuctionController
 				else
 				{
 					$view = "MESSAGE";
-					$this->message = new Message( "warning", "Cinema dont exist!" );
+					$this->message = new Message( "warning", "Movie dont exist!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
 				}
+
 			}
+			
 			else
 			{
 				$view = "MESSAGE";
-				$this->message = new Message( "warning", "Movie dont exist!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'message.php');
-				include URL_VISTA . 'footer.php';
-			}
-
-		}
-	
-		else
-		{
-							$view = "MESSAGE";
 				$this->message = new Message( "warning", "The day or time exceeds the current!" );
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 
+			}
 		}
-	}
 		else{
 			$view = "MESSAGE";
 			$this->message = new Message( "warning", "Must login!" );
