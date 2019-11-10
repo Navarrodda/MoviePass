@@ -35,7 +35,7 @@
       <form class="login-form" method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/user/check_in/">
         <input required name="name" type="Text" value="" placeholder="Name"/>
         <input required name="lastname" type="Text" value="" placeholder="Last Name"/>
-        <input required name="dni" min="10000000" max="99999999" type="number" value="" placeholder="DNI"/>
+        <input required name="dni" min="1000000" max="99999999" type="number" value="" placeholder="DNI"/>
         <input required name="nikname" type="Text" value="" placeholder="Nikname"/>
         <input required name="email" type="Email" value="" placeholder="Email"/>     
         <input required name="pass" id="pass"  value="" type="password" placeholder="Password"/>

@@ -686,4 +686,13 @@ class ViewController
 				include URL_VISTA . 'footer.php';
 			}
 		}
+
+		public function card()
+		{
+
+			$view = 'CARD';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "card.php");
+			include URL_VISTA . 'footer.php';
+		} 
 	}

@@ -46,6 +46,7 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
+        <li class="active"><a href="<?php echo URL ?>/view/card/">CARD</a></li>
         <?php if(!empty($_SESSION["rol"])){ ?>
           <?php if($_SESSION["rol"] != 3){ ?>
             <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
