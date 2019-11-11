@@ -70,4 +70,4 @@ GET
 /trending/{media_type}/{time_window}  //Types: Media_Type= all, movie, tv, person | time_window= day, week 	
 
 Key tha Developer is = @&#341 
-Key tha Costumer is = @&#342
+Key tha Admin is = @&#342
