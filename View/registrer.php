@@ -15,23 +15,6 @@
       <h4>Login To Your Account</h4>
     </div>
     <div class="form">
-      <script type="text/javascript">
-        function valida(password) {
-          var ok = true;
-          var msg = "The fields are different:\n";
-          if(password.elements["pass"].value != password.elements["pass2"].value)
-          {
-            msg += "Verify the password\n";
-            ok = false;
-          }
-
-
-          if(ok == false)
-            alert(msg);
-          return ok;
-        }
-
-      </script>
       <form class="login-form" method="post" onsubmit="return valida(this)" action="<?php echo URL ?>/user/check_in/">
         <input required name="name" type="Text" value="" placeholder="Name"/>
         <input required name="lastname" type="Text" value="" placeholder="Last Name"/>
@@ -65,6 +48,22 @@
           return ok;
         }
 
-      </script>    
+          function valida(password) {
+          var ok = true;
+          var msg = "The fields are different:\n";
+          if(password.elements["pass"].value != password.elements["pass2"].value)
+          {
+            msg += "Verify the password\n";
+            ok = false;
+          }
+
+
+          if(ok == false)
+            alert(msg);
+          return ok;
+        }
+
+      </script>  
+
 
 </section>
