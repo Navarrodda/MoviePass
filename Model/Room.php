@@ -5,27 +5,29 @@ namespace Model;
 class Room
 {
     private $id;
-    private $numero_sala;
-    private $descripcion;
+    private $name_room;
+    private $price;
+    private $cant_site;
     
 	public function __construct()
     {
 
     }
 
+
     /**
-     * Get the value of id
-     */ 
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
+     * @param mixed $id
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -34,41 +36,61 @@ class Room
     }
 
     /**
-     * Get the value of numero_sala
-     */ 
-    public function getNumero_sala()
+     * @return mixed
+     */
+    public function getNameRoom()
     {
-        return $this->numero_sala;
+        return $this->name_room;
     }
 
     /**
-     * Set the value of numero_sala
+     * @param mixed $name_room
      *
-     * @return  self
-     */ 
-    public function setNumero_sala($numero_sala)
+     * @return self
+     */
+    public function setNameRoom($name_room)
     {
-        $this->numero_sala = $numero_sala;
+        $this->name_room = $name_room;
 
         return $this;
     }
 
     /**
-     * Get the value of descripcion
-     */ 
-    public function getDescripcion()
+     * @return mixed
+     */
+    public function getPrice()
     {
-        return $this->descripcion;
+        return $this->price;
     }
 
     /**
-     * Set the value of descripcion
+     * @param mixed $price
      *
-     * @return  self
-     */ 
-    public function setDescripcion($descripcion)
+     * @return self
+     */
+    public function setPrice($price)
     {
-        $this->descripcion = $descripcion;
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCantSite()
+    {
+        return $this->cant_site;
+    }
+
+    /**
+     * @param mixed $cant_site
+     *
+     * @return self
+     */
+    public function setCantSite($cant_site)
+    {
+        $this->cant_site = $cant_site;
 
         return $this;
     }
