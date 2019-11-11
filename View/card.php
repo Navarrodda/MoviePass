@@ -89,7 +89,7 @@
             <label for="card-ccv">CCV</label>
             <input type="text" id="card-ccv" maxlength="3">
           </fieldset>
-          <button class="btn"><i class="fa fa-lock"></i> submit</button>
+          <button class="btn6"><i class="fa fa-lock"></i> submit</button>
         </form>
       </div>
       <a class="the-most" target="_blank" href="https://codepen.io/2016/popular/pens/9/">

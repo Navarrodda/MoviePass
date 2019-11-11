@@ -695,4 +695,14 @@ class ViewController
 			require(URL_VISTA . "card.php");
 			include URL_VISTA . 'footer.php';
 		} 
+
+		public function registeroom($idcinema)
+		{
+			$cinema = $this->ControlCinema->bring_for_id($idcinema); 
+			$view = 'CINEMA';
+			$espace = 'ROOMS';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "registeroom.php");
+			include URL_VISTA . 'footer.php';
+		} 
 	}

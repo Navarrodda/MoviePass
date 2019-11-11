@@ -9,7 +9,7 @@
 /*--------------------
 Buttons
 --------------------*/
-.btn {
+.btn6 {
   display: block;
   background: #bded7d;
   color: white;
@@ -19,7 +19,7 @@ Buttons
   border-radius: 5px;
   position: relative;
 }
-.btn::after {
+.btn6::after {
   content: '';
   position: absolute;
   z-index: 1;
@@ -31,7 +31,7 @@ Buttons
   box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0), 0 3px 3px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
-.btn:hover::after {
+.btn6:hover::after {
   background: rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 3px 0 rgba(0, 0, 0, 0.2);
 }
@@ -322,7 +322,7 @@ Credit Card
 /*--------------------
 Buttons
 --------------------*/
-.btn {
+.btn6 {
   display: block;
   background: hsl(86, 76%, 71%);
   color: hsl(0, 0, 100);

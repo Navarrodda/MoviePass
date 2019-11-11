@@ -105,10 +105,17 @@
         "valor_entrada": "150"
     },
     {
-        "id": 16,
+        "id": null,
         "capacidad": "100",
         "direccion": "Cine2",
         "nombre": "Cine2",
         "valor_entrada": "150"
+    },
+    {
+        "id": 17,
+        "capacidad": "200",
+        "direccion": "Asdsads",
+        "nombre": "Aldrey",
+        "valor_entrada": "200"
     }
 ]
