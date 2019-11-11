@@ -41,10 +41,10 @@
         <form class="form" autocomplete="off" novalidate="">
           <fieldset>
             <label for="card-number">Card Number</label>
-            <input type="num" id="card-number" class="input-cart-number" maxlength="4">
-            <input type="num" id="card-number-1" class="input-cart-number" maxlength="4">
-            <input type="num" id="card-number-2" class="input-cart-number" maxlength="4">
-            <input type="num" id="card-number-3" class="input-cart-number" maxlength="4">
+            <input required type="num" min="0" id="card-number" class="input-cart-number" maxlength="4">
+            <input required type="num" min="0" id="card-number-1" class="input-cart-number" maxlength="4">
+            <input required type="num" min="0" id="card-number-2" class="input-cart-number" maxlength="4">
+            <input required type="num" min="0" id="card-number-3" class="input-cart-number" maxlength="4">
           </fieldset>
           <fieldset>
             <label for="card-holder">Card holder</label>
