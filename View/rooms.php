@@ -12,7 +12,7 @@
          <?php } }  ?>
        </div>
        <div class="col-md-6">
-         <h2>Cinemas List</h2>
+         <h2>Rooms For Cinema: <?=$cinema->getName()?> List</h2>
        </div>
      </div>
    </div>
@@ -22,10 +22,8 @@
        <?php if($_SESSION["rol"] != 3){ ?>
         <th>Id</th>
       <?php } }  ?>
-      <th>Name</th>
-      <th>Address</th>
+      <th>Number</th>
       <th>Capacity</th>
-      <th>Estimated Price</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
        <?php if($_SESSION["rol"] != 3){ ?>
         <th>Room</th>
@@ -38,32 +36,30 @@
      <tbody>
       <?php
 
-      foreach($values as $data){
+      foreach($values as $rooms){
 
        ?>
        <tr>
          <?php if(!empty($_SESSION["rol"])){ ?>
            <?php if($_SESSION["rol"] != 3){ ?>
-             <td><?php echo $data->getId(); ?></td>
+             <td><?php echo $rooms->getId(); ?></td>
            <?php } } ?>
-           <td><?php echo $data->getNombre(); ?></td>
-           <td><?php echo $data->getDireccion(); ?></td>
-           <td><?php echo $data->getCapacidad();?></td>
-           <td>$<?php echo $data->getValor_entrada(); ?></td>
+           <td><?php echo $rooms->getNumber(); ?></td>
+           <td><?php echo $rooms->getCapacity(); ?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
               <td>
-                <a href="<?php echo URL ?>/view/registeroom/<?=$data->getId()?>" class="disabled">     
+                <a href="#" class="disabled">     
                   <img src="<?php echo URL ?>/img/iconroom.png">    
                 </td>
                 <td>
-                  <a href="<?php echo URL ?>/view/modifycinema/<?=$data->getId() ?>" class="disabled">         
+                  <a href="#" class="disabled">         
                     <span class="fa fa-pencil-square-o" title=""
                     data-toggle="tooltip" data-placement="right">
                   </span>
                 </td>
                 <td>
-                  <a type="submit" method="post"  name="id"  href="<?php echo URL ?>/cinema/remove/<?=$data->getId() ?>" class="disabled">
+                  <a type="submit" method="post"  name="id"  href="#" class="disabled">
                     <span class="fa fa-trash-o" title=""
                     data-toggle="tooltip" data-placement="right">
                   </span>
@@ -83,9 +79,9 @@
      <div class="col-md-12">
       <?php if(!empty($_SESSION["rol"])){ ?>
         <?php if($_SESSION["rol"] != 3){ ?>
-         <h2 class="mb-4">There are no registered cinemas ADD: <a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></h2>
+         <h2 class="mb-4">There are no registered Room ADD: <a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="#"></a></h2>
        <?php }} else { ?>
-         <h2 class="mb-4">There are no registered cinemas</h2>
+         <h2 class="mb-4">There are no registered Rooms for cinema</h2>
        <?php }?>
      </div>
    </div>

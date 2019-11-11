@@ -2376,6 +2376,16 @@ form#login-form:after {
     background-color: #000000;
   }
 
+     .imgr4
+  {
+     text-align: center;
+     margin:auto;
+   width: 615px; 
+    height: 412px;
+    padding: 5px;
+    background-color: #1e4de8;
+  }
+
   .cent{
      margin:auto;
    text-align: center;

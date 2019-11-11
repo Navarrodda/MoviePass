@@ -46,6 +46,7 @@
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="<?php echo URL ?>">HOME</a></li>
+        <li class="active"><a href="<?php echo URL ?>/view/card/">CARD</a></li>
         <?php if(!empty($_SESSION["rol"])){ ?>
           <?php if($_SESSION["rol"] != 3){ ?>
             <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
@@ -69,7 +70,7 @@
             <div class="row">
               <div class="col-md-12">
                <div class="header-part">
-                <?php if(!empty($espace)) { ?>
+                <?php if(!empty($espace)) {  //fa-cart-arrow-down?>
                   <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view;?><span> <i class="fa fa-angle-right" aria-hidden="true"></i></span> <?= $espace; ?></span></p>
                   <?php } else {  ?>
                     <p>MOVIEPASS &nbsp;&nbsp;&nbsp;<span><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<?= $view; ?></span></p>
