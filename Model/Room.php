@@ -2,30 +2,30 @@
 
 namespace Model;
 
+use Model\Cinema as Cinema;
+
+
 class Room
 {
     private $id;
-    private $numero_sala;
-    private $descripcion;
-    
-	public function __construct()
-    {
+    private $cinema;
+    private $number;
+    private $capacity;
 
-    }
 
     /**
-     * Get the value of id
-     */ 
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Set the value of id
+     * @param mixed $id
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -34,41 +34,61 @@ class Room
     }
 
     /**
-     * Get the value of numero_sala
-     */ 
-    public function getNumero_sala()
+     * @return mixed
+     */
+    public function getCinema()
     {
-        return $this->numero_sala;
+        return $this->cinema;
     }
 
     /**
-     * Set the value of numero_sala
+     * @param mixed $cinema
      *
-     * @return  self
-     */ 
-    public function setNumero_sala($numero_sala)
+     * @return self
+     */
+    public function setCinema(Cinema $cinema)
     {
-        $this->numero_sala = $numero_sala;
+        $this->cinema = $cinema;
 
         return $this;
     }
 
     /**
-     * Get the value of descripcion
-     */ 
-    public function getDescripcion()
+     * @return mixed
+     */
+    public function getNumber()
     {
-        return $this->descripcion;
+        return $this->number;
     }
 
     /**
-     * Set the value of descripcion
+     * @param mixed $number
      *
-     * @return  self
-     */ 
-    public function setDescripcion($descripcion)
+     * @return self
+     */
+    public function setNumber($number)
     {
-        $this->descripcion = $descripcion;
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCapacity()
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param mixed $capacity
+     *
+     * @return self
+     */
+    public function setCapacity($capacity)
+    {
+        $this->capacity = $capacity;
 
         return $this;
     }

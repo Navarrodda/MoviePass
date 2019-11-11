@@ -17,8 +17,8 @@ class FunctionBdDao
         return self::$instance;
     }
 
-    public function bring_id_by_cunema($idcinema){
-        $sql = "SELECT id FROM $this->table WHERE cinema = \"$idcinema\" LIMIT 1";
+    public function bring_id_by_room($idroom){
+        $sql = "SELECT id FROM $this->table WHERE room = \"$idroom\" LIMIT 1";
 
         $conec = Conection::conection();
 
@@ -57,9 +57,9 @@ class FunctionBdDao
         return null;
     }
 
-    public function bring_by_day_for_cinema($day,$idcinema){
+    public function bring_by_day_for_room($day,$idroom){
         try{
-            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\"";
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\"";
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
             $judgment->execute();
@@ -100,11 +100,11 @@ class FunctionBdDao
         //Devuelve todas las funciones del cine
 
 
-    public function bring_Function_by_idCinema($cinema)
+    public function bring_Function_by_idroom($room)
     {   
         try{
-            if ($cinema != null) {
-                $sql = "SELECT * FROM $this->table WHERE cinema = \"$cinema\"";
+            if ($room != null) {
+                $sql = "SELECT * FROM $this->table WHERE room = \"$room\"";
 
                 $conec = Conection::conection();
 
@@ -133,10 +133,10 @@ class FunctionBdDao
 
 
 
-    public function bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour)
+    public function bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour)
     {
         try{
-            $sql = ("SELECT * FROM $this->table WHERE day = \"$day\" AND cinema = \"$idcinema\" AND movie = \"$idmovie\" AND hours =\"$hour\"");
+            $sql = ("SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\" AND movie = \"$idmovie\" AND hours =\"$hour\"");
 
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
@@ -228,7 +228,7 @@ class FunctionBdDao
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (cinema, movie, day, hours) VALUES (:cinema, :movie, :day, :hours)");
+            $sql = ("INSERT INTO $this->table (room, movie, day, hours) VALUES (:room, :movie, :day, :hours)");
 
             $conec = Conection::conection();
 
@@ -237,12 +237,12 @@ class FunctionBdDao
             $cine = $function->getCinema();
             $movi = $function->getMovie();
 
-            $cinema = $cine->getId();
+            $room = $cine->getId();
             $movie = $movi->getId();
             $day = $function->getDia();
             $hour = $function->getHora();
 
-            $judgment->bindParam(":cinema",$cinema);
+            $judgment->bindParam(":room",$room);
             $judgment->bindParam(":movie",$movie);
             $judgment->bindParam(":day",$day);
             $judgment->bindParam(":hours",$hour);
