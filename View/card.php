@@ -48,7 +48,7 @@
           </fieldset>
           <fieldset>
             <label for="card-holder">Card holder</label>
-            <input type="text" id="card-holder">
+            <input required type="text" id="card-holder">
           </fieldset>
           <fieldset class="fieldset-expiration">
             <label for="card-expiration-month">Expiration date</label>
@@ -87,7 +87,7 @@
           </fieldset>
           <fieldset class="fieldset-ccv">
             <label for="card-ccv">CCV</label>
-            <input type="text" id="card-ccv" maxlength="3">
+            <input required type="text" id="card-ccv" maxlength="3">
           </fieldset>
           <button class="btn6"><i class="fa fa-lock"></i> submit</button>
         </form>
