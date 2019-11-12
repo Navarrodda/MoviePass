@@ -22,6 +22,7 @@ class RoomController
 
 	public function add($name_room,$price,$cant_site,$number_room,$idcinema)
 	{
+		$name_room = ucwords($name_room);
 
 		$id = $this->RoomBd->bring_id_by_nameRoom($name_room);
 		if (empty($id)) {
@@ -84,6 +85,11 @@ class RoomController
 
 		}
 	}
+
+	//traer toda la capacidad del cine
+	//traer todas las salas
+	//contar esas capacidades y ver si se puede dar de alta la sala
+	public function 
 }
 
 ?>

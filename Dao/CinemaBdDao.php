@@ -58,6 +58,26 @@ public function bring_id_by_id($id){
     return null;
 }
 
+public function bring_capacity_by_id($id){
+    $sql = "SELECT total_capacity FROM $this->table WHERE id = \"$id\" LIMIT 1";
+
+    $conec = Conection::conection();
+
+    $judgment = $conec->prepare($sql);
+
+    $judgment->execute();
+
+
+    $total_capacity = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+    if(!empty($total_capacity))
+    {
+        return $total_capacity['total_capacity'];
+    }
+
+    return null;
+}
+
 public function add(Cinema $cinema){
     try{
 
