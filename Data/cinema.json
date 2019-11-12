@@ -112,10 +112,31 @@
         "valor_entrada": "150"
     },
     {
-        "id": 17,
+        "id": null,
         "capacidad": "200",
         "direccion": "Asdsads",
         "nombre": "Aldrey",
         "valor_entrada": "200"
+    },
+    {
+        "id": null,
+        "capacidad": "200",
+        "direccion": "Cordoba 2200",
+        "nombre": "Cinemacenter",
+        "valor_entrada": "150"
+    },
+    {
+        "id": null,
+        "capacidad": "200",
+        "direccion": "Cordoba 2200",
+        "nombre": "Ambassador",
+        "valor_entrada": "150"
+    },
+    {
+        "id": 20,
+        "capacidad": "500",
+        "direccion": "Junb Justo",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "300"
     }
 ]

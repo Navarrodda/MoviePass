@@ -12,16 +12,16 @@ class Room
     private $name_room;
     private $price;
     private $cant_site;
+    private $cinema;
+    private $number_room;
     
 	public function __construct()
     {
 
-    private $cinema;
-    private $number;
-    private $capacity;
+    }
 
 
-
+    
 
     /**
      * @return mixed
@@ -46,7 +46,6 @@ class Room
     /**
      * @return mixed
      */
-
     public function getNameRoom()
     {
         return $this->name_room;
@@ -61,28 +60,12 @@ class Room
     {
         $this->name_room = $name_room;
 
-    public function getCinema()
-    {
-        return $this->cinema;
-    }
-
-    /**
-     * @param mixed $cinema
-     *
-     * @return self
-     */
-    public function setCinema(Cinema $cinema)
-    {
-        $this->cinema = $cinema;
-
-
         return $this;
     }
 
     /**
      * @return mixed
      */
-
     public function getPrice()
     {
         return $this->price;
@@ -97,28 +80,12 @@ class Room
     {
         $this->price = $price;
 
-    public function getNumber()
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param mixed $number
-     *
-     * @return self
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
-
-
         return $this;
     }
 
     /**
      * @return mixed
      */
-
     public function getCantSite()
     {
         return $this->cant_site;
@@ -133,19 +100,45 @@ class Room
     {
         $this->cant_site = $cant_site;
 
-    public function getCapacity()
-    {
-        return $this->capacity;
+        return $this;
     }
 
     /**
-     * @param mixed $capacity
+     * @return mixed
+     */
+    public function getCinema()
+    {
+        return $this->cinema;
+    }
+
+    /**
+     * @param mixed $cinema
      *
      * @return self
      */
-    public function setCapacity($capacity)
+    public function setCinema(Cinema $cinema)
     {
-        $this->capacity = $capacity;
+        $this->cinema = $cinema;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumberRoom()
+    {
+        return $this->number_room;
+    }
+
+    /**
+     * @param mixed $number_room
+     *
+     * @return self
+     */
+    public function setNumberRoom($number_room)
+    {
+        $this->number_room = $number_room;
 
         return $this;
     }

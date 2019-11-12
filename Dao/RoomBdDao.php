@@ -5,7 +5,7 @@ use \Model\Room;
 
 class RoomBdDao
 {
-    protected $table = "room";
+    protected $table = "rooms";
     protected $list;
     private static $instance;
 
@@ -18,14 +18,13 @@ class RoomBdDao
     }
 
         public function bring_id_by_nameRoom($name_room){
-        $sql = "SELECT id FROM $this->table WHERE name = \"$name_room\" LIMIT 1";
+        $sql = "SELECT id FROM $this->table WHERE name_room = \"$name_room\" LIMIT 1";
 
         $conec = Conection::conection();
 
         $judgment = $conec->prepare($sql);
 
         $judgment->execute();
-
 
         $id = $judgment->fetch(\PDO::FETCH_ASSOC);
 
@@ -62,21 +61,25 @@ public function add(Room $room){
     try{
 
         /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (id,name_room,price,cant_seat) VALUES (:id,:nombre,:precio,:butacas)");
+        $sql = ("INSERT INTO $this->table (name_room,price,cant_site,cinema,number_room) VALUES 
+            (:name_room,:price,:cant_site,:cinema,:number_room)");
 
         $conec = Conection::conection();
 
         $judgment = $conec->prepare($sql);
 
-        $id = $room->getId();
-        $nombre = $room->getNameRoom();
-        $precio = $room->getPrice();
-        $butacas = $room->getCantSeat();
+        $name_room = $room->getNameRoom();
+        $price = $room->getPrice();
+        $cant_site = $room->getCantSite();
+        $cinema = $room->getCinema();
+        $idcinema = $cinema->getId();
+        $number_room = $room->getNumberRoom();
 
-        $judgment->bindParam(":id",$id);
-        $judgment->bindParam(":nombre",$name_room);
-        $judgment->bindParam(":precio",$price);
-        $judgment->bindParam(":butacas",$butacas);
+        $judgment->bindParam(":name_room",$name_room);
+        $judgment->bindParam(":price",$price);
+        $judgment->bindParam(":cant_site",$cant_site);
+        $judgment->bindParam(":cinema",$idcinema);
+        $judgment->bindParam(":number_room",$number_room);
 
         $judgment->execute();
 
@@ -110,7 +113,7 @@ public function remove_by_id($id){
 public function to_update(Room $room, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET name=:name_room, price=:price, cant_seat=:cant_seat WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET name=:name_room, price=:price, cant_seat=:cant_seat, cinema=:cinema, number_room=:number_room WHERE id=\"$id\"");
 
 
 
@@ -120,11 +123,13 @@ public function to_update(Room $room, $id){
 
         $nombre = $room->getNameRoom();
         $precio = $room->getPrice();
-        $butacas = $room->getCantSeat();
+        $butacas = $room->getCantSite();
 
-        $judgment->bindParam(":name_room",$nombre);
-        $judgment->bindParam(":price",$precio);
-        $judgment->bindParam(":cant_seat",$butacas);
+        $judgment->bindParam(":name_room",$name_room);
+        $judgment->bindParam(":price",$price);
+        $judgment->bindParam(":cant_site",$cant_site);
+        $judgment->bindParam(":cinema",$cinema);
+        $judgment->bindParam(":number_room",$number_room);
 
 
         $judgment->execute();
@@ -134,7 +139,7 @@ public function to_update(Room $room, $id){
         echo $e->getMessage();die();
     }
 }
-        //Trae todos los cinemas
+        //Trae todos los rooms
 public function bring_everything(){
     try{
 
@@ -162,7 +167,7 @@ public function bring_everything(){
 }
 
 
-        //Trae Cinema por Id
+        //Trae Room por Id
 public function bring_by_id($id)
 {   
     try{
@@ -197,13 +202,15 @@ public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
         $this->list = array_map(function ($p) {
-                //,name,address,total_capacity,estimated_price
+              
 
             $room = new Room();
             $room->setId($p['id']);
             $room->setNameRoom($p['name_room']);
             $room->setPrice($p['price']);
-            $room->setCantSeat($p['cant_seat']);
+            $room->setCantSeat($p['cant_site']);
+            $room->setCantSeat($p['cinema']);
+            $room->setCantSeat($p['number_room']);
 
             return $room;
         }, $dataSet);
