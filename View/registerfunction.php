@@ -19,8 +19,10 @@
               <div class="col-md-12 marcform">
                 <p>
                   <h3 style="color:white"><?= $movie->getTitle();?></h3>
-                  <div class="imgr3">
+                  <div class="imgr3 ">
+                    <div class="fonds">
                    <img src="<?= $movie->getBackdrop();?>">
+                 </div>
                  </div>
                </p>
                <div class="flexsearch">

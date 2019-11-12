@@ -2372,8 +2372,15 @@ form#login-form:after {
 
     .imgr3
   {
-    padding: 0px;
-    background-color: #000000;
+     -webkit-border-radius: 10; 
+    -moz-border-radius: 10;
+    border-radius:4%;
+     text-align: center;
+     margin:auto;
+   width: 530px; 
+    height: 293px;
+    padding: 2px;
+    background: linear-gradient(20deg, rgba(11,11,121,0.90), rgba(245,11,121,0.90));
   }
 
      .imgr4
