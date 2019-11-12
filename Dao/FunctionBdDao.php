@@ -57,6 +57,28 @@ class FunctionBdDao
         return null;
     }
 
+    public function bring_Function_by_idCinema($idcinema)
+    {
+        try{
+            $sql = "SELECT * FROM $this->table WHERE cinema = \"$idcinema\" ";
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+            $this->mapear($dataSet);
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+            
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
+    }
+
     public function bring_by_day_for_room($day,$idroom){
         try{
             $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\"";

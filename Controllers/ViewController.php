@@ -705,4 +705,22 @@ class ViewController
 			require(URL_VISTA . "registeroom.php");
 			include URL_VISTA . 'footer.php';
 		} 
+
+		public function buyq($idfuction)
+		{
+			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+			$movie = $fuction->getMovie();
+			$view = "Buy Process ";
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "buyq.php");
+			include URL_VISTA . 'footer.php';
+		}
+
+		public function buyseat()
+		{
+			$view = "Seat Process ";
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "seat.php");
+			include URL_VISTA . 'footer.php';
+		}
 	}
