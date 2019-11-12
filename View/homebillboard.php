@@ -106,11 +106,11 @@
                           <h3><?=$muv->getMovie()->getTitle() ?></h3>
                           <?php if(!empty($_SESSION)){
                             if($_SESSION["rol"] == 3) { ?>
-                              <h4><a href="#"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
+                              <h4><a href="<?php echo URL ?>/view/buyq/<?=$muv->getId(); ?>"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>BUY TICKET</a></h4>
                             <?php } else { ?>
                               <h4><a href="<?php echo URL ?>/view/modifyfuction/<?=$muv->getId();?>"><i aria-hidden="true" class="fa fa-angle-double-right"></i>Modify</a></h4>
                             <?php } } else { ?>
-                              <h4><a href="<?php echo URL ?>/view/login/"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>ADD TO CART</a></h4>
+                              <h4><a href="<?php echo URL ?>/view/login/"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>BUY TICKET</a></h4>
                             <?php  } ?>
                           </div>
                           <div class="rate">

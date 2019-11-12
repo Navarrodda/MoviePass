@@ -2254,7 +2254,7 @@ form#login-form:after {
   height: 280px;
 }
 .marcform{
-  background-color: rgba(0,0,0,0.50);
+   background: linear-gradient(20deg, rgba(231,221,121,0.30), rgba(45,112,121,0.90));
   width:840px;
   -webkit-border-radius: 60;
   -moz-border-radius: 60;
@@ -2372,8 +2372,15 @@ form#login-form:after {
 
     .imgr3
   {
-    padding: 0px;
-    background-color: #000000;
+     -webkit-border-radius: 10; 
+    -moz-border-radius: 10;
+    border-radius:4%;
+     text-align: center;
+     margin:auto;
+   width: 530px; 
+    height: 293px;
+    padding: 2px;
+    background: linear-gradient(20deg, rgba(11,11,121,0.90), rgba(245,11,121,0.90));
   }
 
      .imgr4
