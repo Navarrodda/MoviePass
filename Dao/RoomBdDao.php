@@ -227,17 +227,15 @@ public function bring_by_id($id)
 public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
-        $this->list = array_map(function ($p) {
-              
-
+        $this->list = array_map(function ($p) { 
+        $daoCinema = CinemaBdDao::getInstance();        
             $room = new Room();
             $room->setId($p['id']);
             $room->setNameRoom($p['name_room']);
             $room->setPrice($p['price']);
-            $room->setCantSeat($p['cant_site']);
-            $room->setCantSeat($p['cinema']);
-            $room->setCantSeat($p['number_room']);
-
+            $room->setCinema( $daoCinema->bring_by_id($p['cinema']));
+            $room->setNumberRoom($p['number_room']);
+            $room->setCantSite($p['cant_site']);
             return $room;
         }, $dataSet);
     }
