@@ -5,14 +5,14 @@
   <?php if(!empty($room)) { ?>
    <div class="centerin">
     <div class="row">
-      <div class="col-md-2"> 
+      <div class="col-md-1"> 
         <?php if(!empty($_SESSION["rol"])){ ?>
          <?php if($_SESSION["rol"] != 3){ ?>
-           <h1><a class="fa fa-plus" style="color:white" method="post" name="id_cliente" href="<?php echo URL?>/view/registrercinema/"></a></h1>
+           <h1><a class="fa fa-plus" style="color:white" method="post" name="idcinema" href="<?php echo URL?>/view/registeroom/<?= $cinema->getId();?>"></a></h1>
          <?php } }  ?>
        </div>
-       <div class="col-md-6">
-         <h2>Rooms For Cinema: <?=$cinema->getName()?> List</h2>
+       <div class="col-md-10">
+         <h2>Rooms For Cinema:" <?=$cinema->getNombre()?>"</h2>
        </div>
      </div>
    </div>
@@ -22,8 +22,10 @@
        <?php if($_SESSION["rol"] != 3){ ?>
         <th>Id</th>
       <?php } }  ?>
-      <th>Number</th>
-      <th>Capacity</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Cant Site</th>
+      <th>Number Room</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
        <?php if($_SESSION["rol"] != 3){ ?>
          <th>Modification</th>
@@ -43,8 +45,10 @@
            <?php if($_SESSION["rol"] != 3){ ?>
              <td><?php echo $rooms->getId(); ?></td>
            <?php } } ?>
-           <td><?php echo $rooms->getNumber(); ?></td>
-           <td><?php echo $rooms->getCapacity(); ?></td>
+           <td><?php echo $rooms->getNameRoom();?></td>
+           <td><?php echo $rooms->getPrice(); ?></td>
+           <td><?php echo $rooms->getCantSite();?></td>
+           <td><?php echo $rooms->getNumberRoom();?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
                 <td>
