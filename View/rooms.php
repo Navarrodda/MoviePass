@@ -2,7 +2,7 @@
 
 <section class="mb-5">
  <div class="container">
-  <?php if(!empty($values)) { ?>
+  <?php if(!empty($room)) { ?>
    <div class="centerin">
     <div class="row">
       <div class="col-md-2"> 
@@ -26,7 +26,6 @@
       <th>Capacity</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
        <?php if($_SESSION["rol"] != 3){ ?>
-        <th>Room</th>
          <th>Modification</th>
          <th>Delete</th>
        <?php } }  ?>
@@ -36,7 +35,7 @@
      <tbody>
       <?php
 
-      foreach($values as $rooms){
+      foreach($room as $rooms){
 
        ?>
        <tr>
@@ -48,10 +47,6 @@
            <td><?php echo $rooms->getCapacity(); ?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
-              <td>
-                <a href="#" class="disabled">     
-                  <img src="<?php echo URL ?>/img/iconroom.png">    
-                </td>
                 <td>
                   <a href="#" class="disabled">         
                     <span class="fa fa-pencil-square-o" title=""

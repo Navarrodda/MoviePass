@@ -166,6 +166,32 @@ public function bring_everything(){
     }
 }
 
+public function bring_list_for_id_cinema($idcinema){
+    try{
+
+         $sql = "SELECT * FROM $this->table WHERE cinema = \"$idcinema\"";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+        $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+
+        $this->mapear($dataSet);
+
+        if (!empty($this->list)) {
+            return $this->list;
+        }
+        return null;
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
+}
+
 
         //Trae Room por Id
 public function bring_by_id($id)

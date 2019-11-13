@@ -53,7 +53,7 @@
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
               <td>
-                <a href="<?php echo URL ?>/view/registeroom/<?=$data->getId()?>" class="disabled">     
+                <a href="<?php echo URL ?>/view/listroom/<?=$data->getId()?>" class="disabled">     
                   <img src="<?php echo URL ?>/img/iconroom.png">    
                 </td>
                 <td>

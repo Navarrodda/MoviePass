@@ -86,10 +86,16 @@ class RoomController
 		}
 	}
 
+	public function bring_list_for_id_cinema($idcinema)
+	{
+		return $this->RoomBd->bring_list_for_id_cinema($idcinema);
+	}
+
 	//traer toda la capacidad del cine
 	//traer todas las salas
 	//contar esas capacidades y ver si se puede dar de alta la sala
-	public function 
+	//public function 
+
 }
 
 ?>

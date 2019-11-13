@@ -13,6 +13,7 @@ use \Controllers\UserController as UserC;
 use \Controllers\MoviegenreController as MoviegenreC;
 use \Controllers\DiscountController as DiscountC;
 use \Controllers\FuctionController as Fuctionc;
+use \Controllers\RoomController as Roomc;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -29,6 +30,7 @@ class ViewController
 		$this->ControlMuvGen = new MoviegenreC;
 		$this->ControlDiscount = new DiscountC;
 		$this->ControlFuctionc = new Fuctionc;
+		$this->ControlRoom = new Roomc;
 	}
 
 	public function index()
@@ -694,6 +696,39 @@ class ViewController
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "card.php");
 			include URL_VISTA . 'footer.php';
+		} 
+
+		public function listroom($idcinema)
+		{	
+			$cinema = $this->ControlCinema->bring_for_id($idcinema); 
+			$room = $this->ControlRoom->bring_list_for_id_cinema($idcinema);
+			if(!empty($cinema))
+			{
+				if(!empty($room))
+				{
+
+					$view = 'CINEMA';
+					$espace = 'ROOMS';
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "rooms.php");
+					include URL_VISTA . 'footer.php';
+				}
+				else 
+				{
+					$view = 'CINEMA';
+					$espace = 'ROOMS';
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "registeroom.php");
+					include URL_VISTA . 'footer.php';
+				}
+			}
+			else {
+				$view = "MESSAGE";		
+				$this->message = new Message( "warning", "The Cinema does not exist!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			} 
 		} 
 
 		public function registeroom($idcinema)
