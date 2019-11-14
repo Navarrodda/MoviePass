@@ -3,13 +3,13 @@ namespace Controllers;
 //Model
 
 use \Model\Message as Message;
-use \Model\Cinema as Cinema;
+use \Model\Room as Room;
 use \Model\Movie as Movie;
 use \Model\Fuction as Fuction;
 
 //Dao
 
-use \Dao\CinemaBdDao as CinemaBd;
+use \Dao\RoomBdDao as RoomBdDao;
 use \Dao\MovieBdDao as MovieBdDao;
 use \Dao\FunctionBdDao as FunctionBd;
 
@@ -22,14 +22,160 @@ class FuctionController
 
 	public function __construct()
 	{
-		$this->cinemaBdDao = CinemaBd::getInstance();
+		$this->RoomBdDao = RoomBdDao::getInstance();
 		$this->movieBdDao = MovieBdDao::getInstance();
 		$this->fuctionBdDao = FunctionBd::getInstance();
-
 	}
 
-	public function add($idcinema,$day,$hour,$idmovie)
+	public function add($room,$day,$hour,$movie)
+	{
+		$function = new Fuction();
+		$function->setRoom($room);
+		$function->setMovie($movie);
+		$function->setDia($day);
+		$function->setHora($hour);
+		$this->fuctionBdDao->add($function);
+	}
+
+	public function check_time_and_room_to_add($idroom,$day,$hour,$idmovie)
 	{	
+		if(!empty($_SESSION))
+		{
+			$regle = false;
+			$listday = $this->fuctionBdDao->bring_by_day_for_room($day,$idroom);
+
+			$regla = $this->bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour);
+			if($regla == NULL)
+			{
+				
+				$ve = '00:15:00';
+				$veda[1]=explode(':',$ve);
+				$separar[1]=explode(':',$hour);
+				if(!empty($listday))
+				{
+					foreach ($listday as $dayfun) {
+						$hourss = $dayfun->getHora();
+						$separar[2]=explode(':',$hourss);
+
+						if($hour > $hourss)
+						{
+							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+							$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+							if($total_minutos>=0)
+							{
+								$regle = true;
+							}
+
+						}
+						else
+						{
+							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+							$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+							if($total_minutos>=0)
+							{
+								$regle = true;
+							}
+						}
+						if(!$regle)
+						{
+							$view = "MESSAGE";
+							$wear =  strtolower($view);
+							$this->message = new Message( "warning", "Does not meet the duration!" );
+						}
+
+					}
+				}
+				else
+				{
+					$regle = true;
+				}
+			}
+			else
+			{
+				$view = "MESSAGE";
+				$wear =  strtolower($view);
+				$this->message = new Message( "warning", "Existing Fuction with that date and that hour!" );
+			}
+			
+
+		}
+		else
+		{
+			$view = "LOGIN";
+			$wear =  strtolower($view);
+			$this->message = new Message( "warning", "Must login!" );
+		}
+
+		if($regle)
+		{
+			$room = $this->RoomBdDao->bring_by_id($idroom);
+			$movie = $this->movieBdDao->bring_by_id($idmovie);
+			$this->add($room,$day,$hour,$movie);
+			$view = "MESSAGE";
+			$wear =  strtolower($view);
+			$this->message = new Message( "success", "Function loaded successfully!" );
+
+		}
+		$wear = $wear . '.'.'php';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . $wear);
+		include URL_VISTA . 'footer.php';
+	}
+
+
+
+
+
+	public function validate_day_hours($day,$hour)
+	{
+
+		if(!empty($_SESSION))
+		{
+			$hoursnaw = date("G:i");
+			$dianaw = date ("Y-m-d");
+			$modification = $dianaw .'/'. $hoursnaw;
+			$modificationthisday = $day .'/'. $hour;
+			$movieforcinema = false;
+			if($modificationthisday >= $modification)
+			{
+				$movieforcinema = TRUE;
+			}
+		}
+		return $movieforcinema;
+	}
+
+	public function tomakeatoast_day_and_cinema_with_movie($day,$idcinema,$idmovie)
+	{ if(!empty($_SESSION))
+		{
+			$movieforcinema = false;
+			$movie = $this->movieBdDao->bring_by_id($idmovie);
+			if($movie != NULL)
+			{
+				$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
+				if(!empty($funcionmuvie))
+				{
+					foreach ($funcionmuvie as $miviefun) {
+						$room = $this->RoomBdDao->bring_by_id($miviefun->getRoom()->getId());
+						if($room->getCinema()->getId() == $idcinema)
+						{
+							$movieforcinema = TRUE;
+						}
+					}
+				}
+				else
+				{
+					$movieforcinema = TRUE;
+				}
+			}
+		}
+		return $movieforcinema;
+	}
+
+	public function tomakeatoast_day_and_cinema_for_room_with_movie($idroom,$day,$idmovie)
+	{
+
 		if(!empty($_SESSION))
 		{
 			$hoursnaw = date("G:i");
@@ -38,188 +184,82 @@ class FuctionController
 			$modificationthisday = $day .'/'. $hour;
 			if($modificationthisday >= $modification)
 			{
-				$cinema = $this->cinemaBdDao->bring_by_id($idcinema); 
+				$movieforcinema = false;
 
-				if($cinema != NULL)
+				$movie = $this->movieBdDao->bring_by_id($idmovie);
+
+				if($movie != NULL)
 				{
-					
-					$movie = $this->movieBdDao->bring_by_id($idmovie);
+					$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
 
-					if($movie != NULL)
+					if(!empty($funcionmuvie))
 					{
-						$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
 
-						if(!empty($funcionmuvie))
-						{
-							$movieforcinema = false;
-							foreach ($funcionmuvie as $miviefun) {
-								if($miviefun->getCinema()->getId() == $idcinema)
-								{
-									$movieforcinema = TRUE;
-									
-								}
-
-							}
-						}
-						else
-						{
-							$movieforcinema = TRUE;
-						}
-
-						$listday = $this->fuctionBdDao->bring_by_day_for_cinema($day,$idcinema);
-						if($movieforcinema)
-						{
-
-							$regla = $this->fuctionBdDao->bring_by_date_idmovie_idcinema_hour($idcinema,$day,$idmovie,$hour);
-							if($regla == NULL)
+						foreach ($funcionmuvie as $miviefun) {
+							if($miviefun->getCinema()->getId() == $idcinema)
 							{
-								$regle = false;
-								$ve = '00:15:00';
-								$veda[1]=explode(':',$ve);
-								$separar[1]=explode(':',$hour);
-								if(!empty($listday))
-								{
-									foreach ($listday as $dayfun) {
-										$hourss = $dayfun->getHora();
-										$separar[2]=explode(':',$hourss);
-										if($hour > '12')
-										{
-											if($hour > $hourss)
-											{
-												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-												$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-												if($total_minutos>=0)
-												{
-													$regle = true;
-												}
+								$movieforcinema = TRUE;
 
-											}
-											else
-											{
-												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-												$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-												if($total_minutos>=0)
-												{
-													$regle = true;
-												}
-											}
-										}									
-										else
-										{
-											if($hour < $hourss)
-											{
-												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-												$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-												if($total_minutos>=0)
-												{
-													$regle = true;
-												}
-											}
-											else
-											{
-												$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-												$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
-												$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-												if($total_minutos>=0)
-												{
-													$regle = true;
-												}
-
-											}
-
-										}
-									}
-								}
-								else
-								{
-									$regle = true;
-								}
-								if($regle){
-									$function = new Fuction();
-									$function->setCinema($cinema);
-									$function->setMovie($movie);
-									$function->setDia($day);
-									$function->setHora($hour);
-									$this->fuctionBdDao->add($function);
-									$view = "MESSAGE";
-									$this->message = new Message( "success", "The movie was loaded successfully!" );
-									include URL_VISTA . 'header.php';
-									require(URL_VISTA . 'message.php');
-									include URL_VISTA . 'footer.php';
-								}
-								else
-								{
-									$view = "MESSAGE";
-									$this->message = new Message( "warning", "Does not meet the duration!" );
-									include URL_VISTA . 'header.php';
-									require(URL_VISTA . 'message.php');
-									include URL_VISTA . 'footer.php';
-								}
 							}
-							else
-							{
-								$view = "MESSAGE";
-								$this->message = new Message( "warning", "Billboard movie already exists. It does not matter!!" );
-								include URL_VISTA . 'header.php';
-								require(URL_VISTA . 'message.php');
-								include URL_VISTA . 'footer.php';
-							}
-						}
-						else
-						{
-							$view = "MESSAGE";
-							$this->message = new Message( "warning", "The selected movie is already in another movie theater!" );
-							include URL_VISTA . 'header.php';
-							require(URL_VISTA . 'message.php');
-							include URL_VISTA . 'footer.php';
+
 						}
 					}
 					else
 					{
-						$view = "MESSAGE";
-						$this->message = new Message( "warning", "Cinema dont exist!" );
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . 'message.php');
-						include URL_VISTA . 'footer.php';
+						$movieforcinema = TRUE;
 					}
 				}
-				else
-				{
-					$view = "MESSAGE";
-					$this->message = new Message( "warning", "Movie dont exist!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . 'message.php');
-					include URL_VISTA . 'footer.php';
-				}
-
-			}
-			
-			else
-			{
-				$view = "MESSAGE";
-				$this->message = new Message( "warning", "The day or time exceeds the current!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'message.php');
-				include URL_VISTA . 'footer.php';
-
 			}
 		}
-		else{
-			$view = "MESSAGE";
-			$this->message = new Message( "warning", "Must login!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'login.php');
-			include URL_VISTA . 'footer.php';
-		}
+		return $movieforcinema;
 	}
 
 
-	public function  bring_Function_by_idCinema($id)
+	public function validate_cinema_day_and_room_for_movie($idcinema,$day,$idmovie)
 	{
-		return $this->fuctionBdDao->bring_Function_by_idCinema($id);
+
+		if(!empty($_SESSION))
+		{
+			$hoursnaw = date("G:i");
+			$dianaw = date ("Y-m-d");
+			$modification = $dianaw .'/'. $hoursnaw;
+			$modificationthisday = $day .'/'. $hour;
+			if($modificationthisday >= $modification)
+			{
+				$movieforcinema = false;
+
+				$movie = $this->movieBdDao->bring_by_id($idmovie);
+
+				if($movie != NULL)
+				{
+					$funcionmuvie =$this->fuctionBdDao->bring_Function_by_idMovies_for_day($idmovie,$day);
+
+					if(!empty($funcionmuvie))
+					{
+
+						foreach ($funcionmuvie as $miviefun) {
+							if($miviefun->getCinema()->getId() == $idcinema)
+							{
+								$movieforcinema = TRUE;
+
+							}
+
+						}
+					}
+					else
+					{
+						$movieforcinema = TRUE;
+					}
+				}
+			}
+		}
+		return $movieforcinema;
+	}
+
+
+	public function  bring_Function_by_idroom($id)
+	{
+		return $this->fuctionBdDao->bring_Function_by_idroom($id);
 	}
 
 	public function bring_by_function($idcinema,$day,$idmovie,$hour)
@@ -272,7 +312,7 @@ class FuctionController
 
 	public function removefuctionmovieandmensaj($idfuction)
 	{
-		
+
 		if($idfuction)
 		{
 
@@ -298,7 +338,7 @@ class FuctionController
 
 				$this->message = new Message( "warning", "The function does not exist!" );
 			}
-			
+
 		}else
 		{
 			$this->message = new Message( "warning", "There is no function selected!" );
@@ -307,6 +347,10 @@ class FuctionController
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . 'message.php');
 		include URL_VISTA . 'footer.php';
+	}
 
+	public function bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour)
+	{
+		return $this->fuctionBdDao->bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour);
 	}
 }

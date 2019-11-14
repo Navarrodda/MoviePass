@@ -57,27 +57,6 @@ class FunctionBdDao
         return null;
     }
 
-    public function bring_Function_by_idCinema($idcinema)
-    {
-        try{
-            $sql = "SELECT * FROM $this->table WHERE cinema = \"$idcinema\" ";
-            $conec = Conection::conection();
-            $judgment = $conec->prepare($sql);
-            $judgment->execute();
-            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
-            $this->mapear($dataSet);
-            if (!empty($this->list)) {
-                return $this->list;
-            }
-            return null;
-            
-        }catch(\PDOException $e){
-            echo $e->getMessage();die();
-        }catch(\Exception $e){
-            echo $e->getMessage();die();
-        }
-
-    }
 
     public function bring_by_day_for_room($day,$idroom){
         try{
@@ -256,10 +235,10 @@ class FunctionBdDao
 
             $judgment = $conec->prepare($sql);
 
-            $cine = $function->getCinema();
+            $room = $function->getRoom();
             $movi = $function->getMovie();
 
-            $room = $cine->getId();
+            $room = $room->getId();
             $movie = $movi->getId();
             $day = $function->getDia();
             $hour = $function->getHora();
@@ -452,11 +431,11 @@ public function mapear($dataSet){
     if($dataSet){
         $this->list = array_map(function ($f){
          $daoMovie = MovieBdDao::getInstance();
-         $daoCinema = CinemaBdDao::getInstance();
+         $daoRoom = RoomBdDao::getInstance();
          $fuction = new Fuction();
 
          $fuction->setId($f['id']);
-         $fuction->setCinema($daoCinema->bring_by_id($f['cinema']));
+         $fuction->setRoom($daoRoom->bring_by_id($f['room']));
          $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
          $fuction->setDia($f['day']);
          $fuction->setHora($f['hours']);
