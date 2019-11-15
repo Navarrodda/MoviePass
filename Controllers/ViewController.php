@@ -36,7 +36,25 @@ class ViewController
 	public function index()
 	{
 		$current_date = date ("d-m-Y G:m.a");
-		$funcion = $this->ControlFuctionc->bringeverything();
+		$movie = $this->ControlMovies->bringmovies();
+		$i = 0;
+		$funcion = array();
+		$roomcinema = array();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($funcion, $thisfunction);
+					foreach ($thisfunction as $fun) {
+						$room = $this->ControlRoom->bring_by_id($fun->getRoom()->getId());
+						array_push($roomcinema, $room);
+					}
+				}
+				$i++;
+			}
+		}
 		if(empty($funcion)){
 		
 			$view = 'HOME';

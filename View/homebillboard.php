@@ -25,37 +25,43 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-                             <?php if($funcion!= null )
+              <?php if(!empty($funcion))
                {
                 foreach ($funcion as $fun) { 
                   ?>
               <table class="table marc3">
+                <?php foreach ($fun as $date) { ?>
                   <tbody> 
+                    
                    <tr>
-                    <td rowspan="12" valign="middle"><p><img class="tablesimg " src="<?= $fun->getMovie()->getPoster(); ?>"></p></td>
+                    <td rowspan="12" valign="middle"><p><img class="tablesimg " src="<?= $date->getMovie()->getPoster(); ?>"></p></td>
                   </tr>
                   <tr style="color:pink">
-                    <td colspan="2" style="background:black">Titile: <?= $fun->getMovie()->getTitle(); ?></td>
-                    <td colspan="2"class="fa fa-pied-piper-pp" > Popularity: <?= $fun->getMovie()->getPopularity(); ?></td>
-                    <td colspan="1" class="fa fa-comment"> Language: <?= $fun->getMovie()->getLanguage(); ?></td>
+                    <td colspan="2" style="background:black">Titile: <?= $date->getMovie()->getTitle(); ?></td>
+                    <td colspan="2"class="fa fa-pied-piper-pp" > Popularity: <?= $date->getMovie()->getPopularity(); ?></td>
+                    <td colspan="1" class="fa fa-comment"> Language: <?= $date->getMovie()->getLanguage(); ?></td>
                   </tr>
                   <tr style="color:white"> 
-                    <td colspan="12" style="background:black">Overview: <?= $fun->getMovie()->getOverview();  ?></td>
+                    <td colspan="12" style="background:black">Overview: <?= $date->getMovie()->getOverview();  ?></td>
                   </tr>
-                  <tr style="color:white"> 
-                    <td colspan="12">: <?= $fun->getMovie()->getLanguage();  ?></td>
-                  </tr style="color:white"> 
+                  <?php if(!empty($roomcinema)) { 
+                   foreach ($roomcinema as $romcin){
+                    if($romcin->getId() === $date->getRoom()->getId()) { ?>
+
                   <tr style="color:white">
-                    <td colspan="2"></td>
-                    <td colspan="2">:</td>
-                    <td colspan="2">:?</td>
+                    <td colspan="1">Cinema: <?= $romcin->getCinema()->getNombre();  ?></td>
+                    <td colspan="1">Day</td>
+                    <td colspan="1">Hours</td>
+                    <td colspan="1">Estimated Price</td>
                   </tr >
+               
                   <tr style="color:white">
-                   <td colspan="2"></td>
-                   <td colspan="2"></td>
-                   <td colspan="2">?</td>
-                   <td colspan="2">?</td>
+                   <td colspan="1">Room <?= $romcin->getNameRoom();?></td>
+                   <td colspan="1"><?= $date->getDia(); ?></td>
+                   <td colspan="1"><?= $date->getHora(); ?></td>
+                   <td colspan="1"><?= $romcin->getCinema()->getValor_entrada(); ?></td>
                  </tr>
+                  <?php } } } ?>
                  <tr style="color:white">
                   <td colspan="2">?</td>
                   <td colspan="2">?</td>
@@ -67,7 +73,9 @@
                   <td colspan="2">G</td>
                   <td colspan="2">C</td>
                 </tr>
+            
           </tbody>
+            <?php } ?>
       </table>
       <?php } } ?>
   </div>

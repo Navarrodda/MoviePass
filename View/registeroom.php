@@ -22,7 +22,6 @@
                </p>
               <form class="flexsearch--form" method="post" action="<?php echo URL ?>/room/add/">             
                 <p class="p2" type="Name_Room:"><input required type="text" class="int" name="name_room" style="color:white" placeholder="It introduces name the room"></input></p>
-                <p class="p2" type="Price:"><input required type="number" min="1" max="999" class="int" name="price" style="color:white" placeholder="It introduces the price to the function.."></input></p>
                 <p class="p2" type="Cant_Site:"><input required type="number" min="1" max="999" class="int" name="cant_site" style="color:white" placeholder="It introduces the totality of the site in the room.."></input></p>
                 <p class="p2" type="Number_Room:"><input required type="number" min="1" max="999" class="int" name="number_room" style="color:white" placeholder="It introduces the number on the room.."></input></p>
                 <p><input  name="idcinema" type=hidden value="<?= $cinema->getId()?>"></p>

@@ -140,10 +140,24 @@
         "valor_entrada": "300"
     },
     {
-        "id": 21,
+        "id": null,
         "capacidad": "900",
         "direccion": "Padre Dutto 1998",
         "nombre": "Cinemacenter",
         "valor_entrada": "300"
+    },
+    {
+        "id": null,
+        "capacidad": "400",
+        "direccion": "Asdasd",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "300"
+    },
+    {
+        "id": 23,
+        "capacidad": "200",
+        "direccion": "Asdas",
+        "nombre": "Aldrey",
+        "valor_entrada": "250"
     }
 ]

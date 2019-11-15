@@ -23,7 +23,6 @@
         <th>Id</th>
       <?php } }  ?>
       <th>Name</th>
-      <th>Price</th>
       <th>Cant Site</th>
       <th>Number Room</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
@@ -46,7 +45,6 @@
              <td><?php echo $rooms->getId(); ?></td>
            <?php } } ?>
            <td><?php echo $rooms->getNameRoom();?></td>
-           <td><?php echo $rooms->getPrice(); ?></td>
            <td><?php echo $rooms->getCantSite();?></td>
            <td><?php echo $rooms->getNumberRoom();?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>

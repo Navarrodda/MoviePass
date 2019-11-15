@@ -10,7 +10,6 @@ class Room
     private $id;
 
     private $name_room;
-    private $price;
     private $cant_site;
     private $cinema;
     private $number_room;
@@ -63,25 +62,6 @@ class Room
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param mixed $price
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
 
     /**
      * @return mixed
