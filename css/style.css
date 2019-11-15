@@ -2254,8 +2254,9 @@ form#login-form:after {
   height: 280px;
 }
 .marcform{
-   background: linear-gradient(20deg, rgba(231,221,121,0.30), rgba(45,112,121,0.90));
+   background: linear-gradient(20deg, rgba(21,21,121,0.30), rgba(45,122,21,0.90));
   width:840px;
+   rgba(21,21,121,0.30)
   -webkit-border-radius: 60;
   -moz-border-radius: 60;
   border-radius: 60px;
