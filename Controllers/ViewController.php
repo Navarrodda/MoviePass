@@ -738,9 +738,9 @@ class ViewController
 			include URL_VISTA . 'footer.php';
 		}
 
-<<<<<<< HEAD
-	}
-=======
+
+	
+
 		public function selectroom($idcinema,$day,$hour,$idmovie)
 		{
 			if(!empty($_SESSION))
@@ -803,4 +803,3 @@ class ViewController
 
 
 	}
->>>>>>> a1125c0d5e6d3f7e9699725287549a90d170ff92
