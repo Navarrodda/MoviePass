@@ -2404,3 +2404,13 @@ form#login-form:after {
     float: right;
     text-align: right;
 }
+
+.tablesimg{
+
+  width: 250px;
+  height: 350px;
+}
+
+.marc3{
+  background: linear-gradient(20deg, rgba(220,100,4,0.60), rgba(115,121,222,0.90));
+}

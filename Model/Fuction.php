@@ -3,12 +3,12 @@
 namespace Model;
 
 use Model\Movie as Movie;
-use Model\Cinema as Cinema;
+use Model\Room as Room;
 
 class Fuction
 {
     private $id;
-    private $cinema;
+    private $room;
     private $movie;
     private $dia;
     private $hora;
@@ -33,29 +33,7 @@ class Fuction
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCinema()
-    {
-        return $this->cinema;
-    }
 
-    /**
-     * @param mixed $cinema
-     *
-     * @return self
-     */
-    public function setCinema(Cinema $cinema)
-    {
-
-        $this->cinema = $cinema;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getMovie()
     {
         return $this->movie;
@@ -109,6 +87,26 @@ class Fuction
     public function setHora($hora)
     {
         $this->hora = $hora;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
+     * @param mixed $room
+     *
+     * @return self
+     */
+    public function setRoom(Room $room)
+    {
+        $this->room = $room;
 
         return $this;
     }

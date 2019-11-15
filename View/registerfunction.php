@@ -27,7 +27,7 @@
                </p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/fuction/add/">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/selectroom/">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
                      <p class="p2"  type="Cinema:">
@@ -43,7 +43,7 @@
              <p class="p2" type="Day:"><input required id="dat" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
               
                <p class="p2" type="Hours:"><input required type="time" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
-              <button class="but">Save Data</button>
+              <button class="but">Select Room -></button>
               <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
               <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
               <script> var array = <?php// echo json_encode($fecha);?>;

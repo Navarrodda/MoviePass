@@ -10,140 +10,69 @@
   <?php } ?>
   <div class="clear"></div>
 </section>
+
+
 <section>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <script type="text/javascript">
-          function valida(search) {
-            var ok = true;
-            var msg = "!Empty search data:\n";
-            if(search.elements["search"].value == "")
-            {
-              msg += "Complete the field\n";
-              ok = false;
-            }
-
-            if(ok == false)
-              alert(msg);
-            return ok;
-          }
-        </script>
-        <div class="flexsearch">
-          <div class="flexsearch--wrapper">
-            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
-              <div class="flexsearch--input-wrapper">
-                <div class="col-md-12">
-                <div class="center">
-                 </div>
-               </div>
-             </div>
-             <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
-           </form>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
-</div>
-</section>
-
-
-<section class="product-s-display">
-  <?php if(!empty($genresel)){ ?>
-    <div class="container">
-      <div class="row">
-       <h1>Genres</h1>
-       <?php foreach ($genresel as $genre) { ?>
-        <div class="col-md-4">
-          <div class="s_display">
-            <div class="imgri">
-              <a href="<?php echo URL ?>/view/billboardforgenre/<?=$genre->getId();?>">
-                <img class="imgri" src="<?= $genre->getImage();?>" alt="">
-              </a>
-            </div>
-            <h1 style="color:white"><?= $genre->getName();?></h1>
-          </div>
+    <div class="container lower-box box-primary" style="text-align: center;">
+      <?php if($funcion!= null ) { ?>
+        <h2 class="section-heading">The functions registered to date and time are<?= $current_date ?></h2>
+        <hr class="primary"> <?php }
+        else{ ?>
+          <h2 class="section-heading">No functions registered to date and time are<?= $current_date ?></h2>
+          <hr class="primary"> <?php } ?>
         </div>
-      <?php } ?>
-    </div>
-  </div>
-<?php } ?>
-</section>
-<section>
-  <div class="clear"></div>
-</section>
-
-<section>
-
- <div class="container">
-  <div class="related-products">
-    <div class="row">
-      <div class="col-md-12">
-       <h1>Cinema Functions</h1>
-     </div>
-   </div>
-   <?php if(!empty($cinemas)) { 
-     foreach ($cinemas as $cin) {?>
-       <div class="bar">
-        <h2><?= $cin->getNombre();?></h2>
-        <img alt="" src="<?php echo URL ?>/img/bar.png">
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="row">
-              <?php if(!empty($movies)) {
-                foreach ($movies as $muv) { 
-                  if($muv->getCinema()->getId() == $cin->getId()) { ?>
-                    <div class="col-md-3">
-                      <div class="product">
-                        <h1><?php $fecha = date("d-m-Y", strtotime($muv->getDia())); echo $fecha?></h1>
-                        <div class="s_product">
-                          <img alt="" src="<?= $muv->getMovie()->getPoster();?>">
-                          <div class="s_overlay"></div>
-                          <h2 style="background:black; color:white"><?=$muv->getHora()?></h2>
-                          <h3><?=$muv->getMovie()->getTitle() ?></h3>
-                          <?php if(!empty($_SESSION)){
-                            if($_SESSION["rol"] == 3) { ?>
-                              <h4><a href="<?php echo URL ?>/view/buyq/<?=$muv->getId(); ?>"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>BUY TICKET</a></h4>
-                            <?php } else { ?>
-                              <h4><a href="<?php echo URL ?>/view/modifyfuction/<?=$muv->getId();?>"><i aria-hidden="true" class="fa fa-angle-double-right"></i>Modify</a></h4>
-                            <?php } } else { ?>
-                              <h4><a href="<?php echo URL ?>/view/login/"><i aria-hidden="true" class="fa fa-cart-arrow-down"></i>BUY TICKET</a></h4>
-                            <?php  } ?>
-                          </div>
-                          <div class="rate">
-                            <h3><?=$muv->getMovie()->getOverview()?></h3>
-                            <p>   <?php  if(floor($muv->getMovie()->getVote()*5/100) <= 1) { ?>
-                             <p><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                           <?php } ?>
-                           <?php  if(floor($muv->getMovie()->getVote()*5/100) == 2) { ?>
-                             <p><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                           <?php } ?>
-                           <?php  if(floor($muv->getMovie()->getVote()*5/100) == 3) { ?>
-                             <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p>
-                           <?php }?>
-                           <?php  if(floor($muv->getMovie()->getVote()*5/100) == 4) { ?>
-                             <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><span><i aria-hidden="true" class="fa fa-star"></i></span><span><i aria-hidden="true" class="fa fa-star"></i></span></p> 
-                           <?php }?>
-                           <?php  if(floor($muv->getMovie()->getVote()*5/100) > 5) { ?>
-                             <p><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i><i aria-hidden="true" class="fa fa-star"></i></p> 
-                           <?php }?>
-                           <p><span style="color:white"><i class="fa fa-pied-piper-pp" aria-hidden="true"></i><?=$muv->getMovie()->getPopularity()?></span> <span style="color:white"><i class="fa fa-comment" aria-hidden="true"></i>"<?= $muv->getMovie()->getLanguage()?>"</span> <span style="color:white"><i class="fa fa-play-circle-o" aria-hidden="true"> <?= $muv->getMovie()->getDuration()?></i></span></p>
-                         </p>
-                         <h5>Estimated Price: $<?= $cin->getValor_entrada(); ?></h5>
-                       </div>
-                     </div>
-
-                   </div>
-                 <?php } ?>
-                <?php } } ?>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+                             <?php if($funcion!= null )
+               {
+                foreach ($funcion as $fun) { 
+                  ?>
+              <table class="table marc3">
+                  <tbody> 
+                   <tr>
+                    <td rowspan="12" valign="middle"><p><img class="tablesimg " src="<?= $fun->getMovie()->getPoster(); ?>"></p></td>
+                  </tr>
+                  <tr style="color:pink">
+                    <td colspan="2" style="background:black">Titile: <?= $fun->getMovie()->getTitle(); ?></td>
+                    <td colspan="2"class="fa fa-pied-piper-pp" > Popularity: <?= $fun->getMovie()->getPopularity(); ?></td>
+                    <td colspan="1" class="fa fa-comment"> Language: <?= $fun->getMovie()->getLanguage(); ?></td>
+                  </tr>
+                  <tr style="color:white"> 
+                    <td colspan="12" style="background:black">Overview: <?= $fun->getMovie()->getOverview();  ?></td>
+                  </tr>
+                  <tr style="color:white"> 
+                    <td colspan="12">: <?= $fun->getMovie()->getLanguage();  ?></td>
+                  </tr style="color:white"> 
+                  <tr style="color:white">
+                    <td colspan="2"></td>
+                    <td colspan="2">:</td>
+                    <td colspan="2">:?</td>
+                  </tr >
+                  <tr style="color:white">
+                   <td colspan="2"></td>
+                   <td colspan="2"></td>
+                   <td colspan="2">?</td>
+                   <td colspan="2">?</td>
+                 </tr>
+                 <tr style="color:white">
+                  <td colspan="2">?</td>
+                  <td colspan="2">?</td>
+                  <td colspan="2">?</td>
+                </tr>
+                <tr style="color:white">
+                  <td colspan="2">C</td>
+                  <td colspan="2">C</td>
+                  <td colspan="2">G</td>
+                  <td colspan="2">C</td>
+                </tr>
+          </tbody>
+      </table>
       <?php } } ?>
-    </div>
   </div>
+</div>
+  </div>
+</div>
+
 </section>
