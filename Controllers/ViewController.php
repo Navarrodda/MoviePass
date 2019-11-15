@@ -35,49 +35,24 @@ class ViewController
 
 	public function index()
 	{
-		//$funcion = $this->ControlFuctionc->bringeverything();
-		/*if(empty($funcion))
-		{*/
+		$current_date = date ("d-m-Y G:m.a");
+		$funcion = $this->ControlFuctionc->bringeverything();
+		if(empty($funcion)){
+		
 			$view = 'HOME';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "home.php");
 			include URL_VISTA . 'footer.php';
-		//}
-		/*
+		}
 		else{
-			$genresel = $this->ControlGenre->bring_everything();
-			$cinema = $this->ControlCinema->bringeverything();
-			$movies = array();
-			$cinemas = array();
-			if(!empty($cinema))
-			{
-				foreach ($cinema as $cin) {
-					if($cin->getId() != null)
-					{
-						$this->ControlRoom->
-						$tocinema = $this->ControlFuctionc->bring_Function_by_idroom($cin->getId());
-						if (!empty($tocinema)) {
-							array_push($cinemas, $cin);
-							foreach ($tocinema as $to) {
-								if($to->getCinema()->getId() == $cin->getId())
-								{
-									array_push($movies, $to);
-								}
-
-							}
-						}
-
-					}
-				}
-
-			}
 			$view = 'BILLBOARD';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "homebillboard.php");
 			include URL_VISTA . 'footer.php';
-		}*/
+			}
+		}
 
-	}
+	
 
 
 

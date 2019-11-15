@@ -367,29 +367,22 @@ class FunctionBdDao
     }
 
     public function bring_everything(){
-        try{
+        $sql = "SELECT * FROM $this->table";
 
-            $sql = "SELECT * FROM $this->table";
+        $conec = Conection::conection();
 
-            $conec = Conection::conection();
+        $judgment = $conec->prepare($sql);
 
-            $judgment = $conec->prepare($sql);
+        $judgment->execute();
 
-            $judgment->execute();
+        $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+        $this->mapear($dataSet);
 
-            $this->mapear($dataSet);
-
-            if (!empty($this->list)) {
-                return $this->list;
-            }
-            return null;
-        }catch(\PDOException $e){
-            echo $e->getMessage();die();
-        }catch(\Exception $e){
-            echo $e->getMessage();die();
+        if (!empty($this->list)) {
+            return $this->list;
         }
+        return null;
     }
 
 
@@ -397,19 +390,19 @@ class FunctionBdDao
     {   
         try{
             if ($idfuncion != null) {
-               $sql = ("SELECT * FROM $this->table WHERE id = \"$idfuncion\" limit 1" );
+             $sql = ("SELECT * FROM $this->table WHERE id = \"$idfuncion\" limit 1" );
 
-               $conec = Conection::conection();
+             $conec = Conection::conection();
 
-               $judgment = $conec->prepare($sql);
+             $judgment = $conec->prepare($sql);
 
-               $judgment->execute();
+             $judgment->execute();
 
-               $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+             $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-               $this->mapear($dataSet[0]);
+             $this->mapear($dataSet[0]);
 
-               if(!empty($this->list[0])){
+             if(!empty($this->list[0])){
 
                 return $this->list[0];
             }
@@ -427,22 +420,22 @@ class FunctionBdDao
 
 public function mapear($dataSet){
     $dataSet = is_array($dataSet) ? $dataSet : [];
-  
+    
     if($dataSet){
         $this->list = array_map(function ($f){
-         $daoMovie = MovieBdDao::getInstance();
-         $daoRoom = RoomBdDao::getInstance();
-         $fuction = new Fuction();
+           $daoMovie = MovieBdDao::getInstance();
+           $daoRoom = RoomBdDao::getInstance();
+           $fuction = new Fuction();
 
-         $fuction->setId($f['id']);
-         $fuction->setRoom($daoRoom->bring_by_id($f['room']));
-         $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
-         $fuction->setDia($f['day']);
-         $fuction->setHora($f['hours']);
+           $fuction->setId($f['id']);
+           $fuction->setRoom($daoRoom->bring_by_id($f['room']));
+           $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
+           $fuction->setDia($f['day']);
+           $fuction->setHora($f['hours']);
 
-         return $fuction;
+           return $fuction;
 
-     }, $dataSet);
+       }, $dataSet);
 
     }
 
