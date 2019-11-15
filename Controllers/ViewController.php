@@ -745,6 +745,7 @@ class ViewController
 		{
 			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
 			$movie = $fuction->getMovie();
+			$cinema = $fuction->getCinema();
 			$view = "Buy Process ";
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "buyq.php");
@@ -758,4 +759,5 @@ class ViewController
 			require(URL_VISTA . "seat.php");
 			include URL_VISTA . 'footer.php';
 		}
+
 	}

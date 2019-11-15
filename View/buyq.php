@@ -24,15 +24,30 @@
                </p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/buyseat/">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/card/">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
                      <p class="p2"  type="Quantity:">
-                       <select class="btnselect" name="idquantity" type="Select Quantity:" placeholder = "Select Ticket Quantity" required>
+                       <select id ="selector" class="btnselect" name="idquantity" type="Select Quantity:" placeholder = "Select Ticket Quantity" required>
                         <?php for($i = 0; $i<10;$i++){ ?>
-                          <option value ="$i"><?php echo $i?></option>
+                          <option value ="<?php echo $i?>"><?php echo $i?></option>
                         <?php } ?>
                       </select>
+                     
+                      <script>
+                       var entrada = <?php echo $cinema->getValor_entrada(); ?>;
+                        var activities = document.getElementById("selector");
+                        var total = document.getElementById("total");
+                         activities.addEventListener("change", function() {
+                            //alert(this.value * entrada);
+                               var total1 = this.value * entrada;
+                               //$_GET["total"] = total1; 
+                               <!-- <?php $total = $_GET["total"];?> -->
+                               
+                          });
+                          </script>
+                       <h4 id = "total" style="color:white">Total :  <?php echo $total; ?></h4>
+                      
                     </p>
                     <button class="but">Continue</button>
                   </div>
