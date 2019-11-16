@@ -395,11 +395,11 @@ class FunctionBdDao
              $conec = Conection::conection();
 
              $judgment = $conec->prepare($sql);
-
+             
              $judgment->execute();
 
              $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
-
+               
              $this->mapear($dataSet[0]);
 
              if(!empty($this->list[0])){

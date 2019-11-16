@@ -50,6 +50,9 @@
                           <td colspan="1">Hours</td>
                           <td colspan="1">Estimated Price</td>
                           <td colspan="1">Boton</td>
+                          <form action="<?php echo URL ?>/view/buyq/">
+                          <button name="idfuction" value ="<?php echo $roomci->getId(); ?>">Botonaso</button>
+                          </form>
                         </tr>
                         <tr style="color:white">
                          <td colspan="1">Room <?= $roomci->getRoom()->getNameRoom();?></td>
