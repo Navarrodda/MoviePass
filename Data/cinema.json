@@ -147,10 +147,32 @@
         "valor_entrada": "300"
     },
     {
+<<<<<<< HEAD
         "id": 22,
         "capacidad": "350",
         "direccion": "Colon 111",
         "nombre": "Ambassador",
         "valor_entrada": "150"
+=======
+        "id": null,
+        "capacidad": "400",
+        "direccion": "Asdasd",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "300"
+    },
+    {
+        "id": null,
+        "capacidad": "200",
+        "direccion": "Asdas",
+        "nombre": "Aldrey",
+        "valor_entrada": "250"
+    },
+    {
+        "id": 24,
+        "capacidad": "200",
+        "direccion": "Asdads",
+        "nombre": "El Rey",
+        "valor_entrada": "250"
+>>>>>>> feb8135e4b862b9dd64472e8372ab113793307af
     }
 ]

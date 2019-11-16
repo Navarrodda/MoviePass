@@ -36,9 +36,25 @@ class ViewController
 	public function index()
 	{
 		$current_date = date ("d-m-Y G:m.a");
-		$funcion = $this->ControlFuctionc->bringeverything();
-		if(empty($funcion)){
-		
+		$movie = $this->ControlMovies->bringmovies();
+		$movies = array();
+		$roomcinema = array();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($movies, $mov);
+					foreach ($thisfunction as $fun) {
+						array_push($roomcinema, $fun);
+					}
+				}
+			}
+		}
+		if(empty($movies))
+		{
+
 			$view = 'HOME';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "home.php");
@@ -49,10 +65,10 @@ class ViewController
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "homebillboard.php");
 			include URL_VISTA . 'footer.php';
-			}
 		}
+	}
 
-	
+
 
 
 
@@ -501,7 +517,7 @@ class ViewController
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
-			
+
 		} 
 
 
@@ -739,7 +755,7 @@ class ViewController
 		}
 
 
-	
+
 
 		public function selectroom($idcinema,$day,$hour,$idmovie)
 		{
@@ -771,7 +787,7 @@ class ViewController
 								$espace = 'ROOMS';
 								$wear = 'registeroom';
 							}
-							
+
 						}
 						else
 						{
@@ -794,7 +810,7 @@ class ViewController
 				$wear =  strtolower($view);
 				$this->message = new Message("warning","without a session started!" );
 			}
-			
+
 			$wear = $wear . '.'.'php';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . $wear);

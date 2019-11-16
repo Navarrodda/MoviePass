@@ -20,17 +20,15 @@ class RoomController
 		$this->CinemaControl = new CinemaController();
 	}
 
-	public function add($name_room,$price,$cant_site,$number_room,$idcinema)
+	public function add($name_room,$cant_site,$number_room,$idcinema)
 	{
-		$name_room = ucwords($name_room);
-
-		$id = $this->RoomBd->bring_id_by_nameRoom($name_room);
+		$name_room = ucwords($name_room); 
+		$id = $this->RoomBd->bring_id_by_nameRoom($name_room,$idcinema);
 		if (empty($id)) {
 			$cinema = $this->CinemaControl->bring_for_id($idcinema);
 			if (!empty($cinema)) {
 				$room = new Room();
 				$room->setNameRoom($name_room);
-				$room->setPrice($price);
 				$room->setCantSite($cant_site);
 				$room->setCinema($cinema);
 				$room->setNumberRoom($number_room);
@@ -67,13 +65,12 @@ class RoomController
 		$this->RoomBd->remove_by_id($id);
 	}
 
-	public function modify($idroom,$name_room,$price,$cant_site,$number_room){
+	public function modify($idroom,$name_room,$cant_site,$number_room){
 
 		$room = $this->RoomBd->bring_by_id($idroom);
 		if($room == $id){
 			$room = new Cinema();
 			$room->setNameRoom($name_room);
-			$room->setPrice($price);
 			$room->setCantSite($cant_site);
 			$cinema->setNumberRoom($number_room);
 			$this->RoomBd->to_update($room,$idroom);
@@ -94,6 +91,11 @@ class RoomController
 	public function bringeverything()
 	{
 		return $this->RoomBd->bring_everything();
+	}
+
+		public function bring_by_id($idroom)
+	{
+		return $this->RoomBd->bring_by_id($idroom);
 	}
 
 	//traer toda la capacidad del cine

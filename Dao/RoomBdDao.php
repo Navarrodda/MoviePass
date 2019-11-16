@@ -17,8 +17,8 @@ class RoomBdDao
         return self::$instance;
     }
 
-        public function bring_id_by_nameRoom($name_room){
-        $sql = "SELECT id FROM $this->table WHERE name_room = \"$name_room\" LIMIT 1";
+        public function bring_id_by_nameRoom($name_room,$idcinema){
+        $sql = "SELECT id FROM $this->table WHERE name_room = \"$name_room\" and cinema = \"$idcinema\" LIMIT 1";
 
         $conec = Conection::conection();
 
@@ -61,22 +61,20 @@ public function add(Room $room){
     try{
 
         /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (name_room,price,cant_site,cinema,number_room) VALUES 
-            (:name_room,:price,:cant_site,:cinema,:number_room)");
+        $sql = ("INSERT INTO $this->table (name_room,cant_site,cinema,number_room) VALUES 
+            (:name_room,:cant_site,:cinema,:number_room)");
 
         $conec = Conection::conection();
 
         $judgment = $conec->prepare($sql);
 
         $name_room = $room->getNameRoom();
-        $price = $room->getPrice();
         $cant_site = $room->getCantSite();
         $cinema = $room->getCinema();
         $idcinema = $cinema->getId();
         $number_room = $room->getNumberRoom();
 
         $judgment->bindParam(":name_room",$name_room);
-        $judgment->bindParam(":price",$price);
         $judgment->bindParam(":cant_site",$cant_site);
         $judgment->bindParam(":cinema",$idcinema);
         $judgment->bindParam(":number_room",$number_room);
@@ -113,7 +111,7 @@ public function remove_by_id($id){
 public function to_update(Room $room, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET name=:name_room, price=:price, cant_seat=:cant_seat, cinema=:cinema, number_room=:number_room WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET name=:name_room, cant_seat=:cant_seat, cinema=:cinema, number_room=:number_room WHERE id=\"$id\"");
 
 
 
@@ -126,7 +124,6 @@ public function to_update(Room $room, $id){
         $butacas = $room->getCantSite();
 
         $judgment->bindParam(":name_room",$name_room);
-        $judgment->bindParam(":price",$price);
         $judgment->bindParam(":cant_site",$cant_site);
         $judgment->bindParam(":cinema",$cinema);
         $judgment->bindParam(":number_room",$number_room);
@@ -232,7 +229,6 @@ public function mapear($dataSet){
             $room = new Room();
             $room->setId($p['id']);
             $room->setNameRoom($p['name_room']);
-            $room->setPrice($p['price']);
             $room->setCinema( $daoCinema->bring_by_id($p['cinema']));
             $room->setNumberRoom($p['number_room']);
             $room->setCantSite($p['cant_site']);
