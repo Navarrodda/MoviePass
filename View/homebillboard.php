@@ -49,7 +49,7 @@
                           <td colspan="1">Day</td>
                           <td colspan="1">Hours</td>
                           <td colspan="1">Estimated Price</td>
-                          <td colspan="1">Select</td>
+                          <td colspan="1">Function</td>
                         </tr>
                         <tr style="color:white">
                          <td colspan="1">Room <?= $roomci->getRoom()->getNameRoom();?></td>
@@ -57,7 +57,7 @@
                          <td colspan="1"><?= $roomci->getHora(); ?></td>
                          <td colspan="1"><?= $roomci->getRoom()->getCinema()->getValor_entrada(); ?></td>
                           <form method="post" action="<?php echo URL ?>/view/buyq/">
-                         <td colspan="1"><button name="idfuction" style="background:coral" value ="<?= $roomci->getId(); ?>">Botonaso</button></td>
+                         <td colspan="1"><button class="btn btn-success" name="idfuction" value ="<?= $roomci->getId(); ?>">Select</button></td>
                          </form>
                        </tr>
                      <?php } } } ?>
