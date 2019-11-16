@@ -154,10 +154,17 @@
         "valor_entrada": "300"
     },
     {
-        "id": 23,
+        "id": null,
         "capacidad": "200",
         "direccion": "Asdas",
         "nombre": "Aldrey",
+        "valor_entrada": "250"
+    },
+    {
+        "id": 24,
+        "capacidad": "200",
+        "direccion": "Asdads",
+        "nombre": "El Rey",
         "valor_entrada": "250"
     }
 ]
