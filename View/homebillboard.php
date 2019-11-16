@@ -34,6 +34,9 @@
                    <tr>
                     <td rowspan="12" valign="middle"><p><img class="tablesimg " src="<?= $fun->getMovie()->getPoster(); ?>"></p></td>
                   </tr>
+                  <form action="<?php echo URL?>/view/buyq/<?= $fun->getId();?>">
+                  <button >boton</button>
+                  </form>
                   <tr style="color:pink">
                     <td colspan="2" style="background:black">Titile: <?= $fun->getMovie()->getTitle(); ?></td>
                     <td colspan="2"class="fa fa-pied-piper-pp" > Popularity: <?= $fun->getMovie()->getPopularity(); ?></td>

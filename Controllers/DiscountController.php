@@ -106,4 +106,22 @@ class DiscountController
 			include URL_VISTA . 'footer.php';
 		}
 	}
+
+	public function validate_day_hours($day,$hour)
+	{
+
+		if(!empty($_SESSION))
+		{
+			$hoursnaw = date("G:i");
+			$dianaw = date ("Y-m-d");
+			$modification = $dianaw .'/'. $hoursnaw;
+			$modificationthisday = $day .'/'. $hour;
+			$discount = false;
+			if($modificationthisday >= $modification)
+			{
+				$discount = TRUE;
+			}
+		}
+		return $discount;
+	}
 }
