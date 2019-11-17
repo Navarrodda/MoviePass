@@ -25,7 +25,8 @@
                </p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/modifyroomfuction">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/modifyroomfuction">    
+                  <p><input  name="idfuction" type=hidden value="<?= $function->getId()?>"></p>         
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
                      <p class="p2"  type="Cinema: <?=$function->getRoom()->getCinema()->getNombre(); ?> :">
@@ -37,7 +38,6 @@
                     </p>
                   </div>
                 </div>
-
                 <p class="p2" type="Day:"><input id="dat" value="<?=$function->getDia()?>" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
 
                 <p class="p2" type="Hour:"><input type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>

@@ -2424,3 +2424,16 @@ form#login-form:after {
 .marctr2{
   background: linear-gradient(20deg, rgba(20,14,11,0.60), rgba(115,121,222,0.90));
 }
+
+ .imgr4
+  {
+     -webkit-border-radius: 10; 
+    -moz-border-radius: 10;
+    border-radius:4%;
+     text-align: center;
+     margin:auto;
+   width: 528px; 
+    height: 291px;
+    padding: 2px;
+    background: linear-gradient(20deg, rgba(111,11,121,0.60), rgba(45,11,121,0.60));
+  }

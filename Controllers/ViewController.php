@@ -520,18 +520,20 @@ class ViewController
 
 		} 
 
-		public function modifyroomfuction($idfunction,$idcinema,$day,$time)
+		public function modifyroomfuction($idfuction,$idcinema,$day,$hour)
 		{	
 			$day = $day;
-			$time = $time;
-			$cinema = $this->ControlCinema->bring_for_id($idcinema); 
-			$room = $this->ControlRoom->bring_list_for_id_cinema($idcinema);
+			$hour = $hour;
+			$cinema = $this->ControlCinema->bring_for_id($idcinema);
 			if(!empty($cinema))
 			{
+				$function = $this->ControlFuctionc->bringidfuction($idfuction);
+				$room = $this->ControlRoom->bring_list_for_id_cinema($idcinema);
+				$movie = $this->ControlMovies->movieBdId($function->getMovie()->getId());
 				if(!empty($room))
 				{
 
-					$view = 'CINEMA';
+					$view = 'MODIFY';
 					$espace = 'ROOMS';
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modifyroomfunction.php");

@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-heading" style="color:white">Register Function For: <?= $cinema->getNombre()?> in Room:</h2>
+        <h2 class="section-heading" style="color:white">Modify Function For: <?= $cinema->getNombre()?> in Room:</h2>
         <?php if (!empty($movie)) { ?>
 
           <hr class="primary">
@@ -18,7 +18,7 @@
               <div class="col-md-12 marcform">
                 <p>
                   <h3 style="color:white">Movie: <?= $movie->getTitle();?></h3>
-                  <div class="fonds">
+                  <div class="imgr4">
                    <img src="<?php echo URL ?>/img/room2.jpg?>">
                  </div>
                </p>
