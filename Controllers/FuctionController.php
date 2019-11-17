@@ -293,15 +293,13 @@ class FuctionController
 
 	public function validate_date($date)
 	{
-
-		if(date('d-m-Y', strtotime($date))) {
-			$date = date("Y-m-d", strtotime($date));
-			return $date;
+		$brithdate = explode('/', $date);
+		if(!empty($brithdate[2])){
+		$brithdateFormated = $brithdate[2] . "-" . $brithdate[1] . "-" . $brithdate[0];
+		if (date('d-m-Y', strtotime($brithdateFormated))) {
+			return $brithdateFormated;
 		} 
-		if (date('d/m/Y', strtotime($date))) {
-			$date = date("Y-d-m", strtotime($date));
-			return $date;
-		} 
+	}
 		return null;
 	}
 
