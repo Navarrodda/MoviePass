@@ -533,7 +533,7 @@ class ViewController
 				if(!empty($room))
 				{
 
-					$view = 'CINEMA';
+					$view = 'MODIFY';
 					$espace = 'ROOMS';
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . "modifyroomfunction.php");
