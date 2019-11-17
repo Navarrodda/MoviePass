@@ -129,5 +129,10 @@ class MovieController
 		
 	}
 
+	public function bring_by_name($title)
+	{
+		return $this->MovieBddao->bring_by_name($title);
+	}
+
 
 }
