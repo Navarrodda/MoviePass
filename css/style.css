@@ -2415,3 +2415,12 @@ form#login-form:after {
 .marc3{
   background: linear-gradient(20deg, rgba(220,100,4,0.60), rgba(115,121,222,0.90));
 }
+
+
+.marctr1{
+  background: linear-gradient(20deg, rgba(32,22,4,0.60), rgba(15,121,222,0.90));
+}
+
+.marctr2{
+  background: linear-gradient(20deg, rgba(20,14,11,0.60), rgba(115,121,222,0.90));
+}

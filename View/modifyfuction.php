@@ -5,13 +5,13 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
         <?php if(!empty($cineList)) {?>
-          <h2 class="section-heading" style="color:white">Register Function For:</h2>
+          <h2 class="section-heading" style="color:white">Modify Function For:</h2>
           <?php if (!empty($movie)) { ?>
           <?php }?>
           <hr class="primary">
           <p>
             <strong style="color:white">
-              Register!
+              Modify!
             </strong>
           </p>
           <div class="regularform">
@@ -25,10 +25,10 @@
                </p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="#">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/view/modifyroomfuction">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
-                     <p class="p2"  type="Cinema: <?=$function->getCinema()->getNombre() ?> :">
+                     <p class="p2"  type="Cinema: <?=$function->getRoom()->getCinema()->getNombre(); ?> :">
                        <select class="btnselect" name="idcinema" type="Select Cinema:" placeholder = "Select a Cinema" required>
                         <?php foreach($cineList as $cine) { ?>
                           <option value ="<?php echo $cine->getId()?>"><?php echo $cine->getNombre()?></option>
@@ -38,10 +38,10 @@
                   </div>
                 </div>
 
-                <p class="p2" type="Day:"><input required id="dat" value="<?=$function->getDia()?>" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
+                <p class="p2" type="Day:"><input id="dat" value="<?=$function->getDia()?>" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
 
-                <p class="p2" type="Hour:"><input required type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
-                <button class="but">Modify</button>
+                <p class="p2" type="Hour:"><input type="time" value="<?=$function->getHora()?>" class="int" name="hour" style="color:white" placeholder="Select Hour of Function"></input></p>
+                <button class="but">Select Room -></button>
 
                <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                 <script> var array = <?php //echo json_encode($fecha);?>;

@@ -495,8 +495,8 @@ class ViewController
 		public function modifyfuction($idfuction)
 		{
 
-			$view = 'DISCOUNTS';
-			$espace = 'MODIFY';
+			$view = 'MODIFY';
+			$espace = 'FUNCTION';
 
 			$function = $this->ControlFuctionc->bringidfuction($idfuction);
 			if(!empty($function))
@@ -518,6 +518,41 @@ class ViewController
 				include URL_VISTA . 'footer.php';
 			}
 
+		} 
+
+		public function modifyroomfuction($idfunction,$idcinema,$day,$time)
+		{	
+			$day = $day;
+			$time = $time;
+			$cinema = $this->ControlCinema->bring_for_id($idcinema); 
+			$room = $this->ControlRoom->bring_list_for_id_cinema($idcinema);
+			if(!empty($cinema))
+			{
+				if(!empty($room))
+				{
+
+					$view = 'CINEMA';
+					$espace = 'ROOMS';
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "modifyroomfunction.php");
+					include URL_VISTA . 'footer.php';
+				}
+				else 
+				{
+					$view = 'REGISTER';
+					$espace = 'ROOM';
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "registeroom.php");
+					include URL_VISTA . 'footer.php';
+				}
+			}
+			else {
+				$view = "MESSAGE";		
+				$this->message = new Message( "warning", "The Cinema does not exist!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
+			} 
 		} 
 
 
