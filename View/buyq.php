@@ -43,6 +43,9 @@
                                document.getElementById("total").innerHTML = "Total : $" + total1.toString();
                           });
                           </script>
+                          <?php if($discount != null) {?>
+                          <p style="color:white"> Discount :  <?php die(var_dump($discount)); //echo $discount->getDisc();?></p>
+                          <?php } ;?>
                        <h4 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h4>
                       
                     </p>
