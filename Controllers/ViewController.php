@@ -680,7 +680,7 @@ class ViewController
 					}
 				}
 				$home = 0;
-				$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+				$this->message = new Message('info', ' The selected Titile Muvie' . ' ' . '<i><strong>' .  $search 
 					. '</strong>. It has movies in cinemas!');
 				$view = 'BILLBOARD';
 				$espace = 'FOR GENRE';
