@@ -18,7 +18,7 @@
               <div class="col-md-12 marcform">
                 <p>
                   <h3 style="color:white">Movie: <?= $movie->getTitle();?></h3>
-                  <div class="fonds">
+                  <div class="imgr4">
                    <img src="<?php echo URL ?>/img/room2.jpg?>">
                  </div>
                </p>
