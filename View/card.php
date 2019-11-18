@@ -3,6 +3,16 @@
   <div class="clear"></div>
 </section>
 
+<section>
+  <?php if(isset($this->message)) {?>
+    <div class="container">
+      <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
+    </div>
+  <?php } ?>
+  <div class="clear"></div>
+</section>
+
+
 
 <section>
  <div class="container">
