@@ -2,25 +2,30 @@
 namespace Controllers;
 //Model
 use \Model\Message as Message;
-use \Model\Buy as Buy;
+use \Model\Shopping as Shopping;
 //Controler
 use \Controllers\CinemaController as CinemaC;
 use \Controllers\FuctionController as Fuctionc;
 use \Controllers\DiscountController as DiscountC;
+use \Controllers\UserController as UserC;
 //DAO
-use \Dao\BuyBdDao as BuyBdDao;
+use \Dao\ShoppingsBdDao as ShoppingsBdDao;
 
 class ShoppingController
 {
-	private $daoBuy;
+	private $daoShopping;
+	private $usercontroller;
+	private $ControlDiscount;
 	public function __construct()
 	{
-		$this->daoBuy = BuyBdDao::getInstance();
+		$this->daoShopping = ShoppingsBdDao::getInstance();
+		$this->usercontroller = new Userc();
+		$this->ControlDiscount = new DiscountC();
 	}
 
 	public function purchasetikets($id)
 	{
-		return $this->daoBuy->bring_buy_by_user($id);
+		return $this->daoShopping->bring_buy_by_user($id);
 	}
 
 	//Verify and add the shop 
@@ -50,7 +55,21 @@ class ShoppingController
 							if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
 							{
 								$shopping = new Shopping();
-								
+								$shopping->setUser($this->usercontroler->bring_by_id());
+								$shopping->setFunction($fuction);
+								$shopping->setDiscount($discount);
+								$shopping->setDate(date("Y-m-d"));
+								$shopping->setCountrtiket($quantity);
+								$shopping->setPrice($cinema->getValor_entrada());
+								$shopping->setDiscount($discount);
+								if($discount != null)
+								{								
+									$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount->getDisc()/100));
+								}else
+								{
+									$total = $shopping->getPrice() * $shopping->getCountrtiket();
+								}
+								$shopping->setTotal($total);
 
 							}else
 							{

@@ -2,16 +2,16 @@
 namespace Model;
 
 use Model\User as User;
-use Model\Function as Function;
+use Model\Fuction as Fuction;
 use Model\Discount as Discount;
-class Buy
+class Shopping
 {
     private $id;
-    private $user;
-    private $function;
-    private $discount;
-    private $date;
-    private $countrtiket;
+    private $user; //Objeto user
+    private $function; // Objeto function
+    private $discount; // Objeto discount
+    private $date; // Y-m-d
+    private $countrtiket; // cant ticket
     private $price;
     private $total;
 
@@ -156,7 +156,7 @@ class Buy
      *
      * @return  self
      */ 
-    public function setFunction(Function $function)
+    public function setFunction(Fuction $function)
     {
         $this->function = $function;
 
