@@ -20,6 +20,7 @@ class Shopping
     {
 
     }
+    
 
     /**
      * Get the value of id
@@ -40,88 +41,6 @@ class Shopping
 
         return $this;
     }
-
-    /**
-     * Get the value of discount
-     */ 
-    public function getDescuento()
-    {
-        return $this->discount;
-    }
-
-    /**
-     * Set the value of discount
-     *
-     * @return  self
-     */ 
-    public function setDescuento(Discount $discount)
-    {
-        $this->discount = $discount;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of date
-     */ 
-    public function getFecha()
-    {
-        return $this->date;
-    }
-
-    /**
-     * Set the value of date
-     *
-     * @return  self
-     */ 
-    public function setFecha($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-         * Get the value of price
-         */ 
-        public function getPrecio()
-        {
-            return $this->price;
-        }
-
-        /**
-         * Set the value of price
-         *
-         * @return  self
-         */ 
-        public function setPrecio($price)
-        {
-            $this->price = $price;
-
-            return $this;
-        }
-
-    /**
-     * Get the value of total
-     */ 
-    public function getTotal()
-    {
-        return $this->total;
-    }
-
-    /**
-     * Set the value of total
-     *
-     * @return  self
-     */ 
-    public function setTotal($total)
-    {
-        $this->total = $total;
-
-        return $this;
-    }
-
-  
 
     /**
      * Get the value of user
@@ -164,21 +83,101 @@ class Shopping
     }
 
     /**
-     * @return mixed
-     */
+     * Get the value of discount
+     */ 
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
+     * Set the value of discount
+     *
+     * @return  self
+     */ 
+    public function setDiscount(Discount $discount)
+    {
+        $this->discount = $discount;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of date
+     */ 
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set the value of date
+     *
+     * @return  self
+     */ 
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of countrtiket
+     */ 
     public function getCountrtiket()
     {
         return $this->countrtiket;
     }
 
     /**
-     * @param mixed $countrtiket
+     * Set the value of countrtiket
      *
-     * @return self
-     */
+     * @return  self
+     */ 
     public function setCountrtiket($countrtiket)
     {
         $this->countrtiket = $countrtiket;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of price
+     */ 
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     *
+     * @return  self
+     */ 
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of total
+     */ 
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set the value of total
+     *
+     * @return  self
+     */ 
+    public function setTotal($total)
+    {
+        $this->total = $total;
 
         return $this;
     }

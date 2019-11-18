@@ -3,9 +3,10 @@ namespace Controllers;
 //Model
 use \Model\Message as Message;
 use \Model\Shopping as Shopping;
+use \Model\Discount as Discount;
 //Controler
 use \Controllers\CinemaController as CinemaC;
-use \Controllers\FuctionController as Fuctionc;
+use \Controllers\FuctionController as FuctionC;
 use \Controllers\DiscountController as DiscountC;
 use \Controllers\UserController as UserC;
 //DAO
@@ -19,8 +20,9 @@ class ShoppingController
 	public function __construct()
 	{
 		$this->daoShopping = ShoppingsBdDao::getInstance();
-		$this->usercontroller = new Userc();
+		$this->usercontroller = new UserC();
 		$this->ControlDiscount = new DiscountC();
+		$this->ControlFuctionc = new FuctionC();
 	}
 
 	public function purchasetikets($id)
@@ -29,7 +31,7 @@ class ShoppingController
 	}
 
 	//Verify and add the shop 
-	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity)
+	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity,$card)
 	{
 
 		if(!empty($_SESSION))
@@ -46,31 +48,33 @@ class ShoppingController
 				$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
 				$year = date("Y"); 
 				$month = date("m");
-				if(count($cardnumber) == 16 && !is_string($cardnumber)) 
+				if(strlen($cardnumber) == 16 && preg_match('~[0-9]+~', $cardnumber)) 
 				{
 					if(!preg_match('~[0-9]+~', $cardholder))
 					{
-						if($year == $cardexpirationyear && $month == $cardexpirationmonth)
+						if($year <= $cardexpirationyear && $month <= $cardexpirationmonth)
 						{
 							if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
 							{
 								$shopping = new Shopping();
-								$shopping->setUser($this->usercontroler->bring_by_id());
+								$shopping->setUser($this->usercontroller->bring_by_id());
 								$shopping->setFunction($fuction);
-								$shopping->setDiscount($discount);
 								$shopping->setDate(date("Y-m-d"));
 								$shopping->setCountrtiket($quantity);
 								$shopping->setPrice($cinema->getValor_entrada());
-								$shopping->setDiscount($discount);
 								if($discount != null)
-								{								
-									$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount->getDisc()/100));
+								{	
+									$shopping->setDiscount($discount[0]);							
+									$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount[0]->getDisc()/100));
 								}else
 								{
 									$total = $shopping->getPrice() * $shopping->getCountrtiket();
 								}
 								$shopping->setTotal($total);
-
+								$this->daoShopping->add($shopping);
+								$view = "MESSAGE";
+								$wear = strlower($view);
+								$message("success","La compra se ha realizado con exito " );
 							}else
 							{
 								$view = 'CARD';

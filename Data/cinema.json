@@ -1,2 +1,9 @@
 [
+    {
+        "id": 1,
+        "capacidad": "300",
+        "direccion": "Colon 4110",
+        "nombre": "Ambassador",
+        "valor_entrada": "150"
+    }
 ]
