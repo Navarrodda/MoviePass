@@ -23,7 +23,7 @@ class ShoppingController
 		return $this->daoBuy->bring_buy_by_user($id);
 	}
 
-	public function add($card-number,$card-number-1,$card-number-2,$card-number-3,$card-holder,$card-expiration-month,$card-expiration-year,$idicount,$idfuction,$quantity)
+	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$idicount,$idfuction,$quantity)
 	{
 
 		if(!empty($_SESSION))
