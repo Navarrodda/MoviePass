@@ -83,19 +83,22 @@ class ShoppingsBdDao
             $user = $shopping->getUser();
             $function = $shopping->getFunction();
             $discount = $shopping->getDiscount();
+            if(!empty($discount))
+            {
+                $discount = $discount ->getId();
+            }
 
             $user = $user->getId();
             $function = $function->getId();
-            $discount = $discount ->getId();
-
+            
             $fecha = $shopping->getFecha();
             $price = $shopping->getPrecio();
             $total = $shopping->getTotal();
             $countrtiket = $shopping->getCountrtiket();
 
-            $judgment->bindParam(":user",$id_user);
-            $judgment->bindParam(":function",$id_function);
-            $judgment->bindParam(":discount", $id_descuento);
+            $judgment->bindParam(":user",$user);
+            $judgment->bindParam(":function",$function);
+            $judgment->bindParam(":discount", $discount);
             $judgment->bindParam(":date",$fecha);
             $judgment->bindParam(":countrtiket",$countrtiket);
             $judgment->bindParam(":price",$price);
@@ -130,8 +133,8 @@ class ShoppingsBdDao
     }
 
 
-  
-    public function add(Shopping $shopping, $id){
+
+    public function update(Shopping $shopping, $id){
 
         try{
             $sql = ("UPDATE $this->table SET user=:user, function=:function, discount=:discount, date=:date, countrtiket=:countrtiket, price=:price, total=:total WHERE id=\"$id\"");
@@ -143,19 +146,22 @@ class ShoppingsBdDao
             $user = $shopping->getUser();
             $function = $shopping->getFunction();
             $discount = $shopping->getDiscount();
+            if(!empty($discount))
+            {
+                $discount = $discount ->getId();
+            }
 
             $user = $user->getId();
             $function = $function->getId();
-            $discount = $discount ->getId();
-
+            
             $fecha = $shopping->getFecha();
             $price = $shopping->getPrecio();
             $total = $shopping->getTotal();
             $countrtiket = $shopping->getCountrtiket();
 
-            $judgment->bindParam(":user",$id_user);
-            $judgment->bindParam(":function",$id_function);
-            $judgment->bindParam(":discount", $id_descuento);
+            $judgment->bindParam(":user",$user);
+            $judgment->bindParam(":function",$function);
+            $judgment->bindParam(":discount", $discount);
             $judgment->bindParam(":date",$fecha);
             $judgment->bindParam(":countrtiket",$countrtiket);
             $judgment->bindParam(":price",$price);
@@ -232,7 +238,7 @@ class ShoppingsBdDao
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
             $this->list = array_map(function ($p) {
-                
+
                 $buy = new Buy();
                 $DaoUser = UserBdDao::getInstance();
                 $DaoFunction = FunctionBdDao::getInstance();
