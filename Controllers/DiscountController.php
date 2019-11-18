@@ -109,19 +109,25 @@ class DiscountController
 
 	public function validate_day_hours($day,$hour)
 	{
-
+		$discount = false;
 		if(!empty($_SESSION))
 		{
 			$hoursnaw = date("G:i");
 			$dianaw = date ("Y-m-d");
 			$modification = $dianaw .'/'. $hoursnaw;
 			$modificationthisday = $day .'/'. $hour;
-			$discount = false;
+			
 			if($modificationthisday >= $modification)
 			{
 				$discount = TRUE;
 			}
 		}
+		return $discount;
+	}
+
+	public function give_discount_day($day)
+	{
+		$discount = $this->DiscountBd->bring_by_day($day);
 		return $discount;
 	}
 }

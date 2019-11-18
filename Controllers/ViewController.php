@@ -775,7 +775,9 @@ class ViewController
 		{
 			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
 			$movie = $fuction->getMovie();
+			$room =  $fuction->getRoom();
 			$cinema = $fuction->getRoom()->getCinema();
+			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
 			$view = "Buy Process ";
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "buyq.php");
