@@ -75,19 +75,19 @@
     <form class="form" autocomplete="off" novalidate="">
       <fieldset>
         <label for="card-number">Card Number</label>
-        <input required name="card-number" type="num" min="0" id="card-number" class="input-cart-number" maxlength="4">
-        <input required name="card-number-1" type="num" min="0" id="card-number-1" class="input-cart-number" maxlength="4">
-        <input required name="card-number-2" type="num" min="0" id="card-number-2" class="input-cart-number" maxlength="4">
-        <input required name="card-number-3" type="num" min="0" id="card-number-3" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber" type="num" min="0" id="card-number" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber1" type="num" min="0" id="card-number-1" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber2" type="num" min="0" id="card-number-2" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber3" type="num" min="0" id="card-number-3" class="input-cart-number" maxlength="4">
       </fieldset>
       <fieldset>
         <label for="card-holder">Card holder</label>
-        <input required name="card-holder" type="text" id="card-holder">
+        <input required name="cardholder" type="text" id="card-holder">
       </fieldset>
       <fieldset class="fieldset-expiration">
         <label for="card-expiration-month">Expiration date</label>
         <div class="select">
-          <select name="card-expiration-month" id="card-expiration-month">
+          <select name="cardexpirationmonth" id="card-expiration-month">
             <option></option>
             <option>01</option>
             <option>02</option>
@@ -104,7 +104,7 @@
           </select>
         </div>
         <div class="select">
-          <select name="card-expiration-year" id="card-expiration-year">
+          <select name="cardexpirationyear" id="card-expiration-year">
             <option></option>
             <option>2016</option>
             <option>2017</option>
