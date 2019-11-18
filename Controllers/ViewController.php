@@ -14,6 +14,7 @@ use \Controllers\MoviegenreController as MoviegenreC;
 use \Controllers\DiscountController as DiscountC;
 use \Controllers\FuctionController as Fuctionc;
 use \Controllers\RoomController as Roomc;
+use \Controllers\ShoppingController as Shoppingc;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -31,6 +32,7 @@ class ViewController
 		$this->ControlDiscount = new DiscountC;
 		$this->ControlFuctionc = new Fuctionc;
 		$this->ControlRoom = new Roomc;
+		$this->ControlShopping = new Shoppingc;
 	}
 
 	public function index()
@@ -850,6 +852,26 @@ class ViewController
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . $wear);
 			include URL_VISTA . 'footer.php';
+		}
+
+		public function purchasetikets()
+		{
+			if(!empty($_SESSION))
+			{
+				$current_date = date ("d-m-Y G:m.a");
+				$purchasetikets = $this->ControlShopping->purchasetikets($_SESSION["rol"]);
+				$view = "PURCHASED TICKETS";
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "purchasetikets.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$view = 'LOGIN';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 
 

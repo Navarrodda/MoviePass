@@ -102,15 +102,17 @@ CONSTRAINT pk_id_discount PRIMARY KEY (id)
 
 CREATE TABLE shoppings(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-client BIGINT UNSIGNED,
+user BIGINT UNSIGNED,
+function BIGINT UNSIGNED,    
 discount BIGINT UNSIGNED,
 day DATE NOT NULL,
 countrtiket SMALLINT UNSIGNED NOT NULL,   
-cost FLOAT UNSIGNED NOT NULL,    
+price FLOAT UNSIGNED NOT NULL,    
 total FLOAT UNSIGNED NOT NULL,
 CONSTRAINT pk_id_shoppings PRIMARY KEY (id),
-CONSTRAINT fk_user_id FOREIGN KEY (client) REFERENCES  users (id),
-CONSTRAINT fk_discounts_id FOREIGN KEY (client) REFERENCES  discounts (id)  
+CONSTRAINT fk_user_id FOREIGN KEY (user) REFERENCES  users (id),
+CONSTRAINT pk_function_id_shopping FOREIGN KEY (function) REFERENCES functions (id),    
+CONSTRAINT fk_discounts_id FOREIGN KEY (discount) REFERENCES  discounts (id)  
 );
 
 CREATE TABLE tikets(
