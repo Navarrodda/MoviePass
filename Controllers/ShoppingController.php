@@ -23,12 +23,17 @@ class ShoppingController
 		return $this->daoBuy->bring_buy_by_user($id);
 	}
 
+	//Verify and add the shop
 	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$idicount,$idfuction,$quantity)
 	{
 
 		if(!empty($_SESSION))
 		{
-			$cinema = $this->ControlCinema->bring_for_id($idcinema);
+			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+			$movie = $fuction->getMovie();
+			$room =  $fuction->getRoom();
+			$cinema = $fuction->getRoom()->getCinema();
+			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
 			if(!empty($cinema))
 			{
 

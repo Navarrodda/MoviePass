@@ -731,7 +731,7 @@ class ViewController
 
 			if(!empty($_SESSION))
 			{
-				if($idquantity >0 && $idquantity <= 10)
+				if($quantity >0 && $quantity <= 10)
 				{
 					if(!empty($fuction) )
 					{
