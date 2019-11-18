@@ -1,5 +1,13 @@
 <?php  include(URL_VISTA . 'navbar.php') ;?>
 
+<section>
+    <?php if(isset($this->message)) {?>
+      <div class="container">
+        <h1> <?= $this->message->cartelAlert($this->message->getMessage(),$this->message->getTipo()) ?></h1>
+      </div>
+    <?php } ?>
+</section>
+
 <section class="register-account"> 
   <div class="container">
     <div class="row">
@@ -35,8 +43,8 @@
                         <?php } ?>
                       </select>
                       <p class="p2">
-                      <select name="card" id="typecard" class="btnselect">
-                            <option value="0">Select Card Type</option>
+                      <select name="typecard" id="typecard" class="btnselect">
+                            <option value="select">Select Card Type</option>
                             <option value="visa">Visa</option>
                             <option value="mastercard">Master Card</option>
                     </select>

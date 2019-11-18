@@ -722,14 +722,14 @@ class ViewController
 
 		public function card($idquantity,$typecard,$iddiscount,$idfuction)
 		{
-<<<<<<< HEAD
+			$flag = false;
 			if(!empty($_SESSION))
 			{
 				if($idquantity >0 && $idquantity <= 10)
 				{
 					if($this->ControlFuctionc->bringidfuction($idfuction) != null )
 					{
-						if(card != 0)
+						if($typecard != "select")
 						{
 							if($typecard == "visa")
 							{
@@ -746,10 +746,7 @@ class ViewController
 						}else
 						{
 							$this->message = new Message('warning', 'Choose a Type of Card ');
-							$view = "Buy Process ";
-							include URL_VISTA . 'header.php';
-							require(URL_VISTA . "buyq.php");
-							include URL_VISTA . 'footer.php';
+							$flag = true;
 						}
 						
 					}else
@@ -763,12 +760,9 @@ class ViewController
 					
 				}
 				else
-				{	
+				{
 					$this->message = new Message('warning', 'Quantity not Valid ');
-					$view = "Buy Process ";
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . "buyq.php");
-					include URL_VISTA . 'footer.php';	
+					$flag = true;
 				}
 					
 				
@@ -781,13 +775,21 @@ class ViewController
 				require(URL_VISTA . "login.php");
 				include URL_VISTA . 'footer.php';
 			}
+
+			if($flag)
+			{
+				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+				$movie = $fuction->getMovie();
+				$room =  $fuction->getRoom();
+				$cinema = $fuction->getRoom()->getCinema();
+				$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+				$view = "Buy Process ";
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "buyq.php");
+				include URL_VISTA . 'footer.php';	
+			}
 			
-=======
-			$view = 'CARD';
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "card.php");
-			include URL_VISTA . 'footer.php';
->>>>>>> 80e0145d47ecafd8616ccc00b9535333d7648833
+			
 		} 
 
 		public function listroom($idcinema)
