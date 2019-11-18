@@ -722,6 +722,7 @@ class ViewController
 
 		public function card($idquantity,$typecard,$iddiscount,$idfuction)
 		{
+<<<<<<< HEAD
 			if(!empty($_SESSION))
 			{
 				if($idquantity >0 && $idquantity <= 10)
@@ -781,6 +782,12 @@ class ViewController
 				include URL_VISTA . 'footer.php';
 			}
 			
+=======
+			$view = 'CARD';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "card.php");
+			include URL_VISTA . 'footer.php';
+>>>>>>> 80e0145d47ecafd8616ccc00b9535333d7648833
 		} 
 
 		public function listroom($idcinema)
