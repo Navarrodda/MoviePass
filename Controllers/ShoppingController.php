@@ -23,20 +23,67 @@ class ShoppingController
 		return $this->daoBuy->bring_buy_by_user($id);
 	}
 
-	//Verify and add the shop
-	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$idicount,$idfuction,$quantity)
+	//Verify and add the shop 
+	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity)
 	{
 
 		if(!empty($_SESSION))
 		{
-			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
-			$movie = $fuction->getMovie();
-			$room =  $fuction->getRoom();
-			$cinema = $fuction->getRoom()->getCinema();
-			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
-			if(!empty($cinema))
-			{
+			$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
 
+			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+
+			if(!empty($fuction))
+			{
+				$movie = $fuction->getMovie();
+				$room =  $fuction->getRoom();
+				$cinema = $fuction->getRoom()->getCinema();
+				$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+				$year = date("Y"); 
+				$month = date("m");
+				if(count($cardnumber) == 16 && !is_string($cardnumber)) 
+				{
+					if(!preg_match('~[0-9]+~', $cardholder))
+					{
+						if($year == $cardexpirationyear && $month == $cardexpirationmonth)
+						{
+							if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
+							{
+								$shopping = new Shopping();
+								
+
+							}else
+							{
+								$view = 'CARD';
+								$wear =  strtolower($view);
+								$this->message = new Message("warning","Invalid CCV" );
+							}
+
+						}else 
+						{
+							$view = 'CARD';
+							$wear =  strtolower($view);
+							$this->message = new Message("warning","Invalid Expiration Date" );
+						}
+
+					}else
+					{
+						$view = 'CARD';
+						$wear =  strtolower($view);
+						$this->message = new Message("warning","Invalid Card Holder" );
+					}
+				}else
+				{
+					$view = 'CARD';
+					$wear =  strtolower($view);
+					$this->message = new Message("warning","Invalid Card Number" );
+				}
+			}
+			else
+			{
+				$view = "MESSAGE";
+				$wear =  strtolower($view);
+				$this->message = new Message("warning","Function don't exist." );
 			}
 		}
 		else
@@ -45,6 +92,7 @@ class ShoppingController
 			$wear =  strtolower($view);
 			$this->message = new Message("warning","without a session started!" );
 		}
+
 		$wear = $wear . '.'.'php';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . $wear);

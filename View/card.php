@@ -121,7 +121,7 @@
       </fieldset>
       <fieldset class="fieldset-ccv">
         <label for="card-ccv">CCV</label>
-        <input required type="text" id="card-ccv" maxlength="3">
+        <input name= "ccv" required type="text" id="card-ccv" maxlength="3">
       </fieldset>
       
       <?php if(!empty($discount)) {?>
