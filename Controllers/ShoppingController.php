@@ -76,8 +76,8 @@ class ShoppingController
 								$shopping->setTotal($total);
 								$this->daoShopping->add($shopping);
 								$view = "MESSAGE";
-								$wear = strlower($view);
-								$message("success","La compra se ha realizado con exito " );
+								$wear = strtolower($view);
+								$this->message = new Message("success","La compra se ha realizado con exito " );
 							}else
 							{
 								$view = 'CARD';
