@@ -720,13 +720,67 @@ class ViewController
 			}
 		}
 
-		public function card()
+		public function card($idquantity,$typecard,$iddiscount,$idfuction)
 		{
-
-			$view = 'CARD';
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "card.php");
-			include URL_VISTA . 'footer.php';
+			if(!empty($_SESSION))
+			{
+				if($idquantity >0 && $idquantity <= 10)
+				{
+					if($this->ControlFuctionc->bringidfuction($idfuction) != null )
+					{
+						if(card != 0)
+						{
+							if($typecard == "visa")
+							{
+								$card = 1;
+							}
+							else{
+								$card = 0;
+							}
+								$view = 'CARD';
+								include URL_VISTA . 'header.php';
+								require(URL_VISTA . "card.php");
+								include URL_VISTA . 'footer.php';
+						
+						}else
+						{
+							$this->message = new Message('warning', 'Choose a Type of Card ');
+							$view = "Buy Process ";
+							include URL_VISTA . 'header.php';
+							require(URL_VISTA . "buyq.php");
+							include URL_VISTA . 'footer.php';
+						}
+						
+					}else
+					{
+						$this->message = new Message('warning', ' The Function is not Available');
+						$view = 'BILLBOARD';
+						include URL_VISTA . 'header.php';
+						require(URL_VISTA . "homebillboard.php");
+						include URL_VISTA . 'footer.php';
+					}
+					
+				}
+				else
+				{	
+					$this->message = new Message('warning', 'Quantity not Valid ');
+					$view = "Buy Process ";
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . "buyq.php");
+					include URL_VISTA . 'footer.php';	
+				}
+					
+				
+				
+			}else 
+			{
+				$this->message = new Message('warning', 'User not logged ');
+				$view = 'LOGIN';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
+			}
+			
 		} 
 
 		public function listroom($idcinema)
