@@ -778,8 +778,7 @@ class ViewController
 			$movie = $fuction->getMovie();
 			$room =  $fuction->getRoom();
 			$cinema = $fuction->getRoom()->getCinema();
-			$dianaw = date ("Y-m-d");
-			$discount = $this->ControlDiscount->give_discount_day($dianaw);
+			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
 			$view = "Buy Process ";
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "buyq.php");

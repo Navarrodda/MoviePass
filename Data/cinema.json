@@ -175,10 +175,17 @@
         "valor_entrada": "250"
     },
     {
-        "id": 26,
+        "id": null,
         "capacidad": "800",
         "direccion": "Asdasd",
         "nombre": "El Rey",
         "valor_entrada": "300"
+    },
+    {
+        "id": 27,
+        "capacidad": "300",
+        "direccion": "Colon 111",
+        "nombre": "Ambassador",
+        "valor_entrada": "150"
     }
 ]

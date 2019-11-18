@@ -34,24 +34,43 @@
                           <option value ="<?php echo $i?>"><?php echo $i?></option>
                         <?php } ?>
                       </select>
-                     
+                      <p class="p2">
+                      <select name="card" id="card" class="btnselect">
+                            <option value="0">Select Card Type</option>
+                            <option value="visa">Visa</option>
+                            <option value="mastercard">Master Card</option>
+                    </select>
+                    </p>
                       <script>
+                      <?php if(!empty($discount)) {?>
+                        var discount = <?php echo $discount[0]->getDisc()/100 ?> ;
+                      <?php }else {?>
+                        var discount = 0;
+                      <?php }?>
                        var entrada = <?php echo $cinema->getValor_entrada(); ?>;
-                       var discount = <?php echo $discount[0]->getDisc();?>/100
                         var activities = document.getElementById("selector");
                          activities.addEventListener("change", function() {
                             // alert(this.value * entrada);
-                               var total1 = this.value * entrada * discount;
+                              if(discount == 0)
+                              {
+                                var total1 = this.value * entrada;
+                              }else{
+                                var total1 = this.value * entrada * discount;
+                              }
+                               
                                document.getElementById("total").innerHTML = "Total : $" + total1.toString();
                           });
                           </script>
-                          <?php if($discount != null) {?>
-                          <p style="color:white"> Discount :  <?php  echo "%".$discount[0]->getDisc();?></p>
+                          <?php if(!empty($discount)) {?>
+                          <h2 style="color:white"> Discount :  <?php  echo "%".$discount[0]->getDisc();?></h2>
                           <?php } ;?> 
-                          <p style="color:white">Precio : <?php echo $cinema->getValor_entrada(); ?></p>
-                       <h4 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h4>
-                      
+                          <h2 style="color:white">Precio : <?php echo $cinema->getValor_entrada(); ?></h2>
+                       <h1 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h1>
+                       <p><input id ="idfuction" name = "idfuction" type = "hidden" value = "<?php echo $fuction->getId(); ?>"></p>
+                       
+                       
                     </p>
+                   
                     <button class="but">Continue</button>
                   </div>
                 </div>
