@@ -722,7 +722,6 @@ class ViewController
 
 		public function card()
 		{
-
 			$view = 'CARD';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "card.php");

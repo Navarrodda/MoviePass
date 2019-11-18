@@ -175,7 +175,21 @@
         "valor_entrada": "250"
     },
     {
-        "id": 26,
+        "id": null,
+        "capacidad": "800",
+        "direccion": "Asdasd",
+        "nombre": "El Rey",
+        "valor_entrada": "300"
+    },
+    {
+        "id": null,
+        "capacidad": "900",
+        "direccion": "Asdasd",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "250"
+    },
+    {
+        "id": 28,
         "capacidad": "800",
         "direccion": "Asdasd",
         "nombre": "El Rey",
