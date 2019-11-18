@@ -9,10 +9,12 @@ class Buy
     private $id;
     private $user;
     private $function;
-    private $descuento;
-    private $fecha;
-    private $precio;
+    private $discount;
+    private $date;
+    private $countrtiket;
+    private $price;
     private $total;
+
 
     public function __construct()
     {
@@ -40,61 +42,61 @@ class Buy
     }
 
     /**
-     * Get the value of descuento
+     * Get the value of discount
      */ 
     public function getDescuento()
     {
-        return $this->descuento;
+        return $this->discount;
     }
 
     /**
-     * Set the value of descuento
+     * Set the value of discount
      *
      * @return  self
      */ 
-    public function setDescuento(Discount $descuento)
+    public function setDescuento(Discount $discount)
     {
-        $this->descuento = $descuento;
+        $this->discount = $discount;
 
         return $this;
     }
 
     /**
-     * Get the value of fecha
+     * Get the value of date
      */ 
     public function getFecha()
     {
-        return $this->fecha;
+        return $this->date;
     }
 
     /**
-     * Set the value of fecha
+     * Set the value of date
      *
      * @return  self
      */ 
-    public function setFecha($fecha)
+    public function setFecha($date)
     {
-        $this->fecha = $fecha;
+        $this->date = $date;
 
         return $this;
     }
 
     /**
-         * Get the value of precio
+         * Get the value of price
          */ 
         public function getPrecio()
         {
-            return $this->precio;
+            return $this->price;
         }
 
         /**
-         * Set the value of precio
+         * Set the value of price
          *
          * @return  self
          */ 
-        public function setPrecio($precio)
+        public function setPrecio($price)
         {
-            $this->precio = $precio;
+            $this->price = $price;
 
             return $this;
         }
@@ -157,6 +159,26 @@ class Buy
     public function setFunction(Function $function)
     {
         $this->function = $function;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountrtiket()
+    {
+        return $this->countrtiket;
+    }
+
+    /**
+     * @param mixed $countrtiket
+     *
+     * @return self
+     */
+    public function setCountrtiket($countrtiket)
+    {
+        $this->countrtiket = $countrtiket;
 
         return $this;
     }

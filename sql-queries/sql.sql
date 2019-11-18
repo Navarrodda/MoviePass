@@ -102,15 +102,17 @@ CONSTRAINT pk_id_discount PRIMARY KEY (id)
 
 CREATE TABLE shoppings(
 id BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,
-client BIGINT UNSIGNED,
+user BIGINT UNSIGNED,
+function BIGINT UNSIGNED,    
 discount BIGINT UNSIGNED,
 day DATE NOT NULL,
 countrtiket SMALLINT UNSIGNED NOT NULL,   
-cost FLOAT UNSIGNED NOT NULL,    
+price FLOAT UNSIGNED NOT NULL,    
 total FLOAT UNSIGNED NOT NULL,
 CONSTRAINT pk_id_shoppings PRIMARY KEY (id),
-CONSTRAINT fk_user_id FOREIGN KEY (client) REFERENCES  users (id),
-CONSTRAINT fk_discounts_id FOREIGN KEY (client) REFERENCES  discounts (id)  
+CONSTRAINT fk_user_id FOREIGN KEY (user) REFERENCES  users (id),
+CONSTRAINT pk_function_id_shopping FOREIGN KEY (function) REFERENCES functions (id) ON DELETE SET NULL,    
+CONSTRAINT fk_discounts_id FOREIGN KEY (discount) REFERENCES  discounts (id) ON DELETE SET NULL  
 );
 
 CREATE TABLE tikets(
@@ -122,6 +124,6 @@ qr VARCHAR(255) NOT NULL ,
 numbre BIGINT UNSIGNED NOT NULL,
 CONSTRAINT pk_id_tiket PRIMARY KEY (id),
 CONSTRAINT fk_id_shopping_tikets FOREIGN KEY (shopping) REFERENCES shoppings (id),
-CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES shoppings (id),
+CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES shoppings (id) ON DELETE SET NULL,
 CONSTRAINT unq_numbertikets UNIQUE(numbre)     
 );

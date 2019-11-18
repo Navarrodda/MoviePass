@@ -11,15 +11,51 @@
   <div class="clear"></div>
 </section>
 
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <script type="text/javascript">
+          function valida(search) {
+            var ok = true;
+            var msg = "!Empty search data:\n";
+            if(search.elements["search"].value == "")
+            {
+              msg += "Complete the field\n";
+              ok = false;
+            }
 
+            if(ok == false)
+              alert(msg);
+            return ok;
+          }
+        </script>
+        <div class="flexsearch">
+          <div class="flexsearch--wrapper">
+            <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
+              <div class="flexsearch--input-wrapper">
+                <div class="col-md-12">
+                <div class="center">
+                 </div>
+               </div>
+             </div>
+             <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</section>
 <section>
   <div class="container">
     <div class="container lower-box box-primary" style="text-align: center;">
       <?php if($movies!= null ) { ?>
-        <h2 class="section-heading">The functions registered to date and time are<?= $current_date ?></h2>
+        <h2 class="section-heading">The functions registered to date and time are <?= $current_date ?></h2>
         <hr class="primary"> <?php }
         else{ ?>
-          <h2 class="section-heading">No functions registered to date and time are<?= $current_date ?></h2>
+          <h2 class="section-heading">No functions registered to date and time are <?= $current_date ?></h2>
           <hr class="primary"> <?php } ?>
         </div>
         <div class="container">

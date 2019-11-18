@@ -273,6 +273,36 @@ class MovieBdDao{
 		}
 	}
 
+		public function bring_by_name($title)
+	{   
+		try{
+			if ($title != null) {
+				$sql = ("SELECT * FROM $this->table WHERE title LIKE '%$title' LIMIT 1");
+
+				$conec = Conection::conection();
+
+				$judgment = $conec->prepare($sql);
+
+				$judgment->execute();
+
+				$dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+
+				
+
+				if($dataSet){
+					$this->mapear($dataSet);
+					return $this->list;
+				}
+			}
+
+			return null;
+		}catch(\PDOException $e){
+			echo $e->getMessage();die();
+		}catch(\Exception $e){
+			echo $e->getMessage();die();
+		}
+	}
+
 	public function mapear($dataSet){
 		$dataSet = is_array($dataSet) ? $dataSet : false;
 		if($dataSet){

@@ -17,7 +17,7 @@
               <div class="col-md-12 marcform">
                 <p>
                   <div class="imgr4">
-                   <img src="<?php echo URL ?>/img/Rooms.png?>">
+                   <img class="imgr4" src="<?php echo URL ?>/img/Rooms.png?>">
                  </div>
                </p>
               <form class="flexsearch--form" method="post" action="<?php echo URL ?>/room/add/">             

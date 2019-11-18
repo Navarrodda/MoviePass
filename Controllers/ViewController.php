@@ -14,6 +14,7 @@ use \Controllers\MoviegenreController as MoviegenreC;
 use \Controllers\DiscountController as DiscountC;
 use \Controllers\FuctionController as Fuctionc;
 use \Controllers\RoomController as Roomc;
+use \Controllers\ShoppingController as Shoppingc;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -31,6 +32,7 @@ class ViewController
 		$this->ControlDiscount = new DiscountC;
 		$this->ControlFuctionc = new Fuctionc;
 		$this->ControlRoom = new Roomc;
+		$this->ControlShopping = new Shoppingc;
 	}
 
 	public function index()
@@ -560,41 +562,41 @@ class ViewController
 
 		public function billboardforsearch($search)
 		{
+
 			$home = false;
 			$home = 1;
 			$valid = $this->ControlFuctionc->validate_date($search);
 			if(!empty($valid) && $valid != '1969-12-31')
 			{
-				$genresel = $this->ControlGenre->bring_everything();
-				$cinema = $this->ControlCinema->bringeverything();
-				$tocinema = $this->ControlFuctionc->bringe_for_data($valid);
+				$current_date = $search;
 				$movies = array();
-				$cinemas = array();
-				if(!empty($tocinema))
+				$roomcinema = array();
+				$tocinema = $this->ControlFuctionc->bringe_for_data($valid);
+				$movie = $this->ControlMovies->bringmovies();
+				$chequin = false;
+				if(!empty($movie))
 				{
-					if(!empty($cinema))
-					{
-						foreach ($cinema as $cin) {
-							if($cin->getId() != null)
-							{
-
-								if (!empty($tocinema)) {
-									array_push($cinemas, $cin);
-									foreach ($tocinema as $to) {
-										if($to->getCinema()->getId() == $cin->getId())
-										{
-											array_push($movies, $to);
-										}
-
-									}
-
-
+					foreach ($movie as $mov) {
+						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+						$chequin = false;
+						if(!empty($thisfunction))
+						{
+							foreach ($thisfunction as $fun) {
+								if($valid == $fun->getDia())
+								{
+									array_push($roomcinema, $fun);
+									$chequin = True;
 								}
 
 							}
+							if($chequin)
+							{
+								array_push($movies, $mov);
+							}
 						}
-
 					}
+
+
 					$view = 'BILLBOARD';
 					$espace = 'FOR GENRE';
 					$home = 0;
@@ -614,99 +616,97 @@ class ViewController
 			}
 			else
 			{
+
+				$current_date = date ("d-m-Y G:m.a");
 				$search = ucwords($search);
-				$genresel = $this->ControlGenre->bring_everything();
+				$movie = $this->ControlMovies->bringmovies();
 				$idgenre = 	$this->ControlGenre->bring_genre_id_name($search);
-				if($idgenre != null)
+				$movies = array();
+				$roomcinema = array();
+				if(!empty($movie))
 				{
-					$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
-					$idmovies = array();
-					if ($moviesgenre != null) {
-						foreach ($moviesgenre as $movgen) {
-							array_push($idmovies, $movgen->getMovie()->getId());
-						}
-					}
-					$fers = NULL;
-					$last = -1;
-					$movies = array();
-					$cinemas = array();
-					if(!empty($idmovies))
+					if($idgenre != null)
 					{
-						foreach ($idmovies as $idm) {
-							$tocinema = $this->ControlFuctionc->bring_Function_by_idMovies($idm);
-							if (!empty($tocinema)) {
-								foreach ($tocinema as $to) {
-									if($to != NULL)
-									{
-										$movie = $to->getMovie()->getId();
-										if($idm == $movie)
-										{
-											array_push($movies, $to);
-											$id = $to->getCinema()->getId();
-											if($fers != $id && $last != $id)
-											{
-												if(!empty($cinemas))
-												{
-													foreach ($cinemas as $cinemaa) {
-														$idcinema= $cinemaa->getId();
-														if($idcinema != $id)
-														{
-															array_push($cinemas, $to->getCinema());
-														}
-													}
-												}
-												else
-												{
-
-													array_push($cinemas, $to->getCinema());
-												}
-												$last = $fers;
-												$fers = $id;
-											}
-										}
-
+						$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
+						$idmovies = array();
+						if ($moviesgenre != null) {
+							foreach ($moviesgenre as $movgen) {
+								array_push($idmovies, $movgen->getMovie());
+							}
+						}
+						if(!empty($idmovies))
+						{
+							foreach ($idmovies as $idm) {
+								$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($idm->getId());
+								if(!empty($thisfunction))
+								{
+									array_push($movies, $idm);
+									foreach ($thisfunction as $fun) {
+										array_push($roomcinema, $fun);
 									}
 								}
 							}
 						}
-
-					}
-					if($cinemas != NULL)
-					{
-						$home = 0;
-						$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
-							. '</strong>. It has movies in cinemas!');
-						$view = 'BILLBOARD';
-						$espace = 'FOR GENRE';
-						include URL_VISTA . 'header.php';
-						require(URL_VISTA . "billboardforgenre.php");
-						include URL_VISTA . 'footer.php';
-					}
-					else
-					{
-						$home = 1;
-						$this->message = new Message('warning', ' The selected genre' . ' ' . '<i><strong>' .  $search 
-							. '</strong>. does not contain any billboards. we are sorry!');
+						if(!empty($movies))
+						{
+							$home = 0;
+							$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+								. '</strong>. It has movies in cinemas!');
+							$view = 'BILLBOARD';
+							$espace = 'FOR GENRE';
+							include URL_VISTA . 'header.php';
+							require(URL_VISTA . "billboardforgenre.php");
+							include URL_VISTA . 'footer.php';
+						}
+						else
+						{
+							$home = 1;
+							$this->message = new Message('warning', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+								. '</strong>. does not contain any billboards. we are sorry!');
+						}
 					}
 				}
 
 			}
+			$movie = $this->ControlMovies->bring_by_name($search);
+			if(!empty($movie))
+			{
+				foreach ($movie as $mov) {
+					$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+					if(!empty($thisfunction))
+					{
+						array_push($movies, $mov);
+						foreach ($thisfunction as $fun) {
+							array_push($roomcinema, $fun);
+						}
+					}
+				}
+				$home = 0;
+				$this->message = new Message('info', ' The selected Titile Muvie' . ' ' . '<i><strong>' .  $search 
+					. '</strong>. It has movies in cinemas!');
+				$view = 'BILLBOARD';
+				$espace = 'FOR GENRE';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "billboardforgenre.php");
+				include URL_VISTA . 'footer.php';
+
+			}
 			if($home)
 			{
-				$search = ucwords($search);
-				$genresel = $this->ControlGenre->bring_everything();
-				$cinema = $this->ControlCinema->bringeverything();
+				$current_date = date ("d-m-Y G:m.a");
+				$movie = $this->ControlMovies->bringmovies();
 				$movies = array();
-				$cinemas = array();
-				if(!empty($cinema))
+				$roomcinema = array();
+				if(!empty($movie))
 				{
-					foreach ($cinema as $cin) {
-						$tocinema = $this->ControlFuctionc->bring_Function_by_idCinema($cin->getId());
-						array_push($cinemas, $cin);
-						foreach ($tocinema as $to) {
-							array_push($movies, $to);
-							$moviesgenre = $this->ControlMuvGen->bring_id_by_MovieAll($to->getMovie()->getId());
-
+					foreach ($movie as $mov) {
+						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+						if(!empty($thisfunction))
+						{
+							array_push($movies, $mov);
+							foreach ($thisfunction as $fun) {
+								array_push($roomcinema, $fun);
+							}
 						}
 					}
 				}
@@ -855,6 +855,26 @@ class ViewController
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . $wear);
 			include URL_VISTA . 'footer.php';
+		}
+
+		public function purchasetikets()
+		{
+			if(!empty($_SESSION))
+			{
+				$current_date = date ("d-m-Y G:m.a");
+				$purchasetikets = $this->ControlShopping->purchasetikets($_SESSION["rol"]);
+				$view = "PURCHASED TICKETS";
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "purchasetikets.php");
+				include URL_VISTA . 'footer.php';
+			}
+			else
+			{
+				$view = 'LOGIN';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 
 
