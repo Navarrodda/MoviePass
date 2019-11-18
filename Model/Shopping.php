@@ -4,7 +4,7 @@ namespace Model;
 use Model\User as User;
 use Model\Function as Function;
 use Model\Discount as Discount;
-class Buy
+class Shopping
 {
     private $id;
     private $user;

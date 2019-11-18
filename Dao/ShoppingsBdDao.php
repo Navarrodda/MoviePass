@@ -1,12 +1,12 @@
 <?php
 namespace Dao;
 
-use \Model\Buy as Buy;
+use \Model\Shopping as Shopping;
 use \Model\User as User;
 use \Model\Fuction as Fuction;
 use \Model\Discount as Discount;
 
-class BuyBdDao
+class ShoppingsBdDao
 {
     protected $table = "shoppings";
     protected $list;
@@ -70,34 +70,34 @@ class BuyBdDao
         return null;
     }
 
-    public function add(Buy $buy){
+    public function add(Shopping $shopping){
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (id_user, id_function, id_descuento, date, price, total) VALUES (:id_user, :id_function, :id_descuento, :date, :price, :total)");
+            $sql = ("INSERT INTO $this->table (user, function, discount, date, countrtiket, price, total) VALUES (:user, :function, :discount, :date, ,:countrtiket :price, :total)");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
-            $user = new User();
-            $function = new Fuction();
-            $discount = new Discount();
 
-            $user = $buy->getUser();
-            $function = $buy->getFunction();
-            $discount = $buy->getDiscount();
+            $user = $shopping->getUser();
+            $function = $shopping->getFunction();
+            $discount = $shopping->getDiscount();
 
-            $id_user = $user->getId();
-            $id_function = $function->getId();
-            $id_descuento = $discount ->getId();
-            $fecha = $buy->getFecha();
-            $price = $buy->getPrecio();
-            $total = $buy->getTotal();
+            $user = $user->getId();
+            $function = $function->getId();
+            $discount = $discount ->getId();
 
-            $judgment->bindParam(":id_user",$id_user);
-            $judgment->bindParam(":id_function",$id_function);
-            $judgment->bindParam(":id_descuento", $id_descuento);
+            $fecha = $shopping->getFecha();
+            $price = $shopping->getPrecio();
+            $total = $shopping->getTotal();
+            $countrtiket = $shopping->getCountrtiket();
+
+            $judgment->bindParam(":user",$id_user);
+            $judgment->bindParam(":function",$id_function);
+            $judgment->bindParam(":discount", $id_descuento);
             $judgment->bindParam(":date",$fecha);
+            $judgment->bindParam(":countrtiket",$countrtiket);
             $judgment->bindParam(":price",$price);
             $judgment->bindParam(":total",$total);
 
@@ -130,41 +130,39 @@ class BuyBdDao
     }
 
 
-    public function to_update(Buy $buy, $id){
+  
+    public function add(Shopping $shopping, $id){
 
         try{
-            $sql = ("UPDATE $this->table SET id_user=:id_user id_function=:id_function id_descuento=:id_descuento date=:date price=:price total=:total WHERE id=\"$id\"");
+            $sql = ("UPDATE $this->table SET user=:user, function=:function, discount=:discount, date=:date, countrtiket=:countrtiket, price=:price, total=:total WHERE id=\"$id\"");
                 // id, genre, movie
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
-            
-            $judgment = $conec->prepare($sql);
-            $user = new User();
-            $function = new Fuction();
-            $discount = new Discount();
 
-            $user = $buy->getUser();
-            $function = $buy->getFunction();
-            $discount = $buy->getDiscount();
+            $user = $shopping->getUser();
+            $function = $shopping->getFunction();
+            $discount = $shopping->getDiscount();
 
-            $id_user = $user->getId();
-            $id_function = $function->getId();
-            $id_descuento = $discount ->getId();
-            $fecha = $buy->getFecha();
-            $price = $buy->getPrecio();
-            $total = $buy->getTotal();
+            $user = $user->getId();
+            $function = $function->getId();
+            $discount = $discount ->getId();
 
-            $judgment->bindParam(":id_user",$id_user);
-            $judgment->bindParam(":id_function",$id_function);
-            $judgment->bindParam(":id_descuento", $id_descuento);
+            $fecha = $shopping->getFecha();
+            $price = $shopping->getPrecio();
+            $total = $shopping->getTotal();
+            $countrtiket = $shopping->getCountrtiket();
+
+            $judgment->bindParam(":user",$id_user);
+            $judgment->bindParam(":function",$id_function);
+            $judgment->bindParam(":discount", $id_descuento);
             $judgment->bindParam(":date",$fecha);
+            $judgment->bindParam(":countrtiket",$countrtiket);
             $judgment->bindParam(":price",$price);
             $judgment->bindParam(":total",$total);
-            
-
 
             $judgment->execute();
+
         }catch(\PDOException $e){
             echo $e->getMessage();die();
         }catch(\Exception $e){

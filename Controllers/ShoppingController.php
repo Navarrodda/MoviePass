@@ -2,25 +2,25 @@
 namespace Controllers;
 //Model
 use \Model\Message as Message;
-use \Model\Buy as Buy;
+use \Model\Shopping as Shopping;
 //Controler
 use \Controllers\CinemaController as CinemaC;
 use \Controllers\FuctionController as Fuctionc;
 use \Controllers\DiscountController as DiscountC;
 //DAO
-use \Dao\BuyBdDao as BuyBdDao;
+use \Dao\ShoppingsBdDao as ShoppingsBdDao;
 
 class ShoppingController
 {
-	private $daoBuy;
+	private $daoShopping;
 	public function __construct()
 	{
-		$this->daoBuy = BuyBdDao::getInstance();
+		$this->daoShopping = ShoppingsBdDao::getInstance();
 	}
 
 	public function purchasetikets($id)
 	{
-		return $this->daoBuy->bring_buy_by_user($id);
+		return $this->daoShopping->bring_buy_by_user($id);
 	}
 
 	//Verify and add the shop
@@ -30,13 +30,13 @@ class ShoppingController
 		if(!empty($_SESSION))
 		{
 			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+
+			if(!empty($fuction))
+			{
 			$movie = $fuction->getMovie();
 			$room =  $fuction->getRoom();
 			$cinema = $fuction->getRoom()->getCinema();
 			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
-			if(!empty($cinema))
-			{
-
 			}
 		}
 		else

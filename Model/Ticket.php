@@ -2,72 +2,113 @@
 
 namespace Model;
 
+use Model\Shopping as Shopping;
+use Model\Movie as Movie;
+
 class Ticket
 {
     private $id;
-    private $nro_entrada;    //nro_entrada = id_compra
-    private $nro_funcion;   //nro_funcion = id_funcion 
+    private $shopping; 
+    private $movie;
+    private $seat;  
     private $qr;
+    private $numbre;
 
-	 public function __construct()
-    {
 
-    }
-    
+
     /**
-     * Get the value of nro_funcion
-     */ 
-    public function getNro_funcion()
+     * @return mixed
+     */
+    public function getId()
     {
-        return $this->nro_funcion;
+        return $this->id;
     }
 
     /**
-     * Set the value of nro_funcion
+     * @param mixed $id
      *
-     * @return  self
-     */ 
-    public function setNro_funcion($nro_funcion)
+     * @return self
+     */
+    public function setId($id)
     {
-        $this->nro_funcion = $nro_funcion;
-
-        return $this;
-    }
-
-
-    /**
-     * Get the value of nro_entrada
-     */ 
-    public function getNro_entrada()
-    {
-        return $this->nro_entrada;
-    }
-
-    /**
-     * Set the value of nro_entrada
-     *
-     * @return  self
-     */ 
-    public function setNro_entrada($nro_entrada)
-    {
-        $this->nro_entrada = $nro_entrada;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get the value of qr
-     */ 
+     * @return mixed
+     */
+    public function getShopping()
+    {
+        return $this->shopping;
+    }
+
+    /**
+     * @param mixed $shopping
+     *
+     * @return self
+     */
+    public function setShopping(Shopping $shopping)
+    {
+        $this->shopping = $shopping;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMovie()
+    {
+        return $this->movie;
+    }
+
+    /**
+     * @param mixed $movie
+     *
+     * @return self
+     */
+    public function setMovie(Movie $movie)
+    {
+        $this->movie = $movie;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeat()
+    {
+        return $this->seat;
+    }
+
+    /**
+     * @param mixed $seat
+     *
+     * @return self
+     */
+    public function setSeat($seat)
+    {
+        $this->seat = $seat;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getQr()
     {
         return $this->qr;
     }
 
     /**
-     * Set the value of qr
+     * @param mixed $qr
      *
-     * @return  self
-     */ 
+     * @return self
+     */
     public function setQr($qr)
     {
         $this->qr = $qr;
@@ -76,21 +117,21 @@ class Ticket
     }
 
     /**
-     * Get the value of id
-     */ 
-    public function getId()
+     * @return mixed
+     */
+    public function getNumbre()
     {
-        return $this->id;
+        return $this->numbre;
     }
 
     /**
-     * Set the value of id
+     * @param mixed $numbre
      *
-     * @return  self
-     */ 
-    public function setId($id)
+     * @return self
+     */
+    public function setNumbre($numbre)
     {
-        $this->id = $id;
+        $this->numbre = $numbre;
 
         return $this;
     }
