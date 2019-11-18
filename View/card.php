@@ -75,6 +75,7 @@
     <form class="form" autocomplete="off" novalidate="">
       <fieldset>
         <label for="card-number">Card Number</label>
+<<<<<<< HEAD
         <input required type="num" min="0" id="card-number" class="input-cart-number" maxlength="4">
         <input required type="num" min="0" id="card-number-1" class="input-cart-number" maxlength="4">
         <input required type="num" min="0" id="card-number-2" class="input-cart-number" maxlength="4">
@@ -83,11 +84,25 @@
       <fieldset>
         <label for="card-holder">Card holder</label>
         <input required type="text" id="card-holder">
+=======
+        <input required name="cardnumber" type="num" min="0" id="card-number" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber1" type="num" min="0" id="card-number-1" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber2" type="num" min="0" id="card-number-2" class="input-cart-number" maxlength="4">
+        <input required name="cardnumber3" type="num" min="0" id="card-number-3" class="input-cart-number" maxlength="4">
+      </fieldset>
+      <fieldset>
+        <label for="card-holder">Card holder</label>
+        <input required name="cardholder" type="text" id="card-holder">
+>>>>>>> b80b8fc4e062417e6dd19f01e0588dd7fbcefd84
       </fieldset>
       <fieldset class="fieldset-expiration">
         <label for="card-expiration-month">Expiration date</label>
         <div class="select">
+<<<<<<< HEAD
           <select id="card-expiration-month">
+=======
+          <select name="cardexpirationmonth" id="card-expiration-month">
+>>>>>>> b80b8fc4e062417e6dd19f01e0588dd7fbcefd84
             <option></option>
             <option>01</option>
             <option>02</option>
@@ -104,7 +119,7 @@
           </select>
         </div>
         <div class="select">
-          <select id="card-expiration-year">
+          <select name="cardexpirationyear" id="card-expiration-year">
             <option></option>
             <option>2016</option>
             <option>2017</option>
@@ -131,7 +146,7 @@
       <?php } ?>
       <p><input id ="idfuction" name = "idfuction" type = "hidden" value = "<?php echo $fuction->getId(); ?>"></p>
       <p><input id ="quantity" name = "quantity" type = "hidden" value = "<?php  echo $quantity?>"></p>
-      
+
       <button class="btn6"><i class="fa fa-lock"></i> submit</button>
     </form>
   </div>
