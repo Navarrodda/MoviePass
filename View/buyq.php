@@ -37,7 +37,7 @@
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
                      <p class="p2"  type="Quantity:">
-                       <select id ="selector" class="btnselect" name="idquantity" type="Select Quantity:" placeholder = "Select Ticket Quantity" required>
+                       <select id ="selector" class="btnselect" name="quantity" type="Select Quantity:" placeholder = "Select Ticket Quantity" required>
                         <?php for($i = 1; $i<=10;$i++){ ?>
                           <option value ="<?php echo $i?>"><?php echo $i?></option>
                         <?php } ?>
@@ -72,8 +72,9 @@
                           <?php if(!empty($discount)) {?>
                           <h2 style="color:white"> Discount :  <?php  echo "%".$discount[0]->getDisc();?></h2>
                           <p><input id ="iddiscount" name = "iddiscount" type = "hidden" value = "<?php  echo $discount[0]->getDisc();?>"></p>
-                          <?php }?> 
+                          <?php } else {?> 
                           <p><input id ="iddiscount" name = "iddiscount" type = "hidden" value = "0"></p>
+                          <?php } ?>
                           <h2 style="color:white">Precio : <?php echo $cinema->getValor_entrada(); ?></h2>
                        <h1 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h1>
                        <p><input id ="idfuction" name = "idfuction" type = "hidden" value = "<?php echo $fuction->getId(); ?>"></p>

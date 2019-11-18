@@ -720,14 +720,20 @@ class ViewController
 			}
 		}
 
-		public function card($idquantity,$typecard,$iddiscount,$idfuction)
+		public function card($quantity,$typecard,$iddiscount,$idfuction)
 		{
 			$flag = false;
+			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+			$movie = $fuction->getMovie();
+			$room =  $fuction->getRoom();
+			$cinema = $fuction->getRoom()->getCinema();
+			$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+
 			if(!empty($_SESSION))
 			{
 				if($idquantity >0 && $idquantity <= 10)
 				{
-					if($this->ControlFuctionc->bringidfuction($idfuction) != null )
+					if(!empty($fuction) )
 					{
 						if($typecard != "select")
 						{
@@ -778,11 +784,7 @@ class ViewController
 
 			if($flag)
 			{
-				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
-				$movie = $fuction->getMovie();
-				$room =  $fuction->getRoom();
-				$cinema = $fuction->getRoom()->getCinema();
-				$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+				
 				$view = "Buy Process ";
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "buyq.php");
