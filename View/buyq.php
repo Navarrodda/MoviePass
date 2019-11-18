@@ -15,7 +15,8 @@
               <div class="col-md-12 marcform">
                 <p>
                   <h3 style="color:white"><?= $movie->getTitle();?></h3>
-                  <h4><?php $fecha = date("d-m-Y", strtotime($fuction->getDia())); echo "Function Day:  ".$fecha." ".$fuction->getHora();?></h1>
+                  <h4><?php $fecha = date("d-m-Y", strtotime($fuction->getDia())); echo "Function Day:  ".$fecha." ".$fuction->getHora();?></h4>
+                  <h4>Room : <?php echo $room->getNameRoom() ?> Number : <?php echo $room->getNumberRoom();?></h4>
                   <div class="imgr3 ">
                     <div class="fonds">
                    <img src="<?= $movie->getBackdrop();?>">
@@ -36,16 +37,18 @@
                      
                       <script>
                        var entrada = <?php echo $cinema->getValor_entrada(); ?>;
+                       var discount = <?php echo $discount[0]->getDisc();?>/100
                         var activities = document.getElementById("selector");
                          activities.addEventListener("change", function() {
                             // alert(this.value * entrada);
-                               var total1 = this.value * entrada;
+                               var total1 = this.value * entrada * discount;
                                document.getElementById("total").innerHTML = "Total : $" + total1.toString();
                           });
                           </script>
                           <?php if($discount != null) {?>
-                          <p style="color:white"> Discount :  <?php die(var_dump($discount)); //echo $discount->getDisc();?></p>
-                          <?php } ;?>
+                          <p style="color:white"> Discount :  <?php  echo "%".$discount[0]->getDisc();?></p>
+                          <?php } ;?> 
+                          <p style="color:white">Precio : <?php echo $cinema->getValor_entrada(); ?></p>
                        <h4 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h4>
                       
                     </p>

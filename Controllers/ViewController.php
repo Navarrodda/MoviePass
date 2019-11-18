@@ -776,6 +776,7 @@ class ViewController
 		{
 			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
 			$movie = $fuction->getMovie();
+			$room =  $fuction->getRoom();
 			$cinema = $fuction->getRoom()->getCinema();
 			$dianaw = date ("Y-m-d");
 			$discount = $this->ControlDiscount->give_discount_day($dianaw);
