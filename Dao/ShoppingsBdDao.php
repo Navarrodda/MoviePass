@@ -74,7 +74,7 @@ class ShoppingsBdDao
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (user, function, discount, day, countrtiket, price, total) VALUES (:user, :function, :discount, :day, ,:countrtiket :price, :total)");
+            $sql = ("INSERT INTO $this->table (user, function, discount, day, countrtiket, price, total) VALUES (:user, :function, :discount, :day, :countrtiket :price, :total)");
 
             $conec = Conection::conection();
 

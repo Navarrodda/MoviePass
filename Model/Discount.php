@@ -10,7 +10,7 @@ class Discount
     private $hora;
 
     public function __construction()
-    {
+    { 
 
     }
 
