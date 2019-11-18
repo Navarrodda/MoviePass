@@ -131,7 +131,7 @@ class ShoppingsBdDao
 
 
   
-    public function add(Shopping $shopping, $id){
+    public function update(Shopping $shopping, $id){
 
         try{
             $sql = ("UPDATE $this->table SET user=:user, function=:function, discount=:discount, date=:date, countrtiket=:countrtiket, price=:price, total=:total WHERE id=\"$id\"");

@@ -57,14 +57,14 @@ class TicketBdDao
             $shopping =  $idshopping->getId();
             $movie = $idmovie->getId();
 
-            
+
 
             $judgment->bindParam(":shopping",$shopping);
             $judgment->bindParam(":movie",$movie);
             $judgment->bindParam(":seat",$seat);
             $judgment->bindParam(":qr",$qr);
             $judgment->bindParam(":numbre",$numbre);
-            
+
             $judgment->execute();
 
             return $conec->lastInsertId();
@@ -114,14 +114,14 @@ class TicketBdDao
             $shopping =  $idshopping->getId();
             $movie = $idmovie->getId();
 
-            
+
 
             $judgment->bindParam(":shopping",$shopping);
             $judgment->bindParam(":movie",$movie);
             $judgment->bindParam(":seat",$seat);
             $judgment->bindParam(":qr",$qr);
             $judgment->bindParam(":numbre",$numbre);
-            
+
             $judgment->execute();
         }catch(\PDOException $e){
             echo $e->getMessage();die();
@@ -194,16 +194,18 @@ class TicketBdDao
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
             $this->list = array_map(function ($p) {
+                $DaoShopping = ShoppingtBdDao::getInstance();
+                $DaoMovie = MovieBdDao::getInstance();
                 $ticket = new Ticket();
                 $ticket->setId($p['id']);
-                $ticket->setNro_entrada($p['shopping']);
-                $ticket->setNro_entrada($p['nro_entrada']);
-                $ticket->setNro_entrada($p['nro_entrada']);
-                $ticket->setNro_entrada($p['nro_entrada']);
-                $ticket->setNro_funcion($p['nro_funcion']);
+                $ticket->setShopping($DaoShopping->bring_by_id($p['shopping']);
+                $ticket->setMovie($DaoMovie->bring_by_id($p['movie']);
+                $ticket->setSeat($p['seat']);
+                $ticket->setQr($p['qr']);
+                $ticket->setNumbre($p['numbre']);
                 return $ticket;
-            }, $dataSet);
+                    }, $dataSet);
+                }
+            }
         }
-    }
-}
-?>
+        ?>
