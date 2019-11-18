@@ -52,8 +52,11 @@ class ShoppingController
 				{
 					if(!preg_match('~[0-9]+~', $cardholder))
 					{
-						if($year <= $cardexpirationyear && $month <= $cardexpirationmonth)
+						$monthyear =  $year . $month;
+						$cardexpirationyearmonth = $cardexpirationyear . $cardexpirationmonth;
+						if($monthyear <= $cardexpirationyearmonth)
 						{
+
 							if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
 							{
 								$shopping = new Shopping();
@@ -84,9 +87,10 @@ class ShoppingController
 
 						}else 
 						{
+							$this->message = new Message("warning","Invalid Expiration Date" );
 							$view = 'CARD';
 							$wear =  strtolower($view);
-							$this->message = new Message("warning","Invalid Expiration Date" );
+							
 						}
 
 					}else
