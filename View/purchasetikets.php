@@ -51,13 +51,17 @@
                           <td colspan="1">Hours</td>
                           <td colspan="1">Purchase</td>
                           <td colspan="1">Amount of tikets</td>
+                          <td colspan="1">To print</td>
                         </tr>
                         <tr style="color:white">
                          <td colspan="1">Room <?= $fun->getFunction()->getRoom()->getNameRoom();?></td>
                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getFunction()->getDia())); echo $fecha?></td>
                          <td colspan="1"><?= $fun->getFunction()->getHora(); ?></td>
-                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getDate())); echo $fecha?></td>
-                          <td colspan="1"><?= $fun->coun; ?></td>
+                         <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getDate())); echo $fecha?></td>
+                         <td colspan="1"><?= $fun->coun; ?></td>
+                         <form  target="_blank"  method="post" action="<?php echo URL ?>/view/print/">
+                          <td colspan="1"><button class="btn btn-default fa fa-print" name="idfuction" value ="<?= $fun->getId(); ?>"> Select</button></td>
+                         </form>
                        </tr>
                      <?php } } } ?>
                    </tbody>

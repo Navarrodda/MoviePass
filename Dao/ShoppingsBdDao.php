@@ -248,7 +248,7 @@ class ShoppingsBdDao
                 $daoFunction = FunctionBdDao::getInstance();
                 $daoDiscount = DiscountBdDao::getInstance();
                 //id_user, id_function, id_descuento, date, countrtiket, price, total
-                $shopping->setId('id');
+                $shopping->setId($p['id']);
                 $shopping->setUser($daoUser->bring_by_id($p['user']));
                 $shopping->setFunction($daoFunction->bring_by_id($p['function']));
                 if(!empty($daoDiscount->bring_by_id($p['discount'])))

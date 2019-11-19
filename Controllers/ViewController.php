@@ -977,4 +977,10 @@ class ViewController
 		}
 
 
+		public function print($idsopping)
+		{
+			die(var_dump($idsopping));
+				require(URL_VISTA . "print.php");
+		}
+
 	}
