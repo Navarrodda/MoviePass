@@ -34,8 +34,6 @@ class TicketController
                 $cinema = $shopping->getFunction()->getRoom()->getCinema();
                 $room = $shopping->getFunction()->getRoom();
                 $movie = $fuction->getMovie();
-                $url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name:".$user->getName()."-LastName:".$user->getLastname()."-Cinema:".$cinema->getNombre()."-Room:".$room->getNameRoom()."-Movie:".$fuction->getMovie()->getTitle()."-Day:".$fuction->getDia()."-Hour:".$fuction->getHora(); 
-
                 $img = $user->getId(); 
                 $path = 'img/Qr/'.$user->getNikname().'/';
                 $array = array();
@@ -45,6 +43,8 @@ class TicketController
                     if (!file_exists($path)) {
                         mkdir($path, 0777, true);
                     }
+                    $url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name:".$user->getName()."-LastName:".$user->getLastname()."-Cinema:".$cinema->getNombre()."-Room:".$room->getNameRoom()."-Movie:".$fuction->getMovie()->getTitle()."-Day:".$fuction->getDia()."-Hour:".$fuction->getHora().$i; 
+                    $url = str_replace(' ', '', $url);
                     $nameimg = 'img/Qr/'.$user->getNikname().'/'.$img.'-'.$shopping->getDate().'-'.$i.".png";
                     file_put_contents($nameimg, file_get_contents($url));
                     $ticket = new Ticket();
