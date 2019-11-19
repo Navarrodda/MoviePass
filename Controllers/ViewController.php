@@ -23,7 +23,6 @@ class ViewController
 
 	public function __construct()
 	{
-		$this->daoUser = UserBD::getInstance();
 		$this->ControlMovies = new MoviesC;
 		$this->ControlGenre = new GenreC;
 		$this->ControlCinema = new CinemaC;
@@ -744,11 +743,11 @@ class ViewController
 							else{
 								$card = 0;
 							}
-								$view = 'CARD';
-								include URL_VISTA . 'header.php';
-								require(URL_VISTA . "card.php");
-								include URL_VISTA . 'footer.php';
-						
+							$view = 'CARD';
+							include URL_VISTA . 'header.php';
+							require(URL_VISTA . "card.php");
+							include URL_VISTA . 'footer.php';
+
 						}else
 						{
 							$this->message = new Message('warning', 'Choose a Type of Card ');
@@ -770,7 +769,7 @@ class ViewController
 					$this->message = new Message('warning', 'Quantity not Valid ');
 					$flag = true;
 				}
-					
+
 				
 				
 			}else 
@@ -926,7 +925,24 @@ class ViewController
 			if(!empty($_SESSION))
 			{
 				$current_date = date ("d-m-Y G:m.a");
-				$purchasetikets = $this->ControlShopping->purchasetikets($_SESSION["rol"]);
+				$fers = null;
+				$user = $this->ControlUser->bring_by_id();
+				$purchasetikets = $this->ControlShopping->purchasetikets($user->getId());
+				if(!empty($purchasetikets))
+				{
+					foreach ($purchasetikets as $mov) {
+
+						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+						if(!empty($thisfunction))
+						{
+							array_push($movies, $mov);
+							foreach ($thisfunction as $fun) {
+								array_push($roomcinema, $fun);
+							}
+						}
+					}
+				}
+				die(var_dump($purchasetikets));
 				$view = "PURCHASED TICKETS";
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "purchasetikets.php");

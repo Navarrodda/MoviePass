@@ -26,7 +26,7 @@
             <div class="col-xs-12">
               <?php if(!empty($purchasetikets)){
                 foreach ($purchasetikets as $purc) { ?>
-                  <table class="table marc3">
+                  <table class="table marc4">
 
                     <tbody> 
                      <tr>
@@ -57,21 +57,6 @@
                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($roomci->getDia())); echo $fecha?></td>
                          <td colspan="1"><?= $roomci->getHora(); ?></td>
                          <td colspan="1"><?= $roomci->getRoom()->getCinema()->getValor_entrada(); ?></td>
-                         <?php if(!empty($_SESSION["rol"])){ ?>
-                          <?php if($_SESSION["rol"] == 3){ ?>
-                            <form method="post" action="<?php echo URL ?>/view/buyq/">
-                             <td colspan="1"><button class="btn btn-success fa fa-shopping-cart" name="idfuction" value =" <?= $roomci->getId(); ?>"> Select</button></td>
-                           </form>
-                         <?php } else {
-                          ?>
-                          <form method="post" action="<?php echo URL ?>/view/modifyfuction/">
-                           <td colspan="1"><button class="btn btn-success fa fa-pencil" name="idfuction" value =" <?= $roomci->getId(); ?>"> Modify</button></td>
-                         </form>
-                       <?php } } else { ?>
-                         <form method="post" action="<?php echo URL ?>/view/login/">
-                           <td colspan="1"><button class="btn btn-success fa fa-shopping-cart" name="idfuction" value =" <?= $roomci->getId(); ?>"> Select</button></td>
-                         </form>
-                         <?php } ?>
                          </tr>
                        <?php } } } ?>
                      </tbody>
