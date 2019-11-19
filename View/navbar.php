@@ -8,11 +8,13 @@
             <ul>
               <?php if(!empty($_SESSION["email"])){ ?>
                 <li><a href="<?php echo URL ?>/view/account/">Account</a></li>
-                <li><a href="#">Checkout</a></li>
+                
                 <?php if($_SESSION["rol"] != 3){ ?>
                 <li><a href="<?php echo URL ?>/view/discounts/">Discounts</a></li>
-              <?php }  ?>
-              <?php } ?>
+              <?php }
+                  else { ?>
+                    <li><a href="<?php echo URL ?>/view/purchasetikets/">Purchased Tickets</a></li>
+              <?php } }?>
             </ul>
           </div>
           <div class="col-md-4">
@@ -51,8 +53,6 @@
             <li><a href="<?php echo URL?>/view/movies/">MOVIES</a></li>
             <li><a href="<?php echo URL?>/view/mymovies/">MYMOVIES</a></li>
                 <li><a href="<?php echo URL ?>/view/feature/">FEATURE</a></li>
-              <?php } else { ?>
-                <li><a href="<?php echo URL ?>/view/purchasetikets/">PURCHASED TICKETS</a></li>
               <?php } } ?>
               <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
             </ul>

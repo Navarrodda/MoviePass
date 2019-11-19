@@ -926,23 +926,40 @@ class ViewController
 			{
 				$current_date = date ("d-m-Y G:m.a");
 				$fers = null;
+				$fersfun = null;
+				$count = -1;
+				$i=0;
+				$movies = array();
+				$funct = array();
 				$user = $this->ControlUser->bring_by_id();
 				$purchasetikets = $this->ControlShopping->purchasetikets($user->getId());
 				if(!empty($purchasetikets))
 				{
-					foreach ($purchasetikets as $mov) {
-
-						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
-						if(!empty($thisfunction))
+					foreach ($purchasetikets as $purc) {
+						if(!empty($purc))
 						{
-							array_push($movies, $mov);
-							foreach ($thisfunction as $fun) {
-								array_push($roomcinema, $fun);
+							if($purc->getFunction()->getMovie() != $fers){
+								array_push($movies, $purc->getFunction()->getMovie());				
 							}
+							if($purc->getFunction()->getDia() != $fersfun)
+							{
+								array_push($funct, $purc);
+								$i = 0;
+								$count++;
+
+							}
+							else
+							{
+								$i++;
+
+								$funct[$count]->coun = $i + $purc->getCountrtiket();
+								
+							}
+							$fers = $purc->getFunction()->getMovie();
+							$fersfun = $purc->getFunction()->getDia();
 						}
 					}
 				}
-				die(var_dump($purchasetikets));
 				$view = "PURCHASED TICKETS";
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "purchasetikets.php");

@@ -24,8 +24,8 @@
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
-              <?php if(!empty($purchasetikets)){
-                foreach ($purchasetikets as $purc) { ?>
+              <?php if(!empty($movies)){
+                foreach ($movies as $mov) { ?>
                   <table class="table marc4">
 
                     <tbody> 
@@ -40,30 +40,31 @@
                       <td colspan="1" class="fa fa-play-circle-o"> Duration: <?= $mov->getDuration();?></td>
                     </tr>
                     <tr style="color:white"> 
-                      <td colspan="12" class="marctr2">Overview: <?= $fun->getMovie()->getOverview();?></td>
+                      <td colspan="12" class="marctr2">Overview: <?= $mov->getOverview();?></td>
                     </tr>
-                    <?php if(!empty($purchasetikets)) { 
-                     foreach ($purchasetikets as $roomci){
-                      if($mov->getId() === $roomci->getMovie()->getId()) { ?>
+                    <?php if(!empty($funct)) { 
+                     foreach ($funct as $fun){
+                      if($mov->getId() === $fun->getFunction()->getMovie()->getId()) { ?>
                         <tr rowspan="12" style="color:white">
-                          <td colspan="1">Cinema: <?= $roomci->getRoom()->getCinema()->getNombre();  ?></td>
+                          <td colspan="1">Cinema: <?= $fun->getFunction()->getRoom()->getCinema()->getNombre();  ?></td>
                           <td colspan="1">Day</td>
                           <td colspan="1">Hours</td>
-                          <td colspan="1">Estimated Price</td>
-                          <td colspan="1">Function</td>
+                          <td colspan="1">Purchase</td>
+                          <td colspan="1">Amount of tikets</td>
                         </tr>
                         <tr style="color:white">
-                         <td colspan="1">Room <?= $roomci->getRoom()->getNameRoom();?></td>
-                         <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($roomci->getDia())); echo $fecha?></td>
-                         <td colspan="1"><?= $roomci->getHora(); ?></td>
-                         <td colspan="1"><?= $roomci->getRoom()->getCinema()->getValor_entrada(); ?></td>
-                         </tr>
-                       <?php } } } ?>
-                     </tbody>
-                   </table>
-                 <?php }  } ?>
-               </div>
+                         <td colspan="1">Room <?= $fun->getFunction()->getRoom()->getNameRoom();?></td>
+                         <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getFunction()->getDia())); echo $fecha?></td>
+                         <td colspan="1"><?= $fun->getFunction()->getHora(); ?></td>
+                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getDate())); echo $fecha?></td>
+                          <td colspan="1"><?= $fun->coun; ?></td>
+                       </tr>
+                     <?php } } } ?>
+                   </tbody>
+                 </table>
+               <?php }  } ?>
              </div>
            </div>
          </div>
-       </section>
+       </div>
+     </section>
