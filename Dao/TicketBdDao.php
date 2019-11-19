@@ -198,8 +198,8 @@ class TicketBdDao
                 $DaoMovie = MovieBdDao::getInstance();
                 $ticket = new Ticket();
                 $ticket->setId($p['id']);
-                $ticket->setShopping($DaoShopping->bring_by_id($p['shopping']);
-                $ticket->setMovie($DaoMovie->bring_by_id($p['movie']);
+                $ticket->setShopping($DaoShopping->bring_by_id($p['shopping']));
+                $ticket->setMovie($DaoMovie->bring_by_id($p['movie']));
                 $ticket->setSeat($p['seat']);
                 $ticket->setQr($p['qr']);
                 $ticket->setNumbre($p['numbre']);
@@ -207,5 +207,5 @@ class TicketBdDao
                     }, $dataSet);
                 }
             }
-        }
-        ?>
+        
+}
