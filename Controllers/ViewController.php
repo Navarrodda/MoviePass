@@ -1021,4 +1021,10 @@ class ViewController
 			}
 		}
 
+		public function grafic()
+		{
+			$view = 'GRAPHIC';
+			require(URL_VISTA . "graphic.php");
+		}
+
 	}
