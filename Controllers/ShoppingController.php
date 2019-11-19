@@ -37,7 +37,6 @@ class ShoppingController
 		{
 			if($view != "MESSAGE")
 			{
-				die(var_dump($view));
 				$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
 
 				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);

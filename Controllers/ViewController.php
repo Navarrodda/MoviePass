@@ -946,6 +946,7 @@ class ViewController
 								array_push($funct, $purc);
 								$i = 0;
 								$count++;
+								$funct[$count]->coun = $purc->getCountrtiket();
 
 							}
 							else
