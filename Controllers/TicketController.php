@@ -60,4 +60,9 @@ class TicketController
         }
         
     }
+
+    public function brindforidshopping($idshopping)
+    {
+       return $this->ticketDao->bring_by_id_tha_shoping($idshopping);
+    }
 }
