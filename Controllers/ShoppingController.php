@@ -78,7 +78,8 @@ class ShoppingController
 										$total = $shopping->getPrice() * $shopping->getCountrtiket();
 									}
 									$shopping->setTotal($total);
-									$this->daoShopping->add($shopping);
+									$id = $this->daoShopping->add($shopping);
+									$shopping->setId($id);
 									$this->ControlTicket->add($shopping);
 
 									$view = "MESSAGE";

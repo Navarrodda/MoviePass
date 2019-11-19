@@ -15,6 +15,7 @@ use \Controllers\DiscountController as DiscountC;
 use \Controllers\FuctionController as Fuctionc;
 use \Controllers\RoomController as Roomc;
 use \Controllers\ShoppingController as Shoppingc;
+use \Controllers\TicketController as TicketC;
 //Dao
 use \Dao\UserBdDao as UserBD;
 
@@ -32,6 +33,7 @@ class ViewController
 		$this->ControlFuctionc = new Fuctionc;
 		$this->ControlRoom = new Roomc;
 		$this->ControlShopping = new Shoppingc;
+		$this->ControlTicket = new TicketC;
 	}
 
 	public function index()
@@ -982,6 +984,7 @@ class ViewController
 			if(!empty($_SESSION))
 			{
 				$funct = array();
+				$tiket = array();
 				$user = $this->ControlUser->bring_by_id();
 				$purchasetikets = $this->ControlShopping->purchasetikets($user->getId());
 				if(!empty($purchasetikets))
@@ -994,11 +997,19 @@ class ViewController
 								if($purc->getFunction()->getMovie()->getId() == $movieId)
 								{
 									array_push($funct, $purc);
+									$tikets = $this->ControlTicket->brindforidshopping($purc->getId());
+									if(!empty($tikets))
+									{
+
+										array_push($tiket, $tikets);
+									}
+									
 								}
 							}
 						}
 					}
 				}
+				die(var_dump($tiket));
 				require(URL_VISTA . "print.php");
 			}
 			else
