@@ -1,20 +1,15 @@
 <?php
-
 namespace Model;
-
 use Model\Shopping as Shopping;
 use Model\Movie as Movie;
-
 class Ticket
 {
     private $id;
     private $shopping; 
     private $movie;
+    private $seat;  
     private $qr;
     private $numbre;
-
-
-
     /**
      * @return mixed
      */
@@ -22,7 +17,6 @@ class Ticket
     {
         return $this->id;
     }
-
     /**
      * @param mixed $id
      *
@@ -31,10 +25,8 @@ class Ticket
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -42,7 +34,6 @@ class Ticket
     {
         return $this->shopping;
     }
-
     /**
      * @param mixed $shopping
      *
@@ -51,10 +42,8 @@ class Ticket
     public function setShopping(Shopping $shopping)
     {
         $this->shopping = $shopping;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -62,7 +51,6 @@ class Ticket
     {
         return $this->movie;
     }
-
     /**
      * @param mixed $movie
      *
@@ -71,12 +59,25 @@ class Ticket
     public function setMovie(Movie $movie)
     {
         $this->movie = $movie;
-
         return $this;
     }
-
-
-
+    /**
+     * @return mixed
+     */
+    public function getSeat()
+    {
+        return $this->seat;
+    }
+    /**
+     * @param mixed $seat
+     *
+     * @return self
+     */
+    public function setSeat($seat)
+    {
+        $this->seat = $seat;
+        return $this;
+    }
     /**
      * @return mixed
      */
@@ -84,7 +85,6 @@ class Ticket
     {
         return $this->qr;
     }
-
     /**
      * @param mixed $qr
      *
@@ -93,10 +93,8 @@ class Ticket
     public function setQr($qr)
     {
         $this->qr = $qr;
-
         return $this;
     }
-
     /**
      * @return mixed
      */
@@ -104,7 +102,6 @@ class Ticket
     {
         return $this->numbre;
     }
-
     /**
      * @param mixed $numbre
      *
@@ -113,7 +110,7 @@ class Ticket
     public function setNumbre($numbre)
     {
         $this->numbre = $numbre;
-
         return $this;
     }
 }
+?>
