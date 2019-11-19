@@ -49,10 +49,54 @@ class ShoppingsBdDao
             echo $e->getMessage();die();
         }
     }
-    
-    public function bring_buy_by_Function($idUfunction)
+
+    public function sum_buy_by_cinema($idCinema)
     {
-        $sql = "SELECT * FROM $this->table WHERE id_function = \"$idFunction\" ";
+        $sql = "SELECT sum(shoppings.countrtiket) FROM $this->table inner join functions on $this->table.function = functions.id inner join rooms on functions.room = rooms.id  WHERE rooms.cinema = \"$idCinema\" ";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+        $count = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        
+
+        if(!empty($count))
+        {
+            return $count;
+        }
+
+        return null;
+    }
+
+    public function sum_buy_by_function($idFunction)
+    {
+        $sql = "SELECT sum(shoppings.countrtiket) FROM $this->table WHERE function = \"$idFunction\" ";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+        $count = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        
+
+        if(!empty($count))
+        {
+            return $count;
+        }
+
+        return null;
+    }
+    
+    public function bring_buy_by_Function($idFunction)
+    {
+        $sql = "SELECT * FROM $this->table WHERE function = \"$idFunction\" ";
 
         $conec = Conection::conection();
 
