@@ -1,4 +1,6 @@
 [
+<<<<<<< HEAD
+=======
     {
         "id": null,
         "capacidad": "300",
@@ -20,4 +22,5 @@
         "nombre": "Cinemasenter",
         "valor_entrada": "300"
     }
+>>>>>>> 26945106a4d85d6816758b5054b932f77cce53b7
 ]
