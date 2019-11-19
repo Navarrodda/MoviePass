@@ -31,58 +31,62 @@ class ShoppingController
 	}
 
 	//Verify and add the shop 
-	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity,$card)
+	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity,$card,$validator)
 	{
 
 		if(!empty($_SESSION))
 		{
-			$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
-
-			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
-
-			if(!empty($fuction))
+			if($validator)
 			{
-				$movie = $fuction->getMovie();
-				$room =  $fuction->getRoom();
-				$cinema = $fuction->getRoom()->getCinema();
-				$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
-				$year = date("Y"); 
-				$month = date("m");
-				if(strlen($cardnumber) == 16 && preg_match('~[0-9]+~', $cardnumber)) 
-				{
-					if(!preg_match('~[0-9]+~', $cardholder))
-					{
-						$monthyear =  $year . $month;
-						$cardexpirationyearmonth = $cardexpirationyear . $cardexpirationmonth;
-						if($monthyear <= $cardexpirationyearmonth)
-						{
+				die(var_dump($validator));
+				$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
 
-							if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
+				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+
+				if(!empty($fuction))
+				{
+					$movie = $fuction->getMovie();
+					$room =  $fuction->getRoom();
+					$cinema = $fuction->getRoom()->getCinema();
+					$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+					$year = date("Y"); 
+					$month = date("m");
+					if(strlen($cardnumber) == 16 && preg_match('~[0-9]+~', $cardnumber)) 
+					{
+						if(!preg_match('~[0-9]+~', $cardholder))
+						{
+							$monthyear =  $year . $month;
+							$cardexpirationyearmonth = $cardexpirationyear . $cardexpirationmonth;
+							if($monthyear <= $cardexpirationyearmonth)
 							{
-								$shopping = new Shopping();
-								$shopping->setUser($this->usercontroller->bring_by_id());
-								$shopping->setFunction($fuction);
-								$shopping->setDate(date("Y-m-d"));
-								$shopping->setCountrtiket($quantity);
-								$shopping->setPrice($cinema->getValor_entrada());
-								if($discount != null)
-								{	
-									$shopping->setDiscount($discount[0]);							
-									$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount[0]->getDisc()/100));
+
+								if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
+								{
+									$shopping = new Shopping();
+									$shopping->setUser($this->usercontroller->bring_by_id());
+									$shopping->setFunction($fuction);
+									$shopping->setDate(date("Y-m-d"));
+									$shopping->setCountrtiket($quantity);
+									$shopping->setPrice($cinema->getValor_entrada());
+									if($discount != null)
+									{	
+										$shopping->setDiscount($discount[0]);							
+										$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount[0]->getDisc()/100));
+									}else
+									{
+										$total = $shopping->getPrice() * $shopping->getCountrtiket();
+									}
+									$shopping->setTotal($total);
+									$this->daoShopping->add($shopping);
+									$validator = 0;
+									$view = "MESSAGE";
+									$wear = strtolower($view);
+									$this->message = new Message("success","La compra se ha realizado con exito " );
 								}else
 								{
-									$total = $shopping->getPrice() * $shopping->getCountrtiket();
-								}
-								$shopping->setTotal($total);
-								$this->daoShopping->add($shopping);
-								$view = "MESSAGE";
-								$wear = strlower($view);
-								$message("success","La compra se ha realizado con exito " );
-							}else
-							{
-								$view = 'CARD';
-								$wear =  strtolower($view);
-								$this->message = new Message("warning","Invalid CCV" );
+									$view = 'CARD';
+									$wear =  strtolower($view);
+									$this->message = new Message("warning","Invalid CCV" );
 							}
 
 						}else 
@@ -104,15 +108,24 @@ class ShoppingController
 					$view = 'CARD';
 					$wear =  strtolower($view);
 					$this->message = new Message("warning","Invalid Card Number" );
+					}
 				}
-			}
-			else
+				else
+				{
+					$view = "MESSAGE";
+					$wear =  strtolower($view);
+					$this->message = new Message("warning","Function don't exist." );
+				}
+		
+			}else
 			{
-				$view = "MESSAGE";
-				$wear =  strtolower($view);
-				$this->message = new Message("warning","Function don't exist." );
+				$this->message = new Message("warning", "You already have a ticket");
+				$view = 'MESSAGE';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "message.php");
+				include URL_VISTA . 'footer.php';
 			}
-		}
+		}	
 		else
 		{
 			$view = "LOGIN";
