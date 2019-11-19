@@ -256,7 +256,7 @@ class ShoppingsBdDao
                     $shopping->setDiscount($daoDiscount->bring_by_id($p['discount']));
                 }
                 $shopping->setDate($p['day']);
-                $shopping->setCountrtiket('countrtiket');
+                $shopping->setCountrtiket($p['countrtiket']);
                 $shopping->setPrice($p['price']);
                 $shopping->setTotal($p['total']);
                 return $shopping;
