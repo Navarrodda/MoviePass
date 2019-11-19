@@ -929,6 +929,7 @@ class ViewController
 				$fersfun = null;
 				$count = -1;
 				$i=0;
+				$q=1;
 				$movies = array();
 				$funct = array();
 				$user = $this->ControlUser->bring_by_id();
@@ -952,10 +953,10 @@ class ViewController
 							else
 							{
 								$i++;
-
-								$funct[$count]->coun = $i + $purc->getCountrtiket();
+								$funct[$count]->coun = $funct[$count]->coun + $purc->getCountrtiket();
 								
 							}
+							$q++;
 							$fers = $purc->getFunction()->getMovie();
 							$fersfun = $purc->getFunction()->getDia();
 						}
