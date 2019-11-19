@@ -977,10 +977,37 @@ class ViewController
 		}
 
 
-		public function print($idsopping)
+		public function print($movieId,$functiondata)
 		{
-			die(var_dump($idsopping));
+			if(!empty($_SESSION))
+			{
+				$funct = array();
+				$user = $this->ControlUser->bring_by_id();
+				$purchasetikets = $this->ControlShopping->purchasetikets($user->getId());
+				if(!empty($purchasetikets))
+				{
+					foreach ($purchasetikets as $purc) {
+						if(!empty($purc))
+						{
+							if($purc->getFunction()->getDia() == $functiondata)
+							{
+								if($purc->getFunction()->getMovie()->getId() == $movieId)
+								{
+									array_push($funct, $purc);
+								}
+							}
+						}
+					}
+				}
 				require(URL_VISTA . "print.php");
+			}
+			else
+			{
+				$view = 'LOGIN';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
+			}
 		}
 
 	}

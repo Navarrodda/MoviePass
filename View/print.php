@@ -11,110 +11,124 @@
   </head>
 
   <body>
-    <div class="ticket">
-      <img src="https://yt3.ggpht.com/-3BKTe8YFlbA/AAAAAAAAAAI/AAAAAAAAAAA/ad0jqQ4IkGE/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Logotipo">
-      <p class="centrado">Mauto ponete las pilas dale 
-        <br>Agus Murio en el Proyecto jajaja
-        <br>19/11/2019 02:22 a.m.</p>
-        <table>
-          <thead>
-            <tr>
-              <th class="cantidad">CANT</th>
-              <th class="producto">PRODUCTO</th>
-              <th class="precio">$$</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="cantidad">1.00</td>
-              <td class="producto">CHEETOS VERDES 80 G</td>
-              <td class="precio">$8.50</td>
-            </tr>
-            <tr>
-              <td class="cantidad">2.00</td>
-              <td class="producto">KINDER DELICE</td>
-              <td class="precio">$10.00</td>
-            </tr>
-            <tr>
-              <td class="cantidad">1.00</td>
-              <td class="producto">COCA COLA 600 ML</td>
-              <td class="precio">$10.00</td>
-            </tr>
-            <tr>
-              <td class="cantidad"></td>
-              <td class="producto">TOTAL</td>
-              <td class="precio">$28.50</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="centrado">¡GRACIAS POR SU COMPRA!
-          <br>parzibyte.me</p>
+    <div class="container">
+      <div class="container lower-box box-primary">
+        <div class="row">
+          <div class="col-md-12">
+            <?php  if(!empty($funct)){
+              foreach ($funct as $fun) { ?>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="ticket">
+                      <img src="https://yt3.ggpht.com/-3BKTe8YFlbA/AAAAAAAAAAI/AAAAAAAAAAA/ad0jqQ4IkGE/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Logotipo">
+                      <p class="centrado">Cinema: <?=$fun->getFunction()->getRoom()->getCinema()->getNombre(); ?> 
+                      <br>Room: <?=$fun->getFunction()->getRoom()->getNameRoom(); ?> 
+                      <br>Day <?php $fecha = date("d/m/Y", strtotime($fun->getFunction()->getDia())); echo $fecha?>
+                      Hour: <?= $fun->getFunction()->getHora()?>
+                    </p>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th class="cantidad">M:</th>
+                          <th class="producto"><?= $fun->getFunction()->getMovie()->getTitle();?></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="cantidad">Language:</td>
+                          <td class="producto"><?= $fun->getFunction()->getMovie()->getLanguage();?></td>
+                        </tr>
+                        <tr>
+                          <td class="cantidad">Duration:</td>
+                          <td class="producto"><?= $fun->getFunction()->getMovie()->getDuration();?></td>
+                        </tr>
+                        <tr>
+                          <td class="cantidad">1.00</td>
+                          <td class="producto">COCA COLA 600 ML</td>
+                          <td class="precio">$10.00</td>
+                        </tr>
+                        <tr>
+                          <td class="cantidad"></td>
+                          <td class="producto">TOTAL</td>
+                          <td class="precio">$28.50</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <p class="centrado">¡ENJOY THE MOVIE!
+                      <br>Thank you for choosing Us</p>
+                    </div>
+                    <button class="oculto-impresion" onclick="imprimir()">Imprimir</button>
+                  </div>
+                </div>
+              <?php } } ?>
+            </div>
+          </div>
         </div>
-        <button class="oculto-impresion" onclick="imprimir()">Imprimir</button>
-      </body>
+      </div>
+    </body>
 
-      </html>
-      <script type="text/javascript">
-        function imprimir() {
-          window.print();
+    </html>
+    <script type="text/javascript">
+      function imprimir() {
+        window.print();
+      }
+    </script>
+
+    <style type="text/css">
+
+      @media print {
+        .oculto-impresion,
+        .oculto-impresion * {
+          display: none !important;
         }
-      </script>
+      }
 
-      <style type="text/css">
+      * {
+        font-size: 12px;
+        font-family: 'Times New Roman';
+      }
 
-        @media print {
-          .oculto-impresion,
-          .oculto-impresion * {
-            display: none !important;
-          }
-        }
+      td,
+      th,
+      tr,
+      table {
+        border-top: 1px solid black;
+        border-collapse: collapse;
+      }
 
-        * {
-          font-size: 12px;
-          font-family: 'Times New Roman';
-        }
+      td.producto,
+      th.producto {
+        width: 100px;
+        max-width: 100px;
+      }
 
-        td,
-        th,
-        tr,
-        table {
-          border-top: 1px solid black;
-          border-collapse: collapse;
-        }
+      td.cantidad,
+      th.cantidad {
+        width: 120px;
+        max-width: 120px;
+        word-break: break-all;
+      }
 
-        td.producto,
-        th.producto {
-          width: 75px;
-          max-width: 75px;
-        }
+      td.precio,
+      th.precio {
+        width: 40px;
+        max-width: 40px;
+        word-break: break-all;
+      }
 
-        td.cantidad,
-        th.cantidad {
-          width: 40px;
-          max-width: 40px;
-          word-break: break-all;
-        }
+      .centrado {
+        text-align: center;
+        align-content: center;
+      }
 
-        td.precio,
-        th.precio {
-          width: 40px;
-          max-width: 40px;
-          word-break: break-all;
-        }
+      .ticket {
+        width: 155px;
+        max-width: 155px;
+      }
 
-        .centrado {
-          text-align: center;
-          align-content: center;
-        }
+      img {
+        max-width: inherit;
+        width: inherit;
+      }
 
-        .ticket {
-          width: 155px;
-          max-width: 155px;
-        }
-
-        img {
-          max-width: inherit;
-          width: inherit;
-        }
-
-      </style>
+    </style>

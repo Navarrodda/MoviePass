@@ -9,6 +9,7 @@ use \Controllers\CinemaController as CinemaC;
 use \Controllers\FuctionController as FuctionC;
 use \Controllers\DiscountController as DiscountC;
 use \Controllers\UserController as UserC;
+use \Controllers\TicketController as TicketC;
 //DAO
 use \Dao\ShoppingsBdDao as ShoppingsBdDao;
 
@@ -17,12 +18,14 @@ class ShoppingController
 	private $daoShopping;
 	private $usercontroller;
 	private $ControlDiscount;
+	private $ControlTicket;
 	public function __construct()
 	{
 		$this->daoShopping = ShoppingsBdDao::getInstance();
 		$this->usercontroller = new UserC();
 		$this->ControlDiscount = new DiscountC();
 		$this->ControlFuctionc = new FuctionC();
+		$this->ControlTicket = new TicketC();
 	}
 
 	public function purchasetikets($id)
@@ -76,6 +79,7 @@ class ShoppingController
 									}
 									$shopping->setTotal($total);
 									$this->daoShopping->add($shopping);
+									$this->ControlTicket->add($shopping);
 
 									$view = "MESSAGE";
 									$wear = strtolower($view);
@@ -85,27 +89,27 @@ class ShoppingController
 									$view = 'CARD';
 									$wear =  strtolower($view);
 									$this->message = new Message("warning","Invalid CCV" );
+								}
+
+							}else 
+							{
+								$this->message = new Message("warning","Invalid Expiration Date" );
+								$view = 'CARD';
+								$wear =  strtolower($view);
+
 							}
 
-						}else 
+						}else
 						{
-							$this->message = new Message("warning","Invalid Expiration Date" );
 							$view = 'CARD';
 							$wear =  strtolower($view);
-							
+							$this->message = new Message("warning","Invalid Card Holder" );
 						}
-
 					}else
 					{
 						$view = 'CARD';
 						$wear =  strtolower($view);
-						$this->message = new Message("warning","Invalid Card Holder" );
-					}
-				}else
-				{
-					$view = 'CARD';
-					$wear =  strtolower($view);
-					$this->message = new Message("warning","Invalid Card Number" );
+						$this->message = new Message("warning","Invalid Card Number" );
 					}
 				}
 				else
@@ -114,7 +118,7 @@ class ShoppingController
 					$wear =  strtolower($view);
 					$this->message = new Message("warning","Function don't exist." );
 				}
-		
+
 			}else
 			{
 				$this->message = new Message("warning", "You already have a ticket");
@@ -135,6 +139,16 @@ class ShoppingController
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . $wear);
 		include URL_VISTA . 'footer.php';
+	}
+
+	public function bringbyid($idsopping)
+	{
+		return $this->daoShopping->bring_by_id($idsopping);
+	}
+
+	public function bringbuybyFunction($idfunction)
+	{
+		return $this->daoShopping->bring_buy_by_Function($idfunction);
 	}
 
 }

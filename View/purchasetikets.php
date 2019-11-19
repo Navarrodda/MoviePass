@@ -60,7 +60,8 @@
                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($fun->getDate())); echo $fecha?></td>
                          <td colspan="1"><?= $fun->coun; ?></td>
                          <form  target="_blank"  method="post" action="<?php echo URL ?>/view/print/">
-                          <td colspan="1"><button class="btn btn-default fa fa-print" name="idfuction" value ="<?= $fun->getId(); ?>"> Select</button></td>
+                          <input type="hidden" name="movieId" value="<?=$fun->getFunction()->getMovie()->getId();?>" />
+                          <td colspan="1"><button class="btn btn-default fa fa-print" name="functiondata" value ="<?= $fun->getFunction()->getDia()?>"> Select</button></td>
                          </form>
                        </tr>
                      <?php } } } ?>
