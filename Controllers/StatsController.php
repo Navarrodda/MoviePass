@@ -33,12 +33,12 @@
             return $qSoldFunction;
         }
 
-        public function notSoldFunction($idFunction)
-        {
-            $qSoldFunction = $this->shopDao->sum_buy_by_function($idFunction);
-            $qCapacityFunction = $this->cinema
+        // public function notSoldFunction($idFunction)
+        // {
+        //     $qSoldFunction = $this->shopDao->sum_buy_by_function($idFunction);
+        //     $qCapacityFunction = $this->cinema
 
-        }
+        // }
 
     }
 ?>
