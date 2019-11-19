@@ -19,7 +19,6 @@
               foreach ($tiket as $tik) { 
                 foreach($tik as $t ){
                 ?>
-
                 <div class="row">
                   <div class="col-md-3">
                     <div class="ticket">
@@ -31,7 +30,7 @@
                       <br>Day <?php $fecha = date("d/m/Y", strtotime($fun->getFunction()->getDia())); echo $fecha?>
                       Hour: <?= $fun->getFunction()->getHora()?>
                     </p>
-                    <table>
+                    <table class="table">
                       <thead>
                         <tr>
                           <th class="cantidad">M:</th>
@@ -49,14 +48,8 @@
                         </tr>
                       <?php } } ?>
                         <tr>
-                          <td class="cantidad">1.00</td>
-                          <td class="producto">COCA COLA 600 ML</td>
-                          <td class="precio">$10.00</td>
-                        </tr>
-                        <tr>
-                          <td class="cantidad"></td>
-                          <td class="producto">TOTAL</td>
-                          <td class="precio">$28.50</td>
+                          <td class="cantidad">NUMBER</td>
+                          <td class="producto"><?=$t->getNumbre()?></td>
                         </tr>
                       </tbody>
                     </table>
