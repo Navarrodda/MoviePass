@@ -17,7 +17,6 @@ use \Controllers\RoomController as Roomc;
 use \Controllers\ShoppingController as Shoppingc;
 use \Controllers\TicketController as TicketC;
 //Dao
-use \Dao\UserBdDao as UserBD;
 
 class ViewController
 {
@@ -1023,8 +1022,54 @@ class ViewController
 
 		public function grafic()
 		{
-			$view = 'GRAPHIC';
-			require(URL_VISTA . "graphic.php");
+			if(!empty($_SESSION))
+			{
+				$current_date = date ("d-m-Y G:m.a");
+				$movie = $this->ControlMovies->bringmovies();
+				$count = 0;
+				$i=1;
+				$movies = array();
+				$roomcinema = array();
+				if(!empty($movie))
+				{
+					foreach ($movie as $mov) {
+						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
+						if(!empty($thisfunction))
+						{
+							array_push($movies, $mov);
+							foreach ($thisfunction as $fun) {
+								array_push($roomcinema, $fun);
+								$roomcinema[$count]->coun = 0;
+								$tikets = $this->ControlTicket->bringbydthamovie($mov->getId());
+								if(!empty($tikets))
+								{
+									foreach ($tikets as $ti) {
+
+											if($fun->getRoom()->getId() == $ti->getShopping()->getFunction()->getRoom()->getId()){
+												$roomcinema[$count]->coun =  $i;
+												$roomcinema[$count]->min = $roomcinema[$count]->getRoom()->getCantSite() - $roomcinema[$count]->coun;
+												$roomcinema[$count]->buy = $roomcinema[$count]->getRoom()->getCinema()->getValor_entrada() * $roomcinema[$count]->coun;
+												$i++;
+
+											}
+											
+									}
+									
+									
+								}
+
+								$count++;
+							}
+							$i = 0;
+						}
+					}
+				}
+				$view = 'GRAPHIC';
+				include URL_VISTA . 'header.php'; 
+				require(URL_VISTA . "graphic.php");
+				include URL_VISTA . 'footer.php';
+			}
+			
 		}
 
 	}

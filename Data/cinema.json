@@ -7,10 +7,17 @@
         "valor_entrada": "150"
     },
     {
-        "id": 2,
+        "id": null,
         "capacidad": "900",
         "direccion": "Asdasd",
         "nombre": "Cinemasenter",
         "valor_entrada": "250"
+    },
+    {
+        "id": 3,
+        "capacidad": "900",
+        "direccion": "Adasd",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "300"
     }
 ]

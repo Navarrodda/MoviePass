@@ -65,4 +65,9 @@ class TicketController
     {
        return $this->ticketDao->bring_by_id_tha_shoping($idshopping);
     }
+
+    public function bringbydthamovie($idmovie)
+    {
+        return $this->ticketDao->bring_by_id_tha_movie($idmovie);
+    }
 }

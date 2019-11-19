@@ -11,6 +11,7 @@
                 
                 <?php if($_SESSION["rol"] != 3){ ?>
                 <li><a href="<?php echo URL ?>/view/discounts/">Discounts</a></li>
+                <li><a href="<?php echo URL ?>/view/grafic/">BUYS</a></li>
               <?php }
                   else { ?>
                     <li><a href="<?php echo URL ?>/view/purchasetikets/">Purchased Tickets</a></li>
