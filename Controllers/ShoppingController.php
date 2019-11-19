@@ -31,14 +31,13 @@ class ShoppingController
 	}
 
 	//Verify and add the shop 
-	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity,$card,$validator)
+	public function add($cardnumber,$cardnumber1,$cardnumber2,$cardnumber3,$cardholder,$cardexpirationmonth,$cardexpirationyear,$ccv,$idicount,$idfuction,$quantity,$card,$view)
 	{
-
 		if(!empty($_SESSION))
 		{
-			if($validator)
+			if($view != "MESSAGE")
 			{
-				die(var_dump($validator));
+				die(var_dump($view));
 				$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
 
 				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
@@ -78,7 +77,7 @@ class ShoppingController
 									}
 									$shopping->setTotal($total);
 									$this->daoShopping->add($shopping);
-									$validator = 0;
+
 									$view = "MESSAGE";
 									$wear = strtolower($view);
 									$this->message = new Message("success","La compra se ha realizado con exito " );

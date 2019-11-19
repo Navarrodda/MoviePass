@@ -142,7 +142,7 @@
       <p><input id ="idfuction" name = "idfuction" type = "hidden" value = "<?php echo $fuction->getId(); ?>"></p>
       <p><input id ="quantity" name = "quantity" type = "hidden" value = "<?php  echo $quantity?>"></p>
       <p><input id ="card" name ="card" type ="hidden" value ="<?php echo $card?>" ></p>
-      <p><input id ="validator" name ="validator" type ="hidden" value ="<?php echo validator ?>" ></p>
+      <p><input id ="view" name ="view" type ="hidden" value ="<?= $view ?>" ></p>
 
       <button class="btn6"><i class="fa fa-lock"></i> submit</button>
     </form>

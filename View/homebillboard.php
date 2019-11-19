@@ -30,6 +30,7 @@
             return ok;
           }
         </script>
+
         <div class="flexsearch">
           <div class="flexsearch--wrapper">
             <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
