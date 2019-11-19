@@ -4,7 +4,7 @@ namespace Dao;
 use Model\Ticket as Ticket;
 class TicketBdDao
 {
-    protected $table = "tickets";
+    protected $table = "tikets";
     protected $list;
     private static $instance;
 
@@ -47,10 +47,18 @@ class TicketBdDao
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
-
+            
             $idshopping = $ticket->getShopping();
-            $idmovie =  $ticket->
-            $seat = $ticket->getSeat();
+            $idmovie =  $ticket->getMovie();
+            
+            if(!empty($ticket->getSeat()))
+            {
+                $seat = $ticket->getSeat();
+            }
+            else
+            {
+                $seat = null;
+            }
             $qr = $ticket->getQr();
             $numbre = $ticket->getNumbre();
 
