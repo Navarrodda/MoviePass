@@ -193,7 +193,7 @@ class TicketBdDao
     {
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
-            $this->list = array_map(function ($p) {
+            $this->list = array_map(function ($p) { 
                 $DaoShopping = ShoppingtBdDao::getInstance();
                 $DaoMovie = MovieBdDao::getInstance();
                 $ticket = new Ticket();

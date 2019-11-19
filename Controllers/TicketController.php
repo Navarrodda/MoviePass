@@ -20,6 +20,7 @@
             $this->fuctionController = new FuctionC();
         }
 
+        //Add a new Ticket or Tickets in the db
         public function add(Shopping $shopping)
         {
             $wear = "LOGIN";
@@ -32,20 +33,32 @@
                     $fuction = $shopping->getFuction();
                     $cinema = $shopping->getFuction()->getCinema();
                     $room = $cinema->getRoom();
-                    $ticket = new Ticket();
+                    $movie = $fuction->getMovie();
                     $url = 
                     'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name: ".$user->getName()." -LastName: ".$user->getLastname()." -Cinema: ". $cinema->getNombre()." -Room: ".$room->getName_room()."-Movie: ".$fuction->getMovie()->getTitle()."-Day: ".$fuction->getgetDia()."-Hour: ".$fuction->getHora(); 
                     
                     $img = $user->getId(); 
                     $nameimg = 'img/Qr/'.$user->getName().$img;
-                    $path = 'img/Qr/david/';
-                    // Function to write image into file
-                    if(!is_dir($path))
+                    $path = 'img/Qr/'.$user->getNikname().'/';
+                    $array = array();
+                    for($i = 1; $i <= $shopping->getCountrtiket();$i++)
                     {
-                      mkdir( $path, true );
-                    } 
-                    file_put_contents($nameimg, file_get_contents($url));
-                       
+                        // Function to write image into file
+                        if(!is_dir($path))
+                        {
+                            mkdir( $path, true );
+                        } 
+                        file_put_contents($nameimg, file_get_contents($url));
+                        $ticket = new Ticket();
+                        $ticket->setShopping($shopping);
+                        $ticket->setMovie($movie);
+                        $ticket->setQr("C:/xampp/htdocs/MoviePass".$path.$img);
+                        //Number Ticket = idFunction.idCinema.idRoom.idUser.idShopping.Qticket
+                        $ticket->setNumbre($fuction->getId().$cinema->getId().$room->getId().$user->getId().$shopping->getId().$i);
+                        $this->ticketDao->add($ticket);
+                        array_push($array,$ticket->getNumbre);
+                    }
+                    
                 }else{
                     $view = "MESSAGE";
 					$wear =  strtolower($view);
