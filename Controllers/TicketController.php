@@ -51,8 +51,8 @@ class TicketController
                     $ticket->setShopping($shopping);
                     $ticket->setMovie($movie);
                     $ticket->setQr("http://localhost/MoviePass/".$path.$img);
-                    $ticket->setSeat($i);
-                        //Number Ticket = idFunction.idCinema.idRoom.idUser.idShopping.Qticket
+                  
+                    //Number Ticket = idFunction.idCinema.idRoom.idUser.idShopping.Qticket
                     $ticket->setNumbre($fuction->getId().$cinema->getId().$room->getId().$user->getId().$shopping->getId().$i);
                     $this->ticketDao->add($ticket);
                     array_push($array,$ticket->getNumbre());

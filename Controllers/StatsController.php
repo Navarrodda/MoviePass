@@ -2,16 +2,19 @@
     namespace Controllers;
 
     //Dao
-    use Dao\Shopping as Shopping;
-    use Dao\Cinema as Cinema;
+    use Dao\ShoppingBdDao as ShoppingDao;
+    use Dao\CinemaBdDao as CinemaDao;
+    use Dao\RoomBdDao as RoomDao;
     class StatsController
     {
         private $shopDao;
         private $cinemaDao;
+        private $roomDao;
         public function __construct()
         {
-            $this->shopDao = Shopping::getInstance();
-            $this->cinemaDao = Cinema::getInstance();
+            $this->shopDao = ShoppingDao::getInstance();
+            $this->cinemaDao = CinemaDao::getInstance();
+            $this->roomDao = RoomDao::getInstance();
         }
 
         //Devuelve cantidades vendidas por cines
@@ -20,6 +23,7 @@
            return $this->shopDao->sum_buy_by_cinema($idCinema);
         }
 
+        //Devuelve cantidades no vendidas Cinema
         public function notSoldCinema($idCinema)
         {
             $qsold = $this->qSoldCinema($idCinema);
@@ -33,12 +37,12 @@
             return $qSoldFunction;
         }
 
-        // public function notSoldFunction($idFunction)
-        // {
-        //     $qSoldFunction = $this->shopDao->sum_buy_by_function($idFunction);
-        //     $qCapacityFunction = $this->cinema
+        public function notSoldFunction($idFunction)
+        {
+            $qSoldFunction = $this->shopDao->sum_buy_by_function($idFunction);
+            $qCapacityFunction = $this->roomDao->
 
-        // }
+        }
 
     }
 ?>

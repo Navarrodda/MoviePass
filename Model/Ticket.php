@@ -10,7 +10,6 @@ class Ticket
     private $id;
     private $shopping; 
     private $movie;
-    private $seat;  
     private $qr;
     private $numbre;
 
@@ -76,25 +75,7 @@ class Ticket
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSeat()
-    {
-        return $this->seat;
-    }
 
-    /**
-     * @param mixed $seat
-     *
-     * @return self
-     */
-    public function setSeat($seat)
-    {
-        $this->seat = $seat;
-
-        return $this;
-    }
 
     /**
      * @return mixed

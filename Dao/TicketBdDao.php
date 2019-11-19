@@ -42,22 +42,17 @@ class TicketBdDao
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (shopping, movie, seat, qr, numbre) VALUES (:shopping, :movie, :seat, :qr, :numbre)");
+            $sql = ("INSERT INTO $this->table (shopping, movie, qr, numbre) VALUES (:shopping, :movie, :qr, :numbre)");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
 
-            $idshopping = $ticket->getShopping();
-            $idmovie =  $ticket->
-            $seat = $ticket->getSeat();
             $qr = $ticket->getQr();
             $numbre = $ticket->getNumbre();
 
-            $shopping =  $idshopping->getId();
-            $movie = $idmovie->getId();
-
-
+            $shopping =  $ticket->getShopping()->getId();
+            $movie = $ticket->getMovie()->getId();
 
             $judgment->bindParam(":shopping",$shopping);
             $judgment->bindParam(":movie",$movie);
