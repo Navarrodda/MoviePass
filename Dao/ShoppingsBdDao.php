@@ -25,20 +25,22 @@ class ShoppingsBdDao
         try{
             $sql = "SELECT * FROM $this->table WHERE user = \"$idUser\" ";
 
-            $conec = Conection::conection();
+               $conec = Conection::conection();
 
-            $judgment = $conec->prepare($sql);
+                $judgment = $conec->prepare($sql);
 
-            $judgment->execute();
+                $judgment->execute();
 
-            $arrayMg = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-            $this->mapear($arrayMg);
+                $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-            if(!empty($this->list))
-            {
-                return $this->list;
-            }
+                $this->mapear($dataSet);
+
+                if(!empty($this->list)){
+
+                    return $this->list;
+                }
+            
 
             return null;
         }catch(\PDOException $e){
@@ -241,20 +243,23 @@ class ShoppingsBdDao
         if($dataSet){
             $this->list = array_map(function ($p) {
 
-                $buy = new Buy();
-                $DaoUser = UserBdDao::getInstance();
-                $DaoFunction = FunctionBdDao::getInstance();
-                $DaoDiscount = DiscountBdDao::getInstance();
+                $shopping = new Shopping();
+                $daoUser = UserBdDao::getInstance();
+                $daoFunction = FunctionBdDao::getInstance();
+                $daoDiscount = DiscountBdDao::getInstance();
                 //id_user, id_function, id_descuento, date, countrtiket, price, total
-                $buy->setId('id');
-                $buy->setUser($DaoUser->bring_by_id($p['user']));
-                $buy->setFunction($DaoFunction->bring_by_id($p['function']));
-                $buy->setDiscount($DaoDiscount->bring_by_id($p['discount']));
-                $buy->setDate($p['date']);
-                $buy->setCountrtiket('countrtiket');
-                $buy->setPrice($p['price']);
-                $buy->setTotal($p['total']);
-                return $buy;
+                $shopping->setId('id');
+                $shopping->setUser($daoUser->bring_by_id($p['user']));
+                $shopping->setFunction($daoFunction->bring_by_id($p['function']));
+                if(!empty($daoDiscount->bring_by_id($p['discount'])))
+                {
+                    $shopping->setDiscount($daoDiscount->bring_by_id($p['discount']));
+                }
+                $shopping->setDate($p['day']);
+                $shopping->setCountrtiket('countrtiket');
+                $shopping->setPrice($p['price']);
+                $shopping->setTotal($p['total']);
+                return $shopping;
             }, $dataSet);
         }
     }
