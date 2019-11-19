@@ -1,9 +1,16 @@
 [
     {
-        "id": 1,
+        "id": null,
         "capacidad": "300",
         "direccion": "Colon 4110",
         "nombre": "Ambassador",
         "valor_entrada": "150"
+    },
+    {
+        "id": 2,
+        "capacidad": "900",
+        "direccion": "Asdasd",
+        "nombre": "Cinemasenter",
+        "valor_entrada": "250"
     }
 ]

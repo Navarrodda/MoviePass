@@ -197,27 +197,28 @@ class TicketBdDao
         }
     }
 
-        public function bring_by_id_tha_shoping($idsoping)
-    {   
+
+    public function bring_by_id_tha_shoping($idsoping)
+    {
         try{
-            if ($idsoping != null) {
-                $sql = ("SELECT * FROM $this->table WHERE shopping = \"$idsoping\"" );
+            $sql = "SELECT * FROM $this->table WHERE shopping = \"$idsoping\" ";
 
-                $conec = Conection::conection();
+            $conec = Conection::conection();
 
-                $judgment = $conec->prepare($sql);
+            $judgment = $conec->prepare($sql);
 
-                $judgment->execute();
+            $judgment->execute();
 
-                $dataSet = $judgment->fetch(\PDO::FETCH_ASSOC);
 
-                $this->mapear($dataSet);
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
-                if(!empty($this->list)){
+            $this->mapear($dataSet);
 
-                    return $this->list;
-                }
+            if(!empty($this->list)){
+
+                return $this->list;
             }
+            
 
             return null;
         }catch(\PDOException $e){
@@ -242,8 +243,8 @@ class TicketBdDao
                 $ticket->setQr($p['qr']);
                 $ticket->setNumbre($p['numbre']);
                 return $ticket;
-                    }, $dataSet);
-                }
-            }
-        
+            }, $dataSet);
+        }
+    }
+
 }

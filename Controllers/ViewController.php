@@ -1000,6 +1000,7 @@ class ViewController
 									$tikets = $this->ControlTicket->brindforidshopping($purc->getId());
 									if(!empty($tikets))
 									{
+
 										array_push($tiket, $tikets);
 									}
 									
