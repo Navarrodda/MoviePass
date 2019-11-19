@@ -6,6 +6,7 @@ use \Model\Room as Room;
 use \Model\Cinema as Cinema;
 //Dao
 use Dao\RoomBdDao as RoomBdDao;
+use Dao\CinemaBdDao as CinemaBdDao;
 //Controllers
 use Controllers\CinemaController as CinemaController;
 
@@ -27,18 +28,28 @@ class RoomController
 		if (empty($id)) {
 			$cinema = $this->CinemaControl->bring_for_id($idcinema);
 			if (!empty($cinema)) {
-				$room = new Room();
-				$room->setNameRoom($name_room);
-				$room->setCantSite($cant_site);
-				$room->setCinema($cinema);
-				$room->setNumberRoom($number_room);
+				$regla = $this->control_capacity($idcinema, $cant_site);
+				if ($regla) {
+					$room = new Room();
+					$room->setNameRoom($name_room);
+					$room->setCantSite($cant_site);
+					$room->setCinema($cinema);
+					$room->setNumberRoom($number_room);
 
-				$this->RoomBd->add($room);
-				$view = "MESSAGE";
-				$this->message = new Message( "success", "The room loaded successfully!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'message.php');
-				include URL_VISTA . 'footer.php';
+					$this->RoomBd->add($room);
+					$view = "MESSAGE";
+					$this->message = new Message( "success", "The room loaded successfully!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . 'message.php');
+					include URL_VISTA . 'footer.php';
+				}
+				else{
+					$view = "MESSAGE";
+					$this->message = new Message( "warning", "The capacity of the room exceeds the capacity of the cinema!" );
+					include URL_VISTA . 'header.php';
+					require(URL_VISTA . 'message.php');
+					include URL_VISTA . 'footer.php';
+				}
 
 			}
 			else{
@@ -101,8 +112,33 @@ class RoomController
 	//traer toda la capacidad del cine
 	//traer todas las salas
 	//contar esas capacidades y ver si se puede dar de alta la sala
-	//public function 
-
+	public function control_capacity($idcinema, $cant_site){
+		$rooms = $this->RoomBd->bring_list_for_id_cinema($idcinema);
+		$cinema = $this->CinemaControl->bring_for_id($idcinema);
+		$count = 0;
+		if(!empty($rooms))
+		{
+			foreach ($rooms as $room) 
+		{
+			$count = $count + $room->getCantSite();
+		}
+		$count = $count + $cant_site;
+		if ($cinema->getCapacidad() >= $count) {
+				return true;
+		}	
+		return false;
+	}else
+	{
+		if($cinema->getCapacidad() >= $cant_site)
+		{
+			return true;
+		}
+		return false;
+	}
+		
+		}
 }
+
+
 
 ?>
