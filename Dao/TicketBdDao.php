@@ -67,7 +67,6 @@ class TicketBdDao
 
             $judgment->bindParam(":shopping",$shopping);
             $judgment->bindParam(":movie",$movie);
-            $judgment->bindParam(":seat",$seat);
             $judgment->bindParam(":qr",$qr);
             $judgment->bindParam(":numbre",$numbre);
 
