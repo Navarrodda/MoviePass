@@ -6,18 +6,21 @@
     use Dao\CinemaBdDao as CinemaDao;
     use Dao\RoomBdDao as RoomDao;
     use Dao\FuctionBdDao as FuctionDao;
+    use Dao\MovieBdDao as MovieDao;
     class StatsController
     {
         private $shopDao;
         private $cinemaDao;
         private $roomDao;
         private $fuctionDao;
+        private $movieDao;
         public function __construct()
         {
             $this->shopDao = ShoppingDao::getInstance();
             $this->cinemaDao = CinemaDao::getInstance();
             $this->roomDao = RoomDao::getInstance();
             $this->fuctionDao = FuctionDao::getInstance();
+            $this->MovieBdDao = MovieDao::getInstance();
         }
 
         //Devuelve cantidades vendidas por cines
@@ -49,7 +52,19 @@
         }
 
         //Devuelve cantidades por pelicula
-        
+        public function qSoldMovie($idMovie)
+        {
 
+            $qSoldMovie = $this->shopDao->sum_buy_by_Movie($idMovie);
+            return $qSoldMovie;
+        } 
+
+        //Devuelve cantidades no vendidas por Pelicula
+        public function notSoldMovie($idMovie)
+        {   
+            $qSoldMovie = $this->shopDao->sum_buy_by_Movie($idMovie);
+            $qCapacityMovie = $this->sum_capcity_movie($idMovie);
+            return $qCapacityMovie - $qSoldMovie;
+        }
     }
 ?>

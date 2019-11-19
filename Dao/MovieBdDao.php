@@ -37,6 +37,27 @@ class MovieBdDao{
 
 		return null;
 	}
+	//devuelve capacidad total
+	public function sum_capcity_movie($idMovie)
+    {
+        $sql = "SELECT sum(rooms.cant_site) FROM $this->table inner join functions on fuctions.movie = $this->table.id inner join rooms on rooms.id = fuctions.room WHERE $this->table.id = \"$idMovie\"";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+
+        $sum = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        if(!empty($sum))
+        {
+            return $sum;
+        }
+
+        return null;
+    }
 
 		public function bring_id_by($id){
 		$sql = "SELECT id FROM $this->table WHERE id = \"$id\" LIMIT 1";

@@ -94,6 +94,30 @@ class ShoppingsBdDao
         return null;
     }
     
+    public function sum_buy_by_Movie($idMovie)
+    {
+        $sql = "SELECT sum(shoppings.countrtiket) FROM $this->table inner join functions on $this->table.function = functions.id inner join movies on functions.movies = movies.id  WHERE functions.movie = \"$idMovie\" ";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+        $count = $judgment->fetch(\PDO::FETCH_ASSOC);
+
+        
+
+        if(!empty($count))
+        {
+            return $count;
+        }
+
+        return null;
+    }
+
+
+
     public function bring_buy_by_Function($idFunction)
     {
         $sql = "SELECT * FROM $this->table WHERE function = \"$idFunction\" ";
