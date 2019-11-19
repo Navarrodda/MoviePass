@@ -45,12 +45,12 @@ class TicketController
                     }
                     $url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name:".$user->getName()."-LastName:".$user->getLastname()."-Cinema:".$cinema->getNombre()."-Room:".$room->getNameRoom()."-Movie:".$fuction->getMovie()->getTitle()."-Day:".$fuction->getDia()."-Hour:".$fuction->getHora().$i; 
                     $url = str_replace(' ', '', $url);
-                    $nameimg = 'img/Qr/'.$user->getNikname().'/'.$img.'-'.$shopping->getDate().'-'.$i.".png";
+                    $nameimg = 'img/Qr/'.$user->getNikname().'/'.$img.'-'.$shopping->getId().'-'.$shopping->getDate().'-'.$i.".png";
                     file_put_contents($nameimg, file_get_contents($url));
                     $ticket = new Ticket();
                     $ticket->setShopping($shopping);
                     $ticket->setMovie($movie);
-                    $ticket->setQr("http://localhost/MoviePass/".$path.$img);
+                    $ticket->setQr("http://localhost/MoviePass/".$nameimg);
                         //Number Ticket = idFunction.idCinema.idRoom.idUser.idShopping.Qticket
                     $ticket->setNumbre($fuction->getId().$cinema->getId().$room->getId().$user->getId().$shopping->getId().$i);
                     $this->ticketDao->add($ticket);

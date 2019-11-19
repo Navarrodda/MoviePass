@@ -1002,6 +1002,7 @@ class ViewController
 									{
 
 										array_push($tiket, $tikets);
+										
 									}
 									
 								}
@@ -1009,13 +1010,12 @@ class ViewController
 						}
 					}
 				}
-				die(var_dump($tiket));
 				require(URL_VISTA . "print.php");
 			}
 			else
 			{
 				$view = 'LOGIN';
-				include URL_VISTA . 'header.php';
+				include URL_VISTA . 'header.php'; 
 				require(URL_VISTA . "login.php");
 				include URL_VISTA . 'footer.php';
 			}
