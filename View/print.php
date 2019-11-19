@@ -15,18 +15,22 @@
       <div class="container lower-box box-primary">
         <div class="row">
           <div class="col-md-12">
-            <?php  if(!empty($funct)){
-              foreach ($funct as $fun) { ?>
+            <?php  if(!empty($tiket)){
+              foreach ($tiket as $tik) { 
+                foreach($tik as $t ){
+                ?>
                 <div class="row">
                   <div class="col-md-3">
                     <div class="ticket">
-                      <img src="https://yt3.ggpht.com/-3BKTe8YFlbA/AAAAAAAAAAI/AAAAAAAAAAA/ad0jqQ4IkGE/s900-c-k-no-mo-rj-c0xffffff/photo.jpg" alt="Logotipo">
+                      <img src="<?= $t->getQr();?>" alt="QR">
+                      <?php if(!empty($funct)){
+                      foreach ($funct as $fun) { ?>
                       <p class="centrado">Cinema: <?=$fun->getFunction()->getRoom()->getCinema()->getNombre(); ?> 
                       <br>Room: <?=$fun->getFunction()->getRoom()->getNameRoom(); ?> 
                       <br>Day <?php $fecha = date("d/m/Y", strtotime($fun->getFunction()->getDia())); echo $fecha?>
                       Hour: <?= $fun->getFunction()->getHora()?>
                     </p>
-                    <table>
+                    <table class="table">
                       <thead>
                         <tr>
                           <th class="cantidad">M:</th>
@@ -42,15 +46,10 @@
                           <td class="cantidad">Duration:</td>
                           <td class="producto"><?= $fun->getFunction()->getMovie()->getDuration();?></td>
                         </tr>
+                      <?php } } ?>
                         <tr>
-                          <td class="cantidad">1.00</td>
-                          <td class="producto">COCA COLA 600 ML</td>
-                          <td class="precio">$10.00</td>
-                        </tr>
-                        <tr>
-                          <td class="cantidad"></td>
-                          <td class="producto">TOTAL</td>
-                          <td class="precio">$28.50</td>
+                          <td class="cantidad">NUMBER</td>
+                          <td class="producto"><?=$t->getNumbre()?></td>
                         </tr>
                       </tbody>
                     </table>
@@ -60,7 +59,7 @@
                     <button class="oculto-impresion" onclick="imprimir()">Imprimir</button>
                   </div>
                 </div>
-              <?php } } ?>
+              <?php } } } ?>
             </div>
           </div>
         </div>

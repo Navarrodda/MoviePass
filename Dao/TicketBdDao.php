@@ -4,7 +4,7 @@ namespace Dao;
 use Model\Ticket as Ticket;
 class TicketBdDao
 {
-    protected $table = "tickets";
+    protected $table = "tikets";
     protected $list;
     private static $instance;
 
@@ -42,26 +42,31 @@ class TicketBdDao
         try{
 
             /** @noinspection SqlResolve */
-            $sql = ("INSERT INTO $this->table (shopping, movie, seat, qr, numbre) VALUES (:shopping, :movie, :seat, :qr, :numbre)");
+            $sql = ("INSERT INTO $this->table (shopping, movie, qr, numbre) VALUES (:shopping, :movie, :qr, :numbre)");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
-
+            
             $idshopping = $ticket->getShopping();
-            $idmovie =  $ticket->
-            $seat = $ticket->getSeat();
+            $idmovie =  $ticket->getMovie();
+            
+            if(!empty($ticket->getSeat()))
+            {
+                $seat = $ticket->getSeat();
+            }
+            else
+            {
+                $seat = null;
+            }
             $qr = $ticket->getQr();
             $numbre = $ticket->getNumbre();
 
-            $shopping =  $idshopping->getId();
-            $movie = $idmovie->getId();
-
-
+            $shopping =  $ticket->getShopping()->getId();
+            $movie = $ticket->getMovie()->getId();
 
             $judgment->bindParam(":shopping",$shopping);
             $judgment->bindParam(":movie",$movie);
-            $judgment->bindParam(":seat",$seat);
             $judgment->bindParam(":qr",$qr);
             $judgment->bindParam(":numbre",$numbre);
 
@@ -189,12 +194,43 @@ class TicketBdDao
         }
     }
 
+
+    public function bring_by_id_tha_shoping($idsoping)
+    {
+        try{
+            $sql = "SELECT * FROM $this->table WHERE shopping = \"$idsoping\" ";
+
+            $conec = Conection::conection();
+
+            $judgment = $conec->prepare($sql);
+
+            $judgment->execute();
+
+
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if(!empty($this->list)){
+
+                return $this->list;
+            }
+            
+
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
     public function mapear($dataSet)
     {
         $dataSet = is_array($dataSet) ? $dataSet : false;
         if($dataSet){
             $this->list = array_map(function ($p) { 
-                $DaoShopping = ShoppingtBdDao::getInstance();
+                $DaoShopping = ShoppingsBdDao::getInstance();
                 $DaoMovie = MovieBdDao::getInstance();
                 $ticket = new Ticket();
                 $ticket->setId($p['id']);
@@ -204,8 +240,8 @@ class TicketBdDao
                 $ticket->setQr($p['qr']);
                 $ticket->setNumbre($p['numbre']);
                 return $ticket;
-                    }, $dataSet);
-                }
-            }
-        
+            }, $dataSet);
+        }
+    }
+
 }

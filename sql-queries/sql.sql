@@ -121,9 +121,9 @@ shopping BIGINT UNSIGNED,
 movie BIGINT UNSIGNED,    
 seat BIGINT UNSIGNED,       
 qr VARCHAR(255) NOT NULL ,
-numbre BIGINT UNSIGNED NOT NULL,
+numbre VARCHAR(255) NOT NULL,
 CONSTRAINT pk_id_tiket PRIMARY KEY (id),
 CONSTRAINT fk_id_shopping_tikets FOREIGN KEY (shopping) REFERENCES shoppings (id),
-CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES shoppings (id) ON DELETE SET NULL,
+CONSTRAINT fk_id_movie_tikets FOREIGN KEY (movie) REFERENCES movies (id) ON DELETE SET NULL,
 CONSTRAINT unq_numbertikets UNIQUE(numbre)     
 );
