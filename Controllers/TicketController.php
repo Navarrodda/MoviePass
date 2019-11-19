@@ -34,24 +34,23 @@ class TicketController
                 $cinema = $shopping->getFunction()->getRoom()->getCinema();
                 $room = $shopping->getFunction()->getRoom();
                 $movie = $fuction->getMovie();
-                $url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name: ".$user->getName()." -LastName: ".$user->getLastname()." -Cinema: ". $cinema->getNombre()." -Room: ".$room->getNameRoom()."-Movie: ".$fuction->getMovie()->getTitle()."-Day: ".$fuction->getDia()."-Hour: ".$fuction->getHora(); 
+                $url = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='."-Name:".$user->getName()."-LastName:".$user->getLastname()."-Cinema:".$cinema->getNombre()."-Room:".$room->getNameRoom()."-Movie:".$fuction->getMovie()->getTitle()."-Day:".$fuction->getDia()."-Hour:".$fuction->getHora(); 
 
                 $img = $user->getId(); 
                 $path = 'img/Qr/'.$user->getNikname().'/';
                 $array = array();
                 for($i = 1; $i <= $shopping->getCountrtiket();$i++)
                 {
-                        // Function to write image into file
-                    if(!is_dir($path))
-                    {
-                        mkdir( $path, true );
-                    } 
+                    // Function to write image into file
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
                     $nameimg = 'img/Qr/'.$user->getNikname().'/'.$img.'-'.$shopping->getDate().'-'.$i.".png";
                     file_put_contents($nameimg, file_get_contents($url));
                     $ticket = new Ticket();
                     $ticket->setShopping($shopping);
                     $ticket->setMovie($movie);
-                    $ticket->setQr("http://localhost/MoviePass/MoviePass".$path.$img);
+                    $ticket->setQr("http://localhost/MoviePass/".$path.$img);
                         //Number Ticket = idFunction.idCinema.idRoom.idUser.idShopping.Qticket
                     $ticket->setNumbre($fuction->getId().$cinema->getId().$room->getId().$user->getId().$shopping->getId().$i);
                     $this->ticketDao->add($ticket);
