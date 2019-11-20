@@ -66,11 +66,12 @@
                                <td colspan="1"><?= $roomci->min; ?></td>
                                <td colspan="1"><?= $roomci->getRoom()->getCantSite()?></td>
                            <?php } else { ?>
-                           <?php } ?>
+                           
                            <td colspan="1">0</td>
                            <td colspan="1">0</td>
                            <td colspan="1">0</td>
                            <td colspan="1"><?=$roomci->getRoom()->getCantSite()?></td>
+                           <?php } ?>
                        </tr>
                    <?php } } } ?>
                </tbody>
