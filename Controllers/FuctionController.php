@@ -351,4 +351,42 @@ class FuctionController
 	{
 		return $this->fuctionBdDao->bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour);
 	}
+
+	public function feature_extraction_algorithm()
+	{
+		$movie = $this->movieBdDao->bring_everything();
+		$roomcinema = array();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					foreach($thisfunction as $fun) {
+						array_push($roomcinema, $fun);
+					}
+				}
+			}
+		}
+		return $roomcinema;
+	}
+	public function movie_extraction_algorithm()
+	{
+		$movie = $this->movieBdDao->bring_everything();
+		$movies = array();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($movies, $mov);
+					}
+				}
+			}
+			return $movies;
+		}
+	
+
+
 }

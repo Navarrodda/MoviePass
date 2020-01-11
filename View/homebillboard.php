@@ -74,11 +74,13 @@
                       <td colspan="2">Titile: <?= $mov->getTitle();?></td>
                       <td colspan="1"class="fa fa-pied-piper-pp" > Popularity: <?= $mov->getPopularity();?></td>
                       <td colspan="1" class="fa fa-comment"> Language: <?= $mov->getLanguage();?></td>
-                      <td colspan="1" class="fa fa-thumbs-o-up"> Votes: <?= $mov->getVote();?></td>
+                      <td colspan="1"></td>
+                      <td colspan="1" class="fa fa-thumbs-o-up"> Votes: <?= $mov->getVote();?> </td>
                       <td colspan="1" class="fa fa-play-circle-o"> Duration: <?= $mov->getDuration();?></td>
+                      <td colspan="1"></td>
                     </tr>
                     <tr style="color:white"> 
-                      <td colspan="12" class="marctr2">Overview: <?= $fun->getMovie()->getOverview();?></td>
+                      <td colspan="12" class="marctr2">Overview: <?= $mov->getOverview();?></td>
                     </tr>
                     <?php if(!empty($roomcinema)) { 
                      foreach ($roomcinema as $roomci){
