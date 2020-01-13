@@ -189,21 +189,7 @@ class ViewController
 		$value = $this->ControlMovies->bringmovies();
 		$values = $this->ControlMovies->getList($page);
 		$genere = $this->ControlGenre->getList();
-		$i = 0;
-		foreach ($values as $data) {
-
-			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
-			{
-				$values[$i]->codigo = TRUE;
-
-			}
-			else
-			{
-				$values[$i]->codigo = FALSE;
-			}
-			$i++;
-		}
-
+		$values = $this->ControlMovies->movies_stored_in_the_bd($pages);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "movies.php");
 		include URL_VISTA . 'footer.php';
