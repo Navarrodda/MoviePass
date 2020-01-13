@@ -52,5 +52,16 @@ class GenreController
 		return $this->GenreBdDao->bring_id_by_name($genre);
 	}
 
+	public function gender_name_modification($genre){
+
+		$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
+			"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
+		$genre = trim(str_replace($strip, " ", strip_tags($genre)));
+		$genre = preg_replace('/\s+/', " ", $genre);
+		$titule = ucwords($genre);
+		return $titule;	
+
+	}
+
 
 }

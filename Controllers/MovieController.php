@@ -106,6 +106,28 @@ class MovieController
 		return $movie;
 	}
 
+	public function movies_stored_in_the_bd($page)
+	{
+		$values = $this->getList($page);
+		$i = 0;
+		$genresel = array();
+		$value = array();
+		foreach ($values as $data) {
+
+			if($this->bring_id_by_idapi($data->getIdapi()))
+			{
+				$values[$i]->codigo = TRUE;
+
+			}
+			else
+			{
+				$values[$i]->codigo = FALSE;
+			}
+			$i++;
+		}
+		return $values;
+	}
+
 	public function bringmovies()
 	{
 		$movie = $this->MovieBddao->bring_everything();

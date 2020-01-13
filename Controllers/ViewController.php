@@ -115,24 +115,7 @@ class ViewController
 		$count = 3;
 		$page = 1;
 		$emty = $page;
-		$values = $this->ControlMovies->getList(1);
-		$value = $this->ControlMovies->bringmovies();
-		$i = 0;
-		$genresel = array();
-		$value = array();
-		foreach ($values as $data) {
-
-			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
-			{
-				$values[$i]->codigo = TRUE;
-
-			}
-			else
-			{
-				$values[$i]->codigo = FALSE;
-			}
-			$i++;
-		}
+		$values = $this->ControlMovies->movies_stored_in_the_bd(1);
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
 		include URL_VISTA . 'header.php';
@@ -147,26 +130,8 @@ class ViewController
 		$page = 1;
 		$values = $this->ControlMovies->getMovieByGenre($id);
 		$genere = $this->ControlGenre->getList();
-
-		$i = 0;
-		foreach ($values as $data) 
-		{
-			if($this->ControlMovies->bring_id_by_idapi($data->getIdapi()))
-			{
-				$values[$i]->codigo = TRUE;
-			}
-			else
-			{
-				$values[$i]->codigo = FALSE;
-			}
-			$i++;
-		}
-		$strip = array("~", "`", "!", "@", "#", "#", "$", "%", "^", "&", "*", "(", ")", "_", "=", "+", "[", "{", "]",
-			"}", "\\", "|", ";", ":", "\"", "'", "&#;", "&#;", "3", "4","5","6","7","8","9","10","9", "â€”", "â€“", ",", "<", ".", ">", "/", "?","20");
-		$genre = trim(str_replace($strip, " ", strip_tags($genre)));
-		$genre = preg_replace('/\s+/', " ", $genre);
-		$titule = ucwords($genre);	
-
+		$values = $this->ControlMovies->movies_stored_in_the_bd(1);
+		$titule = $this->ControlGenre->gender_name_modification($genre);
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "genre.php");
 		include URL_VISTA . 'footer.php';
