@@ -252,16 +252,8 @@ class ViewController
 
 			$view = 'DISCOUNTS';
 			$espace = 'REGISTRED';
-			$discount = $this->ControlDiscount->bring_everything();
-			$i = 0;
+			$fecha = $this->ControlDiscount->modification_of_discount_dates_to_d_m_y();
 			$current_date = date ("Y-m-d");
-			if(!empty($discount))
-			{
-				foreach ($discount as $dis) {
-					$fecha[$i] = date("Y-m-d", strtotime($dis->getFecha()));
-					$i++;
-				}
-			}
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "registrerdiscounts.php");
 			include URL_VISTA . 'footer.php';

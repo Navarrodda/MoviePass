@@ -130,4 +130,20 @@ class DiscountController
 		$discount = $this->DiscountBd->bring_by_day($day);
 		return $discount;
 	}
+
+	public function modification_of_discount_dates_to_d_m_y()
+	{
+		$discount = $this->bring_everything();
+		$i=0;
+		if(!empty($discount))
+			{
+				foreach ($discount as $dis) {
+					$data[$i] = date("Y-m-d", strtotime($dis->getFecha()));
+					$i++;
+				}
+			}
+			return $data;
+	}
+
+
 }
