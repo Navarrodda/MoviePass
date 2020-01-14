@@ -211,16 +211,11 @@ class ViewController
 	{
 		$view = 'My Movies';
 		$espace = 'Genre';
-		$genresel = array();
-		$value = array();
 		$cinemas = $this->ControlCinema->bringeverything();
 		$genre = $this->ControlGenre->bring_everything();
-		$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
-		if ($moviesgenre != null) {
-			foreach ($moviesgenre as $movgenre) {
-				array_push($genresel, $movgenre->getGenre());
-				array_push($value, $movgenre->getMovie());
-			}
+		$genresel = $this->ControlMuvGen->gender_selection_by_id($idgenre);
+		$value = $this->ControlMuvGen->move_selection_by_gender_id($idgenre);
+		if ($genresel != null) {
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "mymoviegenres.php");
 			include URL_VISTA . 'footer.php';

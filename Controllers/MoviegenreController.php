@@ -48,4 +48,28 @@ class MoviegenreController
 		return $this->MovieGenreDao->bring_id_by_MovieAll($idmovie);
 	}
 
+	public function gender_selection_by_id($idgenero){
+
+		$genresel = array();
+		$moviesgenre = $this->bringbygender($idgenero);
+		foreach ($moviesgenre as $movgenre) {
+			array_push($genresel, $movgenre->getGenre());
+		}
+		return $genresel;
+	}
+
+	public function move_selection_by_gender_id($idgenero){
+
+		$value = array();
+		$moviesgenre = $this->bringbygender($idgenero);
+		foreach ($moviesgenre as $movgenre) {
+			array_push($value, $movgenre->getMovie());
+		}
+		return $value;
+
+	}
+
+
+
 }
+
