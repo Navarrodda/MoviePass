@@ -14,7 +14,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-heading" style="color:white">Register Cinema</h2>
+        <h2 class="section-heading" style="color:white">Modify Cinema</h2>
         <hr class="primary">
         <p>
           <strong style="color:white">
@@ -28,9 +28,7 @@
              <form class="form1" method="post" action="#">
               <p><input  name="id" type=hidden value="<?= $cinema->getId()?>"></p>
               <p class="p2" type="Name Cinema:"><input class="int" value="<?=$cinema->getNombre()?>" name="name" style="color:white" placeholder="Enter in the name of the cinema here.."></input></p>
-              <p class="p2" type="Capacity:"><input  type="number" value="<?=$cinema->getCapacidad()?>" min="100" max="395" class="int" name="capacity" style="color:white" placeholder="It introduces the totality of the cinema in total numbers.."></input></p>
               <p class="p2" type="Address:"><input  class="int" value="<?=$cinema->getDireccion()?>" name="address" style="color:white" placeholder="Enter the address of the cinema.."></input></p>
-              <p class="p2" type="Input Value:"><input  type="number" value="<?=$cinema->getValor_entrada()?>" min="150" max="600" class="int" name="input_value" style="color:white" placeholder="What would you like to tell us.."></input></p>
               <button class="but">Save Data</button>
             </form>
           <?php } ?>
