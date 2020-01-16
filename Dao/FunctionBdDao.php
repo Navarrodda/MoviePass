@@ -318,10 +318,10 @@ class FunctionBdDao
         }
     }
 
-    public function remove_by_id_cinema($id){
+        public function remove_by_id_cinema_room($id){
         try{
 
-            $sql = "DELETE FROM $this->table WHERE cinema = \"$id \"";
+            $sql = "DELETE FROM $this->table WHERE room = \"$id \"";
 
             $conec = Conection::conection();
 
@@ -335,6 +335,7 @@ class FunctionBdDao
             echo $e->getMessage();die();
         }
     }
+
     public function remove_by_id_movie($id){
         try{
 

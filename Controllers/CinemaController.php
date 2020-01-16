@@ -6,7 +6,8 @@ use \Model\Cinema as Cinema;
 //Dao
 use Dao\CinemaFileDao as CinemaFileDao;
 use Dao\CinemaBdDao as CinemaBd;
-use \Controllers\FuctionController as Fuctionc;
+use \Dao\RoomBdDao as RoomBdDao;
+
 
 class CinemaController
 {
@@ -17,7 +18,8 @@ class CinemaController
 	{
 		$this->cinemaFileDao = new CinemaFileDao();
 		$this->cinemaBdDao = CinemaBd::getInstance();
-		$this->ControlFuctionc = new Fuctionc;
+		$this->RoomBdDao = RoomBdDao::getInstance();
+
 	}
 
 	public function add($name,$address)
@@ -60,11 +62,12 @@ class CinemaController
 	public function remove($id)
 	{
 		$cinema = $this->cinemaBdDao->bring_by_id($id);
-		if($cinema != null )
+
+		if($cinema != null)
 		{
 			$name = $cinema->getNombre();
-			$this->ControlFuctionc->removefuctioncinema($id);
 			$this->cinemaFileDao->removeCinema($id);
+			$this->RoomBdDao->remove_by_id_cinema($id);
 			$this->cinemaBdDao->remove_by_id($id);
 			$view = "MESSAGE";
 			$this->message = new Message('success', 'The cinema with the id for:'  . '<i><strong>' .  $id 

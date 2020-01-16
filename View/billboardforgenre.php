@@ -95,7 +95,7 @@
                          <td colspan="1">Room <?= $roomci->getRoom()->getNameRoom();?></td>
                          <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($roomci->getDia())); echo $fecha?></td>
                          <td colspan="1"><?= $roomci->getHora(); ?></td>
-                         <td colspan="1"><?= $roomci->getRoom()->getCinema()->getValor_entrada(); ?></td>
+                         <td colspan="1">$<?= $roomci->getRoom()->getInputValue(); ?></td>
                          <?php if(!empty($_SESSION["rol"])){ ?>
                           <?php if($_SESSION["rol"] == 3){ ?>
                             <form method="post" action="<?php echo URL ?>/view/buyq/">

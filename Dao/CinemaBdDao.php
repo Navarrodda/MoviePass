@@ -159,7 +159,7 @@ public function bring_everything(){
 
         //Trae Cinema por Id
 public function bring_by_id($id)
-{   
+{     
     try{
         if ($id != null) {
             $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
@@ -170,7 +170,7 @@ public function bring_by_id($id)
 
             $judgment->execute();
 
-            $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
             $this->mapear($dataSet);
 

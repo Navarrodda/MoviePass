@@ -7,6 +7,7 @@ use \Model\Cinema as Cinema;
 //Dao
 use Dao\RoomBdDao as RoomBdDao;
 use Dao\CinemaBdDao as CinemaBdDao;
+use \Controllers\FuctionController as Fuctionc;
 //Controllers
 use Controllers\CinemaController as CinemaController;
 
@@ -19,6 +20,7 @@ class RoomController
 	{
 		$this->RoomBd = RoomBdDao::getInstance();
 		$this->CinemaControl = new CinemaController();
+		$this->ControlFuctionc = new Fuctionc;
 	}
 
 	public function add($name_room,$cant_site,$input_value,$idcinema)
@@ -30,18 +32,18 @@ class RoomController
 			$cinema = $this->CinemaControl->bring_for_id($idcinema);
 			if (!empty($cinema)) {
 				//if ($regla) {
-					$room = new Room();
-					$room->setNameRoom($name_room);
-					$room->setCantSite($cant_site);
-					$room->setCinema($cinema);
-					$room->setInputValue($input_value);
+				$room = new Room();
+				$room->setNameRoom($name_room);
+				$room->setCantSite($cant_site);
+				$room->setCinema($cinema);
+				$room->setInputValue($input_value);
 
-					$this->RoomBd->add($room);
-					$view = "MESSAGE";
-					$this->message = new Message( "success", "The room loaded successfully!" );
-					include URL_VISTA . 'header.php';
-					require(URL_VISTA . 'message.php');
-					include URL_VISTA . 'footer.php';
+				$this->RoomBd->add($room);
+				$view = "MESSAGE";
+				$this->message = new Message( "success", "The room loaded successfully!" );
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . 'message.php');
+				include URL_VISTA . 'footer.php';
 				//}
 				/*else{
 					$view = "MESSAGE";
@@ -63,18 +65,47 @@ class RoomController
 		}
 		else{
 			
-				$view = "MESSAGE";
-				$this->message = new Message( "warning", "The name room exist!" );
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . 'message.php');
-				include URL_VISTA . 'footer.php';
+			$view = "MESSAGE";
+			$this->message = new Message( "warning", "The name room exist!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
 		}
 	}	
 
 	public function remove_by_id_room($id)
 	{
-		$this->RoomBd->remove_by_id($id);
+		$room = $this->bring_by_id($id);
+		if(!empty($room))
+		{
+			$name = $room->getNameRoom();
+			$this->ControlFuctionc->removefunctionforroom($id);
+			$this->RoomBd->remove_by_id($id);
+			$view = "MESSAGE";
+			$this->message = new Message('success', 'the cinema room with the id:'  . '<i><strong>' .  $id 
+				. '</strong>. and Name' . ' ' . '<i><strong>' .  $name 
+				. '</strong> has been deleted successfully </i>');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$view = "MESSAGE";
+			$this->message = new Message('warning', ' The id was already deleted or no data is found that the id:' . ' ' . '<i><strong>' .  $id 
+				. '</strong>!');
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
+		
 	}
+
+	public function remove_by_id_cinema($id)
+	{
+		return $this->RoomBd->remove_by_id_cinema($id);
+	}
+	
 
 	public function modify($idroom,$name_room,$cant_site,$input_value){
 
@@ -104,7 +135,7 @@ class RoomController
 		return $this->RoomBd->bring_everything();
 	}
 
-		public function bring_by_id($idroom)
+	public function bring_by_id($idroom)
 	{
 		return $this->RoomBd->bring_by_id($idroom);
 	}
@@ -137,7 +168,7 @@ class RoomController
 		return false;
 	}
 		
-		}*/
+}*/
 }
 
 

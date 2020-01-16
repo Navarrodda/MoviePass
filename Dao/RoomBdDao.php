@@ -107,6 +107,24 @@ public function remove_by_id($id){
     }
 }
 
+public function remove_by_id_cinema($idcinema){
+    try{
+
+        $sql = "DELETE FROM $this->table WHERE cinema = \"$idcinema \"";
+
+        $conec = Conection::conection();
+
+        $judgment = $conec->prepare($sql);
+
+        $judgment->execute();
+
+    }catch(\PDOException $e){
+        echo $e->getMessage();die();
+    }catch(\Exception $e){
+        echo $e->getMessage();die();
+    }
+}
+
 
 public function to_update(Room $room, $id){
 
@@ -194,7 +212,7 @@ public function bring_list_for_id_cinema($idcinema){
 
         //Trae Room por Id
 public function bring_by_id($id)
-{   
+{     
     try{
         if ($id != null) {
             $sql = ("SELECT * FROM $this->table WHERE id = \"$id\"" );
@@ -205,7 +223,7 @@ public function bring_by_id($id)
 
             $judgment->execute();
 
-            $dataSet[] = $judgment->fetch(\PDO::FETCH_ASSOC);
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
 
             $this->mapear($dataSet);
 
