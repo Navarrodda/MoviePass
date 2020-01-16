@@ -21,20 +21,20 @@ class RoomController
 		$this->CinemaControl = new CinemaController();
 	}
 
-	public function add($name_room,$cant_site,$number_room,$idcinema)
+	public function add($name_room,$cant_site,$input_value,$idcinema)
 	{
 		$name_room = ucwords($name_room); 
 		$id = $this->RoomBd->bring_id_by_nameRoom($name_room,$idcinema);
+	 	//$regla = $this->control_capacity($idcinema, $cant_site);
 		if (empty($id)) {
 			$cinema = $this->CinemaControl->bring_for_id($idcinema);
 			if (!empty($cinema)) {
-				$regla = $this->control_capacity($idcinema, $cant_site);
-				if ($regla) {
+				//if ($regla) {
 					$room = new Room();
 					$room->setNameRoom($name_room);
 					$room->setCantSite($cant_site);
 					$room->setCinema($cinema);
-					$room->setNumberRoom($number_room);
+					$room->setInputValue($input_value);
 
 					$this->RoomBd->add($room);
 					$view = "MESSAGE";
@@ -42,14 +42,14 @@ class RoomController
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
-				}
-				else{
+				//}
+				/*else{
 					$view = "MESSAGE";
 					$this->message = new Message( "warning", "The capacity of the room exceeds the capacity of the cinema!" );
 					include URL_VISTA . 'header.php';
 					require(URL_VISTA . 'message.php');
 					include URL_VISTA . 'footer.php';
-				}
+				}*/
 
 			}
 			else{
@@ -76,14 +76,14 @@ class RoomController
 		$this->RoomBd->remove_by_id($id);
 	}
 
-	public function modify($idroom,$name_room,$cant_site,$number_room){
+	public function modify($idroom,$name_room,$cant_site,$input_value){
 
 		$room = $this->RoomBd->bring_by_id($idroom);
 		if($room == $id){
 			$room = new Cinema();
 			$room->setNameRoom($name_room);
 			$room->setCantSite($cant_site);
-			$cinema->setNumberRoom($number_room);
+			$cinema->setInputValue($input_value);
 			$this->RoomBd->to_update($room,$idroom);
 			$view = "MESSAGE";
 			$this->message = new Message( "success", "The room has been successfully modified!" );
@@ -112,6 +112,7 @@ class RoomController
 	//traer toda la capacidad del cine
 	//traer todas las salas
 	//contar esas capacidades y ver si se puede dar de alta la sala
+	/*
 	public function control_capacity($idcinema, $cant_site){
 		$rooms = $this->RoomBd->bring_list_for_id_cinema($idcinema);
 		$cinema = $this->CinemaControl->bring_for_id($idcinema);
@@ -136,7 +137,7 @@ class RoomController
 		return false;
 	}
 		
-		}
+		}*/
 }
 
 

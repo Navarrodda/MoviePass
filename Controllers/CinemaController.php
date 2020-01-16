@@ -20,7 +20,7 @@ class CinemaController
 		$this->ControlFuctionc = new Fuctionc;
 	}
 
-	public function add($name,$capacity,$address,$input_value)
+	public function add($name,$address)
 	{
 		$name = ucwords($name);
 		$address = ucwords($address);
@@ -28,12 +28,10 @@ class CinemaController
 		{
 			if($this->cinemaBdDao->bring_id_by_title($name) == NULL)
 			{
-				$this->cinemaFileDao->addCinema($name,$capacity,$address,$input_value);
+				$this->cinemaFileDao->addCinema($name,$address);
 				$cinema = new Cinema();
 				$cinema->setNombre($name);
-				$cinema->setCapacidad($capacity);
 				$cinema->setDireccion($address);
-				$cinema->setValor_entrada($input_value);
 				$this->cinemaBdDao->add($cinema);
 
 				$view = "MESSAGE";
@@ -97,16 +95,14 @@ class CinemaController
 		return $this->cinemaBdDao->bring_by_id($idcinema);
 	}
 
-	public function modify($idcinema,$name,$capacity,$address,$input_value)
+	public function modify($idcinema,$name,$address)
 	{
 
 		$cine = $this->cinemaBdDao->bring_id_by_title($name);
 		if($cine == $idcinema){
 			$cinema = new Cinema();
 			$cinema->setNombre($name);
-			$cinema->setCapacidad($capacity);
 			$cinema->setDireccion($address);
-			$cinema->setValor_entrada($input_value);
 			$this->cinemaBdDao->to_update($cinema,$idcinema);
 			$view = "MESSAGE";
 			$this->message = new Message( "success", "The cinema has been successfully modified!" );

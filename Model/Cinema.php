@@ -5,10 +5,8 @@ namespace Model;
 class Cinema
 {
 	private $id;
-	private $capacidad;
 	private $direccion;
 	private $nombre;
-	private $valor_entrada;
 	//private $valor_entrada;
 	
 	public function __construct()
@@ -16,8 +14,6 @@ class Cinema
 
 	}
 	
-	
-
 	/**
 	 * Get the value of id
 	 */ 
@@ -38,25 +34,7 @@ class Cinema
 		return $this;
 	}
 
-	/**
-	 * Get the value of capacidad
-	 */ 
-	public function getCapacidad()
-	{
-		return $this->capacidad;
-	}
 
-	/**
-	 * Set the value of capacidad
-	 *
-	 * @return  self
-	 */ 
-	public function setCapacidad($capacidad)
-	{
-		$this->capacidad = $capacidad;
-
-		return $this;
-	}
 
 	/**
 	 * Get the value of direccion
@@ -98,23 +76,4 @@ class Cinema
 		return $this;
 	}
 
-	/**
-	 * Get the value of valor_entrada
-	 */ 
-	public function getValor_entrada()
-	{
-		return $this->valor_entrada;
-	}
-
-	/**
-	 * Set the value of valor_entrada
-	 *
-	 * @return  self
-	 */ 
-	public function setValor_entrada($valor_entrada)
-	{
-		$this->valor_entrada = $valor_entrada;
-
-		return $this;
-	}
 }

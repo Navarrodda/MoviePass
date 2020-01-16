@@ -12,7 +12,7 @@ class Room
     private $name_room;
     private $cant_site;
     private $cinema;
-    private $number_room;
+    private $input_value;
     
 	public function __construct()
     {
@@ -103,22 +103,24 @@ class Room
         return $this;
     }
 
+
+
     /**
      * @return mixed
      */
-    public function getNumberRoom()
+    public function getInputValue()
     {
-        return $this->number_room;
+        return $this->input_value;
     }
 
     /**
-     * @param mixed $number_room
+     * @param mixed $input_value
      *
      * @return self
      */
-    public function setNumberRoom($number_room)
+    public function setInputValue($input_value)
     {
-        $this->number_room = $number_room;
+        $this->input_value = $input_value;
 
         return $this;
     }

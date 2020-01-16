@@ -61,8 +61,8 @@ public function add(Room $room){
     try{
 
         /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (name_room,cant_site,cinema,number_room) VALUES 
-            (:name_room,:cant_site,:cinema,:number_room)");
+        $sql = ("INSERT INTO $this->table (name_room,cant_site,cinema,input_value) VALUES 
+            (:name_room,:cant_site,:cinema,:input_value)");
 
         $conec = Conection::conection();
 
@@ -72,12 +72,12 @@ public function add(Room $room){
         $cant_site = $room->getCantSite();
         $cinema = $room->getCinema();
         $idcinema = $cinema->getId();
-        $number_room = $room->getNumberRoom();
+        $input_value = $room->getInputValue();
 
         $judgment->bindParam(":name_room",$name_room);
         $judgment->bindParam(":cant_site",$cant_site);
         $judgment->bindParam(":cinema",$idcinema);
-        $judgment->bindParam(":number_room",$number_room);
+        $judgment->bindParam(":input_value",$input_value);
 
         $judgment->execute();
 
@@ -111,7 +111,7 @@ public function remove_by_id($id){
 public function to_update(Room $room, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET name=:name_room, cant_seat=:cant_seat, cinema=:cinema, number_room=:number_room WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET name=:name_room, cant_seat=:cant_seat, cinema=:cinema, input_value=:input_value WHERE id=\"$id\"");
 
 
 
@@ -119,14 +119,16 @@ public function to_update(Room $room, $id){
 
         $judgment = $conec->prepare($sql);
 
-        $nombre = $room->getNameRoom();
-        $precio = $room->getPrice();
-        $butacas = $room->getCantSite();
+        $name_room = $room->getNameRoom();
+        $cant_site = $room->getCantSite();
+        $cinema = $room->getCinema();
+        $idcinema = $cinema->getId();
+        $input_value = $room->getInputValue();
 
         $judgment->bindParam(":name_room",$name_room);
         $judgment->bindParam(":cant_site",$cant_site);
-        $judgment->bindParam(":cinema",$cinema);
-        $judgment->bindParam(":number_room",$number_room);
+        $judgment->bindParam(":cinema",$idcinema);
+        $judgment->bindParam(":input_value",$input_value);
 
 
         $judgment->execute();
@@ -230,7 +232,7 @@ public function mapear($dataSet){
             $room->setId($p['id']);
             $room->setNameRoom($p['name_room']);
             $room->setCinema( $daoCinema->bring_by_id($p['cinema']));
-            $room->setNumberRoom($p['number_room']);
+            $room->setInputValue($p['input_value']);
             $room->setCantSite($p['cant_site']);
             return $room;
         }, $dataSet);

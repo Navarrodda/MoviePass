@@ -5,7 +5,7 @@
 
 	class CinemaFileDao
 	{
-		public function addCinema($nombre,$capacidad,$direccion,$valor_entrada)
+		public function addCinema($nombre,$direccion)
 		{
 			$flag = false;
 			$cinemaList = $this->retrieveData();
@@ -14,20 +14,16 @@
 			if(count($cinemaList) == 0)
 			{	
 				$cinema->setId(1);
-				$cinema->setCapacidad($capacidad);
 				$cinema->setDireccion($direccion);
 				$cinema->setNombre($nombre);
-				$cinema->setValor_entrada($valor_entrada);
 				$flag = true;
 			}else
 			{
 				
 				
 				$cinema->setId(sizeof($cinemaList)+1);
-				$cinema->setCapacidad($capacidad);
 				$cinema->setDireccion($direccion);
 				$cinema->setNombre($nombre);
-				$cinema->setValor_entrada($valor_entrada);
 				$flag = true;
 
 			}
@@ -67,10 +63,8 @@
 			{
 
 				$valueArray["id"] = $cinema->getId();
-				$valueArray["capacidad"] =	$cinema->getCapacidad();
 				$valueArray["direccion"] =	$cinema->getDireccion();
 				$valueArray["nombre"] =	$cinema->getNombre();
-				$valueArray["valor_entrada"] =	$cinema->getValor_entrada();
 				
 				array_push($arrayToencode, $valueArray);
 
@@ -97,10 +91,8 @@
 				{
 					
 					$cinema = new Cinema();
-					$cinema->setCapacidad($values["capacidad"]);
 					$cinema->setDireccion($values["direccion"]);
 					$cinema->setNombre($values["nombre"]);
-					$cinema->setValor_entrada($values["valor_entrada"]);
 					
 					/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 						$values["price"]);*/

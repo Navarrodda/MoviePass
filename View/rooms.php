@@ -46,7 +46,7 @@
            <?php } } ?>
            <td><?php echo $rooms->getNameRoom();?></td>
            <td><?php echo $rooms->getCantSite();?></td>
-           <td><?php echo $rooms->getNumberRoom();?></td>
+           <td>$<?php echo $rooms->getInputValue();?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
                 <td>

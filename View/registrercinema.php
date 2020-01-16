@@ -26,9 +26,7 @@
             <div class="col-md-12 marcform">
              <form class="form1" method="post" action="<?php echo URL ?>/cinema/add/">
               <p class="p2" type="Name Cinema:"><input required class="int" name="name" style="color:white" placeholder="Enter in the name of the cinema here.."></input></p>
-              <p class="p2" type="Capacity:"><input required type="number" min="0" max="999" class="int" name="capacity" style="color:white" placeholder="It introduces the totality of the cinema in total numbers.."></input></p>
               <p class="p2" type="Address:"><input required class="int" name="address" style="color:white" placeholder="Enter the address of the cinema.."></input></p>
-              <p class="p2" type="Input Value:"><input required type="number" min="0" max="900" class="int" name="input_value" style="color:white" placeholder="What would you like to tell us.."></input></p>
               <button class="but">Save Data</button>
             </form>
           </div>

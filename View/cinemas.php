@@ -24,8 +24,6 @@
       <?php } }  ?>
       <th>Name</th>
       <th>Address</th>
-      <th>Capacity</th>
-      <th>Estimated Price</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
        <?php if($_SESSION["rol"] != 3){ ?>
         <th>Room</th>
@@ -48,8 +46,6 @@
            <?php } } ?>
            <td><?php echo $data->getNombre(); ?></td>
            <td><?php echo $data->getDireccion(); ?></td>
-           <td><?php echo $data->getCapacidad();?></td>
-           <td>$<?php echo $data->getValor_entrada(); ?></td>
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
               <td>

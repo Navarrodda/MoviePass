@@ -58,31 +58,11 @@ public function bring_id_by_id($id){
     return null;
 }
 
-public function bring_capacity_by_id($id){
-    $sql = "SELECT total_capacity FROM $this->table WHERE id = \"$id\" LIMIT 1";
-
-    $conec = Conection::conection();
-
-    $judgment = $conec->prepare($sql);
-
-    $judgment->execute();
-
-
-    $total_capacity = $judgment->fetch(\PDO::FETCH_ASSOC);
-
-    if(!empty($total_capacity))
-    {
-        return $total_capacity['total_capacity'];
-    }
-
-    return null;
-}
-
 public function add(Cinema $cinema){
     try{
 
         /** @noinspection SqlResolve */
-        $sql = ("INSERT INTO $this->table (id,name,address,total_capacity,estimated_price) VALUES (:id,:nombre,:direccion,:capacidad,:valor_entrada)");
+        $sql = ("INSERT INTO $this->table (id,name,address) VALUES (:id,:nombre,:direccion)");
 
         $conec = Conection::conection();
 
@@ -90,15 +70,11 @@ public function add(Cinema $cinema){
 
         $id = $cinema->getId();
         $nombre = $cinema->getNombre();
-        $capacidad = $cinema->getCapacidad();
         $direccion = $cinema->getDireccion();
-        $valor_entrada = $cinema->getValor_entrada();
 
         $judgment->bindParam(":id",$id);
         $judgment->bindParam(":nombre",$nombre);
-        $judgment->bindParam(":capacidad",$capacidad);
         $judgment->bindParam(":direccion",$direccion);
-        $judgment->bindParam(":valor_entrada",$valor_entrada);
 
         $judgment->execute();
 
@@ -132,7 +108,7 @@ public function remove_by_id($id){
 public function to_update(Cinema $cinema, $id){
 
     try{
-        $sql = ("UPDATE $this->table SET name=:name, address=:address, total_capacity=:total_capacity, estimated_price=:estimated_price WHERE id=\"$id\"");
+        $sql = ("UPDATE $this->table SET name=:name, address=:address WHERE id=\"$id\"");
 
 
 
@@ -142,14 +118,9 @@ public function to_update(Cinema $cinema, $id){
 
         $nombre = $cinema->getNombre();
         $direccion = $cinema->getDireccion();
-        $capacidad = $cinema->getCapacidad();
-        $valor_entrada = $cinema->getValor_entrada();
 
         $judgment->bindParam(":name",$nombre);
         $judgment->bindParam(":address",$direccion);
-        $judgment->bindParam(":total_capacity",$capacidad);
-        $judgment->bindParam(":estimated_price",$valor_entrada);
-
 
         $judgment->execute();
     }catch(\PDOException $e){
@@ -227,8 +198,6 @@ public function mapear($dataSet){
             $cinema->setId($p['id']);
             $cinema->setNombre($p['name']);
             $cinema->setDireccion($p['address']);
-            $cinema->setCapacidad($p['total_capacity']);
-            $cinema->setValor_entrada($p['estimated_price']);
 
             return $cinema;
         }, $dataSet);

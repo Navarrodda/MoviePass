@@ -1,26 +1,17 @@
 [
-<<<<<<< HEAD
-=======
     {
         "id": null,
-        "capacidad": "300",
-        "direccion": "Colon 4110",
-        "nombre": "Ambassador",
-        "valor_entrada": "150"
+        "direccion": "1231231",
+        "nombre": "Lucho"
     },
     {
         "id": null,
-        "capacidad": "900",
-        "direccion": "Asdasd",
-        "nombre": "Cinemasenter",
-        "valor_entrada": "250"
+        "direccion": "123123",
+        "nombre": "Adadad"
     },
     {
         "id": 3,
-        "capacidad": "900",
-        "direccion": "Adasd",
-        "nombre": "Cinemasenter",
-        "valor_entrada": "300"
+        "direccion": "123123",
+        "nombre": "Asdasd"
     }
->>>>>>> 26945106a4d85d6816758b5054b932f77cce53b7
 ]
