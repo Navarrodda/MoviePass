@@ -24,7 +24,7 @@
       <?php } }  ?>
       <th>Name</th>
       <th>Cant Site</th>
-      <th>Number Room</th>
+      <th>Price</th>
       <?php if(!empty($_SESSION["rol"])){ ?>
        <?php if($_SESSION["rol"] != 3){ ?>
          <th>Modification</th>
