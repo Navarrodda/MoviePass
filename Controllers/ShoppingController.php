@@ -68,7 +68,7 @@ class ShoppingController
 									$shopping->setFunction($fuction);
 									$shopping->setDate(date("Y-m-d"));
 									$shopping->setCountrtiket($quantity);
-									$shopping->setPrice($cinema->getValor_entrada());
+									$shopping->setPrice($room->getInputValue());
 									if($discount != null)
 									{	
 										$shopping->setDiscount($discount[0]);							

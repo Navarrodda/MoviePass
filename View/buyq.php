@@ -24,7 +24,7 @@
                 <p>
                   <h3 style="color:white"><?= $movie->getTitle();?></h3>
                   <h4><?php $fecha = date("d-m-Y", strtotime($fuction->getDia())); echo "Function Day:  ".$fecha." ".$fuction->getHora();?></h4>
-                  <h4>Room : <?php echo $room->getNameRoom() ?> Number : <?php echo $room->getNumberRoom();?></h4>
+                  <h4>Room : <?php echo $room->getNameRoom() ?> </h4>
                   <div class="imgr3 ">
                     <div class="fonds">
                    <img src="<?= $movie->getBackdrop();?>">
@@ -54,13 +54,14 @@
                         var discount = <?php echo $discount[0]->getDisc()/100 ?> ;
                       <?php }else {?>
                         var discount = 0;
-                      <?php }?>
-                       var entrada = <?php echo $cinema->getValor_entrada(); ?>;
+                      <?php };?>
+                       var entrada = <?= $room->getInputValue(); ?>;
                         var activities = document.getElementById("selector");
                          activities.addEventListener("change", function() {
                             // alert(this.value * entrada);
                               if(discount == 0)
                               {
+                                
                                 var total1 = this.value * entrada;
                               }else{
                                 var total1 = this.value * entrada * discount;
@@ -68,6 +69,7 @@
                                
                                document.getElementById("total").innerHTML = "Total : $" + total1.toString();
                           });
+                      
                           </script>
                           <?php if(!empty($discount)) {?>
                           <h2 style="color:white"> Discount :  <?php  echo "%".$discount[0]->getDisc();?></h2>
@@ -75,8 +77,8 @@
                           <?php } else {?> 
                           <p><input id ="iddiscount" name = "iddiscount" type = "hidden" value = "0"></p>
                           <?php } ?>
-                          <h2 style="color:white">Precio : <?php echo $cinema->getValor_entrada(); ?></h2>
-                       <h1 id = "total" style="color:white">Total : <?php echo $cinema->getValor_entrada(); ?> </h1>
+                          <h2 style="color:white">Precio : <?php echo $room->getInputValue(); ?></h2>
+                       <h1 id = "total" style="color:white">Total : <?php echo $room->getInputValue(); ?> </h1>
                        <p><input id ="idfuction" name = "idfuction" type = "hidden" value = "<?php echo $fuction->getId(); ?>"></p>
                        
                        
