@@ -295,22 +295,17 @@ class ViewController
 				$fers = NULL;
 				$last = -1;
 				$i = 0;
-				$idmovies = array();
 				$genresel = $this->ControlGenre->bring_everything();
 				$genre = $this->ControlGenre->bring_everything();
 				$funcion = $this->ControlFuctionc->bringeverything();
-				$moviesgenre = $this->ControlMuvGen->bringbygender($idgenre);
+				$idmovies = $this->ControlMuvGen->bring_id_by_movie_for_genres($idgenre);
 				$namegenre = $this->ControlGenre->bring_genre($idgenre);
 				$namegenre = $namegenre->getName();
-				if ($moviesgenre != null) {
-					foreach ($moviesgenre as $movgen) {
-						array_push($idmovies, $movgen->getMovie()->getId());
-					}
-				}
 				$movies = array();
 				$cinemas = array();
 				if(!empty($idmovies))
 				{
+					die(var_dump($idmovies));
 					foreach ($idmovies as $idm) {
 						$tocinema = $this->ControlFuctionc->bring_Function_by_idMovies($idm);
 						if (!empty($tocinema)) {

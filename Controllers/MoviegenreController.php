@@ -68,7 +68,17 @@ class MoviegenreController
 		return $value;
 
 	}
-
+	public function bring_id_by_movie_for_genres($idgenero)
+	{
+		$moviesgenre = $this->bringbygender($idgenero);
+		$idmovies = array();
+		if ($moviesgenre != null) {
+			foreach ($moviesgenre as $movgen) {
+				array_push($idmovies, $movgen->getMovie()->getId());
+			}
+		}
+		return $idmovies;
+	}
 
 
 }
