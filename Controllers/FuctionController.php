@@ -7,6 +7,11 @@ use \Model\Room as Room;
 use \Model\Movie as Movie;
 use \Model\Fuction as Fuction;
 
+//Controllers
+
+use \Controllers\GenreController as GenreC;
+use \Controllers\MoviegenreController as MoviegenreC;
+
 //Dao
 
 use \Dao\RoomBdDao as RoomBdDao;
@@ -16,12 +21,16 @@ use \Dao\FunctionBdDao as FunctionBd;
 
 class FuctionController
 {
-	private $cinemaBdDao;
+	private $genreC;
+	private $moviegenreC;
+	private $RoomBdDao;
 	private $movieBdDao;
 	private $fuctionBdDao;
 
 	public function __construct()
 	{
+		$this->genreC = new GenreC;
+		$this->moviegenreC = new MoviegenreC;
 		$this->RoomBdDao = RoomBdDao::getInstance();
 		$this->movieBdDao = MovieBdDao::getInstance();
 		$this->fuctionBdDao = FunctionBd::getInstance();
@@ -272,6 +281,58 @@ class FuctionController
 		return $this->fuctionBdDao->bring_Function_by_idMovies($idmovie);
 	}
 
+	public function bring_Function_by_function_for_data($data)
+	{
+		$roomcinema = array();
+		$movie = $this->movieBdDao->bring_everything();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					foreach ($thisfunction as $fun) {
+						if($data == $fun->getDia())
+						{
+							array_push($roomcinema, $fun);
+						}
+
+					}
+				}
+			}
+		}
+		return $roomcinema;
+	}
+
+	public function bring_Function_by_movies_for_data($data)
+	{
+		$chequin = false;
+		$movies = array();
+		$movie = $this->movieBdDao->bring_everything();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				$chequin = false;
+				if(!empty($thisfunction))
+				{
+					foreach ($thisfunction as $fun) {
+						if($data == $fun->getDia())
+						{
+							$chequin = True;
+						}
+
+					}
+					if($chequin)
+					{
+						array_push($movies, $mov);
+					}
+				}
+			}
+		}
+		return $movies;
+	}
+
 	public function bringidfuction($idfuction)
 	{
 		return $this->fuctionBdDao->bring_by_id($idfuction);
@@ -296,13 +357,15 @@ class FuctionController
 	{
 		$brithdate = explode('/', $date);
 		if(!empty($brithdate[2])){
-		$brithdateFormated = $brithdate[2] . "-" . $brithdate[1] . "-" . $brithdate[0];
-		if (date('d-m-Y', strtotime($brithdateFormated))) {
-			return $brithdateFormated;
-		} 
-	}
+			$brithdateFormated = $brithdate[2] . "-" . $brithdate[1] . "-" . $brithdate[0];
+			if (date('d-m-Y', strtotime($brithdateFormated))) {
+				return $brithdateFormated;
+			} 
+		}
 		return null;
 	}
+
+
 
 	public function bringe_for_data($data)
 	{
@@ -382,12 +445,55 @@ class FuctionController
 				if(!empty($thisfunction))
 				{
 					array_push($movies, $mov);
-					}
 				}
 			}
-			return $movies;
 		}
-	
+		return $movies;
+	}
+
+	public function bring_by_genre_id_fuction($search)
+	{
+		$roomcinema = array();
+		$idgenre = 	$this->genreC->bring_genre_id_name($search);
+		if($idgenre != null ){
+			$idmovies = $this->moviegenreC->move_selection_by_gender_id($idgenre);
+			if(!empty($idmovies))
+			{
+				foreach ($idmovies as $idm) {
+					$thisfunction = $this->bring_Function_by_idMovies($idm->getId());
+					if(!empty($thisfunction))
+					{
+						foreach ($thisfunction as $fun) {
+							array_push($roomcinema, $fun);
+						}
+					}
+				}
+
+			}
+		}
+		return $roomcinema;
+	}
 
 
+	public function bring_by_genre_id_muvies($search)
+	{
+		$movies = array();
+		$idgenre = 	$this->genreC->bring_genre_id_name($search);
+		if($idgenre != null )
+		{
+			$idmovies = $this->moviegenreC->move_selection_by_gender_id($idgenre);
+			if(!empty($idmovies))
+			{
+				foreach ($idmovies as $idm) {
+					$thisfunction = $this->bring_Function_by_idMovies($idm->getId());
+					if(!empty($thisfunction))
+					{
+						array_push($movies, $idm);
+					}
+				}
+
+			}
+		}
+		return $movies;
+	}
 }

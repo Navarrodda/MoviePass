@@ -36,6 +36,23 @@ class MoviegenreController
 	{
 		return $this->MovieGenreDao->bring_id_by_generoAll($idgenero);
 
+	}
+
+	public function bringbygenderidmovies($idgenero)
+	{
+
+		if($idgenero != null)
+		{
+			$moviesgenre = $this->bringbygender($idgenero);
+			$idmovies = array();
+			if ($moviesgenre != null) {
+				foreach ($moviesgenre as $movgen) {
+					array_push($idmovies, $movgen->getMovie());
+				}
+			}
+		}
+		return $idmovies;
+
 	}	
 
 	public function remove_by_id_movie($id)
