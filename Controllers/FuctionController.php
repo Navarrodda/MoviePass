@@ -496,4 +496,40 @@ class FuctionController
 		}
 		return $movies;
 	}
+
+	public function bring_by_movie_for_name_movies($search)
+	{
+		$movies = array();
+		$movie = $this->movieBdDao->bring_by_name($search);
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($movies, $mov);
+				}
+			}
+		}
+		return $movies;
+	}
+
+	public function bring_by_function_for_name_movies($search){
+		$roomcinema = array();
+		$movie = $this->movieBdDao->bring_by_name($search);
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					foreach ($thisfunction as $fun) {
+						array_push($roomcinema, $fun);
+					}
+				}
+			}
+		}
+		return $roomcinema;
+
+	}
 }
