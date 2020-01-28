@@ -121,6 +121,26 @@ class FunctionBdDao
 
     }
 
+        public function bring_by_day_for_room_and_movie($day,$idroom,$idmovie){
+        try{
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\" AND movie = \"$idmovie\"";
+            $conec = Conection::conection();
+            $judgment = $conec->prepare($sql);
+            $judgment->execute();
+            $dataSet = $judgment->fetch(\PDO::FETCH_ASSOC);
+            if($dataSet) {
+                return true;
+            }
+            return false;
+            
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+
+    }
+
     public function bring_id_by_hour($hours){
         $sql = "SELECT id FROM $this->table WHERE hours = \"$hours\" LIMIT 1";
 
@@ -176,10 +196,10 @@ class FunctionBdDao
 
 
 
-    public function bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour)
+    public function bring_by_date_idroom_hour($idroom,$day,$hour)
     {
         try{
-            $sql = ("SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\" AND movie = \"$idmovie\" AND hours =\"$hour\"");
+            $sql = ("SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\" AND hours =\"$hour\"");
 
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);

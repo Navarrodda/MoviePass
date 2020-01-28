@@ -52,9 +52,9 @@ class FuctionController
 		{
 			$regle = false;
 			$listday = $this->fuctionBdDao->bring_by_day_for_room($day,$idroom);
-
-			$regla = $this->bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour);
-			if($regla == NULL)
+			$reg = $this->fuctionBdDao->bring_by_day_for_room_and_movie($day,$idroom,$idmovie);
+			$regla = $this->bring_by_date_idroom_hour($idroom,$day,$hour);
+			if($regla === null && $reg === false)
 			{
 				
 				$ve = '00:15:00';
@@ -80,7 +80,8 @@ class FuctionController
 						else
 						{
 							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$movie->getDuration()+$veda[1][1]; 
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
+
 							$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
 							if($total_minutos>=0)
 							{
@@ -411,9 +412,9 @@ class FuctionController
 		include URL_VISTA . 'footer.php';
 	}
 
-	public function bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour)
+	public function bring_by_date_idroom_hour($idroom,$day,$hour)
 	{
-		return $this->fuctionBdDao->bring_by_date_idmovie_idroom_hour($idroom,$day,$idmovie,$hour);
+		return $this->fuctionBdDao->bring_by_date_idroom_hour($idroom,$day,$hour);
 	}
 
 	public function feature_extraction_algorithm()
