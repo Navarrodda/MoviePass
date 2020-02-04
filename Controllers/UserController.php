@@ -109,12 +109,12 @@ class UserController
 		}
 
 		if($ir_a_inicio){
-			$view = 'MENSSAGE';
+			$view = 'MESSAGE';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "message.php");
 			include URL_VISTA . 'footer.php';		
 		}else{
-			$view = 'MENSSAGE';
+			$view = 'MESSAGE';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "login.php");
 			include URL_VISTA . 'footer.php';
@@ -142,7 +142,7 @@ class UserController
 		session_destroy();
 
 		$this->message = new Message('info', 'You have logged out!');
-		$view = 'MENSSAGE';
+		$view = 'MESSAGE';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "message.php");
 		include URL_VISTA . 'footer.php';
