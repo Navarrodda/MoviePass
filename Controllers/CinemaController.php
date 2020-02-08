@@ -107,20 +107,26 @@ class CinemaController
 			$cinema->setNombre($name);
 			$cinema->setDireccion($address);
 			$this->cinemaBdDao->to_update($cinema,$idcinema);
-			$view = "MESSAGE";
 			$this->message = new Message( "success", "The cinema has been successfully modified!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'message.php');
-			include URL_VISTA . 'footer.php';
 		}
 		else
 		{
-			$view = "MESSAGE";
-			$this->message = new Message( "warning", "The cinema with that name is already registered!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'message.php');
-			include URL_VISTA . 'footer.php';
+			if($cine == NULL)
+			{
+				$cinema = new Cinema();
+				$cinema->setNombre($name);
+				$cinema->setDireccion($address);
+				$this->cinemaBdDao->to_update($cinema,$idcinema);
+				$this->message = new Message( "success", "The cinema has been successfully modified!" );
+			}
+			else{
+				$this->message = new Message( "warning", "The cinema with that name is already registered!" );
+			}
 		}
+		$view = "MESSAGE";
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . 'message.php');
+		include URL_VISTA . 'footer.php';
 	}
 }
 ?>

@@ -18,18 +18,18 @@
         <hr class="primary">
         <p>
           <strong style="color:white">
-            Register! .
+            Modifi! .
           </strong>
         </p>
         <div class="regularform">
           <div class="row">
             <div class="col-md-12 marcform">
               <?php  if(!empty($cinema)) { ?>
-             <form class="form1" method="post" action="#">
+             <form class="form1" method="post" action="<?php echo URL ?>/cinema/modify/">
               <p><input  name="id" type=hidden value="<?= $cinema->getId()?>"></p>
               <p class="p2" type="Name Cinema:"><input class="int" value="<?=$cinema->getNombre()?>" name="name" style="color:white" placeholder="Enter in the name of the cinema here.."></input></p>
               <p class="p2" type="Address:"><input  class="int" value="<?=$cinema->getDireccion()?>" name="address" style="color:white" placeholder="Enter the address of the cinema.."></input></p>
-              <button class="but">Save Data</button>
+              <button class="but">Modify Data</button>
             </form>
           <?php } ?>
           </div>

@@ -1,27 +1,12 @@
 [
     {
         "id": null,
-        "direccion": "1231231",
-        "nombre": "Lucho"
+        "direccion": "Asdasd",
+        "nombre": "Aldrey"
     },
     {
-        "id": null,
-        "direccion": "123123",
-        "nombre": "Adadad"
-    },
-    {
-        "id": null,
-        "direccion": "123123",
-        "nombre": "Asdasd"
-    },
-    {
-        "id": 4,
-<<<<<<< HEAD
-        "direccion": "Olazabal 2219",
-        "nombre": "Cinemacenter"
-=======
-        "direccion": "Jun B Justo 123",
-        "nombre": "Cinemasenter"
->>>>>>> b191409c5be6273d93e402357d071585330e1600
+        "id": 2,
+        "direccion": "Asdasd",
+        "nombre": "Aldrey"
     }
 ]
