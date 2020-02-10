@@ -50,7 +50,7 @@
            <?php if(!empty($_SESSION["rol"])){ ?>
             <?php if($_SESSION["rol"] != 3){ ?>
                 <td>
-                  <a href="#" class="disabled">         
+                  <a href="<?php echo URL ?>/view/modifyroom/<?=$rooms->getId();?>" class="disabled">         
                     <span class="fa fa-pencil-square-o" title=""
                     data-toggle="tooltip" data-placement="right">
                   </span>

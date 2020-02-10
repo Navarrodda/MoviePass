@@ -157,6 +157,18 @@ class ViewController
 		include URL_VISTA . 'footer.php';
 	} 
 
+	public function modifyroom($idroom)
+	{
+
+		$view = 'ROOM';
+		$espace = 'MODIFY';
+		$room = $this->ControlRoom->bring_by_id($idroom);
+		$current_date = date ("Y-m-d");
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "modifyroom.php");
+		include URL_VISTA . 'footer.php';
+	} 
+
 	public function cinema()
 	{
 		$view = 'CINEMA';
