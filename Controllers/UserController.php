@@ -201,18 +201,8 @@ class UserController
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
-				/*
-				ini_set( 'display_errors', 1 );
-				error_reporting( E_ALL );
-				$from = "test@hostinger-tutorials.com";
-				$to = "test@gmail.com";
-				$subject = "Checking PHP mail";
-				$message = "PHP mail works just fine";
-				$headers = "From:" . $from;
-				mail($to,$subject,$message, $headers);
-				echo "The email message was sent.";
-			);*/
-
+			
+			
 		}catch(\PDOException $pdo_error){
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'error.php');
