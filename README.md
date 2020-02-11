@@ -71,3 +71,8 @@ GET
 
 Key tha Developer is = @&#341 
 Key tha Admin is = @&#342
+
+
+Email tha App:
+
+moviepas.mdq.tp@gmail.com

@@ -17,3 +17,7 @@ define('URL', 'http://localhost/MoviePass');
 define('API','https://api.themoviedb.org/3/');
 define('KEY','?api_key=1b6861e202a1e52c6537b73132864511');
 define('PAGE','&language=en-US&page=');
+
+//Email
+define('EMAIL','moviepas.mdq.tp@gmail.com');
+define('EMAILPASS','Proyecto2019');
