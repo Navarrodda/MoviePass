@@ -6,7 +6,6 @@ namespace Controllers;
 use \Model\User as User;
 use \Model\Role as role;
 use \Model\Message as Message;
-use \Model\Mail as Mail;
 
 //Dao
 
@@ -170,8 +169,6 @@ class UserController
 						$userInstance = new User($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
 						$idUser = $this->daoUser->add($userInstance);
 						$userInstance->setId($idUser);
-						$mail = new Mail();
-						$mail->sendMail($email);
 						$view = "MESSAGE";
 						$this->message = new Message( "success", "The User was registered successfully!" );
 						include URL_VISTA . 'header.php';
