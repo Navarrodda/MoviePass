@@ -59,7 +59,7 @@
                            <td colspan="1">Room <?= $roomci->getRoom()->getNameRoom();?></td>
                            <td colspan="1"><?php $fecha = date("d/m/Y", strtotime($roomci->getDia())); echo $fecha?></td>
                            <td colspan="1"><?= $roomci->getHora(); ?></td>
-                           <td colspan="1"><?= $roomci->getRoom()->getCinema()->getValor_entrada(); ?></td>
+                           <td colspan="1"><?= $roomci->getRoom()->getInputValue(); ?></td>
                            <?php if(!empty($roomci->buy)){ ?>
                                <td colspan="1"><?= $roomci->buy?></td>
                                <td colspan="1"><?= $roomci->coun; ?></td>

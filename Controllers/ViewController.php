@@ -772,7 +772,7 @@ class ViewController
 										if($fun->getRoom()->getId() == $ti->getShopping()->getFunction()->getRoom()->getId()){
 											$roomcinema[$count]->coun =  $i;
 											$roomcinema[$count]->min = $roomcinema[$count]->getRoom()->getCantSite() - $roomcinema[$count]->coun;
-											$roomcinema[$count]->buy = $roomcinema[$count]->getRoom()->getCinema()->getValor_entrada() * $roomcinema[$count]->coun;
+											$roomcinema[$count]->buy = $roomcinema[$count]->getRoom()->getInputValue() * $roomcinema[$count]->coun;
 											$i++;
 
 										}
