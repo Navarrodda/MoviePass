@@ -201,8 +201,6 @@ class UserController
 				require(URL_VISTA . 'message.php');
 				include URL_VISTA . 'footer.php';
 			}
-			
-			
 		}catch(\PDOException $pdo_error){
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . 'error.php');
