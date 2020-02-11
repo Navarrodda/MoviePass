@@ -23,6 +23,11 @@ class RoomController
 		$this->ControlFuctionc = new Fuctionc;
 	}
 
+	public function bringidbytitleroom($name_room){
+
+		return $this->RoomBd->bring_id_by_titleroom($name_room);
+	}
+
 	public function add($name_room,$cant_site,$input_value,$idcinema)
 	{
 		$name_room = ucwords($name_room); 
@@ -107,22 +112,39 @@ class RoomController
 	}
 	
 
-	public function modify($idroom,$name_room,$cant_site,$input_value){
-
-		$room = $this->RoomBd->bring_by_id($idroom);
-		if($room == $id){
-			$room = new Cinema();
+	public function modify($name_room,$cant_site,$input_value,$idroom){
+		$id = $this->bringidbytitleroom($name_room);
+		$roomaray = $this->bring_by_id($idroom);
+		if($id == $idroom){
+			$room = new Room();
 			$room->setNameRoom($name_room);
 			$room->setCantSite($cant_site);
-			$cinema->setInputValue($input_value);
+			$room->setCinema($roomaray->getCinema());
+			$room->setInputValue($input_value);
 			$this->RoomBd->to_update($room,$idroom);
-			$view = "MESSAGE";
 			$this->message = new Message( "success", "The room has been successfully modified!" );
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . 'message.php');
-			include URL_VISTA . 'footer.php';
-
 		}
+		else
+		{
+			if($id == NULL)
+			{
+				$room = new Room();
+				$room->setNameRoom($name_room);
+				$room->setCantSite($cant_site);
+				$room->setCinema($roomaray->getCinema());
+				$room->setInputValue($input_value);
+				$this->RoomBd->to_update($room,$idroom);
+				$this->message = new Message( "success", "The room has been successfully modified!" );
+			}
+			else
+			{
+				$this->message = new Message( "warning", "The room with that name is already registered!" );
+			}
+		}
+		$view = "MESSAGE";
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . 'message.php');
+		include URL_VISTA . 'footer.php';
 	}
 
 	public function bring_list_for_id_cinema($idcinema)
@@ -169,8 +191,8 @@ class RoomController
 	}
 		
 }*/
+
+
 }
-
-
 
 ?>
