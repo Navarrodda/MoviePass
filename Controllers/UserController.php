@@ -121,6 +121,44 @@ class UserController
 		}
 
 	}
+	//Facebook Login.
+	public function facebookLogin() {
+
+        include('Config/fb-config.php');
+
+            try{
+                $accessToken = $helper->getAccessToken();
+
+            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                echo "Exception: " . $e->getMessage();
+                exit();
+            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                echo "Exception: " . $e->getMessage();
+                exit();
+            }
+
+            if(!$accessToken) {
+                require_once(VIEWS_PATH . 'navbar.php');
+                require_once(VIEWS_PATH . "login.php");
+                exit();
+            }
+
+            $oAuth2Client = $fb->getOAuth2Client();
+            if (!$accessToken->isLongLived()) {
+                $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+            }
+            $response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
+            $userData = $response->getGraphNode()->asArray();
+			$_SESSION["id"] = $user->getId();
+			$_SESSION["nikname"] = $userData['first_name'];
+			$_SESSION["email"] = $userData['email'];
+			$_SESSION["nombre"] = $userData['first_name'];
+			$_SESSION["lastname"] = $userData['last_name'];
+			$_SESSION["rol"] = 3;
+			require_once(VIEWS_PATH . 'navbar.php');
+            require_once(VIEWS_PATH . "home.php");
+		}
+		
 	public function logout()
 	{
         // Elimio las variables de sesión y sus valores.
