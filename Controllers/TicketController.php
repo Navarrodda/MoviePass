@@ -5,6 +5,7 @@ namespace controllers;
 use \Model\Shopping as Shopping;
 use \Model\Message as Message;
 use \Model\Ticket as Ticket;
+use \Model\Mail as Mail;
     //Controllers
 use \Controllers\FuctionController as FuctionC;
     //Dao
@@ -56,9 +57,16 @@ class TicketController
                     $this->ticketDao->add($ticket);
                 }
 
+                $this->sendtoemail($shopping->getUser()->getEmail(),$shopping->getId());
             }
         }
         
+    }
+
+    public function sendtoemail($email,$idshopping){
+        $tiket = $this->brindforidshopping($idshopping);
+        $mail = new Mail();
+        $mail->sendMail($email,$tiket);
     }
 
     public function brindforidshopping($idshopping)

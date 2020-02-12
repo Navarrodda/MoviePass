@@ -6,6 +6,7 @@ use \phpmailer\phpmailer\PHPMailer;
 use \phpmailer\phpmailer\Exception;
 use \phpmailer\phpmailer\SMTP;
 
+use Model\Ticket as Ticket;
 
 require './vendor/phpmailer/phpmailer/src/Exception.php';
 require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
@@ -15,18 +16,17 @@ class Mail
 {
 
 
-        public function __construct(){
-        }
+    public function __construct(){
 
+    }
 
+    public function sendMail($email,$tiket){
 
-    public function sendMail($email){
-      
 
 
         $mail = new PHPMailer(true);
 
-            try {
+        try {
                 //Server settings
            //     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
                 $mail->isSMTP();                                            // Send using SMTP
@@ -44,29 +44,47 @@ class Mail
               /*  $mail->addReplyTo('info@example.com', 'Information');
                 $mail->addCC('cc@example.com');
                 $mail->addBCC('bcc@example.com');*/
-            
+
                 // Attachments
              //   $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
                 //$mail->addAttachment(dirname(__DIR__) . '\qrcode.pdf', 'Codigo qr entradas');    // Optional name
-            
+
                 // Content
                // $id = $this->buyoutDAO->GetId($buy->getDate());
                 //$cinema = $this->cinemaDAO->GetById($buy->getCinema());
                 $mail->isHTML(true);                                  // Set email format to HTML
-                $mail->Subject = 'Confirmacion de compra de entradas';
-                $mail->Body    = "Se adjunta la informacion de la compra con un codigo qr que debera presentar al momento de entrar a la funcion" ;/*
-                                "<br><br>Cantidad: " . $buy->getQuan() . "<br>Total: " . $buy->getTotal() .
-                                "<br>Fecha de compra: " . $buy->getDate() . "<br>Id compra: " . $id . 
-                                "<br>Cine: " . $cinema->getName(). "<br>Direccion: ". $cinema->getAdress();*/
-                                
-              $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-            
+                $i=1;
+                $body = 'The purchase has been satisfactory the ticket/s are data: ';
+                foreach ($tiket as $tik) { 
+                    $counttiket = $tik->getShopping()->getCountrtiket();
+                    $brinlogic = explode('/', $tik->getQr());
+                    $adreslogic = $brinlogic[6] . '/'. $brinlogic[7];
+                    $totaladres = "C:/xampp/htdocs/MoviePass/img/Qr/" . $adreslogic;
+                    if($i == 1)
+                    {
+                        $body .= $tik->getShopping()->getDate();
+                    }
+                    $mail->AddAttachment($totaladres);  
+                    $body  .=   "<br><br>Number Qr: " . $tik->getNumbre() . "<br>Movie: " . $tik->getMovie()->getTitle()  .
+                                "<br>Data Function: " . $tik->getShopping()->getFunction()->getDia() ." ". $tik->getShopping()->getFunction()->getHora().  "<br>Room: " . $tik->getShopping()->getFunction()->getRoom()->getNameRoom() . 
+                                "<br>Room: " . $tik->getShopping()->getFunction()->getRoom()->getCinema()->getNombre() . "<br>Address: ". $tik->getShopping()->getFunction()->getRoom()->getCinema()->getDireccion()
+;
+                    $i++;
+
+                }
+                
+                $mail->Body  = $body;
+                $mail->Subject = 'Movie Pass you have successfully bought '. $counttiket;
+
+
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
                 $mail->send();
              //   echo 'Message has been sent';
             } catch (Exception $e) {
-                
-                    echo  $e->getMessage();
+
+                echo  $e->getMessage();
             }
-        
+
+        }
     }
-}
