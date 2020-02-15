@@ -43,7 +43,13 @@ class ShoppingController
 				$cardnumber = $cardnumber.$cardnumber1.$cardnumber2.$cardnumber3;
 
 				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
-
+				$sum = $this->daoShopping->sum_buy_by_function($fuction->getId());
+				$seat = $fuction->getRoom()->getCantSite() + 1;
+				$cantotal= $sum["sum(shoppings.countrtiket)"] + $quantity;
+				$result = $seat - $cantotal ;
+				
+				if($result > 0)
+				{
 				if(!empty($fuction))
 				{
 					$movie = $fuction->getMovie();
@@ -119,7 +125,13 @@ class ShoppingController
 					$wear =  strtolower($view);
 					$this->message = new Message("warning","Function don't exist." );
 				}
-
+			}
+			else
+			{
+				$view = "MESSAGE";
+					$wear =  strtolower($view);
+					$this->message = new Message("warning","There are no more vacancies for this room." );
+			}
 			}else
 			{
 				$this->message = new Message("warning", "You already have a ticket");
@@ -151,6 +163,8 @@ class ShoppingController
 	{
 		return $this->daoShopping->bring_buy_by_Function($idfunction);
 	}
+
+
 
 }
 ?>

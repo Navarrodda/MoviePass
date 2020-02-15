@@ -162,6 +162,12 @@ class RoomController
 		return $this->RoomBd->bring_by_id($idroom);
 	}
 
+	public function brin_cant_site_room_for_idroom($idroom)
+	{
+		$room = $this->RoomBd->bring_by_id($idroom);
+		return $room->getCantSite();
+	}
+
 	//traer toda la capacidad del cine
 	//traer todas las salas
 	//contar esas capacidades y ver si se puede dar de alta la sala
