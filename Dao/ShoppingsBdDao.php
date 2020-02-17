@@ -74,7 +74,7 @@ class ShoppingsBdDao
 
     public function sum_buy_by_function($idFunction)
     {
-        $sql = "SELECT sum(shoppings.countrtiket) FROM $this->table WHERE function = \"$idFunction\" ";
+        $sql = "SELECT sum(countrtiket) FROM $this->table WHERE function = \"$idFunction\" ";
 
         $conec = Conection::conection();
 

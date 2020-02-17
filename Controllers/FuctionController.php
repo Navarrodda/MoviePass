@@ -11,7 +11,7 @@ use \Model\Fuction as Fuction;
 
 use \Controllers\GenreController as GenreC;
 use \Controllers\MoviegenreController as MoviegenreC;
-
+use \Controllers\ShoppingController as Shoppingc;
 //Dao
 
 use \Dao\RoomBdDao as RoomBdDao;
@@ -418,6 +418,7 @@ class FuctionController
 	{
 		$movie = $this->movieBdDao->bring_everything();
 		$roomcinema = array();
+		$i=0;
 		if(!empty($movie))
 		{
 			foreach ($movie as $mov) {
@@ -427,7 +428,19 @@ class FuctionController
 					foreach($thisfunction as $fun) {
 						$reglehours = $this->validate_day_hours($fun->getDia(),$fun->getHora());
 						if ($reglehours) {
-							array_push($roomcinema, $fun);
+							$shoping = new Shoppingc;
+							$result = $shoping->cant_tiket_for_function_bacanci($fun->getId());
+							if($result > 0)
+							{
+								array_push($roomcinema, $fun);
+								$roomcinema[$i]->count = 1;
+							}
+							else
+							{
+								array_push($roomcinema, $fun);
+								$roomcinema[$i]->count = 0;
+							}
+							$i++;
 						}
 					}
 				}

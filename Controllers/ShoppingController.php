@@ -45,93 +45,93 @@ class ShoppingController
 				$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
 				$sum = $this->daoShopping->sum_buy_by_function($fuction->getId());
 				$seat = $fuction->getRoom()->getCantSite() + 1;
-				$cantotal= $sum["sum(shoppings.countrtiket)"] + $quantity;
+				$cantotal= $sum["sum(countrtiket)"] + $quantity;
 				$result = $seat - $cantotal ;
 				
 				if($result > 0)
 				{
-				if(!empty($fuction))
-				{
-					$movie = $fuction->getMovie();
-					$room =  $fuction->getRoom();
-					$cinema = $fuction->getRoom()->getCinema();
-					$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
-					$year = date("Y"); 
-					$month = date("m");
-					if(strlen($cardnumber) == 16 && preg_match('~[0-9]+~', $cardnumber)) 
+					if(!empty($fuction))
 					{
-						if(!preg_match('~[0-9]+~', $cardholder))
+						$movie = $fuction->getMovie();
+						$room =  $fuction->getRoom();
+						$cinema = $fuction->getRoom()->getCinema();
+						$discount = $this->ControlDiscount->give_discount_day($fuction->getDia());
+						$year = date("Y"); 
+						$month = date("m");
+						if(strlen($cardnumber) == 16 && preg_match('~[0-9]+~', $cardnumber)) 
 						{
-							$monthyear =  $year . $month;
-							$cardexpirationyearmonth = $cardexpirationyear . $cardexpirationmonth;
-							if($monthyear <= $cardexpirationyearmonth)
+							if(!preg_match('~[0-9]+~', $cardholder))
 							{
-
-								if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
+								$monthyear =  $year . $month;
+								$cardexpirationyearmonth = $cardexpirationyear . $cardexpirationmonth;
+								if($monthyear <= $cardexpirationyearmonth)
 								{
-									$shopping = new Shopping();
-									$shopping->setUser($this->usercontroller->bring_by_id());
-									$shopping->setFunction($fuction);
-									$shopping->setDate(date("Y-m-d"));
-									$shopping->setCountrtiket($quantity);
-									$shopping->setPrice($room->getInputValue());
-									if($discount != null)
-									{	
-										$shopping->setDiscount($discount[0]);							
-										$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount[0]->getDisc()/100));
+
+									if(strlen($ccv) == 3 && preg_match('~[0-9]+~', $ccv) )
+									{
+										$shopping = new Shopping();
+										$shopping->setUser($this->usercontroller->bring_by_id());
+										$shopping->setFunction($fuction);
+										$shopping->setDate(date("Y-m-d"));
+										$shopping->setCountrtiket($quantity);
+										$shopping->setPrice($room->getInputValue());
+										if($discount != null)
+										{	
+											$shopping->setDiscount($discount[0]);							
+											$total = $shopping->getPrice() * $shopping->getCountrtiket()*  (1 - ($discount[0]->getDisc()/100));
+										}else
+										{
+											$total = $shopping->getPrice() * $shopping->getCountrtiket();
+										}
+										$shopping->setTotal($total);
+										$id = $this->daoShopping->add($shopping);
+										$shopping->setId($id);
+										$this->ControlTicket->add($shopping);
+
+										$view = "MESSAGE";
+										$wear = strtolower($view);
+										$this->message = new Message("success","La compra se ha realizado con exito " );
 									}else
 									{
-										$total = $shopping->getPrice() * $shopping->getCountrtiket();
+										$view = 'CARD';
+										$wear =  strtolower($view);
+										$this->message = new Message("warning","Invalid CCV" );
 									}
-									$shopping->setTotal($total);
-									$id = $this->daoShopping->add($shopping);
-									$shopping->setId($id);
-									$this->ControlTicket->add($shopping);
 
-									$view = "MESSAGE";
-									$wear = strtolower($view);
-									$this->message = new Message("success","La compra se ha realizado con exito " );
-								}else
+								}else 
 								{
+									$this->message = new Message("warning","Invalid Expiration Date" );
 									$view = 'CARD';
 									$wear =  strtolower($view);
-									$this->message = new Message("warning","Invalid CCV" );
+
 								}
 
-							}else 
+							}else
 							{
-								$this->message = new Message("warning","Invalid Expiration Date" );
 								$view = 'CARD';
 								$wear =  strtolower($view);
-
+								$this->message = new Message("warning","Invalid Card Holder" );
 							}
-
 						}else
 						{
 							$view = 'CARD';
 							$wear =  strtolower($view);
-							$this->message = new Message("warning","Invalid Card Holder" );
+							$this->message = new Message("warning","Invalid Card Number" );
 						}
-					}else
+					}
+					else
 					{
-						$view = 'CARD';
+						$view = "MESSAGE";
 						$wear =  strtolower($view);
-						$this->message = new Message("warning","Invalid Card Number" );
+						$this->message = new Message("warning","Function don't exist." );
 					}
 				}
 				else
 				{
 					$view = "MESSAGE";
 					$wear =  strtolower($view);
-					$this->message = new Message("warning","Function don't exist." );
-				}
-			}
-			else
-			{
-				$view = "MESSAGE";
-					$wear =  strtolower($view);
 					$this->message = new Message("warning","There are no more vacancies for this room." );
-			}
+				}
 			}else
 			{
 				$this->message = new Message("warning", "You already have a ticket");
@@ -164,7 +164,14 @@ class ShoppingController
 		return $this->daoShopping->bring_buy_by_Function($idfunction);
 	}
 
+	public function cant_tiket_for_function_bacanci($idfuction)
+	{
+		$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
+		$sum = $this->daoShopping->sum_buy_by_function($fuction->getId());
+		$seat = $fuction->getRoom()->getCantSite();
+		$result =  $seat - $sum["sum(countrtiket)"] ;
+		return$result;	}
 
 
-}
-?>
+	}
+	?>
