@@ -141,8 +141,6 @@ class FuctionController
 	public function validate_day_hours($day,$hour)
 	{
 
-		if(!empty($_SESSION))
-		{
 			$hoursnaw = date("G:i");
 			$dianaw = date ("Y-m-d");
 			$modification = $dianaw .'/'. $hoursnaw;
@@ -152,7 +150,6 @@ class FuctionController
 			{
 				$movieforcinema = TRUE;
 			}
-		}
 		return $movieforcinema;
 	}
 
@@ -428,7 +425,10 @@ class FuctionController
 				if(!empty($thisfunction))
 				{
 					foreach($thisfunction as $fun) {
-						array_push($roomcinema, $fun);
+						$reglehours = $this->validate_day_hours($fun->getDia(),$fun->getHora());
+						if ($reglehours) {
+							array_push($roomcinema, $fun);
+						}
 					}
 				}
 			}
@@ -438,6 +438,7 @@ class FuctionController
 	public function movie_extraction_algorithm()
 	{
 		$movie = $this->movieBdDao->bring_everything();
+		$status = 1;
 		$movies = array();
 		if(!empty($movie))
 		{
@@ -445,7 +446,17 @@ class FuctionController
 				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
 				if(!empty($thisfunction))
 				{
-					array_push($movies, $mov);
+					foreach ($thisfunction as $fun) {
+						$reglehours = $this->validate_day_hours($fun->getDia(),$fun->getHora());
+						if($reglehours)
+						{	
+							if($status){
+								$status = 0;
+								array_push($movies, $mov);
+							}
+						}
+					}
+					
 				}
 			}
 		}
