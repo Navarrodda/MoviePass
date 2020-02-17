@@ -653,6 +653,7 @@ class ViewController
 				$fers = null;
 				$fersfun = null;
 				$count = -1;
+				$idmovies= array();
 				$i=0;
 				$q=1;
 				$movies = array();
@@ -665,7 +666,9 @@ class ViewController
 						if(!empty($purc))
 						{
 							if($purc->getFunction()->getMovie() != $fers){
-								array_push($movies, $purc->getFunction()->getMovie());				
+								array_push($idmovies, $purc->getFunction()->getMovie()->getId());
+
+								$fers = $purc->getFunction()->getMovie();			
 							}
 							if($purc->getFunction()->getDia() != $fersfun)
 							{
@@ -682,9 +685,16 @@ class ViewController
 
 							}
 							$q++;
-							$fers = $purc->getFunction()->getMovie();
 							$fersfun = $purc->getFunction()->getDia();
 						}
+						$fersfun = null;
+					}
+				}
+				if(!empty($idmovies))
+				{
+					$resultado = array_unique($idmovies);		
+					foreach ($resultado as $re) {
+						array_push($movies, $this->ControlMovies->movieBdId($re));		
 					}
 				}
 				$view = "PURCHASED TICKETS";
@@ -764,6 +774,7 @@ class ViewController
 							foreach ($thisfunction as $fun) {
 								array_push($roomcinema, $fun);
 								$roomcinema[$count]->coun = 0;
+
 								$tikets = $this->ControlTicket->bringbydthamovie($mov->getId());
 								if(!empty($tikets))
 								{
@@ -778,15 +789,12 @@ class ViewController
 										}
 
 									}
-
-
+									$i = 1;
 								}
-
-								$count++;
 							}
-							$i = 0;
 						}
 					}
+					$count++;
 				}
 				$view = 'GRAPHIC';
 				include URL_VISTA . 'header.php'; 

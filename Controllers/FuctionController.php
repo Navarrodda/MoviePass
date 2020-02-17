@@ -141,15 +141,15 @@ class FuctionController
 	public function validate_day_hours($day,$hour)
 	{
 
-			$hoursnaw = date("G:i");
-			$dianaw = date ("Y-m-d");
-			$modification = $dianaw .'/'. $hoursnaw;
-			$modificationthisday = $day .'/'. $hour;
-			$movieforcinema = false;
-			if($modificationthisday >= $modification)
-			{
-				$movieforcinema = TRUE;
-			}
+		$hoursnaw = date("G:i");
+		$dianaw = date ("Y-m-d");
+		$modification = $dianaw .'/'. $hoursnaw;
+		$modificationthisday = $day .'/'. $hour;
+		$movieforcinema = false;
+		if($modificationthisday >= $modification)
+		{
+			$movieforcinema = TRUE;
+		}
 		return $movieforcinema;
 	}
 
@@ -451,8 +451,8 @@ class FuctionController
 	public function movie_extraction_algorithm()
 	{
 		$movie = $this->movieBdDao->bring_everything();
-		$status = 1;
 		$movies = array();
+		$idmolas = null;
 		if(!empty($movie))
 		{
 			foreach ($movie as $mov) {
@@ -463,10 +463,11 @@ class FuctionController
 						$reglehours = $this->validate_day_hours($fun->getDia(),$fun->getHora());
 						if($reglehours)
 						{	
-							if($status){
-								$status = 0;
+							if($idmolas != $mov->getId())
+							{
 								array_push($movies, $mov);
 							}
+							$idmolas = $mov->getId();
 						}
 					}
 					
