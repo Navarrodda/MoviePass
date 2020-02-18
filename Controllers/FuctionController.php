@@ -10,6 +10,7 @@ use \Model\Fuction as Fuction;
 //Controllers
 
 use \Controllers\GenreController as GenreC;
+use \Controllers\MovieController as MoviesC;
 use \Controllers\MoviegenreController as MoviegenreC;
 use \Controllers\ShoppingController as Shoppingc;
 //Dao
@@ -556,6 +557,65 @@ class FuctionController
 			}
 		}
 		return $roomcinema;
-
 	}
+
+
+	public function brind_grafic_buys()
+	{
+		$ControlShopping = new Shoppingc;
+		$movie = $this->bring_movies_and_function_for_buys();
+		$count = 0;
+		$i=1;
+		$roomcinema = array();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					foreach ($thisfunction as $fun) {
+						array_push($roomcinema, $fun);
+						$roomcinema[$count]->coun = 0;
+						$shop = $ControlShopping->bringbuybyFunction($fun->getId());
+						if(!empty($shop))
+						{
+							foreach ($shop as $ti) {
+								if($fun->getId() == $ti->getFunction()->getId())
+								{
+									if(!empty($ti->getCountrtiket()))
+									{
+										$roomcinema[$count]->coun = $roomcinema[$count]->coun  + $ti->getCountrtiket();
+										$roomcinema[$count]->min = $roomcinema[$count]->getRoom()->getCantSite() - $roomcinema[$count]->coun;
+										$roomcinema[$count]->buy = $roomcinema[$count]->getRoom()->getInputValue() * $roomcinema[$count]->coun;
+									}
+								}
+							}
+						}
+						$count++;
+					}
+				}
+			}
+		}
+		return $roomcinema;
+	}
+
+	public function bring_movies_and_function_for_buys()
+	{
+		$this->ControlMovies = new MoviesC;
+		$movies = array();
+		$movie = $this->ControlMovies->bringmovies();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($movies, $mov);
+				}
+			}
+		}
+		return $movies;
+	}
+
+
 }

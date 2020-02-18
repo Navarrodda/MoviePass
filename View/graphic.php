@@ -40,7 +40,7 @@
                           <td colspan="1" class="fa fa-play-circle-o"> Duration: <?= $mov->getDuration();?></td>
                       </tr>
                       <tr style="color:white"> 
-                          <td colspan="12" class="marctr2">Overview: <?= $fun->getMovie()->getOverview();?></td>
+                          <td colspan="12" class="marctr2">Overview: <?= $mov->getOverview();?></td>
                       </tr>
                       <?php if(!empty($roomcinema)) { 
                        foreach ($roomcinema as $roomci){

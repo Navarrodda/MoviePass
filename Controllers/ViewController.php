@@ -759,43 +759,8 @@ class ViewController
 			if(!empty($_SESSION))
 			{
 				$current_date = date ("d-m-Y G:m.a");
-				$movie = $this->ControlMovies->bringmovies();
-				$count = 0;
-				$i=1;
-				$movies = array();
-				$roomcinema = array();
-				if(!empty($movie))
-				{
-					foreach ($movie as $mov) {
-						$thisfunction = $this->ControlFuctionc->bring_Function_by_idMovies($mov->getId());
-						if(!empty($thisfunction))
-						{
-							array_push($movies, $mov);
-							foreach ($thisfunction as $fun) {
-								array_push($roomcinema, $fun);
-								$roomcinema[$count]->coun = 0;
-
-								$tikets = $this->ControlTicket->bringbydthamovie($mov->getId());
-								if(!empty($tikets))
-								{
-									foreach ($tikets as $ti) {
-
-										if($fun->getRoom()->getId() == $ti->getShopping()->getFunction()->getRoom()->getId()){
-											$roomcinema[$count]->coun =  $i;
-											$roomcinema[$count]->min = $roomcinema[$count]->getRoom()->getCantSite() - $roomcinema[$count]->coun;
-											$roomcinema[$count]->buy = $roomcinema[$count]->getRoom()->getInputValue() * $roomcinema[$count]->coun;
-											$i++;
-
-										}
-
-									}
-									$i = 1;
-								}
-							}
-						}
-					}
-					$count++;
-				}
+				$movies = $this->ControlFuctionc->bring_movies_and_function_for_buys();
+				$roomcinema = $this->ControlFuctionc->brind_grafic_buys();
 				$view = 'GRAPHIC';
 				include URL_VISTA . 'header.php'; 
 				require(URL_VISTA . "graphic.php");

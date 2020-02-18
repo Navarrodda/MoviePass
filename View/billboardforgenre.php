@@ -30,22 +30,23 @@
             return ok;
           }
         </script>
+
         <div class="flexsearch">
           <div class="flexsearch--wrapper">
             <form class="flexsearch--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/billboardforsearch">
               <div class="flexsearch--input-wrapper">
                 <div class="col-md-12">
-                <div class="center">
-                 </div>
-               </div>
-             </div>
-             <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
-           </form>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
+                  <div class="center">
+                  </div>
+                </div>
+              </div>
+              <input method="post" class="flexsearch--input btn3"  name="search" type="search" placeholder="Search"> 
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 <section>
@@ -97,22 +98,27 @@
                          <td colspan="1"><?= $roomci->getHora(); ?></td>
                          <td colspan="1">$<?= $roomci->getRoom()->getInputValue(); ?></td>
                          <?php if(!empty($_SESSION["rol"])){ ?>
-                          <?php if($_SESSION["rol"] == 3){ ?>
-                            <form method="post" action="<?php echo URL ?>/view/buyq/">
+                          <?php if($_SESSION["rol"] == 3){ 
+                            if($roomci->count){?>
+                              <form method="post" action="<?php echo URL ?>/view/buyq/">
+                               <td colspan="1"><button class="btn btn-success fa fa-shopping-cart" name="idfuction" value =" <?= $roomci->getId(); ?>"> Select</button></td>
+                             </form>
+                           <?php } else{
+                            ?>
+                            <td colspan="1">No Vacancy</td>
+                          <?php } } else { ?>
+                            <form method="post" action="<?php echo URL ?>/view/modifyfuction/">
+                             <td colspan="1"><button class="btn btn-success fa fa-pencil" name="idfuction" value =" <?= $roomci->getId(); ?>"> Modify</button></td>
+                           </form>
+                         <?php } } else { 
+                           if($roomci->count){ ?>
+                           <form method="post" action="<?php echo URL ?>/view/login/">
                              <td colspan="1"><button class="btn btn-success fa fa-shopping-cart" name="idfuction" value =" <?= $roomci->getId(); ?>"> Select</button></td>
                            </form>
-                         <?php } else {
-                          ?>
-                          <form method="post" action="<?php echo URL ?>/view/modifyfuction/">
-                           <td colspan="1"><button class="btn btn-success fa fa-pencil" name="idfuction" value =" <?= $roomci->getId(); ?>"> Modify</button></td>
-                         </form>
-                       <?php } } else { ?>
-                         <form method="post" action="<?php echo URL ?>/view/login/">
-                           <td colspan="1"><button class="btn btn-success fa fa-shopping-cart" name="idfuction" value =" <?= $roomci->getId(); ?>"> Select</button></td>
-                         </form>
-                         <?php } ?>
-                         </tr>
-                       <?php } } } ?>
+                         <?php } else{ ?>
+                           <td colspan="1">No Vacancy</td>
+                         <?php } } } } } ?>
+                       </tr>
                      </tbody>
                    </table>
                  <?php }  } ?>
