@@ -634,10 +634,30 @@ class FuctionController
 		$shoping = new Shoppingc;
 		$this->ControlMovies = new MoviesC;
 		$brithdate = explode('/', $search);
-		//$brithdateFormated = $brithdate[2] . "-" . $brithdate[1] . "-" . $brithdate[0];
-		//$dataini = $this->validate_date($search);
-		//$dataini = $this->validate_date($search);
-		die(var_dump($brithdate));
+		if(!empty($brithdate[2]))
+		{
+			$separedayforyear = explode(' ', $brithdate[2]);
+			$date1 = $separedayforyear[0] . "/" . $brithdate[1] . "/" . $brithdate[0];
+
+			$date1 = $this->validate_date($date1);
+			if(!empty($brithdate[3]))
+			{
+				$date2 = $separedayforyear[1] . "/" . $brithdate[3] . "/" . $brithdate[4];
+				$date2 = $this->validate_date($date2);
+			}
+			else
+			{
+				$date2 = NULL;
+			}
+			if($data1 == $data2)
+			{
+				$data2 = NULL;
+			}
+		}
+		else
+		{
+			$date1 = NULL;
+		}
 		$count = 0;
 		$movies = array();
 		$movie = $this->ControlMovies->bringmovies();
@@ -660,24 +680,49 @@ class FuctionController
 								foreach ($shop as $ti) {
 									if($fun->getId() == $ti->getFunction()->getId())
 									{
-										if(!empty($ti->getCountrtiket()))
+										if(!empty($date1))
 										{
-											$movies[$count]->coun = $movies[$count]->coun  + $ti->getCountrtiket();
-											$movies[$count]->min =  $movies[$count]->min + $ti->getTotal();
+											if($date1 <= $ti->getFunction()->getDia())
+											{
+												if(!empty($date2))
+												{
+													if($date2 >= $ti->getFunction()->getDia())
+													{
+														$movies[$count]->coun = $movies[$count]->coun  + $ti->getCountrtiket();
+														$movies[$count]->min =  $movies[$count]->min + $ti->getTotal();
+													}
+												}
+												else
+												{
+													$movies[$count]->coun = $movies[$count]->coun  + $ti->getCountrtiket();
+													$movies[$count]->min =  $movies[$count]->min + $ti->getTotal();
+												}
+
+											}
 											
+										}
+										else
+										{
+											if($search == null)
+												if(!empty($ti->getCountrtiket()))
+												{
+													$movies[$count]->coun = $movies[$count]->coun  + $ti->getCountrtiket();
+													$movies[$count]->min =  $movies[$count]->min + $ti->getTotal();
+
+												}
+											}
 										}
 									}
 								}
-							}
-							
-						}
 
+							}
+
+						}
+						$count++;
 					}
-					$count++;
 				}
 			}
+			return $movies;
 		}
-		return $movies;
-	}
 
-}
+	}

@@ -398,24 +398,24 @@ class ViewController
 			{
 				if($home == 1)
 				{
-				$search = ucwords($search);
-				$movies = $this->ControlFuctionc->bring_by_genre_id_muvies($search);
-				$roomcinema = $this->ControlFuctionc->bring_by_genre_id_fuction($search);
-				if(!empty($movies))
-				{
-					$home = 0;
-					$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
-						. '</strong>. It has movies in cinemas!');
-					$view = 'BILLBOARD';
-					$espace = 'FOR GENRE';
+					$search = ucwords($search);
+					$movies = $this->ControlFuctionc->bring_by_genre_id_muvies($search);
+					$roomcinema = $this->ControlFuctionc->bring_by_genre_id_fuction($search);
+					if(!empty($movies))
+					{
+						$home = 0;
+						$this->message = new Message('info', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+							. '</strong>. It has movies in cinemas!');
+						$view = 'BILLBOARD';
+						$espace = 'FOR GENRE';
+					}
+					else
+					{
+						$home = 1;
+						$this->message = new Message('warning', ' The selected genre' . ' ' . '<i><strong>' .  $search 
+							. '</strong>. does not contain any billboards. we are sorry!');
+					}
 				}
-				else
-				{
-					$home = 1;
-					$this->message = new Message('warning', ' The selected genre' . ' ' . '<i><strong>' .  $search 
-						. '</strong>. does not contain any billboards. we are sorry!');
-				}
-			}
 			}
 			if(!empty($movies))
 			{
@@ -783,15 +783,23 @@ class ViewController
 			if($option == 1)
 			{
 				$movies = $this->ControlFuctionc->remanete_buy_for_movie($search);
-				$view = 'REMANENTS';
-				include URL_VISTA . 'header.php'; 
-				require(URL_VISTA . "remanents.php");
-				include URL_VISTA . 'footer.php';
+				if (!empty($search)){
+					$this->message = new Message('info', ' You have searched for the following' . ' ' . '<i><strong>' .  $search 
+						. '</strong>.');
+				}
+				else
+				{
+					$this->message = new Message("info","As you have not sent anything we bring you all sales!" );
+				}
 			}
 			if($option == 2)
 			{
 
 			}
+			$view = 'REMANENTS';
+			include URL_VISTA . 'header.php'; 
+			require(URL_VISTA . "remanents.php");
+			include URL_VISTA . 'footer.php';
 		}
 
 	}
