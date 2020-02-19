@@ -565,7 +565,6 @@ class FuctionController
 		$ControlShopping = new Shoppingc;
 		$movie = $this->bring_movies_and_function_for_buys();
 		$count = 0;
-		$i=1;
 		$roomcinema = array();
 		if(!empty($movie))
 		{
@@ -617,5 +616,50 @@ class FuctionController
 		return $movies;
 	}
 
+	public function remanete_buy_for_movie()
+	{
+		$shoping = new Shoppingc;
+		$this->ControlMovies = new MoviesC;
+		$count = 0;
+		$movies = array();
+		$movie = $this->ControlMovies->bringmovies();
+		if(!empty($movie))
+		{
+			foreach ($movie as $mov) {
+				$thisfunction = $this->bring_Function_by_idMovies($mov->getId());
+				if(!empty($thisfunction))
+				{
+					array_push($movies, $mov);
+					$movies[$count]->coun = 0;
+					$movies[$count]->min = 0 ;
+					foreach ($thisfunction as $fun) {
+						if($mov->getId() == $fun->getMovie()->getId())
+						{
+
+							$shop = $shoping->bringbuybyFunction($fun->getId());
+							if(!empty($shop))
+							{
+								foreach ($shop as $ti) {
+									if($fun->getId() == $ti->getFunction()->getId())
+									{
+										if(!empty($ti->getCountrtiket()))
+										{
+											$movies[$count]->coun = $movies[$count]->coun  + $ti->getCountrtiket();
+											$movies[$count]->min =  $movies[$count]->min + $ti->getTotal();
+											
+										}
+									}
+								}
+							}
+							
+						}
+
+					}
+					$count++;
+				}
+			}
+		}
+		return $movies;
+	}
 
 }

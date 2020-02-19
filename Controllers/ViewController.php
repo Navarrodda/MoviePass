@@ -769,4 +769,14 @@ class ViewController
 
 		}
 
+		public function remanets_buys($aption,$search)
+		{
+			$current_date = date ("d-m-Y G:m.a");
+			$view = 'REMANENTS';
+			$movies = $this->ControlFuctionc->remanete_buy_for_movie();
+			include URL_VISTA . 'header.php'; 
+			require(URL_VISTA . "remanents.php");
+			include URL_VISTA . 'footer.php';
+		}
+
 	}

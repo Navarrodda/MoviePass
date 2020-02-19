@@ -14,7 +14,7 @@
 <section>
   <div class="flexs">
     <div class="flexs--wrapper">
-      <form class="flexs--form" onsubmit="return valida(this)" method="post" action="#">
+      <form class="flexs--form" onsubmit="return valida(this)" method="post" action="<?php echo URL ?>/view/remanets_buys/">
         <div class="flexs--input-wrapper">
           <div class="center">
             <select style="text-align:center;" name="select" class="btnselect">
@@ -80,13 +80,13 @@
                          <td colspan="1"><?= $roomci->getHora(); ?></td>
                          <td colspan="1"><?= $roomci->getRoom()->getInputValue(); ?></td>
                          <?php if(!empty($roomci->buy)){ ?>
-                           <td colspan="1"><?= $roomci->buy?></td>
+                           <td colspan="1">$<?= $roomci->buy?></td>
                            <td colspan="1"><?= $roomci->coun; ?></td>
                            <td colspan="1"><?= $roomci->min; ?></td>
                            <td colspan="1"><?= $roomci->getRoom()->getCantSite()?></td>
                          <?php } else { ?>
 
-                           <td colspan="1">0</td>
+                           <td colspan="1">$0</td>
                            <td colspan="1">0</td>
                            <td colspan="1">0</td>
                            <td colspan="1"><?=$roomci->getRoom()->getCantSite()?></td>
