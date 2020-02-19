@@ -370,7 +370,9 @@ class ViewController
 		{
 			$home = 1;
 			$current_date = date ("d-m-Y G:m.a");
+
 			$valid = $this->ControlFuctionc->validate_date($search);
+
 			if(!empty($valid) && $valid != '1969-12-31')
 			{
 				$current_date = $search;
@@ -394,7 +396,8 @@ class ViewController
 			}
 			else
 			{
-
+				if($home == 1)
+				{
 				$search = ucwords($search);
 				$movies = $this->ControlFuctionc->bring_by_genre_id_muvies($search);
 				$roomcinema = $this->ControlFuctionc->bring_by_genre_id_fuction($search);
@@ -413,8 +416,7 @@ class ViewController
 						. '</strong>. does not contain any billboards. we are sorry!');
 				}
 			}
-			$movies = $this->ControlFuctionc->bring_by_movie_for_name_movies($search);
-			$roomcinema = $this->ControlFuctionc->bring_by_function_for_name_movies($search);
+			}
 			if(!empty($movies))
 			{
 				$home = 0;
@@ -438,6 +440,7 @@ class ViewController
 			}
 			else
 			{
+				
 				include URL_VISTA . 'header.php';
 				require(URL_VISTA . "billboardforgenre.php");
 				include URL_VISTA . 'footer.php';
@@ -769,14 +772,26 @@ class ViewController
 
 		}
 
-		public function remanets_buys($aption,$search)
+		public function remanets_buys($option,$search)
 		{
 			$current_date = date ("d-m-Y G:m.a");
-			$view = 'REMANENTS';
-			$movies = $this->ControlFuctionc->remanete_buy_for_movie();
-			include URL_VISTA . 'header.php'; 
-			require(URL_VISTA . "remanents.php");
-			include URL_VISTA . 'footer.php';
+			if($option == 0)
+			{
+				$this->message = new Message("warning","you have not chosen an option!" );
+				$this->grafic();
+			}
+			if($option == 1)
+			{
+				$movies = $this->ControlFuctionc->remanete_buy_for_movie($search);
+				$view = 'REMANENTS';
+				include URL_VISTA . 'header.php'; 
+				require(URL_VISTA . "remanents.php");
+				include URL_VISTA . 'footer.php';
+			}
+			if($option == 2)
+			{
+
+			}
 		}
 
 	}

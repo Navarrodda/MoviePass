@@ -49,7 +49,7 @@
 
                     <tbody> 
                      <tr>
-                      <td rowspan="1" valign="middle" ><p><img class="tablesimg " src="<?= $mov->getPoster(); ?>"></p></td>
+                      <td rowspan="1" valign="middle" ><p><img class="tablesimg" src="<?= $mov->getPoster(); ?>"></p></td>
                     </tr>
                     <tr class="marctr3">
                       <td colspan="2">Titile: <?= $mov->getTitle();?></td>

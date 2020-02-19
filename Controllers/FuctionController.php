@@ -293,6 +293,7 @@ class FuctionController
 					foreach ($thisfunction as $fun) {
 						if($data == $fun->getDia())
 						{
+
 							array_push($roomcinema, $fun);
 						}
 
@@ -305,6 +306,7 @@ class FuctionController
 
 	public function bring_Function_by_movies_for_data($data)
 	{
+		
 		$chequin = false;
 		$movies = array();
 		$movie = $this->movieBdDao->bring_everything();
@@ -616,10 +618,26 @@ class FuctionController
 		return $movies;
 	}
 
-	public function remanete_buy_for_movie()
+	public function modification_data($day)
+	{
+		$hoursnaw = date("G:i");
+		$dianaw = date ("Y-m-d");
+		$modification = $dianaw .'/'. $hoursnaw;
+		$modificationthisday = $day .'/'. $hour;
+		return $modificationthisday;
+	}
+
+
+
+	public function remanete_buy_for_movie($search)
 	{
 		$shoping = new Shoppingc;
 		$this->ControlMovies = new MoviesC;
+		$brithdate = explode('/', $search);
+		//$brithdateFormated = $brithdate[2] . "-" . $brithdate[1] . "-" . $brithdate[0];
+		//$dataini = $this->validate_date($search);
+		//$dataini = $this->validate_date($search);
+		die(var_dump($brithdate));
 		$count = 0;
 		$movies = array();
 		$movie = $this->ControlMovies->bringmovies();
