@@ -649,7 +649,7 @@ class FuctionController
 			{
 				$date2 = NULL;
 			}
-			if($data1 == $data2)
+			if(empty($data2))
 			{
 				$data2 = NULL;
 			}
