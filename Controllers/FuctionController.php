@@ -637,7 +637,7 @@ class FuctionController
 		if(!empty($brithdate[2]))
 		{
 			$separedayforyear = explode(' ', $brithdate[2]);
-			$date1 = $separedayforyear[0] . "/" . $brithdate[1] . "/" . $brithdate[0];
+			$date1 = $brithdate[0] . "/" . $brithdate[1] . "/" . $separedayforyear[0];
 
 			$date1 = $this->validate_date($date1);
 			if(!empty($brithdate[3]))

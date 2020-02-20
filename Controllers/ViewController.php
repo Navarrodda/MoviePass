@@ -786,20 +786,34 @@ class ViewController
 				if (!empty($search)){
 					$this->message = new Message('info', ' You have searched for the following' . ' ' . '<i><strong>' .  $search 
 						. '</strong>.');
+
 				}
 				else
 				{
 					$this->message = new Message("info","As you have not sent anything we bring you all sales!" );
 				}
+				$view = 'REMNENTSMOVIE';
+				include URL_VISTA . 'header.php'; 
+				require(URL_VISTA . "remnentsmovies.php");
+				include URL_VISTA . 'footer.php';
 			}
 			if($option == 2)
 			{
-
+				$cinemas = $this->ControlCinema->remanete_buy_for_cinemas($search);
+				if (!empty($search)){
+					$this->message = new Message('info', ' You have searched for the following' . ' ' . '<i><strong>' .  $search 
+						. '</strong>.');
+				}
+				else
+				{
+					$this->message = new Message("info","As you have not sent anything we bring you all sales!" );
+				}
+				$view = 'REMNENTSCINEMA';
+				include URL_VISTA . 'header.php'; 
+				require(URL_VISTA . "remnentscinema.php");
+				include URL_VISTA . 'footer.php';
+				
 			}
-			$view = 'REMANENTS';
-			include URL_VISTA . 'header.php'; 
-			require(URL_VISTA . "remanents.php");
-			include URL_VISTA . 'footer.php';
 		}
 
 	}

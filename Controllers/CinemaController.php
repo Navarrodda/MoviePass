@@ -8,6 +8,11 @@ use Dao\CinemaFileDao as CinemaFileDao;
 use Dao\CinemaBdDao as CinemaBd;
 use \Dao\RoomBdDao as RoomBdDao;
 
+//controllers
+use \Controllers\FuctionController as Fuctionc;
+use \Controllers\ShoppingController as Shoppingc;
+use \Controllers\RoomController as Roomc;
+
 
 class CinemaController
 {
@@ -128,5 +133,111 @@ class CinemaController
 		require(URL_VISTA . 'message.php');
 		include URL_VISTA . 'footer.php';
 	}
-}
-?>
+
+
+	public function remanete_buy_for_cinemas($search)
+	{
+		$shoping = new Shoppingc;
+		$rooms = new Roomc;
+		$function = new Fuctionc;
+
+		$brithdate = explode('/', $search);
+		if(!empty($brithdate[2]))
+		{
+			$separedayforyear = explode(' ', $brithdate[2]);
+			$date1 = $brithdate[0] . "/" . $brithdate[1] . "/" . $separedayforyear[0];
+			$date1 = $function->validate_date($date1);
+			if(!empty($brithdate[3]))
+			{
+				$date2 = $separedayforyear[1] . "/" . $brithdate[3] . "/" . $brithdate[4];
+				$date2 = $function->validate_date($date2);
+			}
+			else
+			{
+				$date2 = NULL;
+			}
+			if(empty($data2))
+			{
+				$data2 = NULL;
+			}
+		}
+		else
+		{
+			$date1 = NULL;
+		}
+		$count = 0;
+		$cinemas = array();
+		$cinema = $this->bringeverything();
+		if(!empty($cinema))
+		{
+			foreach ($cinema as $cin) {
+				$roomscinema = $rooms->bring_list_for_id_cinema($cin->getId());
+				if($roomscinema){
+					array_push($cinemas, $cin);
+					$cinemas[$count]->coun = 0;
+					$cinemas[$count]->min = 0 ;
+					foreach ($roomscinema as $room) {
+						$functionsrom = $function->bring_Function_by_idroom($room->getId());
+						if($functionsrom)
+						{
+							foreach ($functionsrom as $fun) {
+								if($cin->getId() == $fun->getRoom()->getCinema()->getId())
+								{
+									$shop = $shoping->bringbuybyFunction($fun->getId());
+									if(!empty($shop))
+									{
+										foreach ($shop as $ti) {
+											if($fun->getId() == $ti->getFunction()->getId())
+											{
+												if(!empty($date1))
+												{
+													if($date1 <= $ti->getFunction()->getDia())
+													{
+														
+														if(!empty($date2))
+														{
+
+															if($date2 >= $ti->getFunction()->getDia())
+															{
+																$cinemas[$count]->coun = $cinemas[$count]->coun  + $ti->getCountrtiket();
+																$cinemas[$count]->min =  $cinemas[$count]->min + $ti->getTotal();
+															}
+														}
+														else
+														{
+															$cinemas[$count]->coun = $cinemas[$count]->coun  + $ti->getCountrtiket();
+															$cinemas[$count]->min =  $cinemas[$count]->min + $ti->getTotal();
+														}
+
+													}
+
+												}
+												else
+												{
+													if($search == null)
+														if(!empty($ti->getCountrtiket()))
+														{
+															$cinemas[$count]->coun = $cinemas[$count]->coun  + $ti->getCountrtiket();
+															$cinemas[$count]->min =  $cinemas[$count]->min + $ti->getTotal();
+
+														}
+													}
+												}
+											}
+										}
+									}
+
+								}
+							}
+						}
+
+					}
+					$count++;
+				}
+			}
+			return $cinemas;
+		}
+
+
+	}
+	?>
