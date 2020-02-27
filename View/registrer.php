@@ -1,11 +1,14 @@
-<?php  include(URL_VISTA . "navbar.php"); ?>
+<?php  
+  include(URL_VISTA . "navbar.php");
+  include("Config/faceConf.php");
+?>
 
 
 <section class="register-account"> 
 
   <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
     <div class="bts">
-      <a href="#" class="fblogin social"><i class="fa fa-facebook"></i><span>Register with Facebook</span></a>
+      <a href="<?php echo $loginUrl; ?>" onClick="loadingFb();" class="fblogin social"><i class="fa fa-facebook"></i><span>Register with Facebook</span></a>
       <a href="#" class="twlogin social"><i class="fa fa-twitter"></i><span>Register with Twitter</span></a>
       <a href="#" class="gplogin social"><i class="fa fa-google-plus"></i><span>Register with Google</span></a>             
     </div>

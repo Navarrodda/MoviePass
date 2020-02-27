@@ -121,14 +121,38 @@ class UserController
 		}
 
 	}
-	//Facebook Login.
+	//Register on facebook
+	public function registerFacebook($name, $lastname, $dni, $nikname, $email, $password)
+	{
+		$id = 3;
+		$userInstance = new User($nikname, $email, $name, $lastname, $dni, $password, $this->daoRole->bring_by_id($id));
+		$idUser = $this->daoUser->add($userInstance);
+		$userInstance->setId($idUser);
+	}
+
+	//Login using facebook
+	public function flogin($email)
+	{
+		$user = $this->daoUser->bring_by_mail($email);
+		$_SESSION["id"] = $user->getId();
+		$_SESSION["nikname"] = $user->getNikname();
+		$_SESSION["email"] = $email;
+		$_SESSION["nombre"] = $user->getName();
+		$_SESSION["lastname"] = $user->getLastname();
+		$_SESSION["dni"] = $user->getDni();
+		$_SESSION["password"] = $user->getPassword();
+		$_SESSION["rol"] = $user->getRole()->getId();
+		return true;
+	}
+
+	//Facebook Login
 	public function facebookLogin() {
-
-        include('Config/fb-config.php');
-
+		
+		include('Config/faceConf.php');
+		$loginUrl;
             try{
                 $accessToken = $helper->getAccessToken();
-
+			
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                 echo "Exception: " . $e->getMessage();
                 exit();
@@ -138,8 +162,11 @@ class UserController
             }
 
             if(!$accessToken) {
-                require_once(VIEWS_PATH . 'navbar.php');
-                require_once(VIEWS_PATH . "login.php");
+				$this->message = new Message('danger', 'There was an error connecting!');
+               	$view = 'MESSAGE';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
                 exit();
             }
 
@@ -148,16 +175,36 @@ class UserController
                 $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
             }
             $response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
-            $userData = $response->getGraphNode()->asArray();
-			$_SESSION["id"] = $user->getId();
-			$_SESSION["nikname"] = $userData['first_name'];
-			$_SESSION["email"] = $userData['email'];
-			$_SESSION["nombre"] = $userData['first_name'];
-			$_SESSION["lastname"] = $userData['last_name'];
-			$_SESSION["rol"] = 3;
-			require_once(VIEWS_PATH . 'navbar.php');
-            require_once(VIEWS_PATH . "home.php");
+			$userData = $response->getGraphNode()->asArray();
+			$email=$userData['email'];
+			if(!$this->daoUser->verify_email($email))
+			{
+				//check_in($name, $lastname, $dni, $nikname, $email, $password, $pass2)
+				$password = $userData['picture'];
+				$password = $password['url'];
+				$this->registerFacebook($userData['first_name'],$userData['last_name'],null,$userData['first_name'],$userData['email'],$password);
+				$ir_a_inicio = false;
+			}else{
+				$ir_a_inicio = $this->flogin($email);
+			}
+			
+			if($ir_a_inicio){
+			$this->message = new Message('success', ' Welcome' . ' ' . '<i><strong>' .  $_SESSION["nombre"] 
+						. '</strong>. You have successfully logged in 
+						! Logged in as' . ' ' . '<i><strong>' . $_SESSION["nikname"] 
+						. '</strong></i>');
+			$view = 'MESSAGE';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "message.php");
+			include URL_VISTA . 'footer.php';		
+		}else{
+			$this->message = new Message("success", "The User was registered successfully!" );
+			$view = 'MESSAGE';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "login.php");
+			include URL_VISTA . 'footer.php';
 		}
+	}
 		
 	public function logout()
 	{
