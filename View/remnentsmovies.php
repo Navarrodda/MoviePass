@@ -58,7 +58,7 @@
                       <td colspan="2" class="marctr2">Overview: <?= $mov->getOverview();?></td>
                     </tr>
                     <tr rowspan="2" class="marctr3">
-                      <td colspan="1">Totola Sold</td>
+                      <td colspan="1">Total Sold</td>
                       <td colspan="1">Total Collected</td>
                     </tr>
                     <tr class="marctr3">
