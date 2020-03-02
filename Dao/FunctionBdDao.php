@@ -121,7 +121,31 @@ class FunctionBdDao
 
     }
 
-        public function bring_by_day_for_room_and_movie($day,$idroom,$idmovie){
+    public function bring_by_day_for_day($day){
+        try{
+            $sql = "SELECT * FROM $this->table WHERE day = \"$day\"";
+            $conec = Conection::conection();
+
+            $judgment = $conec->prepare($sql);
+
+            $judgment->execute();
+
+            $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+
+            $this->mapear($dataSet);
+
+            if (!empty($this->list)) {
+                return $this->list;
+            }
+            return null;
+        }catch(\PDOException $e){
+            echo $e->getMessage();die();
+        }catch(\Exception $e){
+            echo $e->getMessage();die();
+        }
+    }
+
+    public function bring_by_day_for_room_and_movie($day,$idroom,$idmovie){
         try{
             $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\" AND movie = \"$idmovie\"";
             $conec = Conection::conection();
@@ -338,7 +362,7 @@ class FunctionBdDao
         }
     }
 
-        public function remove_by_id_cinema_room($id){
+    public function remove_by_id_cinema_room($id){
         try{
 
             $sql = "DELETE FROM $this->table WHERE room = \"$id \"";
@@ -453,19 +477,19 @@ class FunctionBdDao
     {   
         try{
             if ($idfuncion != null) {
-             $sql = ("SELECT * FROM $this->table WHERE id = \"$idfuncion\" limit 1" );
+               $sql = ("SELECT * FROM $this->table WHERE id = \"$idfuncion\" limit 1" );
 
-             $conec = Conection::conection();
+               $conec = Conection::conection();
 
-             $judgment = $conec->prepare($sql);
-             
-             $judgment->execute();
-
-             $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+               $judgment = $conec->prepare($sql);
                
-             $this->mapear($dataSet[0]);
+               $judgment->execute();
 
-             if(!empty($this->list[0])){
+               $dataSet[] = $judgment->fetchAll(\PDO::FETCH_ASSOC);
+               
+               $this->mapear($dataSet[0]);
+
+               if(!empty($this->list[0])){
 
                 return $this->list[0];
             }
@@ -486,19 +510,19 @@ public function mapear($dataSet){
     
     if($dataSet){
         $this->list = array_map(function ($f){
-           $daoMovie = MovieBdDao::getInstance();
-           $daoRoom = RoomBdDao::getInstance();
-           $fuction = new Fuction();
+         $daoMovie = MovieBdDao::getInstance();
+         $daoRoom = RoomBdDao::getInstance();
+         $fuction = new Fuction();
 
-           $fuction->setId($f['id']);
-           $fuction->setRoom($daoRoom->bring_by_id($f['room']));
-           $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
-           $fuction->setDia($f['day']);
-           $fuction->setHora($f['hours']);
+         $fuction->setId($f['id']);
+         $fuction->setRoom($daoRoom->bring_by_id($f['room']));
+         $fuction->setMovie($daoMovie->bring_by_id($f['movie']));
+         $fuction->setDia($f['day']);
+         $fuction->setHora($f['hours']);
 
-           return $fuction;
+         return $fuction;
 
-       }, $dataSet);
+     }, $dataSet);
 
     }
 

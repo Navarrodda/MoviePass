@@ -52,65 +52,76 @@ class FuctionController
 		if(!empty($_SESSION))
 		{
 			$regle = false;
+			$coincide = false;
+			$days = $this->fuctionBdDao->bring_by_day_for_day($day);
 			$listday = $this->fuctionBdDao->bring_by_day_for_room($day,$idroom);
-			$reg = $this->fuctionBdDao->bring_by_day_for_room_and_movie($day,$idroom,$idmovie);
-			$regla = $this->bring_by_date_idroom_hour($idroom,$day,$hour);
-			if($regla === null && $reg === false)
-			{
-				
-				$ve = '00:15:00';
-				$veda[1]=explode(':',$ve);
-				$separar[1]=explode(':',$hour);
-				if(!empty($listday))
-				{
-					foreach ($listday as $dayfun) {
-						$hourss = $dayfun->getHora();
-						$separar[2]=explode(':',$hourss);
-
-						if($hour > $hourss)
-						{
-							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
-							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
-							$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
-							if($total_minutos>=0)
-							{
-								$regle = true;
-							}
-
+			if(!empty($days)){
+				foreach ($days as $d) {
+					if($d->getRoom()->getCinema()->getId() == $idroom){
+						if($d->getMovie()->getId() == $idmovie){
+							$coincide = true;
 						}
-						else
-						{
-							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
-							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
-
-							$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
-							if($total_minutos>=0)
-							{
-								$regle = true;
-							}
-						}
-						if(!$regle)
-						{
-							$view = "MESSAGE";
-							$wear =  strtolower($view);
-							$this->message = new Message( "warning", "Does not meet the duration!" );
-						}
-
 					}
 				}
-				else
-				{
-					$regle = true;
-				}
+			}
+			else
+			{
+				$coincide = true;
+			}
+			if($coincide)
+			{
+					$ve = '00:15:00';
+					$veda[1]=explode(':',$ve);
+					$separar[1]=explode(':',$hour);
+					if(!empty($listday))
+					{
+						foreach ($listday as $dayfun) {
+							$hourss = $dayfun->getHora();
+							$separar[2]=explode(':',$hourss);
+
+							if($hour > $hourss)
+							{
+								$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+								$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+								$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+								if($total_minutos>=0)
+								{
+									$regle = true;
+								}
+
+							}
+							else
+							{
+								$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+								$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
+
+								$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+								if($total_minutos>=0)
+								{
+									$regle = true;
+								}
+							}
+							if(!$regle)
+							{
+								$view = "MESSAGE";
+								$wear =  strtolower($view);
+								$this->message = new Message( "warning", "Does not meet the duration!" );
+							}
+
+						}
+					}
+					else
+					{
+						$regle = true;
+					}
+				
 			}
 			else
 			{
 				$view = "MESSAGE";
 				$wear =  strtolower($view);
-				$this->message = new Message( "warning", "Existing Fuction with that date and that hour!" );
+				$this->message = new Message( "warning", "There is already a busy room on that day with that movie!" );
 			}
-			
-
 		}
 		else
 		{
