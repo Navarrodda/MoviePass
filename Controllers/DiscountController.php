@@ -133,6 +133,7 @@ class DiscountController
 
 	public function modification_of_discount_dates_to_d_m_y()
 	{
+		$data = null;
 		$discount = $this->bring_everything();
 		$i=0;
 		if(!empty($discount))
