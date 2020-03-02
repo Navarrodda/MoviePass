@@ -20,7 +20,7 @@
               <p class="p2" type="Description:"><input required type="text" class="int" name="description" style="color:white" placeholder="It introduces the Description"></input></p>
               <p class="p2" type="Day:"><input required id="dat" min="<?=$current_date?>" class="int" type="date" name="day" style="color:white" placeholder="Enter the Days.."></input></p>
               <p class="p2" type="Hours:"><input required type="time" class="int" name="hours" style="color:white" placeholder="Enter the working hours of the discount.."></input></p>
-              <button class="but">Save Data</button>
+              <button class="but">Salve Data</button>
             
             </form>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

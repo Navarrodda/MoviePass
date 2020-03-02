@@ -5,11 +5,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 text-center">
-        <h2 class="section-heading" style="color:white">Registrer Discounts</h2>
+        <h2 class="section-heading" style="color:white">Modify Discounts</h2>
         <hr class="primary">
         <p>
           <strong style="color:white">
-            Register! .
+            Moddify! .
           </strong>
         </p>
         <div class="regularform">
