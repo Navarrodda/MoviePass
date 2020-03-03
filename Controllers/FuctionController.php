@@ -267,14 +267,14 @@ class FuctionController
 			{
 				$view = "LOGIN";
 				$wear =  strtolower($view);
-				$this->message = new Message( "warning", "Must login!" );
+				$this->message = new Message( "warning", "There is no such function!" );
 			}
 		}
 		else
 		{
 			$view = "LOGIN";
 			$wear =  strtolower($view);
-			$this->message = new Message( "warning", "There is no such function!" );
+			$this->message = new Message( "warning", "Must login!" );
 		}
 
 		if($regle)
