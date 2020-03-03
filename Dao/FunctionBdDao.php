@@ -102,13 +102,13 @@ class FunctionBdDao
 
     public function bring_by_day_for_room($day,$idroom){
         try{
-            $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\"";
+           $sql = "SELECT * FROM $this->table WHERE day = \"$day\" AND room = \"$idroom\"";
             $conec = Conection::conection();
             $judgment = $conec->prepare($sql);
             $judgment->execute();
             $dataSet = $judgment->fetchAll(\PDO::FETCH_ASSOC);
             $this->mapear($dataSet);
-            if (!empty($this->list)) {
+            if (!empty($dataSet)) {
                 return $this->list;
             }
             return null;
@@ -402,22 +402,21 @@ class FunctionBdDao
     public function to_update(Fuction $function, $id){
 
         try{
-            $sql = ("UPDATE $this->table SET id=:id, cinema=:cinema, movie=:movie, day=:day, hours=:hours WHERE id=\"$id\"");
+            $sql = ("UPDATE $this->table SET  room=:room, movie=:movie, day=:day, hours=:hours WHERE id=\"$id\"");
 
             $conec = Conection::conection();
 
             $judgment = $conec->prepare($sql);
 
-            $cine = $function->getCinema();
+            $room = $function->getRoom();
             $movi = $function->getMovie();
 
-            $cinema = $cine->getId();
+            $room = $room->getId();
             $movie = $movi->getId();
             $day = $function->getDia();
-            $hours = $function->getHora();
+            $hour = $function->getHora();
 
-            $judgment->bindParam(":id",$id);
-            $judgment->bindParam(":cinema",$cinema);
+            $judgment->bindParam(":room",$room);
             $judgment->bindParam(":movie",$movie);
             $judgment->bindParam(":day",$day);
             $judgment->bindParam(":hours",$hour);
@@ -506,8 +505,7 @@ class FunctionBdDao
 
 
 public function mapear($dataSet){
-    $dataSet = is_array($dataSet) ? $dataSet : [];
-    
+  $dataSet = is_array($dataSet) ? $dataSet : false;
     if($dataSet){
         $this->list = array_map(function ($f){
          $daoMovie = MovieBdDao::getInstance();

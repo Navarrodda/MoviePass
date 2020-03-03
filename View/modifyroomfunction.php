@@ -26,7 +26,7 @@
                <p><h4>The Day: <?=$fec?> and Hour: <?=$hour?></h4></p>
                <div class="flexsearch">
                 <div class="flexsearch--wrapper">
-                 <form class="flexsearch--form" method="post" action="#">             
+                 <form class="flexsearch--form" method="post" action="<?php echo URL ?>/fuction/modify_and_check_time_and_room_to_add/">             
                    <div class="flexsearch--input-wrapper">
                     <div class="center">
                      <p class="p2"  type="Room:">
@@ -42,7 +42,7 @@
                 </div>
                 <p><input  name="day" type=hidden value="<?= $day?>"></p>
                 <p><input  name="hour" type=hidden value="<?= $hour?>"></p>
-                <p><input  name="idmovie" type=hidden value="<?= $movie->getId()?>"></p>
+                <input  name="idfunction" type=hidden value="<?= $function->getId()?>">
                 <button class="but">Save Data-></button>
             </form>
           </div>

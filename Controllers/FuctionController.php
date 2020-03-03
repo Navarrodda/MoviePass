@@ -53,6 +53,7 @@ class FuctionController
 		{
 			$regle = false;
 			$coincide = false;
+			$chec = false;
 			$days = $this->fuctionBdDao->bring_by_day_for_day($day);
 			$listday = $this->fuctionBdDao->bring_by_day_for_room($day,$idroom);
 			if(!empty($days)){
@@ -60,6 +61,10 @@ class FuctionController
 					if($d->getRoom()->getCinema()->getId() == $idroom){
 						if($d->getMovie()->getId() == $idmovie){
 							$coincide = true;
+						}
+						else
+						{
+							$chec = true;
 						}
 					}
 				}
@@ -70,6 +75,133 @@ class FuctionController
 			}
 			if($coincide)
 			{
+				$ve = '00:15:00';
+				$veda[1]=explode(':',$ve);
+				$separar[1]=explode(':',$hour);
+				if(!empty($listday))
+				{
+					foreach ($listday as $dayfun) {
+						$hourss = $dayfun->getHora();
+						$separar[2]=explode(':',$hourss);
+
+						if($hour > $hourss)
+						{
+							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1]+$dayfun->getMovie()->getDuration()+$veda[1][1];
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]; 
+							$total_minutos = $total_minutos_trasncurridos[1]-$total_minutos_trasncurridos[2];
+							if($total_minutos>=0)
+							{
+								$regle = true;
+							}
+
+						}
+						else
+						{
+							$total_minutos_trasncurridos[2] = ($separar[2][0]*60)+$separar[2][1];
+							$total_minutos_trasncurridos[1] = ($separar[1][0]*60)+$separar[1][1]+$dayfun->getMovie()->getDuration()+$veda[1][1]; 
+
+							$total_minutos = $total_minutos_trasncurridos[2]-$total_minutos_trasncurridos[1];
+							if($total_minutos>=0)
+							{
+								$regle = true;
+							}
+						}
+						if(!$regle)
+						{
+							$view = "MESSAGE";
+							$wear =  strtolower($view);
+							$this->message = new Message( "warning", "Does not meet the duration!" );
+						}
+
+					}
+				}
+				else
+				{
+					$regle = true;
+				}
+				
+			}
+			else
+			{
+				if($chec){
+					$view = "MESSAGE";
+					$wear =  strtolower($view);
+					$this->message = new Message( "warning", "In this room there is another movie that day!" );
+				}
+				else
+				{
+					$view = "MESSAGE";
+					$wear =  strtolower($view);
+					$this->message = new Message( "warning", "There is already a busy room on that day with that movie!" );
+				}
+			}
+		}
+		else
+		{
+			$view = "LOGIN";
+			$wear =  strtolower($view);
+			$this->message = new Message( "warning", "Must login!" );
+		}
+
+		if($regle)
+		{
+			$room = $this->RoomBdDao->bring_by_id($idroom);
+			$movie = $this->movieBdDao->bring_by_id($idmovie);
+			$this->add($room,$day,$hour,$movie);
+			$view = "MESSAGE";
+			$wear =  strtolower($view);
+			$this->message = new Message( "success", "Function loaded successfully!" );
+
+		}
+		$wear = $wear . '.'.'php';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . $wear);
+		include URL_VISTA . 'footer.php';
+	}
+
+	public function to_update($room,$day,$hour,$movie,$idfuction)
+	{
+		$function = new Fuction();
+		$function->setRoom($room);
+		$function->setMovie($movie);
+		$function->setDia($day);
+		$function->setHora($hour);
+		$this->fuctionBdDao->to_update($function,$idfuction);
+	}
+
+	public function modify_and_check_time_and_room_to_add($idroom,$day,$hour,$idfuction)
+	{
+		if(!empty($_SESSION))
+		{
+			$function = $this->bringidfuction($idfuction);
+			if(!empty($function))
+			{
+				$regle = false;
+				$coincide = false;
+				$chec = false;
+				$days = $this->fuctionBdDao->bring_by_day_for_day($day);
+				$listday = $this->fuctionBdDao->bring_by_day_for_room($day,$idroom);
+				if(!empty($days)){
+					foreach ($days as $d) {
+						if($d->getRoom()->getCinema()->getId() == $idroom){
+							if($d->getMovie()->getId() == $function->getMovie()->getId()){
+								if($d->getId() == $idfuction){
+									$coincide = true;
+								}
+								else
+								{
+									$chec = true;
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					$coincide = true;
+				}
+				if($coincide)
+				{
 					$ve = '00:15:00';
 					$veda[1]=explode(':',$ve);
 					$separar[1]=explode(':',$hour);
@@ -114,39 +246,55 @@ class FuctionController
 					{
 						$regle = true;
 					}
-				
+
+				}
+				else
+				{
+					if($chec){
+						$view = "MESSAGE";
+						$wear =  strtolower($view);
+						$this->message = new Message( "warning", "In this room there is another movie that day!" );
+					}
+					else
+					{
+						$view = "MESSAGE";
+						$wear =  strtolower($view);
+						$this->message = new Message( "warning", "There is already a busy room on that day with that movie!" );
+					}
+				}
 			}
 			else
 			{
-				$view = "MESSAGE";
+				$view = "LOGIN";
 				$wear =  strtolower($view);
-				$this->message = new Message( "warning", "There is already a busy room on that day with that movie!" );
+				$this->message = new Message( "warning", "Must login!" );
 			}
 		}
 		else
 		{
 			$view = "LOGIN";
 			$wear =  strtolower($view);
-			$this->message = new Message( "warning", "Must login!" );
+			$this->message = new Message( "warning", "There is no such function!" );
 		}
 
 		if($regle)
 		{
 			$room = $this->RoomBdDao->bring_by_id($idroom);
-			$movie = $this->movieBdDao->bring_by_id($idmovie);
-			$this->add($room,$day,$hour,$movie);
+			$movie = $this->movieBdDao->bring_by_id($function->getMovie()->getId());
+			$this->to_update($room,$day,$hour,$movie,$idfuction);
 			$view = "MESSAGE";
 			$wear =  strtolower($view);
-			$this->message = new Message( "success", "Function loaded successfully!" );
+			$this->message = new Message( "success", "Function Modify successfully!" );
 
 		}
 		$wear = $wear . '.'.'php';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . $wear);
 		include URL_VISTA . 'footer.php';
+
+		
+
 	}
-
-
 
 
 
