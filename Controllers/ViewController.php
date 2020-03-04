@@ -125,10 +125,10 @@ class ViewController
 		$page = 1;
 		$emty = $page;
 		$values = $this->ControlMovies->movies_stored_in_the_bd(1);
-		$genere = $this->ControlGenre->getList();
-		$length = $this->ControlMovies->getAllPages();
 		if(!empty($values))
 		{
+			$genere = $this->ControlGenre->getList();
+			$length = $this->ControlMovies->getAllPages();
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "movies.php");
 			include URL_VISTA . 'footer.php';
