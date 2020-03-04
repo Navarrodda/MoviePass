@@ -70,20 +70,24 @@ class MovieFileDao
 // Devuelve cantidad total de paginas Api
 	private function retrievePages()
 	{
-		$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE."1");
-		$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
-			$pages = $arrayTodecode["total_pages"]; // La api entregar 2 arreglos 1 de results y otro de date.
-
-			return $pages;
-		}
-
-		private function retrieveApiMovie($page,$id)
+		$pages = NULL;
+		$ch = $this->getRemoteFile(API. "movie/now_playing" .KEY.PAGE."1");
+		if(!empty($ch))
 		{
-			$movie = new Movie();
-
-			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
-
+			$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE."1");
 			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+			$pages = $arrayTodecode["total_pages"]; // La api entregar 2 arreglos 1 de results y otro de date.
+		}
+		return $pages;
+	}
+
+	private function retrieveApiMovie($page,$id)
+	{
+		$movie = new Movie();
+
+		$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
+
+		$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 
 				$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
 
@@ -129,12 +133,28 @@ class MovieFileDao
 				return $movie;
 			}
 
+			function getRemoteFile($url, $timeout = 10) {
+				$ch = curl_init();
+				curl_setopt ($ch, CURLOPT_URL, $url);
+				curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+				curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+				$file_contents = curl_exec($ch);
+				curl_close($ch);
+				return ($file_contents) ? $file_contents : FALSE;
+			}
+
+
+
 			private function retrieveApi($page)
 			{
-				$movieList = array();
+				$movieList = NULL;
 				try{
-					$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
-					$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+					$ch = $this->getRemoteFile(API. "movie/now_playing" .KEY.PAGE.$page);
+					if(!empty($ch)) 
+					{
+						$movieList = array();
+						$jsonContent = file_get_contents(API. "movie/now_playing" .KEY.PAGE.$page);
+						$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 			$array = $arrayTodecode["results"]; // La api entregar 2 arreglos 1 de results y otro de date.
 			foreach ($array as $indice) 
 			{
@@ -163,63 +183,64 @@ class MovieFileDao
 				array_push($movieList, $movie);
 			}
 			return $movieList;
-		}catch(\Error $e){
-			die("Error");
 		}
+	}catch(\Error $e){
+		die("Error");
 	}
+}
 		//devuelve el detalle de una pelicula
-	private function retrieveMovie($id,$page)
-	{
-		$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
+private function retrieveMovie($id,$page)
+{
+	$jsonContent = file_get_contents(API. "movie/$id " .KEY.PAGE.$page);
 
-		$data = ($jsonContent) ? json_decode($jsonContent,true):array();
-		$movie = new Movie();
-		if(!empty($data))
-		{
-			$movie->setIdApi($indice["id"]);
-			$movie->setTitle($indice["original_title"]);
-			$movie->setPoster($indice["poster_path"]);
-			$movie->setBackdrop($indice["backdrop_path"]);
-			$movie->setOverview($indice["overview"]);
-			$movie->setAverage($indice["vote_average"]);
-			$movie->setGenre($indice["genre_ids"]);
-			$movie->setDate($indice["release_date"]);
-			$movie->setVote($indice["vote_count"]);
-			$movie->setLanguage($indice["original_language"]);
-			$movie->setPopularity($indice["popularity"]);
-			$movie->setDuration($indice["runtime"]);
-		}else{
-			$movie = false;
-		}
-		return $movie;
+	$data = ($jsonContent) ? json_decode($jsonContent,true):array();
+	$movie = new Movie();
+	if(!empty($data))
+	{
+		$movie->setIdApi($indice["id"]);
+		$movie->setTitle($indice["original_title"]);
+		$movie->setPoster($indice["poster_path"]);
+		$movie->setBackdrop($indice["backdrop_path"]);
+		$movie->setOverview($indice["overview"]);
+		$movie->setAverage($indice["vote_average"]);
+		$movie->setGenre($indice["genre_ids"]);
+		$movie->setDate($indice["release_date"]);
+		$movie->setVote($indice["vote_count"]);
+		$movie->setLanguage($indice["original_language"]);
+		$movie->setPopularity($indice["popularity"]);
+		$movie->setDuration($indice["runtime"]);
+	}else{
+		$movie = false;
 	}
+	return $movie;
+}
 
-	private function retrieveData()
+private function retrieveData()
+{
+	$movieList = array();
+
+	if(file_exists("Data/movie.json"))
 	{
-		$movieList = array();
+		$jsonContent = file_get_contents("Data/movie.json");
 
-		if(file_exists("Data/movie.json"))
+		$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+
+		foreach ($arrayTodecode as $values) 
 		{
-			$jsonContent = file_get_contents("Data/movie.json");
 
-			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+			$movie = new Movie();
 
-			foreach ($arrayTodecode as $values) 
-			{
-
-				$movie = new Movie();
-
-				$movie->setId($values["id"]);
-				$movie->setTitle($values["title"]);
-				$movie->setIdapi($values["idApi"]);
-				$movie->setImagenruta($values["imagenruta"]);
-				$movie->setOverview($values["overview"]);
-				$movie->setDuration($values["duration"]);
-				$movie->setGenre($value["genre_ids"]);
-				$movie->setReleaseDate($value["release_date"]);
-				$movie->setVoteCount($value["vote_count"]);
-				$movie->setVoteAverage($value["vote_average"]);
-				$movie->setOriginalLanguage($value["original_language"]);
+			$movie->setId($values["id"]);
+			$movie->setTitle($values["title"]);
+			$movie->setIdapi($values["idApi"]);
+			$movie->setImagenruta($values["imagenruta"]);
+			$movie->setOverview($values["overview"]);
+			$movie->setDuration($values["duration"]);
+			$movie->setGenre($value["genre_ids"]);
+			$movie->setReleaseDate($value["release_date"]);
+			$movie->setVoteCount($value["vote_count"]);
+			$movie->setVoteAverage($value["vote_average"]);
+			$movie->setOriginalLanguage($value["original_language"]);
 					/*$cell = new Cellphone($values["id"],$values["code"],$values["brand"],$values["model"],
 					$values["price"]);*/
 					array_push($movieList, $movie);

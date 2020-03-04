@@ -112,18 +112,22 @@ class MovieController
 		$i = 0;
 		$genresel = array();
 		$value = array();
-		foreach ($values as $data) {
+		if(!empty($values)){
 
-			if($this->bring_id_by_idapi($data->getIdapi()))
-			{
-				$values[$i]->codigo = TRUE;
 
+			foreach ($values as $data) {
+
+				if($this->bring_id_by_idapi($data->getIdapi()))
+				{
+					$values[$i]->codigo = TRUE;
+
+				}
+				else
+				{
+					$values[$i]->codigo = FALSE;
+				}
+				$i++;
 			}
-			else
-			{
-				$values[$i]->codigo = FALSE;
-			}
-			$i++;
 		}
 		return $values;
 	}

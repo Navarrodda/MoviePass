@@ -127,9 +127,20 @@ class ViewController
 		$values = $this->ControlMovies->movies_stored_in_the_bd(1);
 		$genere = $this->ControlGenre->getList();
 		$length = $this->ControlMovies->getAllPages();
-		include URL_VISTA . 'header.php';
-		require(URL_VISTA . "movies.php");
-		include URL_VISTA . 'footer.php';
+		if(!empty($values))
+		{
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "movies.php");
+			include URL_VISTA . 'footer.php';
+		}
+		else
+		{
+			$view = "MESSAGE";		
+			$this->message = new Message( "info", "At this time there are no movies to show trying later!" );
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . 'message.php');
+			include URL_VISTA . 'footer.php';
+		}
 	}
 
 	public function genre($genre, $id)

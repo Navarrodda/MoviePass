@@ -36,31 +36,44 @@ class GenreFileDao
 	{
 		return $this->retrieveApiId($id);
 	}
+	function getRemoteFile($url, $timeout = 10) {
+		$ch = curl_init();
+		curl_setopt ($ch, CURLOPT_URL, $url);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+		$file_contents = curl_exec($ch);
+		curl_close($ch);
+		return ($file_contents) ? $file_contents : FALSE;
+	}
 
 	private function retrieveApi()
 	{
-
-		$genreList = array();
+		$genreList = null;
+		$ch = $this->getRemoteFile(API. "genre/movie/list" .KEY.PAGE."1");
+		if(!empty($ch)) 
+		{
+			$genreList = array();
 
 			//$jsonContent = file_get_contents("https://api.themoviedb.org/3/genre/movie/list?api_key=1b6861e202a1e52c6537b73132864511&language=en-US&page=1");
 
-		$jsonContent = file_get_contents(API. "genre/movie/list" .KEY.PAGE."1");
+			$jsonContent = file_get_contents(API. "genre/movie/list" .KEY.PAGE."1");
 
-		$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
+			$arrayTodecode = ($jsonContent) ? json_decode($jsonContent,true) : array();
 
-		foreach ($arrayTodecode as $indice) 
-		{
+			foreach ($arrayTodecode as $indice) 
+			{
 
 					//indice tiene un  array de arrays de generos.
-			foreach ($indice as $value) 
-			{	
-				$genre = new Genre();
+				foreach ($indice as $value) 
+				{	
+					$genre = new Genre();
 						//value contiene un solo array con genero.
-				$genre->setId($value["id"]);
-				$genre->setName($value["name"]);
-				array_push($genreList, $genre);
-			}
+					$genre->setId($value["id"]);
+					$genre->setName($value["name"]);
+					array_push($genreList, $genre);
+				}
 
+			}
 		}
 		return $genreList;
 	}
