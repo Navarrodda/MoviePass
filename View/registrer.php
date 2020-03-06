@@ -8,7 +8,11 @@
 
   <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
     <div class="bts">
+      <?php if($intranet) { ?>
       <a href="<?php echo $loginUrl; ?>" onClick="loadingFb();" class="fblogin social"><i class="fa fa-facebook"></i><span>Register with Facebook</span></a>
+    <?php } else { ?>
+      <a href="<?php echo URL ?>/user/no_conection/" class="fblogin social"><i class="fa fa-facebook"></i><span>Register with Facebook</span></a>
+    <?php  } ?>
       <a href="#" class="twlogin social"><i class="fa fa-twitter"></i><span>Register with Twitter</span></a>
       <a href="#" class="gplogin social"><i class="fa fa-google-plus"></i><span>Register with Google</span></a>             
     </div>

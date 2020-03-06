@@ -56,7 +56,7 @@ class ViewController
 
 	public function register()
 	{
-
+		$intranet = $this->ControlUser->validate_connection_for_faceboock();
 		$view = 'REGISTER';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "registrer.php");
@@ -65,6 +65,7 @@ class ViewController
 
 	public function login()
 	{
+		$intranet = $this->ControlUser->validate_connection_for_faceboock();
 		$view = 'LOGIN';
 		include URL_VISTA . 'header.php';
 		require(URL_VISTA . "login.php");

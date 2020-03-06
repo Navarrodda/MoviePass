@@ -26,6 +26,32 @@ class UserController
 		$this->daoUser = UserBD::getInstance();
 	}
 
+	public function validate_connection_for_faceboock() {
+		$ch = curl_init();
+		$loginUrl = API. "movie/now_playing" .KEY.PAGE. 1;
+		curl_setopt ($ch, CURLOPT_URL, $loginUrl );
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		$file_contents = curl_exec($ch);
+		curl_close($ch);
+		if(!empty($file_contents))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	public function no_conection()
+	{
+		$this->message = new Message('danger', 'There was an error connecting!');
+		$view = 'MESSAGE';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "message.php");
+		include URL_VISTA . 'footer.php';
+	}
 
 	public function login($data, $password)
 	{
@@ -149,71 +175,71 @@ class UserController
 
 	//Facebook Login
 	public function facebookLogin() {
-		 try{
-		include('./Config/faceConf.php');
-                $accessToken = $helper->getAccessToken();
+		try{
+			include('./Config/faceConf.php');
+			$accessToken = $helper->getAccessToken();
 
 			
-            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-               $this->message = new Message('danger', 'There was an error connecting!');
-               	$view = 'MESSAGE';
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "login.php");
-				include URL_VISTA . 'footer.php';
-                exit();
-            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                echo "Exception: " . $e->getMessage();
-                exit();
-            }
+		} catch (\Facebook\Exceptions\FacebookResponseException $e) {
+			$this->message = new Message('danger', 'There was an error connecting!');
+			$view = 'MESSAGE';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "login.php");
+			include URL_VISTA . 'footer.php';
+			exit();
+		} catch (\Facebook\Exceptions\FacebookSDKException $e) {
+			echo "Exception: " . $e->getMessage();
+			exit();
+		}
 
-            if(!$accessToken) {
-				$this->message = new Message('danger', 'There was an error connecting!');
-               	$view = 'MESSAGE';
-				include URL_VISTA . 'header.php';
-				require(URL_VISTA . "login.php");
-				include URL_VISTA . 'footer.php';
-                exit();
-            }
+		if(!$accessToken) {
+			$this->message = new Message('danger', 'There was an error connecting!');
+			$view = 'MESSAGE';
+			include URL_VISTA . 'header.php';
+			require(URL_VISTA . "login.php");
+			include URL_VISTA . 'footer.php';
+			exit();
+		}
 
-            $oAuth2Client = $fb->getOAuth2Client();
-            if (!$accessToken->isLongLived()) {
-                $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-            }
-            $response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
-			$userData = $response->getGraphNode()->asArray();
-			$email=$userData['email'];
-			if(!$this->daoUser->verify_email($email))
-			{
+		$oAuth2Client = $fb->getOAuth2Client();
+		if (!$accessToken->isLongLived()) {
+			$accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+		}
+		$response = $fb->get("/me?fields=id, first_name, last_name, email, birthday, picture.type(large)", $accessToken);
+		$userData = $response->getGraphNode()->asArray();
+		$email=$userData['email'];
+		if(!$this->daoUser->verify_email($email))
+		{
 				//check_in($name, $lastname, $dni, $nikname, $email, $password, $pass2)
-				$password = $userData['picture'];
-				$password = $password['url'];
-				$this->registerFacebook($userData['first_name'],$userData['last_name'],null,$userData['first_name'],$userData['email'],$password);
-				$ir_a_inicio = false;
+			$password = $userData['picture'];
+			$password = $password['url'];
+			$this->registerFacebook($userData['first_name'],$userData['last_name'],null,$userData['first_name'],$userData['email'],$password);
+			$ir_a_inicio = false;
 				//Borro varibles de la session.
-				$_SESSION = array();
+			$_SESSION = array();
 				// Eliminamos la cookie del usuario que identifcaba a esa sesión, verifcando "si existía".
-				if (ini_get("session.use_cookies") == true) {
-					$parametros = session_get_cookie_params();
-					setcookie(
-						session_name(),
-						'',
-						time() - 99999,
-						$parametros["path"],
-						$parametros["domain"],
-						$parametros["secure"],
-						$parametros["httponly"]
-					);
-				}
-				
-			}else{
-				$ir_a_inicio = $this->flogin($email);
+			if (ini_get("session.use_cookies") == true) {
+				$parametros = session_get_cookie_params();
+				setcookie(
+					session_name(),
+					'',
+					time() - 99999,
+					$parametros["path"],
+					$parametros["domain"],
+					$parametros["secure"],
+					$parametros["httponly"]
+				);
 			}
-			
-			if($ir_a_inicio){
+
+		}else{
+			$ir_a_inicio = $this->flogin($email);
+		}
+
+		if($ir_a_inicio){
 			$this->message = new Message('success', ' Welcome' . ' ' . '<i><strong>' .  $_SESSION["nombre"] 
-						. '</strong>. You have successfully logged in 
-						! Logged in as' . ' ' . '<i><strong>' . $_SESSION["nikname"] 
-						. '</strong></i>');
+				. '</strong>. You have successfully logged in 
+				! Logged in as' . ' ' . '<i><strong>' . $_SESSION["nikname"] 
+				. '</strong></i>');
 			$view = 'MESSAGE';
 			include URL_VISTA . 'header.php';
 			require(URL_VISTA . "message.php");
@@ -226,7 +252,7 @@ class UserController
 			include URL_VISTA . 'footer.php';
 		}
 	}
-		
+
 	public function logout()
 	{
         // Elimio las variables de sesión y sus valores.
