@@ -58,9 +58,9 @@ class DiscountBdDao
         return null;
         
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
         
     }
@@ -93,9 +93,9 @@ class DiscountBdDao
 
             return $conec->lastInsertId();
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -111,9 +111,9 @@ class DiscountBdDao
             $judgment->execute();
 
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -142,9 +142,9 @@ class DiscountBdDao
 
             $judgment->execute();
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -192,9 +192,9 @@ class DiscountBdDao
 
             return null;
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 

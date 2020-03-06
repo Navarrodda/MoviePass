@@ -44,9 +44,9 @@ class ShoppingsBdDao
 
             return null;
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -138,9 +138,9 @@ class ShoppingsBdDao
     }
     return null;
 }catch(\PDOException $e){
-    echo $e->getMessage();die();
+    echo $e->getMessage();
 }catch(\Exception $e){
-    echo $e->getMessage();die();
+    echo $e->getMessage();
 }
 }
 
@@ -185,9 +185,9 @@ public function add(Shopping $shopping){
 
         return $conec->lastInsertId();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -203,9 +203,9 @@ public function remove_by_id($id){
         $judgment->execute();
 
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -247,9 +247,9 @@ public function update(Shopping $shopping, $id){
         $judgment->execute();
 
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -273,9 +273,9 @@ public function bring_everything(){
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -305,9 +305,9 @@ public function bring_by_id($id)
 
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 

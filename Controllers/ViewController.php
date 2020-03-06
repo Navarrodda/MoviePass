@@ -586,6 +586,7 @@ class ViewController
 
 		public function buyq($idfuction)
 		{
+			$max = $this->ControlShopping->cant_tiket_for_function_bacanci($idfuction);
 			$fuction = $this->ControlFuctionc->bringidfuction($idfuction);
 			$movie = $fuction->getMovie();
 			$room =  $fuction->getRoom();

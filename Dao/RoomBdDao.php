@@ -103,9 +103,9 @@ public function add(Room $room){
 
         return $conec->lastInsertId();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -121,9 +121,9 @@ public function remove_by_id($id){
         $judgment->execute();
 
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -139,9 +139,9 @@ public function remove_by_id_cinema($idcinema){
         $judgment->execute();
 
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -168,9 +168,9 @@ public function to_update(Room $room, $id){
 
         $judgment->execute();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
         //Trae todos los rooms
@@ -194,9 +194,9 @@ public function bring_everything(){
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -220,9 +220,9 @@ public function bring_list_for_id_cinema($idcinema){
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -252,9 +252,9 @@ public function bring_by_id($id)
 
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
         //Mapea el en List lo de $dataset

@@ -114,9 +114,9 @@ class FunctionBdDao
             return null;
             
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
 
     }
@@ -139,9 +139,9 @@ class FunctionBdDao
             }
             return null;
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -158,9 +158,9 @@ class FunctionBdDao
             return false;
             
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
 
     }
@@ -212,9 +212,9 @@ class FunctionBdDao
 
             return null;
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -235,9 +235,9 @@ class FunctionBdDao
             return null;
 
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -258,9 +258,9 @@ class FunctionBdDao
                 return null;
             }
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
 
     }
@@ -281,9 +281,9 @@ class FunctionBdDao
                 return null;
             }
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
 
     }
@@ -304,9 +304,9 @@ class FunctionBdDao
                 return null;
             }
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
 
     }
@@ -338,9 +338,9 @@ class FunctionBdDao
 
             return $conec->lastInsertId();
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -356,9 +356,9 @@ class FunctionBdDao
             $judgment->execute();
 
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -374,9 +374,9 @@ class FunctionBdDao
             $judgment->execute();
 
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -392,9 +392,9 @@ class FunctionBdDao
             $judgment->execute();
 
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -424,9 +424,9 @@ class FunctionBdDao
 
             $judgment->execute();
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -446,9 +446,9 @@ class FunctionBdDao
             return null;
             
         }catch(\PDOException $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }catch(\Exception $e){
-            echo $e->getMessage();die();
+            echo $e->getMessage();
         }
     }
 
@@ -497,9 +497,9 @@ class FunctionBdDao
             return null;
         }
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 

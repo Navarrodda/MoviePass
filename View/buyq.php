@@ -38,7 +38,13 @@
                     <div class="center">
                      <p class="p2"  type="Quantity:">
                        <select id ="selector" class="btnselect" name="quantity" type="Select Quantity:" placeholder = "Select Ticket Quantity" required>
-                        <?php for($i = 1; $i<=10;$i++){ ?>
+                        <?php 
+                          $q = 10;
+                          if($max < 10)
+                          {
+                            $q = $max;
+                          }
+                          for($i = 1; $i<=$q;$i++){ ?>
                           <option value ="<?php echo $i?>"><?php echo $i?></option>
                         <?php } ?>
                       </select>

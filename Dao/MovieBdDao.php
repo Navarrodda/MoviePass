@@ -139,9 +139,9 @@ class MovieBdDao{
 
 			return $conec->lastInsertId();
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -157,9 +157,9 @@ class MovieBdDao{
 			$judgment->execute();
 
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -200,9 +200,9 @@ class MovieBdDao{
 
 			$judgment->execute();
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -226,9 +226,9 @@ class MovieBdDao{
 			}
 			return null;
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -258,9 +258,9 @@ class MovieBdDao{
 
 			return null;
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -288,9 +288,9 @@ class MovieBdDao{
 
 			return null;
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 
@@ -318,9 +318,9 @@ class MovieBdDao{
 
 			return null;
 		}catch(\PDOException $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}catch(\Exception $e){
-			echo $e->getMessage();die();
+			echo $e->getMessage();
 		}
 	}
 

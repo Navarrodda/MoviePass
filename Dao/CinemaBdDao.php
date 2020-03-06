@@ -80,9 +80,9 @@ public function add(Cinema $cinema){
 
         return $conec->lastInsertId();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -98,9 +98,9 @@ public function remove_by_id($id){
         $judgment->execute();
 
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -124,9 +124,9 @@ public function to_update(Cinema $cinema, $id){
 
         $judgment->execute();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
         //Trae todos los cinemas
@@ -150,9 +150,9 @@ public function bring_everything(){
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -182,9 +182,9 @@ public function bring_by_id($id)
 
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
         //Mapea el en List lo de $dataset

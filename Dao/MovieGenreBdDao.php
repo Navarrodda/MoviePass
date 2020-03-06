@@ -57,9 +57,9 @@ public function bring_id_by_MovieAll($idMovie)
             return null;
         }
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 
 }
@@ -79,9 +79,9 @@ public function bring_id_by_generoAll($idGenre)
             return null;
         }
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 
 }
@@ -101,9 +101,9 @@ public function add(Movie_X_Genre $movieGenre){
         $judgment->execute();
         return $conec->lastInsertId();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 public function remove_by_id($id){
@@ -113,9 +113,9 @@ public function remove_by_id($id){
         $judgment = $conec->prepare($sql);
         $judgment->execute();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -126,9 +126,9 @@ public function remove_by_id_movie($id){
         $judgment = $conec->prepare($sql);
         $judgment->execute();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 
@@ -147,9 +147,9 @@ public function to_update(Movie_X_Genre $movieGenre, $id){
         $judgment->bindParam(":movie",$movie);
         $judgment->execute();
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 public function bring_everything(){
@@ -165,9 +165,9 @@ public function bring_everything(){
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 public function bring_by_id($id)
@@ -186,9 +186,9 @@ public function bring_by_id($id)
         }
         return null;
     }catch(\PDOException $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }catch(\Exception $e){
-        echo $e->getMessage();die();
+        echo $e->getMessage();
     }
 }
 public function mapear($dataSet){

@@ -145,6 +145,8 @@ class UserController
 		return true;
 	}
 
+	
+
 	//Facebook Login
 	public function facebookLogin() {
 		
@@ -154,7 +156,11 @@ class UserController
                 $accessToken = $helper->getAccessToken();
 			
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                echo "Exception: " . $e->getMessage();
+               $this->message = new Message('danger', 'There was an error connecting!');
+               	$view = 'MESSAGE';
+				include URL_VISTA . 'header.php';
+				require(URL_VISTA . "login.php");
+				include URL_VISTA . 'footer.php';
                 exit();
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
                 echo "Exception: " . $e->getMessage();
@@ -184,6 +190,22 @@ class UserController
 				$password = $password['url'];
 				$this->registerFacebook($userData['first_name'],$userData['last_name'],null,$userData['first_name'],$userData['email'],$password);
 				$ir_a_inicio = false;
+				//Borro varibles de la session.
+				$_SESSION = array();
+				// Eliminamos la cookie del usuario que identifcaba a esa sesión, verifcando "si existía".
+				if (ini_get("session.use_cookies") == true) {
+					$parametros = session_get_cookie_params();
+					setcookie(
+						session_name(),
+						'',
+						time() - 99999,
+						$parametros["path"],
+						$parametros["domain"],
+						$parametros["secure"],
+						$parametros["httponly"]
+					);
+				}
+				
 			}else{
 				$ir_a_inicio = $this->flogin($email);
 			}
