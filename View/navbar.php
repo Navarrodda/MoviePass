@@ -57,14 +57,6 @@
               <?php } } ?>
               <li><a href="<?php echo URL ?>/view/cinema/">CINEMAS</a></li>
             </ul>
-            <?php if(!empty($_SESSION["rol"])){ ?>
-              <?php if($_SESSION["rol"] == 3){ ?>
-                <div class="col-md-12">
-                  <div class="cart">
-                    <p><i class="fa fa-cart-arrow-down"></i><sup>0</sup> &#36;&nbsp;&nbsp;0.00</p>
-                  </div>
-                </div>
-              <?php } } ?>
             </div>
             <div class="row">
               <div class="col-md-12">

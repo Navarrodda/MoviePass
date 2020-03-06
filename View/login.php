@@ -1,6 +1,6 @@
 <?php  
   include(URL_VISTA . "navbar.php"); 
-  include("Config/faceConf.php");
+  include("./Config/faceConf.php");
 ?>
 
 
