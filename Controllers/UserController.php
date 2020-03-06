@@ -149,11 +149,10 @@ class UserController
 
 	//Facebook Login
 	public function facebookLogin() {
-		
-		include('Config/faceConf.php');
-		$loginUrl;
-            try{
+		 try{
+		include('./Config/faceConf.php');
                 $accessToken = $helper->getAccessToken();
+
 			
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
                $this->message = new Message('danger', 'There was an error connecting!');

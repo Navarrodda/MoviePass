@@ -65,20 +65,10 @@ class ViewController
 
 	public function login()
 	{
-		if(empty($_SESSION))
-		{
-			$view = 'LOGIN';
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "login.php");
-			include URL_VISTA . 'footer.php';
-		}else{
-			$this->message = new Message('success', 'You are already Loggin');
-			$view = 'MESSAGE';
-			include URL_VISTA . 'header.php';
-			require(URL_VISTA . "message.php");
-			include URL_VISTA . 'footer.php';
-		}
-		
+		$view = 'LOGIN';
+		include URL_VISTA . 'header.php';
+		require(URL_VISTA . "login.php");
+		include URL_VISTA . 'footer.php';
 	} 
 
 	public function feature()
